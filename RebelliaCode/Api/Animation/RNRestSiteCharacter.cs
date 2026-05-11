@@ -1,7 +1,6 @@
 using Godot;
 using MegaCrit.Sts2.Core.Nodes.RestSite;
 
-namespace LittleWizard.LittleWizardCode.Api.Nodes;
-
+namespace Rebellia.RebelliaCode.Api.Animation;
 [GlobalClass]
 public partial class RNRestSiteCharacter : NRestSiteCharacter { }

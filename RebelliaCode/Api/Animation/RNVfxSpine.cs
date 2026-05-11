@@ -2,7 +2,7 @@ using System.Reflection;
 using Godot;
 using MegaCrit.Sts2.Core.Nodes.Vfx.Utilities;
 
-namespace LittleWizard.LittleWizardCode.Api.Animation;
+namespace Rebellia.RebelliaCode.Api.Animation;
 
 [GlobalClass]
 public partial class RNVfxSpine : NVfxSpine

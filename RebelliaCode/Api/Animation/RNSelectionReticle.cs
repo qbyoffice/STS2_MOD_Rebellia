@@ -1,7 +1,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 
-namespace LittleWizard.LittleWizardCode.Api.Nodes;
+namespace Rebellia.RebelliaCode.Api.Animation;
 
 [GlobalClass]
 public partial class RNSelectionReticle : NSelectionReticle { }
