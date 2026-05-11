@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://brdkeyyofc6sv"
+path="res://.godot/imported/characterselect_regent.atlas-6907f89b17e10e2c2b17b36ad80ccf43.spatlas"
+
+[deps]
+
+source_file="res://regent/animations/character_select/Regent/characterselect_regent.atlas"
+dest_files=["res://.godot/imported/characterselect_regent.atlas-6907f89b17e10e2c2b17b36ad80ccf43.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -1,0 +1,411 @@
+regent.png
+	size: 2048, 928
+	filter: Linear, Linear
+21
+	bounds: 86, 608, 33, 37
+arm_lower_l
+	bounds: 464, 583, 59, 67
+	offsets: 0, 0, 59, 83
+arm_lower_l1
+	bounds: 1672, 872, 42, 55
+arm_lower_l2
+	bounds: 269, 824, 68, 55
+	offsets: 0, 1, 68, 56
+arm_lower_r1
+	bounds: 1350, 19, 59, 70
+arm_upper_l
+	bounds: 1, 35, 67, 63
+body
+	bounds: 1568, 97, 125, 189
+	offsets: 8, 0, 133, 189
+	rotate: 90
+bz113_ (1)
+	bounds: 923, 76, 159, 47
+	offsets: 33, 30, 206, 117
+bz113_ (2)
+	bounds: 89, 812, 179, 49
+	offsets: 20, 27, 206, 117
+bz113_ (3)
+	bounds: 1052, 862, 193, 65
+	offsets: 10, 18, 206, 117
+bz113_ (4)
+	bounds: 220, 121, 198, 66
+	offsets: 4, 17, 206, 117
+bz113_ (5)
+	bounds: 1821, 360, 200, 66
+	offsets: 3, 17, 206, 117
+bz113_ (6)
+	bounds: 1351, 464, 196, 51
+	offsets: 3, 17, 206, 117
+chair
+	bounds: 220, 470, 457, 1002
+	rotate: 90
+collar_l
+	bounds: 1, 579, 31, 29
+collar_r
+	bounds: 2021, 731, 26, 29
+	offsets: 0, 0, 26, 30
+dimianfangguang1
+	bounds: 1599, 223, 373, 125
+dimianfangguang2
+	bounds: 267, 870, 229, 57
+erduo
+	bounds: 1782, 823, 32, 50
+erduo1111
+	bounds: 1644, 819, 37, 29
+etouxiangguang
+	bounds: 992, 877, 57, 50
+eyelashes
+	bounds: 634, 920, 14, 7
+eyelashes1
+	bounds: 978, 904, 25, 23
+eyelashes2
+	bounds: 1950, 685, 27, 25
+	offsets: 2, 0, 29, 26
+faguanbg1
+	bounds: 1873, 552, 169, 174
+	offsets: 140, 352, 490, 1076
+	rotate: 270
+faguang
+	bounds: 1818, 173, 52, 49
+	offsets: 19, 8, 97, 90
+faguang1
+	bounds: 1, 223, 49, 181
+	offsets: 0, 0, 70, 190
+	rotate: 90
+faguang222
+	bounds: 884, 914, 15, 13
+finger_r
+	bounds: 1360, 913, 33, 14
+finger_r1
+	bounds: 1930, 912, 27, 15
+	offsets: 0, 0, 28, 15
+finger_r111
+	bounds: 1327, 913, 33, 14
+finger_r2
+	bounds: 1029, 867, 23, 18
+	offsets: 0, 1, 24, 19
+finger_r3
+	bounds: 1285, 868, 9, 21
+finger_r4
+	bounds: 974, 886, 17, 18
+finger_r5
+	bounds: 1391, 915, 30, 12
+	offsets: 2, 0, 32, 13
+finger_r6
+	bounds: 790, 915, 29, 12
+	offsets: 0, 1, 29, 13
+finger_r7
+	bounds: 213, 788, 18, 23
+finger_r8
+	bounds: 1646, 903, 23, 24
+	offsets: 0, 1, 23, 25
+finger_r9
+	bounds: 1566, 893, 18, 34
+hair
+	bounds: 1314, 336, 51, 86
+hair1
+	bounds: 1682, 55, 99, 96
+hair2
+	bounds: 486, 503, 140, 232
+	rotate: 90
+hair21
+	bounds: 1494, 11, 78, 71
+	offsets: 0, 0, 79, 71
+hair211
+	bounds: 1973, 281, 73, 78
+hair2111
+	bounds: 2005, 233, 39, 47
+	offsets: 0, 0, 40, 47
+hair22
+	bounds: 2014, 491, 25, 67
+	offsets: 0, 0, 25, 68
+hair223
+	bounds: 675, 28, 80, 62
+	offsets: 46, 0, 138, 230
+hair3
+	bounds: 1299, 422, 44, 90
+hair4
+	bounds: 784, 16, 86, 141
+	rotate: 90
+hair5
+	bounds: 1349, 68, 167, 86
+hair_light
+	bounds: 1644, 796, 17, 22
+hair_light1
+	bounds: 320, 667, 24, 19
+hair_y
+	bounds: 1298, 38, 60, 96
+	offsets: 0, 1, 60, 97
+halo
+	bounds: 1, 204, 456, 1003
+	offsets: 0, 2, 456, 1007
+	rotate: 270
+hand_l
+	bounds: 1885, 894, 46, 33
+	offsets: 0, 1, 46, 34
+hand_light_l
+	bounds: 1299, 907, 27, 20
+hand_r
+	bounds: 707, 891, 49, 36
+	offsets: 1, 0, 50, 46
+hand_r1
+	bounds: 1211, 711, 38, 28
+	offsets: 0, 1, 38, 29
+hand_r_light
+	bounds: 1261, 490, 37, 22
+head
+	bounds: 1579, 826, 94, 101
+headwear
+	bounds: 291, 49, 176, 61
+headwear1
+	bounds: 1151, 120, 40, 65
+houfa
+	bounds: 1871, 120, 176, 156
+	offsets: 1, 0, 178, 160
+houfabing
+	bounds: 327, 2, 44, 77
+jiemao
+	bounds: 1596, 704, 26, 29
+	offsets: 1, 0, 29, 29
+jiemao1
+	bounds: 1001, 914, 9, 13
+	offsets: 1, 1, 11, 14
+lanshefaguang
+	bounds: 284, 653, 36, 43
+	offsets: 5, 0, 44, 46
+lian
+	bounds: 1, 604, 84, 92
+liangt
+	bounds: 496, 882, 111, 45
+	offsets: 42, 0, 205, 77
+lianzi
+	bounds: 1290, 454, 34, 35
+lianzi1
+	bounds: 1612, 725, 22, 45
+mahua
+	bounds: 1325, 114, 121, 243
+	rotate: 90
+mahua1
+	bounds: 524, 591, 40, 56
+minion sweat
+	bounds: 489, 922, 9, 5
+mouth
+	bounds: 230, 793, 23, 18
+mouth1
+	bounds: 756, 901, 36, 26
+mouth2
+	bounds: 132, 792, 22, 19
+mouth3
+	bounds: 902, 906, 27, 21
+	offsets: 0, 1, 27, 22
+mouth4
+	bounds: 2010, 906, 17, 21
+	offsets: 0, 1, 17, 22
+pifeng
+	bounds: 1806, 28, 81, 73
+	offsets: 0, 1, 81, 74
+qunbai
+	bounds: 606, 881, 46, 24
+	offsets: 0, 0, 47, 25
+qunzi
+	bounds: 924, 31, 59, 44
+servant1
+	bounds: 1330, 213, 237, 268
+	rotate: 270
+servant3
+	bounds: 1758, 94, 153, 128
+	rotate: 180
+servant4
+	bounds: 144, 44, 151, 126
+	rotate: 180
+servant6
+	bounds: 1205, 739, 64, 122
+servant7
+	bounds: 1090, 43, 91, 97
+	rotate: 90
+servant8
+	bounds: 1, 625, 230, 233
+servant9
+	bounds: 13, 57, 147, 75
+servant_LIGHT1
+	bounds: 767, 82, 228, 233
+	rotate: 270
+servant_LIGHT2
+	bounds: 1800, 427, 228, 233
+servant_light11
+	bounds: 1984, 721, 63, 120
+servant_light21
+	bounds: 410, 54, 145, 73
+servant_light211
+	bounds: 1522, 31, 89, 95
+	rotate: 90
+servant_light78
+	bounds: 1774, 659, 237, 268
+shadow
+	bounds: 1, 862, 265, 65
+shank_l
+	bounds: 576, 52, 72, 192
+	rotate: 90
+shank_r
+	bounds: 1736, 11, 99, 92
+shenti
+	bounds: 1184, 74, 127, 141
+	offsets: 0, 25, 153, 166
+	rotate: 90
+shoulder_r
+	bounds: 1962, 701, 37, 29
+sparkle 3
+	bounds: 2029, 906, 14, 21
+	offsets: 0, 0, 15, 22
+thigh__l
+	bounds: 1878, 57, 118, 73
+	offsets: 0, 0, 118, 79
+thigh_r
+	bounds: 962, 124, 207, 79
+throne_bottom
+	bounds: 1184, 511, 427, 416
+	offsets: 0, 134, 490, 1076
+	rotate: 180
+throne_bottom_light
+	bounds: 974, 184, 347, 360
+	offsets: 0, 190, 490, 1076
+	rotate: 90
+toufa
+	bounds: 1472, 422, 41, 80
+	offsets: 0, 2, 41, 82
+	rotate: 90
+toufa1
+	bounds: 1740, 842, 52, 85
+	offsets: 0, 1, 52, 87
+toushi
+	bounds: 1919, 1, 121, 128
+	rotate: 90
+toushi1
+	bounds: 1925, 38, 64, 40
+	offsets: 1, 0, 65, 41
+toushi212
+	bounds: 565, 881, 46, 142
+	offsets: 1, 0, 47, 143
+	rotate: 90
+touyyy
+	bounds: 684, 574, 50, 66
+touyyy1
+	bounds: 2011, 842, 36, 64
+	offsets: 0, 1, 36, 65
+xiaoqunzi
+	bounds: 1063, 23, 33, 53
+	offsets: 0, 0, 34, 53
+xinxin
+	bounds: 162, 766, 51, 45
+yanbai
+	bounds: 1869, 910, 17, 17
+	offsets: 10, 0, 42, 17
+yankuang
+	bounds: 1214, 690, 19, 24
+yanmou
+	bounds: 1246, 911, 12, 16
+	offsets: 1, 0, 13, 17
+yanpi
+	bounds: 1246, 867, 10, 13
+yanqiu
+	bounds: 338, 848, 18, 25
+yanqiu2
+	bounds: 202, 758, 18, 23
+yanqiu3
+	bounds: 1246, 880, 18, 25
+yizidibu
+	bounds: 416, 126, 351, 126
+yizifanguang
+	bounds: 1545, 348, 276, 579
+	offsets: 33, 302, 490, 1076
+	rotate: 180
+youbianqunzi
+	bounds: 539, 38, 45, 62
+	offsets: 8, 3, 53, 65
+youdabi
+	bounds: 897, 440, 78, 52
+youdatui
+	bounds: 1, 129, 104, 356
+	offsets: 13, 0, 117, 356
+	rotate: 90
+youjianjia
+	bounds: 645, 490, 42, 35
+youlianzi
+	bounds: 1194, 814, 27, 47
+youlinzi
+	bounds: 558, 494, 36, 33
+youpai
+	bounds: 63, 831, 25, 30
+youxiaobi
+	bounds: 592, 487, 61, 107
+	offsets: 0, 1, 61, 108
+youyan
+	bounds: 1, 750, 16, 23
+	offsets: 0, 0, 16, 24
+youyanfaguang
+	bounds: 702, 883, 15, 13
+	offsets: 0, 0, 16, 13
+youyanxian
+	bounds: 1269, 839, 15, 18
+	offsets: 1, 0, 16, 18
+yy
+	bounds: 1607, 771, 48, 56
+yy1
+	bounds: 1192, 21, 44, 59
+zui
+	bounds: 267, 877, 16, 16
+zuixian
+	bounds: 1580, 907, 17, 20
+zuobianquanzi
+	bounds: 921, 893, 59, 34
+	offsets: 1, 0, 61, 34
+zuodabi
+	bounds: 1814, 436, 66, 54
+zuodabi_shop
+	bounds: 229, 630, 55, 78
+zuodatuifaguang
+	bounds: 654, 914, 42, 13
+zuodauti
+	bounds: 513, 118, 72, 202
+	rotate: 90
+zuofabing22
+	bounds: 1646, 2, 38, 114
+zuofabing24
+	bounds: 1620, 22, 27, 77
+zuojianjia
+	bounds: 1, 689, 36, 23
+	offsets: 0, 0, 36, 24
+zuojioban
+	bounds: 741, 22, 38, 68
+	offsets: 4, 0, 42, 68
+zuolian
+	bounds: 1752, 801, 29, 43
+	offsets: 0, 0, 31, 43
+zuolinzi
+	bounds: 853, 453, 41, 28
+zuoliuhai
+	bounds: 711, 488, 40, 83
+zuooupa
+	bounds: 1, 773, 20, 29
+zuoshouzhang22
+	bounds: 1596, 322, 42, 57
+zuoshouzhangsikao
+	bounds: 796, 53, 42, 38
+zuoxiaobi
+	bounds: 1258, 849, 41, 78
+zuoxiaobi33
+	bounds: 1251, 19, 55, 67
+zuoxiaotui
+	bounds: 776, 174, 61, 84
+	offsets: 1, 0, 62, 84
+zuoxiuzi
+	bounds: 741, 207, 49, 50
+zuoxiuzio333
+	bounds: 1521, 151, 69, 72
+	offsets: 0, 1, 69, 78
+圖層 11
+	bounds: 1970, 758, 17, 30
+	offsets: 1, 0, 18, 30
+圖層 9
+	bounds: 1671, 846, 22, 25

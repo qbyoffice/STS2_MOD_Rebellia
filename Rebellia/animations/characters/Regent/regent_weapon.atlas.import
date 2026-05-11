@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cxycp4yren05m"
+path="res://.godot/imported/regent_weapon.atlas-7a641985fa9f96ca2466580a7a3c6799.spatlas"
+
+[deps]
+
+source_file="res://regent/animations/characters/Regent/regent_weapon.atlas"
+dest_files=["res://.godot/imported/regent_weapon.atlas-7a641985fa9f96ca2466580a7a3c6799.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
