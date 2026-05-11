@@ -1,7 +1,8 @@
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Rebellia.RebelliaCode.Api.Relics;
 using Rebellia.RebelliaCode.Powers;
 
@@ -11,26 +12,18 @@ public class LucentCrystal : RebelliaRelics
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
 
-    public override async Task AfterPlayerTurnStart(
-        PlayerChoiceContext choiceContext,
-        Player player
-    )
+    protected override IEnumerable<DynamicVar> CanonicalVars => new[] { new PowerVar<BloodSwordArtPower>(2) };
+
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext ctx, CombatSide side, CombatState state)
     {
-        if (Owner != player)
-            return;
+        if (side != Owner.Creature.Side || state.RoundNumber != 1) return;
 
-        var creature = player.Creature;
-        var power = creature.GetPower<BloodSwordArtPower>();
-
+        var power = Owner.Creature.GetPower<BloodSwordArtPower>();
         if (power == null)
         {
-            await PowerCmd.Apply<BloodSwordArtPower>(creature, 0, creature, null);
-            power = creature.GetPower<BloodSwordArtPower>();
-            power?.AddPoints(2);
+            await PowerCmd.Apply<BloodSwordArtPower>(Owner.Creature, 0, Owner.Creature, null);
+            power = Owner.Creature.GetPower<BloodSwordArtPower>();
         }
-        else
-        {
-            power.AddPoints(2);
-        }
+        power?.AddPoints((int)((PowerVar<BloodSwordArtPower>)DynamicVars[typeof(BloodSwordArtPower).Name]).BaseValue);
     }
 }
