@@ -4,4 +4,4 @@ using MegaCrit.Sts2.Core.Nodes.Combat;
 namespace LittleWizard.LittleWizardCode.Api.Nodes;
 
 [GlobalClass]
-public partial class SNSelectionReticle : NSelectionReticle { }
+public partial class RNSelectionReticle : NSelectionReticle { }
