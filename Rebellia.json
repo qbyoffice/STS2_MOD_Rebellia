@@ -1,0 +1,13 @@
+{
+  "id": "Rebellia",
+  "name": "Rebellia",
+  "author": "AOShiRo",
+  "description": "Add a new character",
+  "version": "VERSION_PLACEHOLDER",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [
+    "BaseLib"
+  ],
+  "affects_gameplay": true
+}

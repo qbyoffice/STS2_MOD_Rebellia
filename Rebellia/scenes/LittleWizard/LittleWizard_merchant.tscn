@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bowvvch36t701"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bo0xchrk5fhc5" path="res://Rebellia/animations/merchant/Rebellia_merchant_skel_data.tres" id="1_8sym6"]
+[ext_resource type="Script" uid="uid://cv7c7afw8w1wh" path="res://RebelliaCode/Api/Nodes/SNMerchantCharacter.cs" id="1_g2n7t"]
+[ext_resource type="PackedScene" uid="uid://bgwa4cw8uquj1" path="res://Rebellia/scenes/Rebellia/Rebellia_Energy_A.tscn" id="3_7nkxu"]
+
+[node name="RebelliaMerchant" type="Node2D"]
+script = ExtResource("1_g2n7t")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_8sym6")
+preview_skin = "Default"
+preview_animation = "relaxed_loop"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(0, 38)
+scale = Vector2(0.6, 0.6)
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "WE"
+show_behind_parent = true
+position = Vector2(-53.580544, -381.87204)
+rotation = 0.0010330252
+scale = Vector2(0.68670255, 0.68670255)
+
+[node name="RebelliaEnergyA" parent="SpineSprite/SpineBoneNode" instance=ExtResource("3_7nkxu")]
+scale = Vector2(2.25, 2.25)

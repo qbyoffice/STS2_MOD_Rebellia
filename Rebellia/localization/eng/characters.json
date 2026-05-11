@@ -1,0 +1,16 @@
+{
+    "REBELLIA-REBELLIA.titleObject": "The Rebellia",
+    "REBELLIA-REBELLIA.possessiveAdjective": "his/her/its",
+    "REBELLIA-REBELLIA.goldMonologue": "Line spoken when obtaining a large amount of gold",
+    "REBELLIA-REBELLIA.aromaPrinciple": "Lore",
+    "REBELLIA-REBELLIA.pronounPossessive": "his/hers/its",
+    "REBELLIA-REBELLIA.pronounObject": "him/her/it",
+    "REBELLIA-REBELLIA.banter.dead.endTurnPing": "...",
+    "REBELLIA-REBELLIA.eventDeathPrevention": "Co-op survival line",
+    "REBELLIA-REBELLIA.title": "The Rebellia",
+    "REBELLIA-REBELLIA.cardsModifierTitle": "__ Cards",
+    "REBELLIA-REBELLIA.pronounSubject": "he/she/it",
+    "REBELLIA-REBELLIA.cardsModifierDescription": "__ cards will now appear in rewards and shops.",
+    "REBELLIA-REBELLIA.description": "Character Selection\nScreen Description",
+    "REBELLIA-REBELLIA.banter.alive.endTurnPing": "Co-op hurry up end turn ping message"
+}

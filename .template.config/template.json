@@ -1,0 +1,54 @@
+{
+    "author": "iouter, w_s_l",
+    "name": "LittleWizard",
+    "description": "Added a new character named little wizard",
+    "identity": "Iouter.LittleWizard",
+    "shortName": "iouterlittlewizard",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "sourceName": "LittleWizard",
+    "sources": [
+        {
+            "modifiers":[
+                {
+                    "condition": true,
+                    "exclude":[
+                        ".git/**",
+                        ".godot/**",
+                        ".idea/**",
+                        "Properties/**",
+                        "nuget.config",
+                        "README.md"
+                    ]
+                }
+            ]
+        }
+    ],
+    "symbols": {
+        "ModAuthor":{
+            "type": "parameter",
+            "dataType": "string",
+            "isRequired": "true",
+            "replaces": "{ModAuthor}",
+            "defaultValue": "Author"
+        },
+        "NullableChecks":{
+            "type": "parameter",
+            "dataType":"choice",
+            "choices": [
+                {
+                    "choice": "enable",
+                    "description": "More strict handling of possibly null values."
+                },
+                {
+                    "choice": "disable",
+                    "description": ""
+                }
+            ],
+            "replaces": "{NullableChecks}",
+            "defaultValue": "enable"
+        }
+    }
+}

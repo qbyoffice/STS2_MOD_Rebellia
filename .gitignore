@@ -1,0 +1,14 @@
+.godot/
+bin/
+/android/
+.git/
+.idea/
+.vs/
+publish/
+Properties/
+packages/
+*cs.uid
+*.user
+Directory.Build.props
+*.TMP
+windows/

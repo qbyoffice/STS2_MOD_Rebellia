@@ -1,0 +1,10 @@
+{
+    "REBELLIA-REBELLIA_DEFEND.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+    "REBELLIA-REBELLIA_DEFEND.title": "防御",
+    "REBELLIA-REBELLIA_STRIKE.description": "造成{Damage:diff()}点伤害。",
+    "REBELLIA-REBELLIA_STRIKE.title": "打击",
+    "REBELLIA-CRIMSON_PULSE.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+    "REBELLIA-CRIMSON_PULSE.title": "猩红脉冲",
+    "REBELLIA-CRIMSON_VEIL.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+    "REBELLIA-CRIMSON_VEIL.title": "猩红面纱"
+}
