@@ -47,9 +47,11 @@ public class Rebellia : PlaceholderCharacterModel
     public override string CustomCastSfx => "res://";
     public override string CustomDeathSfx => "res://";
     public override string CustomTrailPath => "";
-    public override string CustomVisualPath => "";
-    public override string CustomMerchantAnimPath => "";
-    public override string CustomRestSiteAnimPath => "";
+    public override string CustomVisualPath => "res://Rebellia/scenes/creature_visuals/regent.tscn";
+    public override string CustomMerchantAnimPath =>
+        "res://Rebellia/scenes/merchant/characters/regent_merchant.tscn";
+    public override string CustomRestSiteAnimPath =>
+        "res://Rebellia/scenes/rest_site/characters/regent_rest_site.tscn";
     public override string CustomIconPath => "";
     public override string CustomIconTexturePath => "";
     public override string CustomCharacterSelectLockedIconPath => "";
@@ -58,6 +60,7 @@ public class Rebellia : PlaceholderCharacterModel
     public override string CustomArmRockTexturePath => "";
     public override string CustomArmPaperTexturePath => "";
     public override string CustomArmScissorsTexturePath => "";
-    public override string CustomCharacterSelectBg => "";
+    public override string CustomCharacterSelectBg =>
+        "res://Rebellia/scenes/screens/char_select/char_select_bg_regent.tscn";
     public override string CustomMapMarkerPath => "";
 }

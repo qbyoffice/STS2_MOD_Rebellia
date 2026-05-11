@@ -1,6 +1,6 @@
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
-namespace LittleWizard.LittleWizardCode.Api.DynamicVars;
+namespace Rebellia.RebelliaCode.Api.DynamicVars;
 
 public class RandomElementVar(decimal baseValue) : DynamicVar(DefaultName, baseValue)
 {

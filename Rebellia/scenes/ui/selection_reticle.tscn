@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgy88bk44xxvk"]
 
-[ext_resource type="Script" uid="uid://dr3ox0g0wteo6" path="res://src/Core/Nodes/Combat/NSelectionReticle.cs" id="1_lc2fu"]
-[ext_resource type="Texture2D" uid="uid://bc6lv3rq40k1s" path="res://images/ui/combat/combat_reticle.png" id="2_75ikg"]
+[ext_resource type="Script" uid="uid://dge43gqxevqiq" path="res://RebelliaCode/Api/Nodes/RNSelectionReticle.cs" id="1_lc2fu"]
+[ext_resource type="Texture2D" uid="uid://dn1lmffvpayqo" path="res://Rebellia/images/ui/combat/combat_reticle.png" id="2_75ikg"]
 
 [node name="SelectionReticle" type="Control"]
 layout_mode = 3

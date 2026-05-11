@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://co3ntllamp05l" path="res://RebelliaCode/Api/Animation/RNRestSiteCharacter.cs" id="1_rqbgi"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://vs2voymt4xju" path="res://Rebellia/animations/rest_site/rest_site_regent_skel_data.tres" id="2_yk5fu"]
-[ext_resource type="PackedScene" path="res://scenes/ui/selection_reticle.tscn" id="3_c7uia"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://Rebellia/scenes/ui/selection_reticle.tscn" id="3_uraup"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h2i30"]
 
@@ -28,21 +28,21 @@ offset_top = 24.999802
 offset_right = 17.105127
 offset_bottom = 24.999802
 
-[node name="SelectionReticle" parent="ControlRoot" instance=ExtResource("3_c7uia")]
-unique_name_in_owner = true
+[node name="SelectionReticle" parent="ControlRoot" instance=ExtResource("3_uraup")]
 layout_mode = 0
-offset_left = -238.0
-offset_top = -567.0
-offset_right = 201.31421
-offset_bottom = 113.15698
+offset_left = -174.35701
+offset_top = -330.54764
+offset_right = 126.98009
+offset_bottom = -157.46606
+scale = Vector2(2.7072508, 5.6331377)
 
 [node name="Hitbox" type="Control" parent="ControlRoot"]
 unique_name_in_owner = true
 anchors_preset = 0
-offset_left = -243.41913
-offset_top = -567.10077
-offset_right = 205.26154
-offset_bottom = 114.47284
+offset_left = -240.78757
+offset_top = -707.88916
+offset_right = 307.8923
+offset_bottom = 256.5769
 
 [node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
 unique_name_in_owner = true
