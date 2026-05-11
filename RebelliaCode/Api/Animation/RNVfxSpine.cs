@@ -5,9 +5,9 @@ using MegaCrit.Sts2.Core.Nodes.Vfx.Utilities;
 namespace LittleWizard.LittleWizardCode.Api.Animation;
 
 [GlobalClass]
-public partial class SNVfxSpine : NVfxSpine
+public partial class RNVfxSpine : NVfxSpine
 {
-    public SNVfxSpine()
+    public RNVfxSpine()
     {
         var field = typeof(NVfxSpine).GetField(
             "_animation",
