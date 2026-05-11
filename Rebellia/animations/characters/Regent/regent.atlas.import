@@ -3,12 +3,12 @@
 importer="spine.atlas"
 type="SpineAtlasResource"
 uid="uid://dbnehwkqy7om1"
-path="res://.godot/imported/regent.atlas-af316ee1bd0ed98c223673cb00fb030e.spatlas"
+path="res://.godot/imported/regent.atlas-09c58f70fd4e97dc9da9d45d223c0d39.spatlas"
 
 [deps]
 
-source_file="res://regent/animations/characters/Regent/regent.atlas"
-dest_files=["res://.godot/imported/regent.atlas-af316ee1bd0ed98c223673cb00fb030e.spatlas"]
+source_file="res://Rebellia/animations/characters/Regent/regent.atlas"
+dest_files=["res://.godot/imported/regent.atlas-09c58f70fd4e97dc9da9d45d223c0d39.spatlas"]
 
 [params]
 

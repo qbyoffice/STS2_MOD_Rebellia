@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c8cilisfrt6xc"]
 
-[ext_resource type="Script" uid="uid://y4xifn1ur00y" path="res://src/Core/Nodes/RestSite/NRestSiteCharacter.cs" id="1_rqbgi"]
-[ext_resource type="SpineSkeletonDataResource" uid="uid://vs2voymt4xju" path="res://regent/animations/rest_site/rest_site_regent_skel_data.tres" id="2_yk5fu"]
-[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="3_c7uia"]
+[ext_resource type="Script" uid="uid://co3ntllamp05l" path="res://RebelliaCode/Api/Animation/RNRestSiteCharacter.cs" id="1_rqbgi"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://vs2voymt4xju" path="res://Rebellia/animations/rest_site/rest_site_regent_skel_data.tres" id="2_yk5fu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/selection_reticle.tscn" id="3_c7uia"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h2i30"]
 

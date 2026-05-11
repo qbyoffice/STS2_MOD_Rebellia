@@ -3,12 +3,12 @@
 importer="spine.atlas"
 type="SpineAtlasResource"
 uid="uid://cxycp4yren05m"
-path="res://.godot/imported/regent_weapon.atlas-7a641985fa9f96ca2466580a7a3c6799.spatlas"
+path="res://.godot/imported/regent_weapon.atlas-2a016df9c32e6c44acabd588fba5e2ad.spatlas"
 
 [deps]
 
-source_file="res://regent/animations/characters/Regent/regent_weapon.atlas"
-dest_files=["res://.godot/imported/regent_weapon.atlas-7a641985fa9f96ca2466580a7a3c6799.spatlas"]
+source_file="res://Rebellia/animations/characters/Regent/regent_weapon.atlas"
+dest_files=["res://.godot/imported/regent_weapon.atlas-2a016df9c32e6c44acabd588fba5e2ad.spatlas"]
 
 [params]
 

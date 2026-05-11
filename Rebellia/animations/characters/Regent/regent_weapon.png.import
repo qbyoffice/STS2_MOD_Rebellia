@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8jpfsryop360"
-path="res://.godot/imported/regent_weapon.png-6581d4cfd921fe7136852d3b6bb1dc70.ctex"
+path="res://.godot/imported/regent_weapon.png-49f2f4c96695cb6ad1d4cf02174c7337.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://regent/animations/characters/Regent/regent_weapon.png"
-dest_files=["res://.godot/imported/regent_weapon.png-6581d4cfd921fe7136852d3b6bb1dc70.ctex"]
+source_file="res://Rebellia/animations/characters/Regent/regent_weapon.png"
+dest_files=["res://.godot/imported/regent_weapon.png-49f2f4c96695cb6ad1d4cf02174c7337.ctex"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="spine.skel"
 type="SpineSkeletonFileResource"
 uid="uid://dtqa5wckvxa4c"
-path="res://.godot/imported/restsite_regent.skel-e667a4558890f48aca9d5dcaa41086f1.spskel"
+path="res://.godot/imported/restsite_regent.skel-7c52daca5b7fbf949c20b6922c51aac5.spskel"
 
 [deps]
 
-source_file="res://regent/animations/rest_site/Regent/restsite_regent.skel"
-dest_files=["res://.godot/imported/restsite_regent.skel-e667a4558890f48aca9d5dcaa41086f1.spskel"]
+source_file="res://Rebellia/animations/rest_site/Regent/restsite_regent.skel"
+dest_files=["res://.godot/imported/restsite_regent.skel-7c52daca5b7fbf949c20b6922c51aac5.spskel"]
 
 [params]
 

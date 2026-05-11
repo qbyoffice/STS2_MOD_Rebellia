@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dycmsvll548fd"
-path="res://.godot/imported/characterselect_regent.png-5912950dc7689926c0e70fd14a3099f8.ctex"
+path="res://.godot/imported/characterselect_regent.png-39417bdc56c4c2cbd961d4a0f94f4073.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://regent/animations/character_select/Regent/characterselect_regent.png"
-dest_files=["res://.godot/imported/characterselect_regent.png-5912950dc7689926c0e70fd14a3099f8.ctex"]
+source_file="res://Rebellia/animations/character_select/Regent/characterselect_regent.png"
+dest_files=["res://.godot/imported/characterselect_regent.png-39417bdc56c4c2cbd961d4a0f94f4073.ctex"]
 
 [params]
 
