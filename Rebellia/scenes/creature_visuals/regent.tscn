@@ -5,7 +5,7 @@
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_53uu0"]
 
-[node name="Regent" type="Node2D"]
+[node name="Rebellia" type="Node2D"]
 script = ExtResource("1_3dwrg")
 metadata/_edit_group_ = true
 
