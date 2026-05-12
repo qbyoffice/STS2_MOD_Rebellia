@@ -11,10 +11,10 @@ using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Basic;
 
-public class CrimsonVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self) 
+public class CrimsonVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
-
-    protected override HashSet<CardTag> CanonicalTags =>[CardTag.Defend, CardTagExtensions.RebelliaSanguinePoint];
+    protected override HashSet<CardTag> CanonicalTags =>
+        [CardTag.Defend, CardTagExtensions.RebelliaSanguinePoint];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new DynamicVar[]
         {

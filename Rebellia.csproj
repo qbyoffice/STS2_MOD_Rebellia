@@ -8,7 +8,8 @@
     <DefaultItemExcludes>packages/**</DefaultItemExcludes>
     <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
     <PathMap>$(AppOutputBase)=.\</PathMap>
-    <Authors>iouter, w_s_L, AOShiRo</Authors>
+    <Authors>AOShiRo</Authors>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <!-- OS Detection -->

@@ -1,4 +1,3 @@
-
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,12 +12,14 @@ using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Basic;
 
-public class CrimsonPulse() : RebelliaCard(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy) 
+public class CrimsonPulse()
+    : RebelliaCard(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
     private const int RequiredBloodPoints = 2;
 
-    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike,CardTagExtensions.RebelliaSanguinePoint];
-    protected override IEnumerable<DynamicVar> CanonicalVars =>[ new DamageVar(6, ValueProp.Move) ];
+    protected override HashSet<CardTag> CanonicalTags =>
+        [CardTag.Strike, CardTagExtensions.RebelliaSanguinePoint];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6, ValueProp.Move)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
