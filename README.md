@@ -1,4 +1,4 @@
-# LittleWizard
+# Rebellia·Bloodley·Sprinter
 
 A custom character mod for Slay the Spire 2.
 
@@ -10,7 +10,7 @@ All source code located outside the `LittleWizard/`, `materials/`, `scenes/`, an
 ### Assets and Protected Content
 The following directories and their entire contents are **NOT** covered by the MIT License. They are **All Rights Reserved** unless otherwise stated in a separate license file inside those directories:
 
-- `LittleWizard/`
+- `Rebellion/`
 - `materials/`
 - `scenes/`
 - `shaders/`
@@ -23,7 +23,7 @@ You may not copy, modify, distribute, reverse‑engineer, or use any file from t
 
 ## Content
 
-- Adds a new playable character: **Little Wizard**
+- Adds a new playable character: **Rebellion**
 
 ## Requirements
 
