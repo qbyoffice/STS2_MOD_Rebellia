@@ -334,7 +334,6 @@
     <Content Include="materials\vfx\fire_impact\vfx_fire_flipbook_2.tres" />
     <Content Include="materials\vfx\fire_impact\vfx_fire_flipbook_3.tres" />
     <Content Include="materials\vfx\fire_impact\vfx_fire_impact_flipbook.tres" />
-    <Content Include="scenes\LICENSE.assets" />
     <Content Include="scenes\vfx\common\vfx_common_glow.tscn" />
     <Content Include="scenes\vfx\common\vfx_common_specks.tscn" />
     <Content Include="scenes\vfx\fire_impact\vfx_fire_burst_right_flipbook.tscn" />
