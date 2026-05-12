@@ -6,16 +6,15 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Basic;
 
-public class CrimsonVeil : RebelliaCard
+public class CrimsonVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self) 
 {
-    public CrimsonVeil()
-        : base(1, CardType.Skill, CardRarity.Basic, TargetType.Self) { }
 
-    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Defend };
+    protected override HashSet<CardTag> CanonicalTags =>[CardTag.Defend, CardTagExtensions.RebelliaSanguinePoint];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new DynamicVar[]
         {
