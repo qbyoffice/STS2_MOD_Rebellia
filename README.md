@@ -31,4 +31,4 @@ You may not copy, modify, distribute, reverse‑engineer, or use any file from t
 
 ## Credits
 
-- Built with the StS2 Mod Template
+- Built with the StS2 Mod Template from @iouter
