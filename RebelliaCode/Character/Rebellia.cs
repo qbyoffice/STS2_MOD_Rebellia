@@ -14,7 +14,7 @@ public class Rebellia : PlaceholderCharacterModel
 
     public override Color NameColor => CharacterColor;
     public override CharacterGender Gender => CharacterGender.Feminine;
-    public override int StartingHp => 76;
+    public override int StartingHp => 70;
 
     public override CardPoolModel CardPool => ModelDb.CardPool<RebelliaCardPool>();
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<RebelliaRelicPool>();
