@@ -10,7 +10,7 @@ namespace Rebellia.RebelliaCode.Character;
 public class Rebellia : PlaceholderCharacterModel
 {
     public const string InnerName = "Rebellia";
-    public static readonly Color CharacterColor = new("384A61");
+    public static readonly Color CharacterColor = new("74011f");
 
     public override Color NameColor => CharacterColor;
     public override CharacterGender Gender => CharacterGender.Feminine;
@@ -39,8 +39,8 @@ public class Rebellia : PlaceholderCharacterModel
     public override CustomEnergyCounter? CustomEnergyCounter =>
         new CustomEnergyCounter(
             i => "" + i + ".png",
-            new Color(0.4f, 0.1f, 0.9f),
-            new Color(0.7f, 0.1f, 0.9f)
+            new Color(0.6f, 0.1f, 0.1f),
+            new Color(0.4f, 0.05f, 0.05f)
         );
 
     public override string CustomAttackSfx => "res://";
