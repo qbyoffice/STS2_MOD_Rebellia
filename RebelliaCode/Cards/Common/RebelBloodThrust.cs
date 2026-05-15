@@ -11,7 +11,7 @@ using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-public class CounterbloodThrust()
+public class RebelBloodThrust()
     : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     private const int RequiredBloodArtPointsValue = 1;

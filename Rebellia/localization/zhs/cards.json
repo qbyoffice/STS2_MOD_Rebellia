@@ -9,6 +9,6 @@
     "REBELLIA-CRIMSON_VEIL.title": "猩红面纱",
     "REBELLIA-CRIMSON_STRIKE.description": "造成{Damage:diff()}点伤害。\n下一张[gold]鲜血剑艺[/gold]卡牌无消耗。\n非[gold]鲜血剑艺[/gold]卡牌额外造成 现有生命*{IfUpgraded:show:10%|6%}的伤害。",
     "REBELLIA-CRIMSON_STRIKE.title": "猩红打击",
-    "REBELLIA-COUNTERBLOOD_THRUST.description": "造成{Damage:diff()}点伤害,如果照成实际伤害则随机攻击一名敌人造成{Damage:diff()}点伤害。\n消耗{RequiredBloodArtPoints:diff()}层[gold]鲜血剑艺[/gold]\n使随机攻击变为全体攻击。",
-    "REBELLIA-COUNTERBLOOD_THRUST.title": "逆血突刺"
+    "REBELLIA-REBEL_BLOOD_THRUST.description": "造成{Damage:diff()}点伤害,如果照成实际伤害则随机攻击一名敌人造成{Damage:diff()}点伤害。\n消耗{RequiredBloodArtPoints:diff()}层[gold]鲜血剑艺[/gold]\n使随机攻击变为全体攻击。",
+    "REBELLIA-REBEL_BLOOD_THRUST.title": "逆血突刺"
 }
