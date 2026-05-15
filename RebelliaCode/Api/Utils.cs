@@ -247,7 +247,7 @@ public static class Utils
         return combatState.DrawPile?.Cards?.FirstOrDefault(c => c is RebelliaStrike);
     }
 
-    public static async Task<bool> TryConsumeBloodPoints(Creature creature, int requiredPoints)
+    public static async Task<bool> TryConsumeBloodArtPoints(Creature creature, int requiredPoints)
     {
         if (IsBloodCostExempted(creature))
             return true;

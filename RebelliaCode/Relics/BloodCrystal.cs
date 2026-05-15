@@ -25,7 +25,7 @@ public class BloodCrystal : RebelliaRelics
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
         if (bloodPower != null)
         {
-            bloodPower.MaxPoints = 2;
+            bloodPower.BloodArtMaxPoints = 2;
             int current = bloodPower.GetPoints();
             if (current < 2)
                 bloodPower.AddPoints(1);

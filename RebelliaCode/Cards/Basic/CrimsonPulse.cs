@@ -13,7 +13,7 @@ namespace Rebellia.RebelliaCode.Cards.Basic;
 public class CrimsonPulse()
     : RebelliaCard(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
-    private const int RequiredBloodPointsValue = 2;
+    private const int RequiredBloodArtPointsValue = 2;
 
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
@@ -21,7 +21,7 @@ public class CrimsonPulse()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(6, ValueProp.Move),
-            new IntVar("RequiredBloodPoints", RequiredBloodPointsValue),
+            new IntVar("RequiredBloodArtPoints", RequiredBloodArtPointsValue),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -32,7 +32,7 @@ public class CrimsonPulse()
         if (strikeCard == null)
             return;
 
-        if (!await Utils.TryConsumeBloodPoints(Owner.Creature, RequiredBloodPointsValue))
+        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, RequiredBloodArtPointsValue))
             return;
 
         await CardCmd.AutoPlay(choiceContext, strikeCard, play.Target);

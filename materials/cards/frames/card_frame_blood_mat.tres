@@ -7,4 +7,4 @@ resource_local_to_scene = true
 shader = ExtResource("1_r4s6q")
 shader_parameter/h = 0.0
 shader_parameter/s = 0.90000004275
-shader_parameter/v = 0.5
+shader_parameter/v = 0.6

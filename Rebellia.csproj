@@ -307,7 +307,6 @@
     <Folder Include="materials\cards\frames\" />
     <Folder Include="RebelliaCode\Cards\Others\" />
     <Folder Include="RebelliaCode\Cards\Rare\" />
-    <Folder Include="RebelliaCode\Cards\Uncommon\" />
     <Folder Include="Rebellia\animations\characters\" />
     <Folder Include="Rebellia\animations\character_select\" />
     <Folder Include="Rebellia\animations\merchant\" />

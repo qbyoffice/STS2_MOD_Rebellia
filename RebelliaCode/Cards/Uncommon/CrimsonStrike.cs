@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -8,13 +6,12 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers.cards;
 
-namespace Rebellia.RebelliaCode.Cards.Common;
+namespace Rebellia.RebelliaCode.Cards.Uncommon;
 
 public class CrimsonStrike()
-    : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    : RebelliaCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
 
@@ -27,7 +24,7 @@ public class CrimsonStrike()
         if (Utils.HasAnyPower<CrimsonStrikeDamagePower, CrimsonStrikePower>(Owner.Creature))
             return;
 
-        int extra = (Owner.Creature.MaxHp * (IsUpgraded ? 10 : 6)) / 100;
+        int extra = Owner.Creature.MaxHp * (IsUpgraded ? 10 : 6) / 100;
         var damagePower = await PowerCmd.Apply<CrimsonStrikeDamagePower>(
             Owner.Creature,
             extra,

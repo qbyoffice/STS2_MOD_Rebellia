@@ -36,11 +36,9 @@ namespace Rebellia.RebelliaCode.Powers.cards
             CardModel playedCard = cardPlay.Card;
             if (playedCard != Data.SourceCard && playedCard.Type == CardType.Attack)
             {
-                // 移除另一个 Power（Owner 是 Creature，直接 GetPower）
                 var damagePower = Owner.GetPower<CrimsonStrikeDamagePower>();
                 if (damagePower != null)
                     await PowerCmd.Remove(damagePower);
-                // 移除自身
                 await PowerCmd.Remove(this);
             }
         }
