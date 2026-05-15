@@ -304,11 +304,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RebelliaCode\Cards\Common\" />
+    <Folder Include="materials\cards\frames\" />
     <Folder Include="RebelliaCode\Cards\Others\" />
     <Folder Include="RebelliaCode\Cards\Rare\" />
     <Folder Include="RebelliaCode\Cards\Uncommon\" />
-    <Folder Include="RebelliaCode\Powers\" />
     <Folder Include="Rebellia\animations\characters\" />
     <Folder Include="Rebellia\animations\character_select\" />
     <Folder Include="Rebellia\animations\merchant\" />
@@ -324,7 +323,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="materials\cards\frames\card_frame_purple_mat.tres" />
     <Content Include="materials\LICENSE.assets" />
     <Content Include="materials\vfx\common\vfx_glow.tres" />
     <Content Include="materials\vfx\common\vfx_speck_glow_white.tres" />

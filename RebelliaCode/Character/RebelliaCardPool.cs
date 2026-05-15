@@ -11,12 +11,12 @@ public class RebelliaCardPool : CustomCardPoolModel
 
     public override string TextEnergyIconPath => "";
 
-    public override string CardFrameMaterialPath => "card_frame_purple";
-    public override Color ShaderColor => new("384A61");
-    public override float H => 0.75f;
-    public override float S => 0.6f;
-    public override float V => 1.0f;
-    public override Color DeckEntryCardColor => new("4E437F");
-    public override Color EnergyOutlineColor => new("4E437F");
+    public override string CardFrameMaterialPath => "card_frame_blood";
+    public override Color ShaderColor => new("74011f");
+    public override float H => 0f;
+    public override float S => 0.9f;
+    public override float V => 0.4f;
+    public override Color DeckEntryCardColor => new("74011f");
+    public override Color EnergyOutlineColor => new("74011f");
     public override bool IsColorless => false;
 }

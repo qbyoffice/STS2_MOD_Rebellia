@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Relics;
 using Rebellia.RebelliaCode.Powers;
+using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Relics;
 
