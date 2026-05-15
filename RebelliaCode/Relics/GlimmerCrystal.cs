@@ -24,7 +24,7 @@ public class GlimmerCrystal : RebelliaRelics
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
         if (bloodPower != null)
         {
-            bloodPower.MaxPoints = 3;
+            bloodPower.BloodArtMaxPoints = 3;
             int current = bloodPower.GetPoints();
             int toAdd = 2 - current;
             if (toAdd > 0)

@@ -56,8 +56,8 @@ public class LucentCrystal : RebelliaRelics
         if (bloodPower == null)
             return;
 
-        if (bloodPower.MaxPoints < 2)
-            bloodPower.MaxPoints = 2;
+        if (bloodPower.BloodArtMaxPoints < 2)
+            bloodPower.BloodArtMaxPoints = 2;
 
         int current = bloodPower.GetPoints();
         if (current < 2)

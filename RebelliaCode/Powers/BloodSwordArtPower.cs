@@ -5,16 +5,16 @@ namespace Rebellia.RebelliaCode.Powers;
 
 public class BloodSwordArtPower : RebelliaPowers
 {
-    public int MaxPoints { get; set; } = 2;
+    public int BloodArtMaxPoints { get; set; } = 2;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override int DisplayAmount => GetInternalData<Data>().BloodPoints;
+    public override int DisplayAmount => GetInternalData<Data>().BloodArtPoints;
     public override bool ShouldReceiveCombatHooks => true;
 
     private class Data
     {
-        public int BloodPoints = 0;
+        public int BloodArtPoints = 0;
     }
 
     protected override object InitInternalData() => new Data();
@@ -22,19 +22,19 @@ public class BloodSwordArtPower : RebelliaPowers
     public void AddPoints(int amount)
     {
         var data = GetInternalData<Data>();
-        data.BloodPoints = System.Math.Min(data.BloodPoints + amount, MaxPoints);
+        data.BloodArtPoints = System.Math.Min(data.BloodArtPoints + amount, BloodArtMaxPoints);
         InvokeDisplayAmountChanged();
     }
 
     public bool TrySpendPoints(int amount)
     {
         var data = GetInternalData<Data>();
-        if (data.BloodPoints < amount)
+        if (data.BloodArtPoints < amount)
             return false;
-        data.BloodPoints -= amount;
+        data.BloodArtPoints -= amount;
         InvokeDisplayAmountChanged();
         return true;
     }
 
-    public int GetPoints() => GetInternalData<Data>().BloodPoints;
+    public int GetPoints() => GetInternalData<Data>().BloodArtPoints;
 }
