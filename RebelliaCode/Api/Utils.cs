@@ -11,6 +11,9 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.DynamicVars;
+using Rebellia.RebelliaCode.Cards.Basic;
+using Rebellia.RebelliaCode.Powers;
+using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Api;
 
@@ -217,5 +220,41 @@ public static class Utils
         where T : PowerModel
     {
         return await PowerCmd.Apply<T>(target, amount, applier ?? target, cardSource, silent);
+    }
+
+    public static bool HasAnyPower<T1, T2>(Creature creature)
+        where T1 : PowerModel
+        where T2 : PowerModel
+    {
+        return creature.GetPower<T1>() != null || creature.GetPower<T2>() != null;
+    }
+
+    public static bool IsBloodCostExempted(Creature creature)
+    {
+        return creature.GetPower<CrimsonStrikePower>() != null;
+    }
+
+    public static CardModel? GetAvailableStrikeCard(Player player)
+    {
+        var combatState = player?.PlayerCombatState;
+        if (combatState == null)
+            return null;
+
+        var handCard = combatState.Hand?.Cards?.FirstOrDefault(c => c is RebelliaStrike);
+        if (handCard != null)
+            return handCard;
+
+        return combatState.DrawPile?.Cards?.FirstOrDefault(c => c is RebelliaStrike);
+    }
+
+    public static async Task<bool> TryConsumeBloodPoints(Creature creature, int requiredPoints)
+    {
+        if (IsBloodCostExempted(creature))
+            return true;
+
+        var bloodPower = await GetOrCreatePower<BloodSwordArtPower>(creature);
+        if (bloodPower == null || bloodPower.GetPoints() < requiredPoints)
+            return false;
+        return bloodPower.TrySpendPoints(requiredPoints);
     }
 }

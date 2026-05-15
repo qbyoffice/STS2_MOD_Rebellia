@@ -7,5 +7,7 @@ class CardTagExtensions
 {
     [CustomEnum]
     public static CardTag RebelliaSanguinePoint;
-    public static CardTag RebelliaBloodWeapon;
+
+    [CustomEnum]
+    public static CardTag RebelliaBloodWeaponArt;
 }

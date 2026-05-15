@@ -10,7 +10,7 @@ namespace Rebellia.RebelliaCode.Relics;
 
 public class GlimmerCrystal : RebelliaRelics
 {
-    public override RelicRarity Rarity => RelicRarity.Rare;
+    public override RelicRarity Rarity => RelicRarity.Uncommon;
 
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext ctx,
