@@ -11,7 +11,7 @@ namespace Rebellia.RebelliaCode.Relics;
 
 public class BloodCrystal : RebelliaRelics
 {
-    public override RelicRarity Rarity => RelicRarity.Uncommon;
+    public override RelicRarity Rarity => RelicRarity.Common;
 
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext ctx,

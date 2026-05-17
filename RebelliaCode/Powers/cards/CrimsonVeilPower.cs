@@ -56,6 +56,7 @@ public class CrimsonVeilPower : RebelliaPowers
 
         var hand = PileType.Hand.GetPile(player).Cards;
         var draw = PileType.Draw.GetPile(player).Cards;
+        var discard = PileType.Discard.GetPile(player).Cards;
         var statusCards = hand.Concat(draw).Where(c => c.Type == CardType.Status).ToList();
 
         if (statusCards.Count == 0)

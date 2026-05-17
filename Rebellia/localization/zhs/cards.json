@@ -5,10 +5,14 @@
     "REBELLIA-REBELLIA_STRIKE.title": "打击",
     "REBELLIA-CRIMSON_PULSE.description": "造成{Damage:diff()}点伤害。\n消耗{RequiredBloodArtPoints:diff()}层[gold]鲜血剑艺[/gold]\n从抽牌堆与手牌中打出,1张[gold]打击[/gold]。",
     "REBELLIA-CRIMSON_PULSE.title": "猩红脉冲",
-    "REBELLIA-CRIMSON_VEIL.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得1层[gold]鲜血剑艺[/gold]\n获得{CrimsonVeilPower:diff()}层[gold]猩红面纱[/gold]",
+    "REBELLIA-CRIMSON_VEIL.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{CrimsonVeilPower:diff()}层[gold]猩红面纱[/gold]",
     "REBELLIA-CRIMSON_VEIL.title": "猩红面纱",
     "REBELLIA-CRIMSON_STRIKE.description": "造成{Damage:diff()}点伤害。\n下一张[gold]鲜血剑艺[/gold]卡牌无消耗。\n非[gold]鲜血剑艺[/gold]卡牌额外造成 现有生命*{IfUpgraded:show:10%|6%}的伤害。",
     "REBELLIA-CRIMSON_STRIKE.title": "猩红打击",
     "REBELLIA-REBEL_BLOOD_THRUST.description": "造成{Damage:diff()}点伤害,如果照成实际伤害则随机攻击一名敌人造成{Damage:diff()}点伤害。\n消耗{RequiredBloodArtPoints:diff()}层[gold]鲜血剑艺[/gold]\n使随机攻击变为全体攻击。",
-    "REBELLIA-REBEL_BLOOD_THRUST.title": "逆血突刺"
+    "REBELLIA-REBEL_BLOOD_THRUST.title": "逆血突刺",
+    "REBELLIA-SANGUINE_DANCE.description": "造成{Damage:diff()}点伤害。\n消耗{RequiredBloodArtPoints:diff()}层[gold]鲜血剑艺[/gold]\n获得[gold]猩红面纱[/gold]\n（如果不存在）",
+    "REBELLIA-SANGUINE_DANCE.title": "鲜血舞踏",
+    "REBELLIA-VEINTHORN_SCAB.description": "造成{Damage:diff()}点伤害。\n消耗{RequiredBloodArtPoints:diff()}层[gold]鲜血剑艺[/gold]\n使目标获得[gold]撕裂[/gold]",
+    "REBELLIA-VEINTHORN_SCAB.title": "剜脉棘痂"
 }
