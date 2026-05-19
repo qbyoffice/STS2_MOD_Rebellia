@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rooms;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Powers;
@@ -54,14 +55,24 @@ public class CrimsonVeilPower : RebelliaPowers
         if (player == null)
             return;
 
-        var hand = PileType.Hand.GetPile(player).Cards;
-        var draw = PileType.Draw.GetPile(player).Cards;
-        var statusCards = hand.Concat(draw).Where(c => c.Type == CardType.Status).ToList();
+        var handStatus = PileType
+            .Hand.GetPile(player)
+            .Cards.Where(c => c.Type == CardType.Status)
+            .ToList();
+        var drawStatus = PileType
+            .Draw.GetPile(player)
+            .Cards.Where(c => c.Type == CardType.Status)
+            .ToList();
+        var discardStatus = PileType
+            .Discard.GetPile(player)
+            .Cards.Where(c => c.Type == CardType.Status)
+            .ToList();
 
-        if (statusCards.Count == 0)
+        var allStatusCards = handStatus.Concat(drawStatus).Concat(discardStatus).ToList();
+        if (allStatusCards.Count == 0)
             return;
 
-        var randomCard = player.RunState.Rng.CombatCardSelection.NextItem(statusCards);
+        var randomCard = player.RunState.Rng.CombatCardSelection.NextItem(allStatusCards);
         if (randomCard == null)
             return;
 
@@ -72,7 +83,7 @@ public class CrimsonVeilPower : RebelliaPowers
         }
         else
         {
-            await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), randomCard);
+            await CardPileCmd.Add(randomCard, PileType.Exhaust);
         }
     }
 
@@ -88,27 +99,25 @@ public class CrimsonVeilPower : RebelliaPowers
         if (Owner == null || Owner.Side != side)
             return;
 
-        int veilCount = GetVeilPoints();
-        if (veilCount <= 0)
-            return;
-
-        decimal conversionRate = DynamicVarsHelper
-            .GetPowerVar<CrimsonVeilPower>(DynamicVars)
-            .BaseValue;
-        int totalToAdd = (int)(veilCount * conversionRate);
-        if (totalToAdd > 0)
+        int currentVeil = GetVeilPoints();
+        if (currentVeil > 0)
         {
-            var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
-            if (bloodPower != null)
+            AddVeilPoints(-1);
+        }
+        var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
+        if (bloodPower != null)
+        {
+            int currentBlood = bloodPower.GetPoints();
+            int maxBlood = bloodPower.BloodArtMaxPoints;
+            if (currentBlood < maxBlood)
             {
-                int currentBlood = bloodPower.GetPoints();
-                int maxBlood = bloodPower.BloodArtMaxPoints;
-                int toAdd = Math.Min(totalToAdd, maxBlood - currentBlood);
-                if (toAdd > 0)
-                    bloodPower.AddPoints(toAdd);
+                bloodPower.AddPoints(1);
             }
         }
+    }
 
-        AddVeilPoints(-1);
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        await PowerCmd.Remove(this);
     }
 }

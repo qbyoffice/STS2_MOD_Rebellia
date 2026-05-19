@@ -10,40 +10,38 @@ using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
+using Rebellia.RebelliaCode.Powers.cards;
 
-namespace Rebellia.RebelliaCode.Cards.Basic;
+namespace Rebellia.RebelliaCode.Cards.Common;
 
-public class CrimsonPulse()
-    : RebelliaCard(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
+public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
-
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipsValue.BloodSwordArt, HoverTipsValue.BloodDartDiscount];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(6, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
+        [new DamageVar(4m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CommonActions.CardAttack(this, play).Execute(choiceContext);
+        if (Owner.Creature.GetPower<BloodDartDiscountPower>() == null)
+        {
+            await PowerCmd.Apply<BloodDartDiscountPower>(Owner.Creature, 1, Owner.Creature, this);
+        }
 
-        var strikeCard = Utils.GetAvailableStrikeCard(Owner);
-        if (strikeCard == null)
-            return;
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
         int requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-            return;
-
-        await CardCmd.AutoPlay(choiceContext, strikeCard, play.Target);
+        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+        {
+            await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Top);
+        }
     }
 
     protected override void OnUpgrade()
     {
-        base.OnUpgrade();
-        EnergyCost.UpgradeBy(-1);
-        DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVars.Damage.UpgradeValueBy(2m);
     }
 }

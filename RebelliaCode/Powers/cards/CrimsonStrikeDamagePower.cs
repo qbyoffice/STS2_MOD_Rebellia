@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -13,13 +12,6 @@ namespace Rebellia.RebelliaCode.Powers.cards
 {
     public class CrimsonStrikeDamagePower : RebelliaPowers
     {
-        private class Data
-        {
-            public AttackCommand? CommandToModify;
-            public int AmountWhenAttackStarted;
-            public CardModel? SourceCard;
-        }
-
         public override PowerType Type => PowerType.Buff;
         public override PowerStackType StackType => PowerStackType.Single;
         public override bool ShouldReceiveCombatHooks => true;
@@ -27,6 +19,13 @@ namespace Rebellia.RebelliaCode.Powers.cards
         protected override object InitInternalData() => new Data();
 
         private Data GetData() => GetInternalData<Data>();
+
+        private class Data
+        {
+            public AttackCommand? CommandToModify;
+            public int AmountWhenAttackStarted;
+            public CardModel? SourceCard;
+        }
 
         public void SetSourceCard(CardModel source) => GetData().SourceCard = source;
 
@@ -61,6 +60,9 @@ namespace Rebellia.RebelliaCode.Powers.cards
         )
         {
             var data = GetData();
+
+            if (cardSource != null && cardSource == GetData().SourceCard)
+                return 0m;
 
             if (dealer != Owner)
                 return 0m;

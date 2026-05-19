@@ -42,25 +42,4 @@ public class Rebellia : PlaceholderCharacterModel
             new Color(0.6f, 0.1f, 0.1f),
             new Color(0.4f, 0.05f, 0.05f)
         );
-
-    public override string CustomAttackSfx => "res://";
-    public override string CustomCastSfx => "res://";
-    public override string CustomDeathSfx => "res://";
-    public override string CustomTrailPath => "";
-    public override string CustomVisualPath => "res://Rebellia/scenes/creature_visuals/regent.tscn";
-    public override string CustomMerchantAnimPath =>
-        "res://Rebellia/scenes/merchant/characters/regent_merchant.tscn";
-    public override string CustomRestSiteAnimPath =>
-        "res://Rebellia/scenes/rest_site/characters/regent_rest_site.tscn";
-    public override string CustomIconPath => "";
-    public override string CustomIconTexturePath => "";
-    public override string CustomCharacterSelectLockedIconPath => "";
-    public override string CustomCharacterSelectIconPath => "";
-    public override string CustomArmPointingTexturePath => "";
-    public override string CustomArmRockTexturePath => "";
-    public override string CustomArmPaperTexturePath => "";
-    public override string CustomArmScissorsTexturePath => "";
-    public override string CustomCharacterSelectBg =>
-        "res://Rebellia/scenes/screens/char_select/char_select_bg_regent.tscn";
-    public override string CustomMapMarkerPath => "";
 }

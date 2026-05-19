@@ -12,6 +12,16 @@ public static class DynamicVarsHelper
         return (PowerVar<T>)varSet[typeof(T).Name];
     }
 
+    public static DiscardsVar GetDiscardsVar(DynamicVarSet varSet)
+    {
+        return (DiscardsVar)varSet[DiscardsVar.DefaultName];
+    }
+
+    public static ThresholdVar GetThresholdVar(DynamicVarSet varSet)
+    {
+        return (ThresholdVar)varSet[ThresholdVar.DefaultName];
+    }
+
     public static PowerVar<BloodSwordArtPower> GetBloodSwordArtVar(this DynamicVarSet varSet)
     {
         return (PowerVar<BloodSwordArtPower>)varSet[typeof(BloodSwordArtPower).Name];

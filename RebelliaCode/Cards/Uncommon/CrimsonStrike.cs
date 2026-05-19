@@ -2,10 +2,13 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.DynamicVars;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Uncommon;
@@ -13,9 +16,14 @@ namespace Rebellia.RebelliaCode.Cards.Uncommon;
 public class CrimsonStrike()
     : RebelliaCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
-    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
-
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9, ValueProp.Move)];
+    protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [
+            new DamageVar(9, ValueProp.Move),
+            new PowerVar<CrimsonStrikeDamagePower>(6),
+            new PowerVar<CrimsonStrikePower>(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -24,7 +32,9 @@ public class CrimsonStrike()
         if (Utils.HasAnyPower<CrimsonStrikeDamagePower, CrimsonStrikePower>(Owner.Creature))
             return;
 
-        int extra = Owner.Creature.MaxHp * (IsUpgraded ? 10 : 6) / 100;
+        int percent = (int)
+            DynamicVarsHelper.GetPowerVar<CrimsonStrikeDamagePower>(DynamicVars).BaseValue;
+        int extra = Owner.Creature.MaxHp * percent / 100;
         var damagePower = await PowerCmd.Apply<CrimsonStrikeDamagePower>(
             Owner.Creature,
             extra,
@@ -33,9 +43,11 @@ public class CrimsonStrike()
         );
         damagePower?.SetSourceCard(this);
 
+        int freePowerAmount = (int)
+            DynamicVarsHelper.GetPowerVar<CrimsonStrikePower>(DynamicVars).BaseValue;
         var freePower = await PowerCmd.Apply<CrimsonStrikePower>(
             Owner.Creature,
-            1,
+            freePowerAmount,
             Owner.Creature,
             this
         );
@@ -46,5 +58,6 @@ public class CrimsonStrike()
     {
         base.OnUpgrade();
         DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVarsHelper.GetPowerVar<CrimsonStrikeDamagePower>(DynamicVars).UpgradeValueBy(4m);
     }
 }

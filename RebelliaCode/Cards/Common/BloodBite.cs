@@ -1,0 +1,67 @@
+using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
+using Rebellia.RebelliaCode.Api;
+using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.DynamicVars;
+using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Api.Powers;
+using Rebellia.RebelliaCode.Powers;
+using Rebellia.RebelliaCode.Powers.cards;
+
+namespace Rebellia.RebelliaCode.Cards.Common;
+
+public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+{
+    protected override HashSet<CardTag> CanonicalTags =>
+        [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipsValue.BloodSwordArt, HoverTipsValue.RebelliaTempHp];
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [
+            new DamageVar(9m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<RebelliaTmepHpPower>(4),
+        ];
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
+    {
+        {
+            await CommonActions.CardAttack(this, play).Execute(choiceContext);
+
+            int requiredBlood = (int)
+                DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
+
+            if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+            {
+                var watcher = Owner.Creature.GetPower<RebelliaTmepHpPower>();
+                if (watcher == null)
+                {
+                    watcher = await PowerCmd.Apply<RebelliaTmepHpPower>(
+                        Owner.Creature,
+                        0,
+                        Owner.Creature,
+                        this
+                    );
+                }
+                if (watcher != null)
+                {
+                    int tempGain = (int)
+                        DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
+                    watcher.AddTempHp(tempGain);
+                }
+            }
+        }
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).UpgradeValueBy(1m);
+    }
+}
