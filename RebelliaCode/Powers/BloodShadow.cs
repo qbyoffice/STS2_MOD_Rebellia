@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MegaCrit.Sts2.Core.Entities.Powers;
+using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers;
 
-class BloodShadow { }
+class BloodShadow : RebelliaPowers
+{
+    public override PowerType Type => PowerType.Buff;
+    public override PowerStackType StackType => PowerStackType.Counter;
+}

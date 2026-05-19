@@ -16,8 +16,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class SanguineDance()
     : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    protected override HashSet<CardTag> CanonicalTags =>
-        [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];
     protected override IEnumerable<DynamicVar> CanonicalVars =>

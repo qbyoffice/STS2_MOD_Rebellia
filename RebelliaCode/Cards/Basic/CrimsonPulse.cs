@@ -16,8 +16,7 @@ namespace Rebellia.RebelliaCode.Cards.Basic;
 public class CrimsonPulse()
     : RebelliaCard(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
-    protected override HashSet<CardTag> CanonicalTags =>
-        [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(6, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];

@@ -1,10 +1,9 @@
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Powers;
 
@@ -12,17 +11,30 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class RendPower : RebelliaPowers
 {
+    private bool _isProcessing = false;
+
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => Amount;
     public override bool ShouldReceiveCombatHooks => true;
 
-    public override async Task AfterAttack(AttackCommand command)
+    public override async Task BeforeDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
     {
-        if (command.Attacker != Owner)
+        if (dealer != Owner)
+            return;
+        if (_isProcessing)
             return;
         if (Amount <= 0)
             return;
+
+        _isProcessing = true;
         await CreatureCmd.Damage(
             new BlockingPlayerChoiceContext(),
             Owner,
@@ -31,6 +43,7 @@ public class RendPower : RebelliaPowers
             null,
             null
         );
+        _isProcessing = false;
     }
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)

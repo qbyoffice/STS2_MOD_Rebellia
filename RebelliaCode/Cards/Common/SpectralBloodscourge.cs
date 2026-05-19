@@ -14,7 +14,6 @@ namespace Rebellia.RebelliaCode.Cards.Common
     public class SpectralBloodscourge()
         : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
     {
-        protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
         public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
         protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.Bloodclot];
         protected override IEnumerable<DynamicVar> CanonicalVars =>
