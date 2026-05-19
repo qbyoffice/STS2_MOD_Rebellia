@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -11,6 +14,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.DynamicVars;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
@@ -27,6 +31,7 @@ public class CrimsonVeilPower : RebelliaPowers
     private class Data
     {
         public int VeilPoints = 0;
+        public bool HasMovedSanguinePoints = false;
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrimsonVeilPower>(1)];
@@ -39,7 +44,51 @@ public class CrimsonVeilPower : RebelliaPowers
 
         if (data.VeilPoints == 0)
         {
+            TaskHelper.RunSafely(ConsumeAllSanguinePoints());
             TaskHelper.RunSafely(PowerCmd.Remove(this));
+        }
+    }
+
+    private async Task ConsumeAllSanguinePoints()
+    {
+        if (Owner == null)
+            return;
+        var player = Owner.Player;
+        if (player == null)
+            return;
+
+        var allCards = player.PlayerCombatState?.AllCards ?? Enumerable.Empty<CardModel>();
+        var sanguineCards = allCards
+            .Where(c => c != null && c.Tags.Contains(CardTagExtensions.RebelliaSanguinePoint))
+            .ToList();
+
+        foreach (var card in sanguineCards)
+        {
+            await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
+        }
+    }
+
+    private async Task MoveSanguinePointsToDrawPile()
+    {
+        if (Owner == null)
+            return;
+        var player = Owner.Player;
+        if (player == null)
+            return;
+
+        var data = GetInternalData<Data>();
+        if (data.HasMovedSanguinePoints)
+            return;
+        data.HasMovedSanguinePoints = true;
+
+        var allCards = player.PlayerCombatState?.AllCards ?? Enumerable.Empty<CardModel>();
+        var sanguineCards = allCards
+            .Where(c => c != null && c.Tags.Contains(CardTagExtensions.RebelliaSanguinePoint))
+            .ToList();
+
+        foreach (var card in sanguineCards)
+        {
+            await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Top);
         }
     }
 
@@ -50,40 +99,52 @@ public class CrimsonVeilPower : RebelliaPowers
         var combatState = Owner.CombatState;
         if (combatState == null)
             return;
-
         var player = Owner.Player;
         if (player == null)
             return;
 
-        var handStatus = PileType
-            .Hand.GetPile(player)
-            .Cards.Where(c => c.Type == CardType.Status)
-            .ToList();
         var drawStatus = PileType
             .Draw.GetPile(player)
-            .Cards.Where(c => c.Type == CardType.Status)
+            .Cards.Where(c =>
+                c != null
+                && c.Type == CardType.Status
+                && c.Pile != null
+                && c.Pile.Type != PileType.Exhaust
+            )
+            .ToList();
+        var handStatus = PileType
+            .Hand.GetPile(player)
+            .Cards.Where(c =>
+                c != null
+                && c.Type == CardType.Status
+                && c.Pile != null
+                && c.Pile.Type != PileType.Exhaust
+            )
             .ToList();
         var discardStatus = PileType
             .Discard.GetPile(player)
-            .Cards.Where(c => c.Type == CardType.Status)
+            .Cards.Where(c =>
+                c != null
+                && c.Type == CardType.Status
+                && c.Pile != null
+                && c.Pile.Type != PileType.Exhaust
+            )
             .ToList();
 
-        var allStatusCards = handStatus.Concat(drawStatus).Concat(discardStatus).ToList();
+        var allStatusCards = drawStatus.Concat(handStatus).Concat(discardStatus).ToList();
         if (allStatusCards.Count == 0)
             return;
 
-        var randomCard = player.RunState.Rng.CombatCardSelection.NextItem(allStatusCards);
-        if (randomCard == null)
-            return;
+        var targetCard = allStatusCards.First();
 
-        bool canPlay = Hook.ShouldPlay(combatState, randomCard, out _, AutoPlayType.Default);
+        bool canPlay = Hook.ShouldPlay(combatState, targetCard, out _, AutoPlayType.Default);
         if (canPlay)
         {
-            await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), randomCard, null);
+            await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), targetCard, null);
         }
         else
         {
-            await CardPileCmd.Add(randomCard, PileType.Exhaust);
+            await CardCmd.Discard(new BlockingPlayerChoiceContext(), targetCard);
         }
     }
 
@@ -92,6 +153,7 @@ public class CrimsonVeilPower : RebelliaPowers
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         await TryPlayOrExhaustStatusCard();
+        await MoveSanguinePointsToDrawPile();
     }
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
@@ -114,10 +176,5 @@ public class CrimsonVeilPower : RebelliaPowers
                 bloodPower.AddPoints(1);
             }
         }
-    }
-
-    public override async Task AfterCombatEnd(CombatRoom room)
-    {
-        await PowerCmd.Remove(this);
     }
 }

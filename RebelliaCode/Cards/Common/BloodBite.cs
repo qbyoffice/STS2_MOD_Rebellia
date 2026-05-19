@@ -1,5 +1,4 @@
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -9,7 +8,6 @@ using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
-using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
 
@@ -17,8 +15,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    protected override HashSet<CardTag> CanonicalTags =>
-        [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.RebelliaTempHp];
 
@@ -31,30 +28,21 @@ public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
+
+        int requiredBlood = (int)
+            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
+        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            await CommonActions.CardAttack(this, play).Execute(choiceContext);
+            int tempGain = (int)
+                DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
 
-            int requiredBlood = (int)
-                DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-
-            if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+            var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature, 1);
+            if (tempPower != null)
             {
-                var watcher = Owner.Creature.GetPower<RebelliaTmepHpPower>();
-                if (watcher == null)
-                {
-                    watcher = await PowerCmd.Apply<RebelliaTmepHpPower>(
-                        Owner.Creature,
-                        0,
-                        Owner.Creature,
-                        this
-                    );
-                }
-                if (watcher != null)
-                {
-                    int tempGain = (int)
-                        DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
-                    watcher.AddTempHp(tempGain);
-                }
+                tempPower.AddTempHp(1);
+                tempPower.AddTempHp(tempGain);
+                tempPower.AddTempHp(-1);
             }
         }
     }

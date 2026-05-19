@@ -16,8 +16,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    protected override HashSet<CardTag> CanonicalTags =>
-        [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.BloodDartDiscount];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
