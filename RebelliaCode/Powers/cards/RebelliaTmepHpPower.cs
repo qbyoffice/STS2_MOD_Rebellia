@@ -1,0 +1,112 @@
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.ValueProps;
+using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Api.Powers;
+
+namespace Rebellia.RebelliaCode.Powers.cards;
+
+public class RebelliaTmepHpPower : RebelliaPowers
+{
+    private bool _isSelfDamage = false;
+
+    public override PowerType Type => PowerType.Buff;
+    public override PowerStackType StackType => PowerStackType.Counter;
+    public override int DisplayAmount => GetInternalData<Data>().RebelliaTempHp;
+    public override bool ShouldReceiveCombatHooks => true;
+
+    protected override object InitInternalData() => new Data();
+
+    private Data GetData() => GetInternalData<Data>();
+
+    private class Data
+    {
+        public int RebelliaTempHp = 0;
+    }
+
+    public void AddTempHp(int amount)
+    {
+        var data = GetData();
+        data.RebelliaTempHp += amount;
+        InvokeDisplayAmountChanged();
+    }
+
+    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    {
+        if (side != Owner.Side)
+            return;
+        var player = Owner.Player;
+        if (player == null)
+            return;
+
+        var hand = PileType.Hand.GetPile(player).Cards;
+        int count = hand.Count(c => c.Tags.Contains(CardTagExtensions.BloodclotExhaust));
+        if (count == 0)
+            return;
+
+        int penalty = count * 5;
+        var data = GetData();
+        int currentTemp = data.RebelliaTempHp;
+        int actualDamage = penalty - currentTemp;
+        if (actualDamage > 0)
+        {
+            _isSelfDamage = true;
+            await CreatureCmd.Damage(
+                new BlockingPlayerChoiceContext(),
+                Owner,
+                actualDamage,
+                ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
+                null,
+                null
+            );
+            _isSelfDamage = false;
+        }
+
+        data.RebelliaTempHp = penalty;
+        InvokeDisplayAmountChanged();
+    }
+
+    public override decimal ModifyHpLostBeforeOsty(
+        Creature target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
+    {
+        if (target != Owner)
+            return amount;
+        if (_isSelfDamage)
+            return amount;
+
+        var data = GetData();
+        if (data.RebelliaTempHp <= 0)
+            return amount;
+
+        int damage = (int)amount;
+        if (data.RebelliaTempHp >= damage)
+        {
+            data.RebelliaTempHp -= damage;
+            InvokeDisplayAmountChanged();
+            return 0;
+        }
+        else
+        {
+            int remaining = damage - data.RebelliaTempHp;
+            data.RebelliaTempHp = 0;
+            InvokeDisplayAmountChanged();
+            return remaining;
+        }
+    }
+
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        await PowerCmd.Remove(this);
+    }
+}

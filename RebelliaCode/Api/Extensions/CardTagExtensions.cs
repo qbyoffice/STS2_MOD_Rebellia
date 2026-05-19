@@ -13,4 +13,7 @@ class CardTagExtensions
 
     [CustomEnum]
     public static CardTag RebelliaBloodWeapon;
+
+    [CustomEnum]
+    public static CardTag BloodclotExhaust;
 }

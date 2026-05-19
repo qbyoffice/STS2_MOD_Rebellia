@@ -12,24 +12,21 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class RendPower : RebelliaPowers
 {
-    private decimal RenddamageValue = 0;
-
     public override PowerType Type => PowerType.Debuff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
+    public override int DisplayAmount => Amount;
     public override bool ShouldReceiveCombatHooks => true;
-
-    public void SetDamageValue(decimal value) => RenddamageValue = value;
 
     public override async Task AfterAttack(AttackCommand command)
     {
         if (command.Attacker != Owner)
             return;
-        if (RenddamageValue <= 0)
+        if (Amount <= 0)
             return;
         await CreatureCmd.Damage(
             new BlockingPlayerChoiceContext(),
             Owner,
-            RenddamageValue,
+            Amount,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
             null,
             null

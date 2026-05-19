@@ -1,4 +1,6 @@
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Rooms;
 using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers;
@@ -37,4 +39,9 @@ public class BloodSwordArtPower : RebelliaPowers
     }
 
     public int GetPoints() => GetInternalData<Data>().BloodArtPoints;
+
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        await PowerCmd.Remove(this);
+    }
 }

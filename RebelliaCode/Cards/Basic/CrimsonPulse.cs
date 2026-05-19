@@ -2,27 +2,27 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Basic;
 
 public class CrimsonPulse()
     : RebelliaCard(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
-    private const int RequiredBloodArtPointsValue = 2;
-
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(6, ValueProp.Move),
-            new IntVar("RequiredBloodArtPoints", RequiredBloodArtPointsValue),
-        ];
+        [new DamageVar(6, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -32,7 +32,9 @@ public class CrimsonPulse()
         if (strikeCard == null)
             return;
 
-        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, RequiredBloodArtPointsValue))
+        int requiredBlood = (int)
+            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
+        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             return;
 
         await CardCmd.AutoPlay(choiceContext, strikeCard, play.Target);
