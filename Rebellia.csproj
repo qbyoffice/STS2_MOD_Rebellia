@@ -208,7 +208,6 @@
     <None Include="Rebellia\images\vfx\vfx_weapon_energy\O_energy.png.import" />
     <None Include="Rebellia\images\vfx\vfx_weapon_energy\P_big_energy.png" />
     <None Include="Rebellia\images\vfx\vfx_weapon_energy\P_big_energy.png.import" />
-    <None Include="Rebellia\LICENSE.assets" />
     <None Include="Rebellia\localization\eng\ancients.json" />
     <None Include="Rebellia\localization\eng\cards.json" />
     <None Include="Rebellia\localization\eng\characters.json" />
@@ -216,7 +215,6 @@
     <None Include="Rebellia\localization\eng\powers.json" />
     <None Include="Rebellia\localization\eng\relics.json" />
     <None Include="Rebellia\localization\zhs\cards.json" />
-    <None Include="Rebellia\mod_image.png" />
     <None Include="Rebellia\mod_image.png.import" />
     <None Include="Rebellia\scenes\Rebellia\card_trail_Rebellia.tscn" />
     <None Include="Rebellia\scenes\Rebellia\Rebellia.tscn" />
@@ -228,12 +226,6 @@
     <None Include="Rebellia\scenes\Rebellia\Rebellia_rest_site.tscn" />
     <None Include="Rebellia\scenes\Rebellia\Rebellia_select_bg.tscn" />
     <None Include="Rebellia\scenes\Rebellia\selection_reticle.tscn" />
-    <None Include="Rebellia\scenes\vfx\common\vfx_common_glow.tscn" />
-    <None Include="Rebellia\scenes\vfx\common\vfx_common_specks.tscn" />
-    <None Include="Rebellia\scenes\vfx\fire_impact\vfx_fire_burst_right_flipbook.tscn" />
-    <None Include="Rebellia\scenes\vfx\fire_impact\vfx_fire_flipbook.tscn" />
-    <None Include="Rebellia\scenes\vfx\vfx_fire_burning.tscn" />
-    <None Include="Rebellia\themes\canvas_item_material_additive_shared.tres" />
     <None Include="project.godot" />
     <None Include="Rebellia/**" />
   </ItemGroup>
@@ -271,8 +263,6 @@
     <AdditionalFiles Include="Rebellia\localization\eng\characters.json" />
     <AdditionalFiles Include="Rebellia\localization\eng\enchantments.json" />
     <AdditionalFiles Include="Rebellia\localization\eng\powers.json" />
-    <AdditionalFiles Include="Rebellia\localization\eng\relics.json" />
-    <AdditionalFiles Include="Rebellia\localization\zhs\cards.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -289,6 +279,8 @@
     <Folder Include="Rebellia\images\relics\tres\" />
     <Folder Include="Rebellia\images\ui\combat\Rebellia\" />
     <Folder Include="Rebellia\images\ui\top_panel\" />
+    <Folder Include="Rebellia\localization\eng\" />
+    <Folder Include="Rebellia\localization\zhs\" />
   </ItemGroup>
 
   <ItemGroup>
