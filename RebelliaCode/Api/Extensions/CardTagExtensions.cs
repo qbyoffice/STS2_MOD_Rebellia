@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace Rebellia.RebelliaCode.Api.Extensions;
 
-class CardTagExtensions
+public static class CardTagExtensions
 {
     [CustomEnum]
     public static CardTag RebelliaSanguinePoint;
