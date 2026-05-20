@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Api.Powers;
 
-namespace Rebellia.RebelliaCode.Powers.cards;
+namespace Rebellia.RebelliaCode.Powers;
 
 public class ArmorPower : RebelliaPowers
 {
