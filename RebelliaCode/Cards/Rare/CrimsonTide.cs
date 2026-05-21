@@ -24,22 +24,23 @@ public class CrimsonTide()
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(20, ValueProp.Move),
-        new CalculationBaseVar(1),
-        new CalculationExtraVar(0),
-        new EnergyVar(1),
-        new CalculatedVar(CalculatedVeilGain).WithMultiplier((card, target) =>
-            {
-                var combatState = card.Owner.Creature.CombatState;
-                if (combatState == null)
-                    return 0;
-                var aliveCount = combatState.HittableEnemies.Count(e => e.IsAlive);
-                var perAlive = (int)card.DynamicVars["CalculationBase"].BaseValue;
-                return aliveCount * perAlive;
-            }
-        )
-    ];
+        [
+            new DamageVar(20, ValueProp.Move),
+            new CalculationBaseVar(1),
+            new CalculationExtraVar(0),
+            new EnergyVar(1),
+            new CalculatedVar(CalculatedVeilGain).WithMultiplier(
+                (card, target) =>
+                {
+                    var combatState = card.Owner.Creature.CombatState;
+                    if (combatState == null)
+                        return 0;
+                    var aliveCount = combatState.HittableEnemies.Count(e => e.IsAlive);
+                    var perAlive = (int)card.DynamicVars["CalculationBase"].BaseValue;
+                    return aliveCount * perAlive;
+                }
+            ),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

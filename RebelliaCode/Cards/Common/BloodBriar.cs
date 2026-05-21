@@ -21,13 +21,13 @@ public class BloodBriar()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(5m, ValueProp.Move),
-        new HpLossVar(3m),
-        new PowerVar<BloodSwordArtPower>(2),
-        new IntVar("HitCount", 2),
-        new IntVar("CardCount", 1)
-    ];
+        [
+            new DamageVar(5m, ValueProp.Move),
+            new HpLossVar(3m),
+            new PowerVar<BloodSwordArtPower>(2),
+            new IntVar("HitCount", 2),
+            new IntVar("CardCount", 1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -71,11 +71,7 @@ public class BloodBriar()
                     if (randomCard != null)
                     {
                         var randomTarget = Owner.RunState.Rng.CombatTargets.NextItem(enemies);
-                        await CardCmd.AutoPlay(
-                            choiceContext,
-                            randomCard,
-                            randomTarget
-                        );
+                        await CardCmd.AutoPlay(choiceContext, randomCard, randomTarget);
                         bloodWeaponCards = PileType
                             .Hand.GetPile(Owner)
                             .Cards.Where(c =>

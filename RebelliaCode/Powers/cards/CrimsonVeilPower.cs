@@ -34,7 +34,8 @@ public class CrimsonVeilPower : RebelliaPowers
         data.VeilPoints = Math.Max(0, data.VeilPoints + amount);
         InvokeDisplayAmountChanged();
 
-        if (amount > 0) TaskHelper.RunSafely(BloodKeywordManager.MoveBloodCardsToDrawPile(Owner.Player!));
+        if (amount > 0)
+            TaskHelper.RunSafely(BloodKeywordManager.MoveBloodCardsToDrawPile(Owner.Player!));
 
         if (data.VeilPoints == 0)
         {
@@ -111,13 +112,15 @@ public class CrimsonVeilPower : RebelliaPowers
             return;
 
         var currentVeil = GetVeilPoints();
-        if (currentVeil > 0) AddVeilPoints(-1);
+        if (currentVeil > 0)
+            AddVeilPoints(-1);
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
         if (bloodPower != null)
         {
             var currentBlood = bloodPower.GetPoints();
             var maxBlood = bloodPower.BloodArtMaxPoints;
-            if (currentBlood < maxBlood) bloodPower.AddPoints(1);
+            if (currentBlood < maxBlood)
+                bloodPower.AddPoints(1);
         }
     }
 

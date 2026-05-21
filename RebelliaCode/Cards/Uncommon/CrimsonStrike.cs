@@ -19,11 +19,11 @@ public class CrimsonStrike()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(9, ValueProp.Move),
-        new PowerVar<CrimsonStrikeDamagePower>(6),
-        new PowerVar<CrimsonStrikePower>(1)
-    ];
+        [
+            new DamageVar(9, ValueProp.Move),
+            new PowerVar<CrimsonStrikeDamagePower>(6),
+            new PowerVar<CrimsonStrikePower>(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

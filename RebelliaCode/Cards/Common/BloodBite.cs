@@ -21,11 +21,11 @@ public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.RebelliaTempHp];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(9m, ValueProp.Move),
-        new PowerVar<BloodSwordArtPower>(1),
-        new PowerVar<RebelliaTmepHpPower>(4)
-    ];
+        [
+            new DamageVar(9m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<RebelliaTmepHpPower>(4),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

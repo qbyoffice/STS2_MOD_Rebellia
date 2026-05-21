@@ -27,10 +27,7 @@ public class CrimsonStrikePower : RebelliaPowers
         Data.SourceCard = source;
     }
 
-    public override async Task AfterCardPlayed(
-        PlayerChoiceContext choiceContext,
-        CardPlay cardPlay
-    )
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         var playedCard = cardPlay.Card;
         if (playedCard != Data.SourceCard && playedCard.Type == CardType.Attack)

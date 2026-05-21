@@ -43,13 +43,15 @@ public class BloodDartDiscountPower : RebelliaPowers
         if (data.firstCardIsBloodDart == null)
         {
             data.firstCardIsBloodDart = cardPlay.Card is BloodDart;
-            if (data.firstCardIsBloodDart == false) await PowerCmd.Remove(this);
+            if (data.firstCardIsBloodDart == false)
+                await PowerCmd.Remove(this);
         }
     }
 
     public override Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
-        if (side == Owner.Side) GetInternalData<Data>().firstCardIsBloodDart = null;
+        if (side == Owner.Side)
+            GetInternalData<Data>().firstCardIsBloodDart = null;
         return Task.CompletedTask;
     }
 

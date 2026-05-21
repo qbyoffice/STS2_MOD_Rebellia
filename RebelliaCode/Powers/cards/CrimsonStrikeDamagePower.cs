@@ -87,10 +87,7 @@ public class CrimsonStrikeDamagePower : RebelliaPowers
         return Amount;
     }
 
-    public override async Task AfterAttack(
-        PlayerChoiceContext choiceContext,
-        AttackCommand command
-    )
+    public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
         if (!_used)
             return;

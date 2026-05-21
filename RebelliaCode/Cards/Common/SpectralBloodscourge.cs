@@ -19,12 +19,12 @@ public class SpectralBloodscourge()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.Bloodclot];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(16m, ValueProp.Move),
-        new CardsVar(5),
-        new PowerVar<CrimsonVeilPower>(1),
-        new PowerVar<RebelliaTmepHpPower>(1)
-    ];
+        [
+            new DamageVar(16m, ValueProp.Move),
+            new CardsVar(5),
+            new PowerVar<CrimsonVeilPower>(1),
+            new PowerVar<RebelliaTmepHpPower>(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

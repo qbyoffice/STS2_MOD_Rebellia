@@ -35,12 +35,7 @@ public class SteelbloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Commo
         {
             var currentVeil = Owner.Creature.GetPower<CrimsonVeilPower>()?.GetVeilPoints() ?? 0;
             if (currentVeil > 0)
-                await CreatureCmd.GainBlock(
-                    Owner.Creature,
-                    currentVeil,
-                    ValueProp.Move,
-                    null
-                );
+                await CreatureCmd.GainBlock(Owner.Creature, currentVeil, ValueProp.Move, null);
         }
     }
 

@@ -24,19 +24,20 @@ public class BloodCrimsonMeteor()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(5m, ValueProp.Move),
-        new PowerVar<BloodSwordArtPower>(1),
-        new CalculationBaseVar(1),
-        new CalculationExtraVar(0),
-        new CalculatedVar(TotalHitsKey).WithMultiplier((card, target) =>
-            {
-                var dex = card.Owner.Creature.GetPowerAmount<DexterityPower>();
-                var baseVal = card.DynamicVars.CalculationBase.BaseValue;
-                return baseVal + dex;
-            }
-        )
-    ];
+        [
+            new DamageVar(5m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new CalculationBaseVar(1),
+            new CalculationExtraVar(0),
+            new CalculatedVar(TotalHitsKey).WithMultiplier(
+                (card, target) =>
+                {
+                    var dex = card.Owner.Creature.GetPowerAmount<DexterityPower>();
+                    var baseVal = card.DynamicVars.CalculationBase.BaseValue;
+                    return baseVal + dex;
+                }
+            ),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

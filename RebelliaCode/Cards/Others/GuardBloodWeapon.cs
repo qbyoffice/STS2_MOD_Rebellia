@@ -8,7 +8,8 @@ using Rebellia.RebelliaCode.Api.Extensions;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
 
-internal class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
+internal class GuardBloodWeapon()
+    : RebelliaCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Defend, CardTagExtensions.RebelliaBloodWeapon];

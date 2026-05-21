@@ -13,7 +13,8 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-internal class VeinthornScab() : RebelliaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+internal class VeinthornScab()
+    : RebelliaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 

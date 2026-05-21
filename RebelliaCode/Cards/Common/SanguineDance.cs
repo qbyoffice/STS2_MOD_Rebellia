@@ -22,11 +22,11 @@ public class SanguineDance()
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(12m, ValueProp.Move),
-        new PowerVar<CrimsonVeilPower>(1),
-        new PowerVar<BloodSwordArtPower>(1)
-    ];
+        [
+            new DamageVar(12m, ValueProp.Move),
+            new PowerVar<CrimsonVeilPower>(1),
+            new PowerVar<BloodSwordArtPower>(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

@@ -48,7 +48,7 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
             () => CreateMultiple<EngageBloodWeapon>(3, combatState, player),
             () => CreateMultiple<DartBloodWeapon>(4, combatState, player),
             () => CreateMultiple<SmashBloodWeapon>(1, combatState, player),
-            () => CreateMultiple<SwiftBloodWeapon>(2, combatState, player)
+            () => CreateMultiple<SwiftBloodWeapon>(2, combatState, player),
         };
         var randomCombo = Owner.RunState.Rng.Niche.NextItem(combos);
         if (randomCombo == null)
@@ -66,7 +66,8 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
         var takeFromGenerated = Math.Min(generatedCards.Count, availableSlots);
         cardsToAdd.AddRange(generatedCards.Take(takeFromGenerated));
         var remainingSlots = availableSlots - takeFromGenerated;
-        if (remainingSlots > 0) cardsToAdd.AddRange(existingCards.Take(remainingSlots));
+        if (remainingSlots > 0)
+            cardsToAdd.AddRange(existingCards.Take(remainingSlots));
 
         foreach (var card in cardsToAdd)
             if (existingCards.Contains(card))
@@ -83,7 +84,8 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
         where T : CardModel
     {
         var cards = new List<CardModel>();
-        for (var i = 0; i < count; i++) cards.Add(combatState.CreateCard<T>(owner));
+        for (var i = 0; i < count; i++)
+            cards.Add(combatState.CreateCard<T>(owner));
         return cards;
     }
 

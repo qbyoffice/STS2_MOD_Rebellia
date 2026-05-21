@@ -22,11 +22,11 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.BloodDartDiscount];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(4m, ValueProp.Move),
-        new PowerVar<BloodSwordArtPower>(1),
-        new PowerVar<BloodDartDiscountPower>(1)
-    ];
+        [
+            new DamageVar(4m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<BloodDartDiscountPower>(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

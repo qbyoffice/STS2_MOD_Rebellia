@@ -21,18 +21,18 @@ public class Rebellia : PlaceholderCharacterModel
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<RebelliaPotionPool>();
 
     public override IEnumerable<CardModel> StartingDeck =>
-    [
-        ModelDb.Card<CrimsonPulse>(),
-        ModelDb.Card<CrimsonVeil>(),
-        ModelDb.Card<RebelliaDefend>(),
-        ModelDb.Card<RebelliaDefend>(),
-        ModelDb.Card<RebelliaDefend>(),
-        ModelDb.Card<RebelliaDefend>(),
-        ModelDb.Card<RebelliaStrike>(),
-        ModelDb.Card<RebelliaStrike>(),
-        ModelDb.Card<RebelliaStrike>(),
-        ModelDb.Card<RebelliaStrike>()
-    ];
+        [
+            ModelDb.Card<CrimsonPulse>(),
+            ModelDb.Card<CrimsonVeil>(),
+            ModelDb.Card<RebelliaDefend>(),
+            ModelDb.Card<RebelliaDefend>(),
+            ModelDb.Card<RebelliaDefend>(),
+            ModelDb.Card<RebelliaDefend>(),
+            ModelDb.Card<RebelliaStrike>(),
+            ModelDb.Card<RebelliaStrike>(),
+            ModelDb.Card<RebelliaStrike>(),
+            ModelDb.Card<RebelliaStrike>(),
+        ];
 
     public override IReadOnlyList<RelicModel> StartingRelics => [ModelDb.Relic<LucentCrystal>()];
 

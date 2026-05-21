@@ -31,7 +31,8 @@ public class SanguineDancePower : RebelliaPowers
         if (player == null)
             return;
 
-        for (var i = 0; i < SanguineDancedrawCount; i++) await DrawRandomCardFromAllPiles(choiceContext, player);
+        for (var i = 0; i < SanguineDancedrawCount; i++)
+            await DrawRandomCardFromAllPiles(choiceContext, player);
     }
 
     private async Task DrawRandomCardFromAllPiles(PlayerChoiceContext choiceContext, Player player)
@@ -52,6 +53,7 @@ public class SanguineDancePower : RebelliaPowers
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (Owner.Side == side) await PowerCmd.Remove(this);
+        if (Owner.Side == side)
+            await PowerCmd.Remove(this);
     }
 }

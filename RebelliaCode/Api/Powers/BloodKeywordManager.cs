@@ -17,12 +17,11 @@ public static class BloodKeywordManager
         var exhaust = PileType.Exhaust.GetPile(player).Cards;
         var bloodCards = discard
             .Concat(exhaust)
-            .Where(c =>
-                c != null && c.Keywords.Contains(CardKeywordExtensions.RebelliaSanguine)
-            )
+            .Where(c => c != null && c.Keywords.Contains(CardKeywordExtensions.RebelliaSanguine))
             .ToList();
 
-        foreach (var card in bloodCards) await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Random);
+        foreach (var card in bloodCards)
+            await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Random);
     }
 
     public static async Task ConsumeAllBloodCards(Player player)
@@ -36,6 +35,7 @@ public static class BloodKeywordManager
             )
             .ToList();
 
-        foreach (var card in allCards) await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
+        foreach (var card in allCards)
+            await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
     }
 }

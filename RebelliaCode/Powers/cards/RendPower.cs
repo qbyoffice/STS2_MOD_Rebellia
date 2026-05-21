@@ -48,6 +48,7 @@ public class RendPower : RebelliaPowers
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (Owner.Side == side) await PowerCmd.Remove(this);
+        if (Owner.Side == side)
+            await PowerCmd.Remove(this);
     }
 }
