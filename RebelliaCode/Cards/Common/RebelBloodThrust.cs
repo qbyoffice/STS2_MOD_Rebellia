@@ -28,7 +28,10 @@ public class RebelBloodThrust()
             return;
 
         var mainCmd = await CommonActions.CardAttack(this, play).Execute(choiceContext);
-        bool brokeBlock = mainCmd.Results.Any(r => r.UnblockedDamage > 0 || r.OverkillDamage > 0);
+
+        bool brokeBlock = mainCmd
+            .Results.SelectMany(list => list)
+            .Any(r => r.UnblockedDamage > 0 || r.OverkillDamage > 0);
         if (!brokeBlock)
             return;
 

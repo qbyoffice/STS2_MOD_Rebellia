@@ -45,6 +45,7 @@ class VeinthornScab() : RebelliaCard(3, CardType.Attack, CardRarity.Common, Targ
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
             var rendPower = await PowerCmd.Apply<RendPower>(
+                choiceContext,
                 play.Target,
                 (int)damageAmount,
                 Owner.Creature,

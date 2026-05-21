@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -24,10 +22,10 @@ public class ArmorPower : RebelliaPowers
     {
         if (Amount <= 0)
             return;
-
         if (card.Pile?.Type == PileType.Hand && card.Type == CardType.Status)
         {
-            await PowerCmd.ModifyAmount(this, -1, null, null);
+            SetAmount(Amount - 1);
+            InvokeDisplayAmountChanged();
             await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
         }
     }

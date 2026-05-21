@@ -47,7 +47,7 @@ public class LucentCrystal : RebelliaRelics
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext ctx,
         CombatSide side,
-        CombatState state
+        ICombatState state
     )
     {
         if (side != Owner.Creature.Side || state.RoundNumber != 1)

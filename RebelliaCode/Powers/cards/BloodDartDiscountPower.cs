@@ -1,7 +1,6 @@
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -14,7 +13,7 @@ public class BloodDartDiscountPower : RebelliaPowers
 {
     private class Data
     {
-        public bool? freeActive = null;
+        public bool? firstCardIsBloodDart = null;
     }
 
     public override PowerType Type => PowerType.Buff;
@@ -30,34 +29,33 @@ public class BloodDartDiscountPower : RebelliaPowers
     )
     {
         modifiedCost = originalCost;
-        if (card is BloodDart)
+        var data = GetInternalData<Data>();
+        if (data.firstCardIsBloodDart == true && card is BloodDart)
         {
-            var data = GetInternalData<Data>();
-            if (data.freeActive != false)
-            {
-                modifiedCost = 0;
-                return true;
-            }
+            modifiedCost = 0;
+            return true;
         }
         return false;
     }
 
-    public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
         var data = GetInternalData<Data>();
-        data.freeActive ??= cardPlay.Card is BloodDart;
-        return Task.CompletedTask;
+        if (data.firstCardIsBloodDart == null)
+        {
+            data.firstCardIsBloodDart = cardPlay.Card is BloodDart;
+            if (data.firstCardIsBloodDart == false)
+            {
+                await PowerCmd.Remove(this);
+            }
+        }
     }
 
-    public override Task BeforeSideTurnStart(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        CombatState combatState
-    )
+    public override Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
         if (side == Owner.Side)
         {
-            GetInternalData<Data>().freeActive = null;
+            GetInternalData<Data>().firstCardIsBloodDart = null;
         }
         return Task.CompletedTask;
     }

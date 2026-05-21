@@ -19,6 +19,8 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new HpLossVar(4m), new IntVar("MaxHandSize", 10)];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CreatureCmd.Damage(
@@ -49,7 +51,9 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
             () => CreateMultiple<SwiftBloodWeapon>(2, combatState, player),
         };
         var randomCombo = Owner.RunState.Rng.Niche.NextItem(combos);
-        var generatedCards = randomCombo!();
+        if (randomCombo == null)
+            return;
+        var generatedCards = randomCombo();
 
         var drawPile = PileType.Draw.GetPile(player).Cards;
         var discardPile = PileType.Discard.GetPile(player).Cards;
@@ -75,18 +79,14 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
             }
             else
             {
-                await CardPileCmd.AddGeneratedCardToCombat(
-                    card,
-                    PileType.Hand,
-                    addedByPlayer: true
-                );
+                await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
             }
         }
     }
 
     private static List<CardModel> CreateMultiple<T>(
         int count,
-        CombatState combatState,
+        ICombatState combatState,
         Player owner
     )
         where T : CardModel

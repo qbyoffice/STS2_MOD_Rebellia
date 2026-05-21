@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Extensions;
@@ -12,20 +13,21 @@ namespace Rebellia.RebelliaCode.Powers.cards
 {
     public class CrimsonStrikeDamagePower : RebelliaPowers
     {
+        private class Data
+        {
+            public AttackCommand? CommandToModify;
+            public CardModel? SourceCard;
+        }
+
+        private bool _used = false;
+
         public override PowerType Type => PowerType.Buff;
-        public override PowerStackType StackType => PowerStackType.Counter;
+        public override PowerStackType StackType => PowerStackType.Single;
         public override bool ShouldReceiveCombatHooks => true;
 
         protected override object InitInternalData() => new Data();
 
         private Data GetData() => GetInternalData<Data>();
-
-        private class Data
-        {
-            public AttackCommand? CommandToModify;
-            public int AmountWhenAttackStarted;
-            public CardModel? SourceCard;
-        }
 
         public void SetSourceCard(CardModel source) => GetData().SourceCard = source;
 
@@ -47,7 +49,6 @@ namespace Rebellia.RebelliaCode.Powers.cards
                 return Task.CompletedTask;
 
             data.CommandToModify = command;
-            data.AmountWhenAttackStarted = Amount;
             return Task.CompletedTask;
         }
 
@@ -61,37 +62,42 @@ namespace Rebellia.RebelliaCode.Powers.cards
         {
             var data = GetData();
 
-            if (cardSource != null && cardSource == GetData().SourceCard)
+            if (_used)
                 return 0m;
-
             if (dealer != Owner)
                 return 0m;
             if (!props.IsPoweredAttack())
                 return 0m;
+            if (data.CommandToModify == null)
+                return 0m;
+            if (cardSource != null && cardSource != data.CommandToModify.ModelSource)
+                return 0m;
+            if (cardSource != null && cardSource == data.SourceCard)
+                return 0m;
+            if (
+                cardSource != null
+                && cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt)
+            )
+                return 0m;
 
-            if (cardSource != null)
-            {
-                if (cardSource == data.SourceCard)
-                    return 0m;
-                if (cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt))
-                    return 0m;
-            }
-
-            if (data.CommandToModify != null)
-            {
-                if (cardSource != null && cardSource != data.CommandToModify.ModelSource)
-                    return 0m;
-            }
+            _used = true;
             return Amount;
         }
 
-        public override async Task AfterAttack(AttackCommand command)
+        public override async Task AfterAttack(
+            PlayerChoiceContext choiceContext,
+            AttackCommand command
+        )
         {
-            var data = GetData();
-            if (command == data.CommandToModify)
-            {
-                await PowerCmd.ModifyAmount(this, -data.AmountWhenAttackStarted, null, null);
-            }
+            if (!_used)
+                return;
+            if (command != GetData().CommandToModify)
+                return;
+
+            var strikePower = Owner.GetPower<CrimsonStrikePower>();
+            if (strikePower != null)
+                await PowerCmd.Remove(strikePower);
+            await PowerCmd.Remove(this);
         }
     }
 }

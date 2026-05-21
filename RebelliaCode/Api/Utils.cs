@@ -23,11 +23,13 @@ public static class Utils
         Creature target,
         DynamicVarSet varSet,
         Creature? applier,
-        CardModel? cardModel
+        CardModel? cardModel,
+        PlayerChoiceContext? context = null
     )
         where T : PowerModel
     {
         await PowerCmd.Apply<T>(
+            context,
             target,
             DynamicVarsHelper.GetPowerVar<T>(varSet).BaseValue,
             applier,
@@ -39,11 +41,13 @@ public static class Utils
         IReadOnlyList<Creature> targets,
         DynamicVarSet varSet,
         Creature? applier,
-        CardModel? cardModel
+        CardModel? cardModel,
+        PlayerChoiceContext? context = null
     )
         where T : PowerModel
     {
         await PowerCmd.Apply<T>(
+            context,
             targets,
             DynamicVarsHelper.GetPowerVar<T>(varSet).BaseValue,
             applier,
@@ -51,7 +55,11 @@ public static class Utils
         );
     }
 
-    public static async Task GivePower<T>(CardModel cardModel, CardPlay play)
+    public static async Task GivePower<T>(
+        CardModel cardModel,
+        CardPlay play,
+        PlayerChoiceContext? context = null
+    )
         where T : PowerModel
     {
         switch (cardModel.TargetType)
@@ -62,7 +70,8 @@ public static class Utils
                     cardModel.Owner.Creature,
                     cardModel.DynamicVars,
                     cardModel.Owner.Creature,
-                    cardModel
+                    cardModel,
+                    context
                 );
                 return;
             }
@@ -73,7 +82,8 @@ public static class Utils
                     cardModel.CombatState.HittableEnemies,
                     cardModel.DynamicVars,
                     cardModel.Owner.Creature,
-                    cardModel
+                    cardModel,
+                    context
                 );
                 return;
             }
@@ -88,7 +98,8 @@ public static class Utils
                     target,
                     cardModel.DynamicVars,
                     cardModel.Owner.Creature,
-                    cardModel
+                    cardModel,
+                    context
                 );
                 return;
             }
@@ -106,23 +117,44 @@ public static class Utils
                     play.Target,
                     cardModel.DynamicVars,
                     cardModel.Owner.Creature,
-                    cardModel
+                    cardModel,
+                    context
                 );
                 return;
             }
         }
     }
 
-    public static async Task GivePower<T>(RelicModel relicModel, Creature target)
+    public static async Task GivePower<T>(
+        RelicModel relicModel,
+        Creature target,
+        PlayerChoiceContext? context = null
+    )
         where T : PowerModel
     {
-        await GivePower<T>(target, relicModel.DynamicVars, relicModel.Owner.Creature, null);
+        await GivePower<T>(
+            target,
+            relicModel.DynamicVars,
+            relicModel.Owner.Creature,
+            null,
+            context
+        );
     }
 
-    public static async Task GivePower<T>(RelicModel relicModel, IReadOnlyList<Creature> targets)
+    public static async Task GivePower<T>(
+        RelicModel relicModel,
+        IReadOnlyList<Creature> targets,
+        PlayerChoiceContext? context = null
+    )
         where T : PowerModel
     {
-        await GivePower<T>(targets, relicModel.DynamicVars, relicModel.Owner.Creature, null);
+        await GivePower<T>(
+            targets,
+            relicModel.DynamicVars,
+            relicModel.Owner.Creature,
+            null,
+            context
+        );
     }
 
     public static bool IsPoweredAttack(ValueProp props)
@@ -198,7 +230,8 @@ public static class Utils
         Creature target,
         decimal initialAmount = 1,
         Creature? applier = null,
-        CardModel? cardSource = null
+        CardModel? cardSource = null,
+        PlayerChoiceContext? context = null
     )
         where T : PowerModel
     {
@@ -206,7 +239,13 @@ public static class Utils
         if (power != null)
             return power;
 
-        power = await PowerCmd.Apply<T>(target, initialAmount, applier ?? target, cardSource);
+        power = await PowerCmd.Apply<T>(
+            context,
+            target,
+            initialAmount,
+            applier ?? target,
+            cardSource
+        );
         return power;
     }
 
@@ -215,11 +254,19 @@ public static class Utils
         decimal amount,
         Creature? applier = null,
         CardModel? cardSource = null,
-        bool silent = false
+        bool silent = false,
+        PlayerChoiceContext? context = null
     )
         where T : PowerModel
     {
-        return await PowerCmd.Apply<T>(target, amount, applier ?? target, cardSource, silent);
+        return await PowerCmd.Apply<T>(
+            context,
+            target,
+            amount,
+            applier ?? target,
+            cardSource,
+            silent
+        );
     }
 
     public static bool HasAnyPower<T1, T2>(Creature creature)

@@ -20,13 +20,25 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.BloodDartDiscount];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(4m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1)];
+        [
+            new DamageVar(4m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<BloodDartDiscountPower>(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (Owner.Creature.GetPower<BloodDartDiscountPower>() == null)
         {
-            await PowerCmd.Apply<BloodDartDiscountPower>(Owner.Creature, 1, Owner.Creature, this);
+            int discountAmount = (int)
+                DynamicVarsHelper.GetPowerVar<BloodDartDiscountPower>(DynamicVars).BaseValue;
+            await PowerCmd.Apply<BloodDartDiscountPower>(
+                choiceContext,
+                Owner.Creature,
+                discountAmount,
+                Owner.Creature,
+                this
+            );
         }
 
         await CommonActions.CardAttack(this, play).Execute(choiceContext);

@@ -36,6 +36,7 @@ public class CrimsonStrike()
             DynamicVarsHelper.GetPowerVar<CrimsonStrikeDamagePower>(DynamicVars).BaseValue;
         int extra = Owner.Creature.MaxHp * percent / 100;
         var damagePower = await PowerCmd.Apply<CrimsonStrikeDamagePower>(
+            choiceContext,
             Owner.Creature,
             extra,
             Owner.Creature,
@@ -46,6 +47,7 @@ public class CrimsonStrike()
         int freePowerAmount = (int)
             DynamicVarsHelper.GetPowerVar<CrimsonStrikePower>(DynamicVars).BaseValue;
         var freePower = await PowerCmd.Apply<CrimsonStrikePower>(
+            choiceContext,
             Owner.Creature,
             freePowerAmount,
             Owner.Creature,

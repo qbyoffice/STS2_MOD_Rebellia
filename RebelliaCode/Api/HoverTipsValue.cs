@@ -1,5 +1,4 @@
 using MegaCrit.Sts2.Core.HoverTips;
-using Rebellia.RebelliaCode.Cards.Common;
 using Rebellia.RebelliaCode.Cards.Others;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
@@ -35,6 +34,4 @@ public static class HoverTipsValue
         HoverTipFactory.FromPower<BloodDartDiscountPower>();
 
     public static readonly IHoverTip Bloodclot = HoverTipFactory.FromCard<Bloodclot>();
-
-    public static readonly IHoverTip BloodclotTrans = HoverTipFactory.FromCard<BloodclotTrans>();
 }
