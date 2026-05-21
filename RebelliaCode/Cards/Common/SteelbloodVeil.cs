@@ -14,8 +14,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class SteelbloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        [CardKeyword.Ethereal, CardKeywordExtensions.RebelliaSanguine];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<CrimsonVeilPower>(1), new PowerVar<BloodSwordArtPower>(1)];
@@ -44,5 +43,6 @@ public class SteelbloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Commo
         DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).UpgradeValueBy(1m);
         EnergyCost.UpgradeBy(-1);
         RemoveKeyword(CardKeyword.Ethereal);
+        AddKeyword(CardKeywordExtensions.RebelliaSanguine);
     }
 }

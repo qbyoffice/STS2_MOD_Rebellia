@@ -17,8 +17,7 @@ public class CrimsonTide()
 {
     private const string CalculatedVeilGain = "CalculatedVeilGain";
 
-    protected override HashSet<CardTag> CanonicalTags =>
-        [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];

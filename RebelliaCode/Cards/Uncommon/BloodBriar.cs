@@ -11,10 +11,10 @@ using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 
-namespace Rebellia.RebelliaCode.Cards.Common;
+namespace Rebellia.RebelliaCode.Cards.Uncommon;
 
 public class BloodBriar()
-    : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)
+    : RebelliaCard(1, CardType.Attack, CardRarity.Uncommon, TargetType.RandomEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 

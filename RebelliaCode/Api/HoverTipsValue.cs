@@ -34,4 +34,7 @@ public static class HoverTipsValue
         HoverTipFactory.FromPower<BloodDartDiscountPower>();
 
     public static readonly IHoverTip Bloodclot = HoverTipFactory.FromCard<Bloodclot>();
+
+    public static readonly IHoverTip ExtraHoverTips =
+        HoverTipFactory.FromPower<CrimsonStrikeDamagePower>();
 }

@@ -14,6 +14,12 @@ public class ArmorPower : RebelliaPowers
     public override int DisplayAmount => Amount;
     public override bool ShouldReceiveCombatHooks => true;
 
+    public void AddPoints(int amount)
+    {
+        SetAmount(Amount + amount);
+        InvokeDisplayAmountChanged();
+    }
+
     public override async Task AfterCardChangedPiles(
         CardModel card,
         PileType oldPile,
@@ -24,8 +30,7 @@ public class ArmorPower : RebelliaPowers
             return;
         if (card.Pile?.Type == PileType.Hand && card.Type == CardType.Status)
         {
-            SetAmount(Amount - 1);
-            InvokeDisplayAmountChanged();
+            AddPoints(-1);
             await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
         }
     }

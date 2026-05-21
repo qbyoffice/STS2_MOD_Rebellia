@@ -14,7 +14,7 @@ using Rebellia.RebelliaCode.Powers;
 namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class VillageGuard()
-    : RebelliaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     private const string TotalHitsKey = "TotalHits";
 
@@ -24,7 +24,7 @@ public class VillageGuard()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(5m, ValueProp.Move),
-            new PowerVar<BloodSwordArtPower>(3),
+            new PowerVar<BloodSwordArtPower>(2),
             new CalculationBaseVar(1),
             new CalculationExtraVar(0),
             new CalculatedVar(TotalHitsKey).WithMultiplier(
@@ -41,12 +41,12 @@ public class VillageGuard()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
+
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             return;
-
-        await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
         var hand = PileType.Hand.GetPile(Owner).Cards;
         var attackCount = hand.Count(c => c.Type == CardType.Attack);

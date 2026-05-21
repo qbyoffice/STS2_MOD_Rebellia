@@ -4,8 +4,10 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 
@@ -13,8 +15,9 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class CrimsonStrikeDamagePower : RebelliaPowers
 {
-    private bool _used;
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ExtraHoverTips];
 
+    private bool _used;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;

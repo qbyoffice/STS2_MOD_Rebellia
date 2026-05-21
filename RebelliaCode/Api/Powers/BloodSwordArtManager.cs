@@ -50,4 +50,14 @@ public static class BloodSwordArtManager
         var power = await GetOrCreatePower(creature, context);
         return power.GetPoints();
     }
+
+    public static async Task IncreaseMaxPoints(
+        Creature creature,
+        int amount,
+        PlayerChoiceContext? context = null
+    )
+    {
+        var power = await GetOrCreatePower(creature, context);
+        power.BloodArtMaxPoints += amount;
+    }
 }
