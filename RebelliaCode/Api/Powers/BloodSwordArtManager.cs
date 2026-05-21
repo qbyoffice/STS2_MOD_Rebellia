@@ -21,6 +21,7 @@ public static class BloodSwordArtManager
                     $"Failed to create BloodSwordArtPower for {creature}"
                 );
         }
+
         return power;
     }
 

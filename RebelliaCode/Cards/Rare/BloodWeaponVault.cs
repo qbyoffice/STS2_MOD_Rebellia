@@ -36,19 +36,19 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
         if (combatState == null || player == null)
             return;
 
-        int currentHandCount = PileType.Hand.GetPile(player).Cards.Count;
-        int maxHandSize = (int)DynamicVars["MaxHandSize"].BaseValue;
-        int availableSlots = maxHandSize - currentHandCount;
+        var currentHandCount = PileType.Hand.GetPile(player).Cards.Count;
+        var maxHandSize = (int)DynamicVars["MaxHandSize"].BaseValue;
+        var availableSlots = maxHandSize - currentHandCount;
         if (availableSlots <= 0)
             return;
 
-        var combos = new List<Func<List<CardModel>>>()
+        var combos = new List<Func<List<CardModel>>>
         {
             () => CreateMultiple<StrikeBloodWeapon>(2, combatState, player),
             () => CreateMultiple<EngageBloodWeapon>(3, combatState, player),
             () => CreateMultiple<DartBloodWeapon>(4, combatState, player),
             () => CreateMultiple<SmashBloodWeapon>(1, combatState, player),
-            () => CreateMultiple<SwiftBloodWeapon>(2, combatState, player),
+            () => CreateMultiple<SwiftBloodWeapon>(2, combatState, player)
         };
         var randomCombo = Owner.RunState.Rng.Niche.NextItem(combos);
         if (randomCombo == null)
@@ -63,25 +63,16 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
             .ToList();
 
         var cardsToAdd = new List<CardModel>();
-        int takeFromGenerated = Math.Min(generatedCards.Count, availableSlots);
+        var takeFromGenerated = Math.Min(generatedCards.Count, availableSlots);
         cardsToAdd.AddRange(generatedCards.Take(takeFromGenerated));
-        int remainingSlots = availableSlots - takeFromGenerated;
-        if (remainingSlots > 0)
-        {
-            cardsToAdd.AddRange(existingCards.Take(remainingSlots));
-        }
+        var remainingSlots = availableSlots - takeFromGenerated;
+        if (remainingSlots > 0) cardsToAdd.AddRange(existingCards.Take(remainingSlots));
 
         foreach (var card in cardsToAdd)
-        {
             if (existingCards.Contains(card))
-            {
                 await CardPileCmd.Add(card, PileType.Hand);
-            }
             else
-            {
                 await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
-            }
-        }
     }
 
     private static List<CardModel> CreateMultiple<T>(
@@ -92,10 +83,7 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
         where T : CardModel
     {
         var cards = new List<CardModel>();
-        for (int i = 0; i < count; i++)
-        {
-            cards.Add(combatState.CreateCard<T>(owner));
-        }
+        for (var i = 0; i < count; i++) cards.Add(combatState.CreateCard<T>(owner));
         return cards;
     }
 

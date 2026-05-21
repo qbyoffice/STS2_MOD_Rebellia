@@ -22,7 +22,7 @@ public class EngageBloodWeapon()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
-        int drawCount = DynamicVars.Cards.IntValue;
+        var drawCount = DynamicVars.Cards.IntValue;
         await CardPileCmd.Draw(choiceContext, drawCount, Owner);
     }
 

@@ -15,5 +15,8 @@ public abstract class RebelliaRelics : CustomRelicModel
     protected override string PackedIconOutlinePath =>
         $"{GetBaseFileName()}_outline.tres".TresRelicImagePath();
 
-    private string GetBaseFileName() => Id.Entry.RemovePrefix().ToLowerInvariant();
+    private string GetBaseFileName()
+    {
+        return Id.Entry.RemovePrefix().ToLowerInvariant();
+    }
 }

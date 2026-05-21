@@ -10,70 +10,70 @@ using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Cards.Others;
 using Rebellia.RebelliaCode.Powers.cards;
 
-namespace Rebellia.RebelliaCode.Cards.Common
+namespace Rebellia.RebelliaCode.Cards.Common;
+
+public class SpectralBloodscourge()
+    : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
-    public class SpectralBloodscourge()
-        : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.Bloodclot];
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(16m, ValueProp.Move),
+        new CardsVar(5),
+        new PowerVar<CrimsonVeilPower>(1),
+        new PowerVar<RebelliaTmepHpPower>(1)
+    ];
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-        protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.Bloodclot];
-        protected override IEnumerable<DynamicVar> CanonicalVars =>
-            [
-                new DamageVar(16m, ValueProp.Move),
-                new CardsVar(5),
-                new PowerVar<CrimsonVeilPower>(1),
-                new PowerVar<RebelliaTmepHpPower>(1),
-            ];
+        var combatState = Owner.Creature.CombatState;
+        if (combatState == null)
+            return;
 
-        protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
+        var cmd = DamageCmd
+            .Attack(DynamicVars.Damage.BaseValue)
+            .FromCard(this)
+            .TargetingAllOpponents(combatState);
+        await cmd.Execute(choiceContext);
+
+        for (var i = 0; i < DynamicVars.Cards.IntValue; i++)
         {
-            var combatState = Owner.Creature.CombatState;
-            if (combatState == null)
-                return;
+            var bloodclot = combatState.CreateCard<Bloodclot>(Owner);
+            await CardPileCmd.AddGeneratedCardToCombat(
+                bloodclot,
+                PileType.Draw,
+                Owner,
+                CardPilePosition.Random
+            );
+            await Cmd.Wait(0.05f);
+        }
 
-            var cmd = DamageCmd
-                .Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
-                .TargetingAllOpponents(combatState);
-            await cmd.Execute(choiceContext);
-
-            for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
+        var tempHpGain = (int)
+            DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
+        if (tempHpGain > 0)
+        {
+            if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
             {
-                var bloodclot = combatState.CreateCard<Bloodclot>(Owner);
-                await CardPileCmd.AddGeneratedCardToCombat(
-                    bloodclot,
-                    PileType.Draw,
-                    Owner,
-                    CardPilePosition.Random
+                await PowerCmd.Apply<RebelliaTmepHpPower>(
+                    choiceContext,
+                    Owner.Creature,
+                    tempHpGain,
+                    Owner.Creature,
+                    this
                 );
-                await Cmd.Wait(0.05f);
             }
-
-            int tempHpGain = (int)
-                DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
-            if (tempHpGain > 0)
+            else
             {
-                if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
-                {
-                    await PowerCmd.Apply<RebelliaTmepHpPower>(
-                        choiceContext,
-                        Owner.Creature,
-                        tempHpGain,
-                        Owner.Creature,
-                        this
-                    );
-                }
-                else
-                {
-                    var existing = Owner.Creature.GetPower<RebelliaTmepHpPower>();
-                    existing?.AddTempHp(tempHpGain);
-                }
+                var existing = Owner.Creature.GetPower<RebelliaTmepHpPower>();
+                existing?.AddTempHp(tempHpGain);
             }
         }
+    }
 
-        protected override void OnUpgrade()
-        {
-            DynamicVars.Damage.UpgradeValueBy(2m);
-        }
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(2m);
     }
 }

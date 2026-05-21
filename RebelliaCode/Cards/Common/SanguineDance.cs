@@ -17,14 +17,16 @@ public class SanguineDance()
     : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(12m, ValueProp.Move),
-            new PowerVar<CrimsonVeilPower>(1),
-            new PowerVar<BloodSwordArtPower>(1),
-        ];
+    [
+        new DamageVar(12m, ValueProp.Move),
+        new PowerVar<CrimsonVeilPower>(1),
+        new PowerVar<BloodSwordArtPower>(1)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -33,11 +35,11 @@ public class SanguineDance()
         if (Owner.Creature.GetPower<CrimsonVeilPower>() != null)
             return;
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int veilGain = (int)
+            var veilGain = (int)
                 DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
             if (veilGain > 0)
             {

@@ -1,5 +1,4 @@
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -9,7 +8,7 @@ using Rebellia.RebelliaCode.Api.Extensions;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
 
-class SmashBloodWeapon() : RebelliaCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
+internal class SmashBloodWeapon() : RebelliaCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
 

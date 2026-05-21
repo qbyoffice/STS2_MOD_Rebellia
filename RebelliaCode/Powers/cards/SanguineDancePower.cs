@@ -17,7 +17,10 @@ public class SanguineDancePower : RebelliaPowers
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;
 
-    public void SetDrawCount(int count) => SanguineDancedrawCount = count;
+    public void SetDrawCount(int count)
+    {
+        SanguineDancedrawCount = count;
+    }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -28,10 +31,7 @@ public class SanguineDancePower : RebelliaPowers
         if (player == null)
             return;
 
-        for (int i = 0; i < SanguineDancedrawCount; i++)
-        {
-            await DrawRandomCardFromAllPiles(choiceContext, player);
-        }
+        for (var i = 0; i < SanguineDancedrawCount; i++) await DrawRandomCardFromAllPiles(choiceContext, player);
     }
 
     private async Task DrawRandomCardFromAllPiles(PlayerChoiceContext choiceContext, Player player)
@@ -52,9 +52,6 @@ public class SanguineDancePower : RebelliaPowers
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (Owner.Side == side)
-        {
-            await PowerCmd.Remove(this);
-        }
+        if (Owner.Side == side) await PowerCmd.Remove(this);
     }
 }

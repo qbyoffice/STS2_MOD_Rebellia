@@ -21,14 +21,12 @@ public class CrimsonVeilPower : RebelliaPowers
     public override int DisplayAmount => GetInternalData<Data>().VeilPoints;
     public override bool ShouldReceiveCombatHooks => true;
 
-    protected override object InitInternalData() => new Data();
-
-    private class Data
-    {
-        public int VeilPoints = 0;
-    }
-
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrimsonVeilPower>(1)];
+
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
 
     public void AddVeilPoints(int amount)
     {
@@ -36,10 +34,7 @@ public class CrimsonVeilPower : RebelliaPowers
         data.VeilPoints = Math.Max(0, data.VeilPoints + amount);
         InvokeDisplayAmountChanged();
 
-        if (amount > 0)
-        {
-            TaskHelper.RunSafely(BloodKeywordManager.MoveBloodCardsToDrawPile(Owner.Player!));
-        }
+        if (amount > 0) TaskHelper.RunSafely(BloodKeywordManager.MoveBloodCardsToDrawPile(Owner.Player!));
 
         if (data.VeilPoints == 0)
         {
@@ -93,18 +88,17 @@ public class CrimsonVeilPower : RebelliaPowers
 
         var targetCard = allStatusCards.First();
 
-        bool canPlay = Hook.ShouldPlay(combatState, targetCard, out _, AutoPlayType.Default);
+        var canPlay = Hook.ShouldPlay(combatState, targetCard, out _, AutoPlayType.Default);
         if (canPlay)
-        {
             await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), targetCard, null);
-        }
         else
-        {
             await CardCmd.Discard(new BlockingPlayerChoiceContext(), targetCard);
-        }
     }
 
-    public int GetVeilPoints() => GetInternalData<Data>().VeilPoints;
+    public int GetVeilPoints()
+    {
+        return GetInternalData<Data>().VeilPoints;
+    }
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
@@ -116,25 +110,24 @@ public class CrimsonVeilPower : RebelliaPowers
         if (Owner == null || Owner.Side != side)
             return;
 
-        int currentVeil = GetVeilPoints();
-        if (currentVeil > 0)
-        {
-            AddVeilPoints(-1);
-        }
+        var currentVeil = GetVeilPoints();
+        if (currentVeil > 0) AddVeilPoints(-1);
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
         if (bloodPower != null)
         {
-            int currentBlood = bloodPower.GetPoints();
-            int maxBlood = bloodPower.BloodArtMaxPoints;
-            if (currentBlood < maxBlood)
-            {
-                bloodPower.AddPoints(1);
-            }
+            var currentBlood = bloodPower.GetPoints();
+            var maxBlood = bloodPower.BloodArtMaxPoints;
+            if (currentBlood < maxBlood) bloodPower.AddPoints(1);
         }
     }
 
     public override async Task AfterCombatEnd(CombatRoom room)
     {
         await PowerCmd.Remove(this);
+    }
+
+    private class Data
+    {
+        public int VeilPoints;
     }
 }

@@ -18,6 +18,7 @@ public class RebelBloodThrust()
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(9, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1)];
 
@@ -29,19 +30,18 @@ public class RebelBloodThrust()
 
         var mainCmd = await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        bool brokeBlock = mainCmd
+        var brokeBlock = mainCmd
             .Results.SelectMany(list => list)
             .Any(r => r.UnblockedDamage > 0 || r.OverkillDamage > 0);
         if (!brokeBlock)
             return;
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        bool hasBlood = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() >= requiredBlood;
+        var hasBlood = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() >= requiredBlood;
         if (hasBlood)
         {
             if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-            {
                 foreach (var enemy in combatState.HittableEnemies)
                 {
                     var aoeCmd = DamageCmd
@@ -50,7 +50,6 @@ public class RebelBloodThrust()
                         .Targeting(enemy);
                     await aoeCmd.Execute(choiceContext);
                 }
-            }
         }
         else
         {

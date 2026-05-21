@@ -11,16 +11,14 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class BloodDartDiscountPower : RebelliaPowers
 {
-    private class Data
-    {
-        public bool? firstCardIsBloodDart = null;
-    }
-
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;
 
-    protected override object InitInternalData() => new Data();
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
 
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
@@ -35,6 +33,7 @@ public class BloodDartDiscountPower : RebelliaPowers
             modifiedCost = 0;
             return true;
         }
+
         return false;
     }
 
@@ -44,19 +43,18 @@ public class BloodDartDiscountPower : RebelliaPowers
         if (data.firstCardIsBloodDart == null)
         {
             data.firstCardIsBloodDart = cardPlay.Card is BloodDart;
-            if (data.firstCardIsBloodDart == false)
-            {
-                await PowerCmd.Remove(this);
-            }
+            if (data.firstCardIsBloodDart == false) await PowerCmd.Remove(this);
         }
     }
 
     public override Task AfterSideTurnStart(CombatSide side, ICombatState combatState)
     {
-        if (side == Owner.Side)
-        {
-            GetInternalData<Data>().firstCardIsBloodDart = null;
-        }
+        if (side == Owner.Side) GetInternalData<Data>().firstCardIsBloodDart = null;
         return Task.CompletedTask;
+    }
+
+    private class Data
+    {
+        public bool? firstCardIsBloodDart;
     }
 }

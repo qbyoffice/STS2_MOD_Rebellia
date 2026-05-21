@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
-using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Uncommon;
@@ -18,12 +17,13 @@ public class CrimsonStrike()
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(9, ValueProp.Move),
-            new PowerVar<CrimsonStrikeDamagePower>(6),
-            new PowerVar<CrimsonStrikePower>(1),
-        ];
+    [
+        new DamageVar(9, ValueProp.Move),
+        new PowerVar<CrimsonStrikeDamagePower>(6),
+        new PowerVar<CrimsonStrikePower>(1)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -32,9 +32,9 @@ public class CrimsonStrike()
         if (Utils.HasAnyPower<CrimsonStrikeDamagePower, CrimsonStrikePower>(Owner.Creature))
             return;
 
-        int percent = (int)
+        var percent = (int)
             DynamicVarsHelper.GetPowerVar<CrimsonStrikeDamagePower>(DynamicVars).BaseValue;
-        int extra = Owner.Creature.MaxHp * percent / 100;
+        var extra = Owner.Creature.MaxHp * percent / 100;
         var damagePower = await PowerCmd.Apply<CrimsonStrikeDamagePower>(
             choiceContext,
             Owner.Creature,
@@ -44,7 +44,7 @@ public class CrimsonStrike()
         );
         damagePower?.SetSourceCard(this);
 
-        int freePowerAmount = (int)
+        var freePowerAmount = (int)
             DynamicVarsHelper.GetPowerVar<CrimsonStrikePower>(DynamicVars).BaseValue;
         var freePower = await PowerCmd.Apply<CrimsonStrikePower>(
             choiceContext,

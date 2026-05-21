@@ -17,20 +17,22 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.BloodDartDiscount];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(4m, ValueProp.Move),
-            new PowerVar<BloodSwordArtPower>(1),
-            new PowerVar<BloodDartDiscountPower>(1),
-        ];
+    [
+        new DamageVar(4m, ValueProp.Move),
+        new PowerVar<BloodSwordArtPower>(1),
+        new PowerVar<BloodDartDiscountPower>(1)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (Owner.Creature.GetPower<BloodDartDiscountPower>() == null)
         {
-            int discountAmount = (int)
+            var discountAmount = (int)
                 DynamicVarsHelper.GetPowerVar<BloodDartDiscountPower>(DynamicVars).BaseValue;
             await PowerCmd.Apply<BloodDartDiscountPower>(
                 choiceContext,
@@ -43,12 +45,10 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
 
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-        {
             await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Top);
-        }
     }
 
     protected override void OnUpgrade()

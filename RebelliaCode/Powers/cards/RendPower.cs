@@ -11,7 +11,7 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class RendPower : RebelliaPowers
 {
-    private bool _isProcessing = false;
+    private bool _isProcessing;
 
     public override PowerType Type => PowerType.Debuff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -48,9 +48,6 @@ public class RendPower : RebelliaPowers
 
     public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (Owner.Side == side)
-        {
-            await PowerCmd.Remove(this);
-        }
+        if (Owner.Side == side) await PowerCmd.Remove(this);
     }
 }

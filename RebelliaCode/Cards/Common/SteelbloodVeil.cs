@@ -22,28 +22,25 @@ public class SteelbloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Commo
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        int veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
+        var veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
         if (veilGain > 0)
         {
             var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
             veilPower?.AddVeilPoints(veilGain);
         }
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int currentVeil = Owner.Creature.GetPower<CrimsonVeilPower>()?.GetVeilPoints() ?? 0;
+            var currentVeil = Owner.Creature.GetPower<CrimsonVeilPower>()?.GetVeilPoints() ?? 0;
             if (currentVeil > 0)
-            {
                 await CreatureCmd.GainBlock(
                     Owner.Creature,
                     currentVeil,
                     ValueProp.Move,
-                    null,
-                    fast: false
+                    null
                 );
-            }
         }
     }
 

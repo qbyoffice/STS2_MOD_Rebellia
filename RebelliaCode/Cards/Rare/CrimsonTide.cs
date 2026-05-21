@@ -1,6 +1,5 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -20,26 +19,27 @@ public class CrimsonTide()
 
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Strike, CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(20, ValueProp.Move),
-            new CalculationBaseVar(1),
-            new CalculationExtraVar(0),
-            new EnergyVar(1),
-            new CalculatedVar(CalculatedVeilGain).WithMultiplier(
-                (card, target) =>
-                {
-                    var combatState = card.Owner.Creature.CombatState;
-                    if (combatState == null)
-                        return 0;
-                    int aliveCount = combatState.HittableEnemies.Count(e => e.IsAlive);
-                    int perAlive = (int)card.DynamicVars["CalculationBase"].BaseValue;
-                    return aliveCount * perAlive;
-                }
-            ),
-        ];
+    [
+        new DamageVar(20, ValueProp.Move),
+        new CalculationBaseVar(1),
+        new CalculationExtraVar(0),
+        new EnergyVar(1),
+        new CalculatedVar(CalculatedVeilGain).WithMultiplier((card, target) =>
+            {
+                var combatState = card.Owner.Creature.CombatState;
+                if (combatState == null)
+                    return 0;
+                var aliveCount = combatState.HittableEnemies.Count(e => e.IsAlive);
+                var perAlive = (int)card.DynamicVars["CalculationBase"].BaseValue;
+                return aliveCount * perAlive;
+            }
+        )
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -47,7 +47,7 @@ public class CrimsonTide()
         if (combatState == null)
             return;
 
-        int totalVeilGain = (int)
+        var totalVeilGain = (int)
             ((CalculatedVar)DynamicVars[CalculatedVeilGain]).Calculate(play.Target);
         if (totalVeilGain > 0)
         {
@@ -61,17 +61,15 @@ public class CrimsonTide()
             .TargetingAllOpponents(combatState)
             .Execute(choiceContext);
 
-        int currentBloodArtPoints = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() ?? 0;
+        var currentBloodArtPoints = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() ?? 0;
         if (currentBloodArtPoints <= 0)
             return;
 
-        int energyPerPoint = (int)DynamicVars["Energy"].BaseValue;
-        int totalEnergyGain = currentBloodArtPoints * energyPerPoint;
+        var energyPerPoint = (int)DynamicVars["Energy"].BaseValue;
+        var totalEnergyGain = currentBloodArtPoints * energyPerPoint;
 
-        bool consumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, currentBloodArtPoints);
+        var consumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, currentBloodArtPoints);
         if (consumed && Owner.Creature.Player != null && totalEnergyGain > 0)
-        {
             await PlayerCmd.GainEnergy(totalEnergyGain, Owner.Creature.Player);
-        }
     }
 }

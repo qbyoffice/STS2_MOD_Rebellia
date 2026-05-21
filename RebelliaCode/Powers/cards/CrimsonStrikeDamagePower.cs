@@ -9,95 +9,103 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 
-namespace Rebellia.RebelliaCode.Powers.cards
+namespace Rebellia.RebelliaCode.Powers.cards;
+
+public class CrimsonStrikeDamagePower : RebelliaPowers
 {
-    public class CrimsonStrikeDamagePower : RebelliaPowers
+    private bool _used;
+
+    public override PowerType Type => PowerType.Buff;
+    public override PowerStackType StackType => PowerStackType.Single;
+    public override bool ShouldReceiveCombatHooks => true;
+
+    protected override object InitInternalData()
     {
-        private class Data
-        {
-            public AttackCommand? CommandToModify;
-            public CardModel? SourceCard;
-        }
+        return new Data();
+    }
 
-        private bool _used = false;
+    private Data GetData()
+    {
+        return GetInternalData<Data>();
+    }
 
-        public override PowerType Type => PowerType.Buff;
-        public override PowerStackType StackType => PowerStackType.Single;
-        public override bool ShouldReceiveCombatHooks => true;
+    public void SetSourceCard(CardModel source)
+    {
+        GetData().SourceCard = source;
+    }
 
-        protected override object InitInternalData() => new Data();
+    public override Task BeforeAttack(AttackCommand command)
+    {
+        var data = GetData();
 
-        private Data GetData() => GetInternalData<Data>();
-
-        public void SetSourceCard(CardModel source) => GetData().SourceCard = source;
-
-        public override Task BeforeAttack(AttackCommand command)
-        {
-            var data = GetData();
-
-            if (command.Attacker != Owner)
-                return Task.CompletedTask;
-            if (command.ModelSource is not CardModel cardSource)
-                return Task.CompletedTask;
-            if (cardSource.Type != CardType.Attack)
-                return Task.CompletedTask;
-            if (cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt))
-                return Task.CompletedTask;
-            if (cardSource == data.SourceCard)
-                return Task.CompletedTask;
-            if (data.CommandToModify != null)
-                return Task.CompletedTask;
-
-            data.CommandToModify = command;
+        if (command.Attacker != Owner)
             return Task.CompletedTask;
-        }
+        if (command.ModelSource is not CardModel cardSource)
+            return Task.CompletedTask;
+        if (cardSource.Type != CardType.Attack)
+            return Task.CompletedTask;
+        if (cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt))
+            return Task.CompletedTask;
+        if (cardSource == data.SourceCard)
+            return Task.CompletedTask;
+        if (data.CommandToModify != null)
+            return Task.CompletedTask;
 
-        public override decimal ModifyDamageAdditive(
-            Creature? target,
-            decimal amount,
-            ValueProp props,
-            Creature? dealer,
-            CardModel? cardSource
+        data.CommandToModify = command;
+        return Task.CompletedTask;
+    }
+
+    public override decimal ModifyDamageAdditive(
+        Creature? target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource
+    )
+    {
+        var data = GetData();
+
+        if (_used)
+            return 0m;
+        if (dealer != Owner)
+            return 0m;
+        if (!props.IsPoweredAttack())
+            return 0m;
+        if (data.CommandToModify == null)
+            return 0m;
+        if (cardSource != null && cardSource != data.CommandToModify.ModelSource)
+            return 0m;
+        if (cardSource != null && cardSource == data.SourceCard)
+            return 0m;
+        if (
+            cardSource != null
+            && cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt)
         )
-        {
-            var data = GetData();
+            return 0m;
 
-            if (_used)
-                return 0m;
-            if (dealer != Owner)
-                return 0m;
-            if (!props.IsPoweredAttack())
-                return 0m;
-            if (data.CommandToModify == null)
-                return 0m;
-            if (cardSource != null && cardSource != data.CommandToModify.ModelSource)
-                return 0m;
-            if (cardSource != null && cardSource == data.SourceCard)
-                return 0m;
-            if (
-                cardSource != null
-                && cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt)
-            )
-                return 0m;
+        _used = true;
+        return Amount;
+    }
 
-            _used = true;
-            return Amount;
-        }
+    public override async Task AfterAttack(
+        PlayerChoiceContext choiceContext,
+        AttackCommand command
+    )
+    {
+        if (!_used)
+            return;
+        if (command != GetData().CommandToModify)
+            return;
 
-        public override async Task AfterAttack(
-            PlayerChoiceContext choiceContext,
-            AttackCommand command
-        )
-        {
-            if (!_used)
-                return;
-            if (command != GetData().CommandToModify)
-                return;
+        var strikePower = Owner.GetPower<CrimsonStrikePower>();
+        if (strikePower != null)
+            await PowerCmd.Remove(strikePower);
+        await PowerCmd.Remove(this);
+    }
 
-            var strikePower = Owner.GetPower<CrimsonStrikePower>();
-            if (strikePower != null)
-                await PowerCmd.Remove(strikePower);
-            await PowerCmd.Remove(this);
-        }
+    private class Data
+    {
+        public AttackCommand? CommandToModify;
+        public CardModel? SourceCard;
     }
 }

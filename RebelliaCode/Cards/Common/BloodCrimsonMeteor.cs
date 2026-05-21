@@ -24,39 +24,38 @@ public class BloodCrimsonMeteor()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(5m, ValueProp.Move),
-            new PowerVar<BloodSwordArtPower>(1),
-            new CalculationBaseVar(1),
-            new CalculationExtraVar(0),
-            new CalculatedVar(TotalHitsKey).WithMultiplier(
-                (card, target) =>
-                {
-                    int dex = card.Owner.Creature.GetPowerAmount<DexterityPower>();
-                    decimal baseVal = card.DynamicVars.CalculationBase.BaseValue;
-                    return baseVal + dex;
-                }
-            ),
-        ];
+    [
+        new DamageVar(5m, ValueProp.Move),
+        new PowerVar<BloodSwordArtPower>(1),
+        new CalculationBaseVar(1),
+        new CalculationExtraVar(0),
+        new CalculatedVar(TotalHitsKey).WithMultiplier((card, target) =>
+            {
+                var dex = card.Owner.Creature.GetPowerAmount<DexterityPower>();
+                var baseVal = card.DynamicVars.CalculationBase.BaseValue;
+                return baseVal + dex;
+            }
+        )
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             return;
 
-        int dexterity = Owner.Creature.GetPowerAmount<DexterityPower>();
-        int extraHits = dexterity;
-        decimal damage = DynamicVars.Damage.BaseValue;
+        var dexterity = Owner.Creature.GetPowerAmount<DexterityPower>();
+        var extraHits = dexterity;
+        var damage = DynamicVars.Damage.BaseValue;
 
         var combatState = Owner.Creature.CombatState;
         if (combatState == null)
             return;
 
-        for (int i = 0; i < extraHits; i++)
+        for (var i = 0; i < extraHits; i++)
         {
             var enemies = combatState.HittableEnemies;
             if (enemies.Count == 0)

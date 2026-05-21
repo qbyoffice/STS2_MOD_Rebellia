@@ -21,13 +21,13 @@ public class BloodBriar()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(5m, ValueProp.Move),
-            new HpLossVar(3m),
-            new PowerVar<BloodSwordArtPower>(2),
-            new IntVar("HitCount", 2),
-            new IntVar("CardCount", 1),
-        ];
+    [
+        new DamageVar(5m, ValueProp.Move),
+        new HpLossVar(3m),
+        new PowerVar<BloodSwordArtPower>(2),
+        new IntVar("HitCount", 2),
+        new IntVar("CardCount", 1)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -39,11 +39,11 @@ public class BloodBriar()
             this
         );
 
-        int hitCount = (int)DynamicVars["HitCount"].BaseValue;
-        var attackCmd = CommonActions.CardAttack(this, play, hitCount: hitCount);
+        var hitCount = (int)DynamicVars["HitCount"].BaseValue;
+        var attackCmd = CommonActions.CardAttack(this, play, hitCount);
         await attackCmd.Execute(choiceContext);
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         var hand = PileType.Hand.GetPile(Owner).Cards;
         var bloodWeaponCards = hand.Where(c =>
@@ -52,16 +52,15 @@ public class BloodBriar()
             .ToList();
 
         if (bloodWeaponCards.Count > 0)
-        {
             if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             {
-                int cardCount = (int)DynamicVars["CardCount"].BaseValue;
+                var cardCount = (int)DynamicVars["CardCount"].BaseValue;
                 var combatState = Owner.Creature.CombatState;
                 if (combatState == null)
                     return;
                 var enemies = combatState.HittableEnemies;
                 for (
-                    int i = 0;
+                    var i = 0;
                     i < cardCount && bloodWeaponCards.Count > 0 && enemies.Count > 0;
                     i++
                 )
@@ -75,8 +74,7 @@ public class BloodBriar()
                         await CardCmd.AutoPlay(
                             choiceContext,
                             randomCard,
-                            randomTarget,
-                            AutoPlayType.Default
+                            randomTarget
                         );
                         bloodWeaponCards = PileType
                             .Hand.GetPile(Owner)
@@ -87,7 +85,6 @@ public class BloodBriar()
                     }
                 }
             }
-        }
     }
 
     protected override void OnUpgrade()

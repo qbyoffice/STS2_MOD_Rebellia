@@ -16,11 +16,9 @@ public class LucentCrystal : RebelliaRelics
 {
     private const int UpgradeThreshold = 5;
 
-    [SavedProperty]
-    public int Rebellia_MonsterCombatWins { get; set; }
+    [SavedProperty] public int Rebellia_MonsterCombatWins { get; set; }
 
-    [SavedProperty]
-    public int Rebellia_EliteCombatWins { get; set; }
+    [SavedProperty] public int Rebellia_EliteCombatWins { get; set; }
 
     public override RelicRarity Rarity => RelicRarity.Starter;
     public override bool ShowCounter => true;
@@ -62,7 +60,7 @@ public class LucentCrystal : RebelliaRelics
         if (bloodPower.BloodArtMaxPoints < 2)
             bloodPower.BloodArtMaxPoints = 2;
 
-        int current = bloodPower.GetPoints();
+        var current = bloodPower.GetPoints();
         if (current < 2)
             bloodPower.AddPoints(1);
     }

@@ -23,11 +23,11 @@ public class Bloodclot() : RebelliaCard(1, CardType.Status, CardRarity.Token, Ta
         if (combatState == null)
             return;
 
-        int veilAmount = (int)
+        var veilAmount = (int)
             DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
         var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
         veilPower?.AddVeilPoints(veilAmount);
 
-        this.AddKeyword(CardKeywordExtensions.RebelliaSanguine);
+        AddKeyword(CardKeywordExtensions.RebelliaSanguine);
     }
 }

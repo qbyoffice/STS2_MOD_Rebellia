@@ -16,11 +16,11 @@ public class StrikeBloodWeapon()
     : RebelliaCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags =>
-        [
-            CardTag.Strike,
-            CardTagExtensions.RebelliaBloodWeapon,
-            CardTagExtensions.RebelliaBloodWeaponArt,
-        ];
+    [
+        CardTag.Strike,
+        CardTagExtensions.RebelliaBloodWeapon,
+        CardTagExtensions.RebelliaBloodWeaponArt
+    ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(6m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1), new CardsVar(1)];
@@ -37,12 +37,12 @@ public class StrikeBloodWeapon()
         if (strikeCards.Count == 0)
             return;
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int count = DynamicVars.Cards.IntValue;
-            for (int i = 0; i < count && strikeCards.Count > 0; i++)
+            var count = DynamicVars.Cards.IntValue;
+            for (var i = 0; i < count && strikeCards.Count > 0; i++)
             {
                 var randomStrike = Owner.RunState.Rng.CombatCardSelection.NextItem(strikeCards);
                 if (randomStrike != null)
@@ -50,8 +50,7 @@ public class StrikeBloodWeapon()
                     await CardCmd.AutoPlay(
                         choiceContext,
                         randomStrike,
-                        play.Target,
-                        AutoPlayType.Default
+                        play.Target
                     );
                     strikeCards = PileType
                         .Hand.GetPile(Owner)
