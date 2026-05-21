@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using Rebellia.RebelliaCode.Api;
+using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Api.Relics;
 using Rebellia.RebelliaCode.Powers;
 
@@ -55,6 +56,8 @@ public class LucentCrystal : RebelliaRelics
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
         if (bloodPower == null)
             return;
+
+        await BloodKeywordManager.ConsumeAllBloodCards(Owner);
 
         if (bloodPower.BloodArtMaxPoints < 2)
             bloodPower.BloodArtMaxPoints = 2;

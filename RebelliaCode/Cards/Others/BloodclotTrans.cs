@@ -12,9 +12,9 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class BloodclotTrans() : RebelliaCard(1, CardType.Status, CardRarity.Token, TargetType.Self)
 {
-    protected override HashSet<CardTag> CanonicalTags =>
-        [CardTagExtensions.BloodclotExhaust, CardTagExtensions.RebelliaSanguinePoint];
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.BloodclotExhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords =>
+        [CardKeyword.Exhaust, CardKeywordExtensions.RebelliaSanguine];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.CrimsonVeil];
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrimsonVeilPower>(1)];
 

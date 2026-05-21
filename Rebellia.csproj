@@ -93,7 +93,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.0.6" PrivateAssets="All" />
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.1.1" PrivateAssets="All" />
     <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
     <AdditionalFiles Include="Rebellia/localization/**/*.json" />
     <PackageReference Include="CSharpier.MsBuild" Version="1.2.6">
@@ -279,8 +279,6 @@
     <Folder Include="Rebellia\images\relics\tres\" />
     <Folder Include="Rebellia\images\ui\combat\Rebellia\" />
     <Folder Include="Rebellia\images\ui\top_panel\" />
-    <Folder Include="Rebellia\localization\eng\" />
-    <Folder Include="Rebellia\localization\zhs\" />
   </ItemGroup>
 
   <ItemGroup>

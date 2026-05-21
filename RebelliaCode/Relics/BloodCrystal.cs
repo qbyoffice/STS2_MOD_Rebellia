@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Rebellia.RebelliaCode.Api;
+using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Api.Relics;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
@@ -21,7 +22,7 @@ public class BloodCrystal : RebelliaRelics
     {
         if (side != Owner.Creature.Side || state.RoundNumber != 1)
             return;
-
+        await BloodKeywordManager.ConsumeAllBloodCards(Owner);
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
         if (bloodPower != null)
         {

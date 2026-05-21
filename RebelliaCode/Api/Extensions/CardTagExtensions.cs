@@ -6,9 +6,6 @@ namespace Rebellia.RebelliaCode.Api.Extensions;
 public static class CardTagExtensions
 {
     [CustomEnum]
-    public static CardTag RebelliaSanguinePoint;
-
-    [CustomEnum]
     public static CardTag RebelliaBloodWeaponArt;
 
     [CustomEnum]

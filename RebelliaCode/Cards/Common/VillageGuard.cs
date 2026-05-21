@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
@@ -14,58 +13,53 @@ using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-public class BloodCrimsonMeteor()
-    : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)
+public class VillageGuard()
+    : RebelliaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     private const string TotalHitsKey = "TotalHits";
 
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
-
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(5m, ValueProp.Move),
-            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<BloodSwordArtPower>(3),
             new CalculationBaseVar(1),
             new CalculationExtraVar(0),
             new CalculatedVar(TotalHitsKey).WithMultiplier(
                 (card, target) =>
                 {
-                    int dex = card.Owner.Creature.GetPowerAmount<DexterityPower>();
-                    decimal baseVal = card.DynamicVars.CalculationBase.BaseValue;
-                    return baseVal + dex;
+                    var hand = PileType.Hand.GetPile(card.Owner).Cards;
+                    int attackCount = hand.Count(c => c != null && c.Type == CardType.Attack);
+                    int baseVal = (int)card.DynamicVars.CalculationBase.BaseValue;
+                    int extra = (int)card.DynamicVars.CalculationExtra.BaseValue;
+                    return attackCount * (baseVal + extra);
                 }
             ),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CommonActions.CardAttack(this, play).Execute(choiceContext);
-
         int requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             return;
 
-        int dexterity = Owner.Creature.GetPowerAmount<DexterityPower>();
-        int extraHits = dexterity;
-        decimal damage = DynamicVars.Damage.BaseValue;
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        var combatState = Owner.Creature.CombatState;
-        if (combatState == null)
-            return;
+        var hand = PileType.Hand.GetPile(Owner).Cards;
+        int attackCount = hand.Count(c => c.Type == CardType.Attack);
+        int baseVal = (int)DynamicVars.CalculationBase.BaseValue;
+        int extra = (int)DynamicVars.CalculationExtra.BaseValue;
+        int extraAttacks = attackCount * (baseVal + extra);
 
-        for (int i = 0; i < extraHits; i++)
+        for (int i = 0; i < extraAttacks; i++)
         {
-            var enemies = combatState.HittableEnemies;
-            if (enemies.Count == 0)
-                break;
-            var target = Owner.RunState.Rng.CombatTargets.NextItem(enemies);
-            if (target == null)
-                break;
-
-            await DamageCmd.Attack(damage).FromCard(this).Targeting(target).Execute(choiceContext);
+            var cmd = DamageCmd
+                .Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .Targeting(play.Target!);
+            await cmd.Execute(choiceContext);
         }
     }
 

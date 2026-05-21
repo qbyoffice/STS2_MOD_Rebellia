@@ -13,7 +13,7 @@ namespace Rebellia.RebelliaCode.Powers.cards
     public class CrimsonStrikeDamagePower : RebelliaPowers
     {
         public override PowerType Type => PowerType.Buff;
-        public override PowerStackType StackType => PowerStackType.Single;
+        public override PowerStackType StackType => PowerStackType.Counter;
         public override bool ShouldReceiveCombatHooks => true;
 
         protected override object InitInternalData() => new Data();
