@@ -25,12 +25,11 @@ public class RebelBloodThrust()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         var combatState = Owner.Creature.CombatState;
-        if (combatState == null || play.Target == null)
+        if (combatState == null)
             return;
 
-        var mainCmd = await CommonActions.CardAttack(this, play).Execute(choiceContext);
-
-        var brokeBlock = mainCmd
+        var mainResult = await CommonActions.CardAttack(this, play).Execute(choiceContext);
+        var brokeBlock = mainResult
             .Results.SelectMany(list => list)
             .Any(r => r.UnblockedDamage > 0 || r.OverkillDamage > 0);
         if (!brokeBlock)
@@ -38,29 +37,22 @@ public class RebelBloodThrust()
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        var hasBlood = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() >= requiredBlood;
-        if (hasBlood)
+        var bloodPower = Owner.Creature.GetPower<BloodSwordArtPower>();
+        var hasBlood = bloodPower != null && bloodPower.GetPoints() >= requiredBlood;
+
+        if (hasBlood && await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-                foreach (var enemy in combatState.HittableEnemies)
-                {
-                    var aoeCmd = DamageCmd
-                        .Attack(DynamicVars.Damage.BaseValue)
-                        .FromCard(this)
-                        .Targeting(enemy);
-                    await aoeCmd.Execute(choiceContext);
-                }
+            var baseCmd = DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this);
+            foreach (var enemy in combatState.HittableEnemies)
+                await baseCmd.Targeting(enemy).Execute(choiceContext);
         }
-        else
+        else if (combatState.HittableEnemies.Count > 0)
         {
-            if (combatState.HittableEnemies.Count > 0)
-            {
-                var randomCmd = DamageCmd
-                    .Attack(DynamicVars.Damage.BaseValue)
-                    .FromCard(this)
-                    .TargetingRandomOpponents(combatState);
-                await randomCmd.Execute(choiceContext);
-            }
+            await DamageCmd
+                .Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .TargetingRandomOpponents(combatState)
+                .Execute(choiceContext);
         }
     }
 

@@ -15,9 +15,8 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class CrimsonStrikeDamagePower : RebelliaPowers
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ExtraHoverTips];
-
     private bool _used;
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ExtraHoverTips];
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;

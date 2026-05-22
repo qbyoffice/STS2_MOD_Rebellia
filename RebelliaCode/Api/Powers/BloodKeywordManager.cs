@@ -17,7 +17,7 @@ public static class BloodKeywordManager
         var exhaust = PileType.Exhaust.GetPile(player).Cards;
         var bloodCards = discard
             .Concat(exhaust)
-            .Where(c => c != null && c.Keywords.Contains(CardKeywordExtensions.RebelliaSanguine))
+            .Where(c => c != null && c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
             .ToList();
 
         foreach (var card in bloodCards)
@@ -31,7 +31,7 @@ public static class BloodKeywordManager
 
         var allCards = player
             .PlayerCombatState.AllCards.Where(c =>
-                c != null && c.Keywords.Contains(CardKeywordExtensions.RebelliaSanguine)
+                c != null && c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
             )
             .ToList();
 

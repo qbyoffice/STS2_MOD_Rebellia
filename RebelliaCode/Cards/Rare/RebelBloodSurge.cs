@@ -1,15 +1,11 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
-using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
@@ -20,6 +16,7 @@ public class RebelBloodSurge() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.CrimsonVeil, HoverTipsValue.BloodSwordArt];
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -32,11 +29,11 @@ public class RebelBloodSurge() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        int drawCount = DynamicVars.Cards.IntValue;
+        var drawCount = DynamicVars.Cards.IntValue;
         if (drawCount > 0)
             await CardPileCmd.Draw(choiceContext, drawCount, Owner);
 
-        int veilAmount = (int)
+        var veilAmount = (int)
             DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
         if (veilAmount > 0)
         {
@@ -44,16 +41,21 @@ public class RebelBloodSurge() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
             veilPower?.AddVeilPoints(veilAmount);
         }
 
-        int bloodAmount = (int)
+        var bloodAmount = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (bloodAmount > 0)
             await BloodSwordArtManager.AddPoints(Owner.Creature, bloodAmount);
 
-        int armorAmount = (int)DynamicVarsHelper.GetPowerVar<ArmorPower>(DynamicVars).BaseValue;
+        var armorAmount = (int)DynamicVarsHelper.GetPowerVar<ArmorPower>(DynamicVars).BaseValue;
         if (armorAmount > 0)
         {
-            var armorPower = await Utils.GetOrCreatePower<ArmorPower>(Owner.Creature);
-            armorPower?.AddPoints(armorAmount);
+            await PowerCmd.Apply<ArmorPower>(
+                choiceContext,
+                Owner.Creature,
+                armorAmount,
+                Owner.Creature,
+                this
+            );
         }
     }
 

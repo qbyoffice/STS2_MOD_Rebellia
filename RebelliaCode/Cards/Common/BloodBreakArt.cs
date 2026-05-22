@@ -3,54 +3,51 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
-using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-public class VeinThornScab()
-    : RebelliaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class BloodBreakArt()
+    : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipsValue.BloodSwordArt, HoverTipsValue.Rend];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(4m, ValueProp.Move), new HpLossVar(3m), new PowerVar<BloodSwordArtPower>(1)];
+        [
+            new DamageVar(8m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<VulnerablePower>(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CreatureCmd.Damage(
-            choiceContext,
-            Owner.Creature,
-            DynamicVars.HpLoss.BaseValue,
-            ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-            this
-        );
-
         if (play.Target == null)
             return;
-        var damageAmount = DynamicVars.Damage.BaseValue;
+
         await DamageCmd
-            .Attack(damageAmount)
+            .Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(play.Target)
             .Execute(choiceContext);
 
-        var requiredBlood = (int)
+        var required = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, required))
         {
-            var rendPower = await PowerCmd.Apply<RendPower>(
+            var vulnerableAmount = (int)
+                DynamicVarsHelper.GetPowerVar<VulnerablePower>(DynamicVars).BaseValue;
+            await PowerCmd.Apply<VulnerablePower>(
                 choiceContext,
                 play.Target,
-                (int)damageAmount,
+                vulnerableAmount,
                 Owner.Creature,
                 this
             );
@@ -59,7 +56,7 @@ public class VeinThornScab()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars.Damage.UpgradeValueBy(1m);
+        DynamicVarsHelper.GetPowerVar<VulnerablePower>(DynamicVars).UpgradeValueBy(3m);
     }
 }

@@ -19,8 +19,6 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new HpLossVar(4m), new IntVar("MaxHandSize", 10)];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CreatureCmd.Damage(

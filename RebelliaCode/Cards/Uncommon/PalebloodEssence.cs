@@ -8,7 +8,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Uncommon;
 
-public class PalebloodEssence()
+public class PaleBloodEssence()
     : RebelliaCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
@@ -19,7 +19,7 @@ public class PalebloodEssence()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        int increase = (int)DynamicVars["BloodArtMaxPoints"].BaseValue;
+        var increase = (int)DynamicVars["BloodArtMaxPoints"].BaseValue;
         await BloodSwordArtManager.IncreaseMaxPoints(Owner.Creature, increase, choiceContext);
     }
 

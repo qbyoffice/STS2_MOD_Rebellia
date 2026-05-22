@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Rebellia.RebelliaCode.Api.Extensions;
 
-public static class CardKeywordExtensions
+public static class RCardKeywordExtensions
 {
     [CustomEnum("REBELLIASANGUINE")]
     [KeywordProperties(AutoKeywordPosition.Before)]

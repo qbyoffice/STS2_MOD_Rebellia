@@ -28,6 +28,6 @@ public class Bloodclot() : RebelliaCard(1, CardType.Status, CardRarity.Token, Ta
         var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
         veilPower?.AddVeilPoints(veilAmount);
 
-        AddKeyword(CardKeywordExtensions.RebelliaSanguine);
+        AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
     }
 }

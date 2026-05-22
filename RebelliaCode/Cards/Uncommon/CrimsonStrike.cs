@@ -16,6 +16,7 @@ public class CrimsonStrike()
     : RebelliaCard(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTag.Strike];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.ExtraHoverTips];
 

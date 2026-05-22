@@ -25,8 +25,8 @@ public class BloodBriar()
             new DamageVar(5m, ValueProp.Move),
             new HpLossVar(3m),
             new PowerVar<BloodSwordArtPower>(2),
-            new IntVar("HitCount", 2),
-            new IntVar("CardCount", 1),
+            new RepeatVar(2),
+            new CardsVar(1),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -39,7 +39,7 @@ public class BloodBriar()
             this
         );
 
-        var hitCount = (int)DynamicVars["HitCount"].BaseValue;
+        var hitCount = DynamicVars.Repeat.IntValue;
         var attackCmd = CommonActions.CardAttack(this, play, hitCount);
         await attackCmd.Execute(choiceContext);
 
@@ -51,41 +51,37 @@ public class BloodBriar()
             )
             .ToList();
 
-        if (bloodWeaponCards.Count > 0)
-            if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+        if (
+            bloodWeaponCards.Count > 0
+            && await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood)
+        )
+        {
+            var cardCount = DynamicVars.Cards.IntValue;
+            var combatState = Owner.Creature.CombatState;
+            if (combatState == null)
+                return;
+            var enemies = combatState.HittableEnemies;
+
+            for (var i = 0; i < cardCount && bloodWeaponCards.Count > 0 && enemies.Count > 0; i++)
             {
-                var cardCount = (int)DynamicVars["CardCount"].BaseValue;
-                var combatState = Owner.Creature.CombatState;
-                if (combatState == null)
-                    return;
-                var enemies = combatState.HittableEnemies;
-                for (
-                    var i = 0;
-                    i < cardCount && bloodWeaponCards.Count > 0 && enemies.Count > 0;
-                    i++
-                )
+                var randomCard = Owner.RunState.Rng.CombatCardSelection.NextItem(bloodWeaponCards);
+                if (randomCard != null)
                 {
-                    var randomCard = Owner.RunState.Rng.CombatCardSelection.NextItem(
-                        bloodWeaponCards
-                    );
-                    if (randomCard != null)
-                    {
-                        var randomTarget = Owner.RunState.Rng.CombatTargets.NextItem(enemies);
-                        await CardCmd.AutoPlay(choiceContext, randomCard, randomTarget);
-                        bloodWeaponCards = PileType
-                            .Hand.GetPile(Owner)
-                            .Cards.Where(c =>
-                                c.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon)
-                            )
-                            .ToList();
-                    }
+                    var randomTarget = Owner.RunState.Rng.CombatTargets.NextItem(enemies);
+                    await CardCmd.AutoPlay(choiceContext, randomCard, randomTarget);
+
+                    bloodWeaponCards = PileType
+                        .Hand.GetPile(Owner)
+                        .Cards.Where(c => c.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon))
+                        .ToList();
                 }
             }
+        }
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["HitCount"].UpgradeValueBy(1m);
-        DynamicVars["CardCount"].UpgradeValueBy(1m);
+        DynamicVars.Repeat.UpgradeValueBy(1m);
+        DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }

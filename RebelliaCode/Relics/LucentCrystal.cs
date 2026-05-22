@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -47,6 +48,7 @@ public class LucentCrystal : RebelliaRelics
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext ctx,
         CombatSide side,
+        IReadOnlyList<Creature> participants,
         ICombatState state
     )
     {

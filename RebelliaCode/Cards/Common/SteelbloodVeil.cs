@@ -2,7 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.Models.Powers;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
@@ -12,7 +12,7 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-public class SteelbloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Common, TargetType.Self)
+public class SteelBloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
 
@@ -34,7 +34,13 @@ public class SteelbloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Commo
         {
             var currentVeil = Owner.Creature.GetPower<CrimsonVeilPower>()?.GetVeilPoints() ?? 0;
             if (currentVeil > 0)
-                await CreatureCmd.GainBlock(Owner.Creature, currentVeil, ValueProp.Move, null);
+                await PowerCmd.Apply<PlatingPower>(
+                    choiceContext,
+                    Owner.Creature,
+                    currentVeil,
+                    Owner.Creature,
+                    this
+                );
         }
     }
 
@@ -43,6 +49,6 @@ public class SteelbloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Commo
         DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).UpgradeValueBy(1m);
         EnergyCost.UpgradeBy(-1);
         RemoveKeyword(CardKeyword.Ethereal);
-        AddKeyword(CardKeywordExtensions.RebelliaSanguine);
+        AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
     }
 }
