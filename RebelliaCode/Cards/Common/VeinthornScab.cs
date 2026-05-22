@@ -13,11 +13,14 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-class VeinthornScab() : RebelliaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+public class VeinThornScab()
+    : RebelliaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.Rend];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(4m, ValueProp.Move), new HpLossVar(3m), new PowerVar<BloodSwordArtPower>(1)];
 
@@ -33,18 +36,19 @@ class VeinthornScab() : RebelliaCard(3, CardType.Attack, CardRarity.Common, Targ
 
         if (play.Target == null)
             return;
-        decimal damageAmount = DynamicVars.Damage.BaseValue;
+        var damageAmount = DynamicVars.Damage.BaseValue;
         await DamageCmd
             .Attack(damageAmount)
             .FromCard(this)
             .Targeting(play.Target)
             .Execute(choiceContext);
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
             var rendPower = await PowerCmd.Apply<RendPower>(
+                choiceContext,
                 play.Target,
                 (int)damageAmount,
                 Owner.Creature,

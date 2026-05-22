@@ -14,20 +14,21 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class RebelliaTmepHpPower : RebelliaPowers
 {
-    private bool _isSelfDamage = false;
+    private bool _isSelfDamage;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => GetInternalData<Data>().RebelliaTempHp;
     public override bool ShouldReceiveCombatHooks => true;
 
-    protected override object InitInternalData() => new Data();
-
-    private Data GetData() => GetInternalData<Data>();
-
-    private class Data
+    protected override object InitInternalData()
     {
-        public int RebelliaTempHp = 0;
+        return new Data();
+    }
+
+    private Data GetData()
+    {
+        return GetInternalData<Data>();
     }
 
     public void AddTempHp(int amount)
@@ -37,7 +38,11 @@ public class RebelliaTmepHpPower : RebelliaPowers
         InvokeDisplayAmountChanged();
     }
 
-    public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task BeforeSideTurnEnd(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IEnumerable<Creature> participants
+    )
     {
         if (side != Owner.Side)
             return;
@@ -46,14 +51,14 @@ public class RebelliaTmepHpPower : RebelliaPowers
             return;
 
         var hand = PileType.Hand.GetPile(player).Cards;
-        int count = hand.Count(c => c.Tags.Contains(CardTagExtensions.BloodclotExhaust));
+        var count = hand.Count(c => c.Tags.Contains(CardTagExtensions.BloodclotExhaust));
         if (count == 0)
             return;
 
-        int penalty = count * 5;
+        var penalty = count * 5;
         var data = GetData();
-        int currentTemp = data.RebelliaTempHp;
-        int actualDamage = penalty - currentTemp;
+        var currentTemp = data.RebelliaTempHp;
+        var actualDamage = penalty - currentTemp;
         if (actualDamage > 0)
         {
             _isSelfDamage = true;
@@ -89,24 +94,27 @@ public class RebelliaTmepHpPower : RebelliaPowers
         if (data.RebelliaTempHp <= 0)
             return amount;
 
-        int damage = (int)amount;
+        var damage = (int)amount;
         if (data.RebelliaTempHp >= damage)
         {
             data.RebelliaTempHp -= damage;
             InvokeDisplayAmountChanged();
             return 0;
         }
-        else
-        {
-            int remaining = damage - data.RebelliaTempHp;
-            data.RebelliaTempHp = 0;
-            InvokeDisplayAmountChanged();
-            return remaining;
-        }
+
+        var remaining = damage - data.RebelliaTempHp;
+        data.RebelliaTempHp = 0;
+        InvokeDisplayAmountChanged();
+        return remaining;
     }
 
     public override async Task AfterCombatEnd(CombatRoom room)
     {
         await PowerCmd.Remove(this);
+    }
+
+    private class Data
+    {
+        public int RebelliaTempHp;
     }
 }

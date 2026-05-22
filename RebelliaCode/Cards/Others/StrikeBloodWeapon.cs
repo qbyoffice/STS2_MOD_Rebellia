@@ -23,7 +23,11 @@ public class StrikeBloodWeapon()
         ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(6m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1), new CardsVar(1)];
+        [
+            new DamageVar(6m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<ErodingBloodPower>(2),
+        ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Ethereal, CardKeyword.Exhaust];
@@ -32,38 +36,23 @@ public class StrikeBloodWeapon()
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        var hand = PileType.Hand.GetPile(Owner).Cards;
-        var strikeCards = hand.Where(c => c != this && c.Tags.Contains(CardTag.Strike)).ToList();
-        if (strikeCards.Count == 0)
-            return;
-
         int requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int count = DynamicVars.Cards.IntValue;
-            for (int i = 0; i < count && strikeCards.Count > 0; i++)
-            {
-                var randomStrike = Owner.RunState.Rng.CombatCardSelection.NextItem(strikeCards);
-                if (randomStrike != null)
-                {
-                    await CardCmd.AutoPlay(
-                        choiceContext,
-                        randomStrike,
-                        play.Target,
-                        AutoPlayType.Default
-                    );
-                    strikeCards = PileType
-                        .Hand.GetPile(Owner)
-                        .Cards.Where(c => c != this && c.Tags.Contains(CardTag.Strike))
-                        .ToList();
-                }
-            }
+            await PowerCmd.Apply<ErodingBloodPower>(
+                choiceContext,
+                play.Target!,
+                (int)DynamicVarsHelper.GetPowerVar<ErodingBloodPower>(DynamicVars).BaseValue,
+                Owner.Creature,
+                this
+            );
         }
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVarsHelper.GetPowerVar<ErodingBloodPower>(DynamicVars).UpgradeValueBy(1m);
     }
 }

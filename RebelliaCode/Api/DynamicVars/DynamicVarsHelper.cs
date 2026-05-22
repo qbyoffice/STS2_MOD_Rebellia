@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Powers;
+using static Rebellia.RebelliaCode.Api.DynamicVars.DiscardsVar;
 
 namespace Rebellia.RebelliaCode.Api.DynamicVars;
 
@@ -14,7 +15,7 @@ public static class DynamicVarsHelper
 
     public static DiscardsVar GetDiscardsVar(DynamicVarSet varSet)
     {
-        return (DiscardsVar)varSet[DiscardsVar.DefaultName];
+        return (DiscardsVar)varSet[DefaultName];
     }
 
     public static ThresholdVar GetThresholdVar(DynamicVarSet varSet)
@@ -25,5 +26,15 @@ public static class DynamicVarsHelper
     public static PowerVar<BloodSwordArtPower> GetBloodSwordArtVar(this DynamicVarSet varSet)
     {
         return (PowerVar<BloodSwordArtPower>)varSet[typeof(BloodSwordArtPower).Name];
+    }
+
+    public static PlayCountVar GetPlayCountVar(DynamicVarSet varSet)
+    {
+        return (PlayCountVar)varSet[PlayCountVar.DefaultName];
+    }
+
+    public static ExtraAttackCountVar GetExtraAttackCountVar(DynamicVarSet varSet)
+    {
+        return (ExtraAttackCountVar)varSet[ExtraAttackCountVar.DefaultName];
     }
 }

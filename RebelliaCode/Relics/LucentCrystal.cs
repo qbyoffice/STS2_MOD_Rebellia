@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -47,7 +48,8 @@ public class LucentCrystal : RebelliaRelics
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext ctx,
         CombatSide side,
-        CombatState state
+        IReadOnlyList<Creature> participants,
+        ICombatState state
     )
     {
         if (side != Owner.Creature.Side || state.RoundNumber != 1)
@@ -62,7 +64,7 @@ public class LucentCrystal : RebelliaRelics
         if (bloodPower.BloodArtMaxPoints < 2)
             bloodPower.BloodArtMaxPoints = 2;
 
-        int current = bloodPower.GetPoints();
+        var current = bloodPower.GetPoints();
         if (current < 2)
             bloodPower.AddPoints(1);
     }

@@ -16,12 +16,13 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.RebelliaTempHp];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new DamageVar(9m, ValueProp.Move),
+            new DamageVar(7m, ValueProp.Move),
             new PowerVar<BloodSwordArtPower>(1),
             new PowerVar<RebelliaTmepHpPower>(4),
         ];
@@ -30,14 +31,14 @@ public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int tempGain = (int)
+            var tempGain = (int)
                 DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
 
-            var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature, 1);
+            var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
             if (tempPower != null)
             {
                 tempPower.AddTempHp(1);
@@ -49,7 +50,6 @@ public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(3m);
         DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).UpgradeValueBy(1m);
     }
 }

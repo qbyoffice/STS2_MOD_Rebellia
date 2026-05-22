@@ -31,7 +31,7 @@ public class CrimsonPulse()
         if (strikeCard == null)
             return;
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             return;

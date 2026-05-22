@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ekgjqvf2g434"
-path="res://.godot/imported/steelblood_veil.png-9efb08eebb395647c0378053c33cee0e.ctex"
+uid="uid://cg0f0ulfmwcku"
+path="res://.godot/imported/steel_blood_veil.png-f604c3a0ae2e210a2e25eea28fa7e887.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rebellia/images/card_portraits/big/steelblood_veil.png"
-dest_files=["res://.godot/imported/steelblood_veil.png-9efb08eebb395647c0378053c33cee0e.ctex"]
+source_file="res://Rebellia/images/card_portraits/big/steel_blood_veil.png"
+dest_files=["res://.godot/imported/steel_blood_veil.png-f604c3a0ae2e210a2e25eea28fa7e887.ctex"]
 
 [params]
 

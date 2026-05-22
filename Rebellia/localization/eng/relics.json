@@ -1,12 +1,11 @@
 {
-
-    "REBELLIA-LUCENT_CRYSTAL.description": "",
-    "REBELLIA-LUCENT_CRYSTAL.flavor": "",
-    "REBELLIA-LUCENT_CRYSTAL.title": "Lucent Crystal",
-    "REBELLIA-GLIMMER_CRYSTAL.description": "",
-    "REBELLIA-GLIMMER_CRYSTAL.flavor": "",
-    "REBELLIA-GLIMMER_CRYSTAL.title": "Glimmer Crystal",
-    "REBELLIA-BLOOD_CRYSTAL.description": "",
-    "REBELLIA-BLOOD_CRYSTAL.flavor": "",
-    "REBELLIA-BLOOD_CRYSTAL.title": "Blood Crystal"
+  "REBELLIA-LUCENT_CRYSTAL.description": "",
+  "REBELLIA-LUCENT_CRYSTAL.flavor": "",
+  "REBELLIA-LUCENT_CRYSTAL.title": "Lucent Crystal",
+  "REBELLIA-GLIMMER_CRYSTAL.description": "",
+  "REBELLIA-GLIMMER_CRYSTAL.flavor": "",
+  "REBELLIA-GLIMMER_CRYSTAL.title": "Glimmer Crystal",
+  "REBELLIA-BLOOD_CRYSTAL.description": "",
+  "REBELLIA-BLOOD_CRYSTAL.flavor": "",
+  "REBELLIA-BLOOD_CRYSTAL.title": "Blood Crystal"
 }

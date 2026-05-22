@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sorvhlyudea0"
-path="res://.godot/imported/veinthorn_scab.png-05c382948c5d4ced61142519acf68165.ctex"
+uid="uid://com003lopwfv"
+path="res://.godot/imported/crimson_spiral.png-2b796901570f2861d11a3031c4bf963b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rebellia/images/card_portraits/big/veinthorn_scab.png"
-dest_files=["res://.godot/imported/veinthorn_scab.png-05c382948c5d4ced61142519acf68165.ctex"]
+source_file="res://Rebellia/images/card_portraits/crimson_spiral.png"
+dest_files=["res://.godot/imported/crimson_spiral.png-2b796901570f2861d11a3031c4bf963b.ctex"]
 
 [params]
 

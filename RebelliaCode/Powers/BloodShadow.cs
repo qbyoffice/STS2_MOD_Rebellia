@@ -3,7 +3,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers;
 
-class BloodShadow : RebelliaPowers
+public class BloodShadow : RebelliaPowers
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;

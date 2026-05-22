@@ -8,7 +8,6 @@ using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
-using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Basic;
@@ -17,7 +16,9 @@ public class CrimsonVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Basic, T
 {
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Defend, CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.CrimsonVeil];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(5, ValueProp.Move), new PowerVar<CrimsonVeilPower>(1)];
 
@@ -25,7 +26,7 @@ public class CrimsonVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Basic, T
     {
         await CommonActions.CardBlock(this, play);
 
-        int veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
+        var veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
         if (veilGain > 0)
         {
             var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);

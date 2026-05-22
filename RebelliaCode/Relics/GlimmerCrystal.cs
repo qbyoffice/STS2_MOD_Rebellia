@@ -1,5 +1,5 @@
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using Rebellia.RebelliaCode.Api;
@@ -16,7 +16,8 @@ public class GlimmerCrystal : RebelliaRelics
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext ctx,
         CombatSide side,
-        CombatState state
+        IReadOnlyList<Creature> participants,
+        ICombatState state
     )
     {
         if (side != Owner.Creature.Side || state.RoundNumber != 1)
@@ -26,8 +27,8 @@ public class GlimmerCrystal : RebelliaRelics
         if (bloodPower != null)
         {
             bloodPower.BloodArtMaxPoints = 3;
-            int current = bloodPower.GetPoints();
-            int toAdd = 2 - current;
+            var current = bloodPower.GetPoints();
+            var toAdd = 2 - current;
             if (toAdd > 0)
                 bloodPower.AddPoints(toAdd);
         }

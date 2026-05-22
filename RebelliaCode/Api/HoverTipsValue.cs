@@ -1,5 +1,5 @@
 using MegaCrit.Sts2.Core.HoverTips;
-using Rebellia.RebelliaCode.Cards.Common;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Cards.Others;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
@@ -36,5 +36,10 @@ public static class HoverTipsValue
 
     public static readonly IHoverTip Bloodclot = HoverTipFactory.FromCard<Bloodclot>();
 
-    public static readonly IHoverTip BloodclotTrans = HoverTipFactory.FromCard<BloodclotTrans>();
+    public static readonly IHoverTip ExtraHoverTips =
+        HoverTipFactory.FromPower<CrimsonStrikeDamagePower>();
+
+    public static readonly IHoverTip KeywordSanguine = HoverTipFactory.FromKeyword(
+        RCardKeywordExtensions.RebelliaSanguine
+    );
 }

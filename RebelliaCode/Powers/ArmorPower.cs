@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -16,6 +14,12 @@ public class ArmorPower : RebelliaPowers
     public override int DisplayAmount => Amount;
     public override bool ShouldReceiveCombatHooks => true;
 
+    public void AddPoints(int amount)
+    {
+        SetAmount(Amount + amount);
+        InvokeDisplayAmountChanged();
+    }
+
     public override async Task AfterCardChangedPiles(
         CardModel card,
         PileType oldPile,
@@ -24,10 +28,9 @@ public class ArmorPower : RebelliaPowers
     {
         if (Amount <= 0)
             return;
-
         if (card.Pile?.Type == PileType.Hand && card.Type == CardType.Status)
         {
-            await PowerCmd.ModifyAmount(this, -1, null, null);
+            AddPoints(-1);
             await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
         }
     }

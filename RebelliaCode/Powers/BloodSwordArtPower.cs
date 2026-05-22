@@ -14,17 +14,15 @@ public class BloodSwordArtPower : RebelliaPowers
     public override int DisplayAmount => GetInternalData<Data>().BloodArtPoints;
     public override bool ShouldReceiveCombatHooks => true;
 
-    private class Data
+    protected override object InitInternalData()
     {
-        public int BloodArtPoints = 0;
+        return new Data();
     }
-
-    protected override object InitInternalData() => new Data();
 
     public void AddPoints(int amount)
     {
         var data = GetInternalData<Data>();
-        data.BloodArtPoints = System.Math.Min(data.BloodArtPoints + amount, BloodArtMaxPoints);
+        data.BloodArtPoints = Math.Min(data.BloodArtPoints + amount, BloodArtMaxPoints);
         InvokeDisplayAmountChanged();
     }
 
@@ -38,10 +36,18 @@ public class BloodSwordArtPower : RebelliaPowers
         return true;
     }
 
-    public int GetPoints() => GetInternalData<Data>().BloodArtPoints;
+    public int GetPoints()
+    {
+        return GetInternalData<Data>().BloodArtPoints;
+    }
 
     public override async Task AfterCombatEnd(CombatRoom room)
     {
         await PowerCmd.Remove(this);
+    }
+
+    private class Data
+    {
+        public int BloodArtPoints;
     }
 }

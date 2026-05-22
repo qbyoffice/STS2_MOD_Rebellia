@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m3ttbr48k208"
-path="res://.godot/imported/veinthorn_scab.png-2ca49e58939ccfc375bdf9ab23317827.ctex"
+uid="uid://ct8o2d8srxdm8"
+path="res://.godot/imported/blood_blade_veill.png-0960dd763c81f5fabacc82edb16829d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rebellia/images/card_portraits/veinthorn_scab.png"
-dest_files=["res://.godot/imported/veinthorn_scab.png-2ca49e58939ccfc375bdf9ab23317827.ctex"]
+source_file="res://Rebellia/images/card_portraits/big/blood_blade_veill.png"
+dest_files=["res://.godot/imported/blood_blade_veill.png-0960dd763c81f5fabacc82edb16829d9.ctex"]
 
 [params]
 
