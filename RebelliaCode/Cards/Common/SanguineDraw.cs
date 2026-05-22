@@ -23,12 +23,13 @@ public class SanguineDraw()
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(6m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1)];
+        [new DamageVar(6m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1), new CardsVar(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
+        Utils.SuppressBloodConsumption(true);
         var veilPower = Owner.Creature.GetPower<CrimsonVeilPower>();
         if (veilPower != null)
         {
@@ -36,17 +37,20 @@ public class SanguineDraw()
             if (current > 0)
                 veilPower.AddVeilPoints(-current);
         }
+        Utils.SuppressBloodConsumption(false);
 
         int requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
+            int count = DynamicVars.Cards.IntValue;
             var hand = PileType.Hand.GetPile(Owner).Cards;
             var sanguineCards = hand.Where(c =>
                     c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
                 )
                 .ToList();
-            if (sanguineCards.Count > 0)
+
+            for (int i = 0; i < count && sanguineCards.Count > 0; i++)
             {
                 var randomCard = Owner.RunState.Rng.CombatCardSelection.NextItem(sanguineCards);
                 if (randomCard != null)
@@ -57,6 +61,12 @@ public class SanguineDraw()
                         play.Target,
                         AutoPlayType.Default
                     );
+                    sanguineCards = PileType
+                        .Hand.GetPile(Owner)
+                        .Cards.Where(c =>
+                            c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
+                        )
+                        .ToList();
                 }
             }
         }
@@ -65,5 +75,6 @@ public class SanguineDraw()
     protected override void OnUpgrade()
     {
         EnergyCost.UpgradeBy(-1);
+        DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }

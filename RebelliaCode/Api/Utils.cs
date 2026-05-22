@@ -304,4 +304,40 @@ public static class Utils
             return false;
         return bloodPower.TrySpendPoints(requiredPoints);
     }
+
+    public static async Task<bool> TryUpgradeToAllEnemies(
+        CardModel card,
+        PlayerChoiceContext context,
+        CardPlay play,
+        int requiredBlood,
+        decimal damage,
+        Func<Task>? onConsumeSuccess = null
+    )
+    {
+        var combatState = card.Owner.Creature.CombatState;
+        if (combatState == null)
+            return false;
+
+        if (await TryConsumeBloodArtPoints(card.Owner.Creature, requiredBlood))
+        {
+            var baseCmd = DamageCmd.Attack(damage).FromCard(card);
+            foreach (var enemy in combatState.HittableEnemies)
+            {
+                await baseCmd.Targeting(enemy).Execute(context);
+            }
+            if (onConsumeSuccess != null)
+                await onConsumeSuccess();
+            return true;
+        }
+        return false;
+    }
+
+    private static bool _suppressBloodConsumption = false;
+
+    public static void SuppressBloodConsumption(bool suppress)
+    {
+        _suppressBloodConsumption = suppress;
+    }
+
+    public static bool IsBloodConsumptionSuppressed => _suppressBloodConsumption;
 }

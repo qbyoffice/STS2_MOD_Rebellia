@@ -73,17 +73,20 @@ public class CrimsonStrikeDamagePower : RebelliaPowers
             return 0m;
         if (!props.IsPoweredAttack())
             return 0m;
-        if (data.CommandToModify == null)
-            return 0m;
-        if (cardSource != null && cardSource != data.CommandToModify.ModelSource)
-            return 0m;
-        if (cardSource != null && cardSource == data.SourceCard)
-            return 0m;
-        if (
-            cardSource != null
-            && cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt)
-        )
-            return 0m;
+
+        if (cardSource != null)
+        {
+            if (cardSource == data.SourceCard)
+                return 0m;
+            if (cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt))
+                return 0m;
+        }
+
+        if (data.CommandToModify != null)
+        {
+            if (cardSource == null || cardSource != data.CommandToModify.ModelSource)
+                return 0m;
+        }
 
         _used = true;
         return Amount;

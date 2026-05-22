@@ -39,7 +39,10 @@ public class CrimsonVeilPower : RebelliaPowers
 
         if (data.VeilPoints == 0)
         {
-            TaskHelper.RunSafely(BloodKeywordManager.ConsumeAllBloodCards(Owner.Player!));
+            if (!Utils.IsBloodConsumptionSuppressed)
+            {
+                TaskHelper.RunSafely(BloodKeywordManager.ConsumeAllBloodCards(Owner.Player!));
+            }
             TaskHelper.RunSafely(PowerCmd.Remove(this));
         }
     }

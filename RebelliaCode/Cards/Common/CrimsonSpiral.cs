@@ -33,11 +33,9 @@ public class CrimsonSpiral()
 
         if (hasVeil)
         {
-            var cmd = DamageCmd
-                .Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
-                .TargetingAllOpponents(combatState);
-            await cmd.Execute(choiceContext);
+            var baseCmd = DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this);
+            foreach (var enemy in combatState.HittableEnemies)
+                await baseCmd.Targeting(enemy).Execute(choiceContext);
         }
         else
         {
@@ -50,9 +48,9 @@ public class CrimsonSpiral()
             await cmd.Execute(choiceContext);
         }
 
-        var requiredBlood = (int)
+        int requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-            await CardPileCmd.Add(this, PileType.Draw, CardPilePosition.Top);
+            await CardPileCmd.Add(this, PileType.Hand);
     }
 }

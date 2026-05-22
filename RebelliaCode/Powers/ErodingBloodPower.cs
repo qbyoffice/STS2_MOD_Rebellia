@@ -20,7 +20,7 @@ namespace Rebellia.RebelliaCode.Powers
             ICombatState combatState
         )
         {
-            if (side != Owner.Side)
+            if (!participants.Contains(Owner))
                 return;
             if (Amount <= 0)
                 return;
