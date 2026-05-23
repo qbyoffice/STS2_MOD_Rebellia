@@ -26,22 +26,22 @@ namespace Rebellia.RebelliaCode.Powers
                 return;
 
             int currentHp = Owner.CurrentHp;
-            int damage = (int)(currentHp * Amount / 100m);
+            int damage = (int)Math.Ceiling(currentHp * Amount / 100.0);
+            if (damage < 1)
+                damage = 1;
+            if (damage >= currentHp)
+                damage = currentHp - 1;
+
             if (damage > 0)
             {
-                if (damage >= currentHp)
-                    damage = currentHp - 1;
-                if (damage > 0)
-                {
-                    await CreatureCmd.Damage(
-                        new BlockingPlayerChoiceContext(),
-                        Owner,
-                        damage,
-                        ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-                        null,
-                        null
-                    );
-                }
+                await CreatureCmd.Damage(
+                    new BlockingPlayerChoiceContext(),
+                    Owner,
+                    damage,
+                    ValueProp.Unblockable | ValueProp.Unpowered,
+                    null,
+                    null
+                );
             }
 
             SetAmount(Amount - 1);

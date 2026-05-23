@@ -12,7 +12,7 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-public class SpectralBloodscourge()
+public class SpectralBloodScourge()
     : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

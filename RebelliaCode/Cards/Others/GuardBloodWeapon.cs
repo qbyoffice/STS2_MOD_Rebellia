@@ -1,10 +1,16 @@
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Powers;
+using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
 
@@ -13,12 +19,57 @@ public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.Tok
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Defend, CardTagExtensions.RebelliaBloodWeapon];
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(5, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        [new BlockVar(5, ValueProp.Move), new PowerVar<RebelliaTmepHpPower>(10)];
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CommonActions.CardBlock(this, play);
+
+        var combatState = Owner.Creature.CombatState;
+        if (combatState == null)
+            return;
+
+        int percent = (int)
+            DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
+        if (percent <= 0)
+            return;
+
+        int totalTempHpGain = 0;
+        foreach (var enemy in combatState.HittableEnemies)
+        {
+            var eroding = enemy.GetPower<ErodingBloodPower>();
+            if (eroding == null || eroding.Amount <= 0)
+                continue;
+
+            int currentHp = enemy.CurrentHp;
+            int damagePerTurn = (int)Math.Ceiling(currentHp * eroding.Amount / 100.0);
+            if (damagePerTurn <= 0)
+                continue;
+
+            totalTempHpGain += (int)Math.Ceiling(damagePerTurn * percent / 100.0);
+        }
+
+        if (totalTempHpGain <= 0)
+            return;
+
+        if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
+        {
+            await PowerCmd.Apply<RebelliaTmepHpPower>(
+                choiceContext,
+                Owner.Creature,
+                totalTempHpGain,
+                Owner.Creature,
+                this
+            );
+        }
+        else
+        {
+            var existing = Owner.Creature.GetPower<RebelliaTmepHpPower>();
+            existing?.AddTempHp(totalTempHpGain);
+        }
     }
 
     protected override void OnUpgrade()

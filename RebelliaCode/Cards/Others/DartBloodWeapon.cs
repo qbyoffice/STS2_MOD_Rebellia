@@ -30,21 +30,16 @@ public class DartBloodWeapon()
 
         var erosionPower = play.Target.GetPower<ErodingBloodPower>();
         if (erosionPower == null)
-        {
-            erosionPower = await PowerCmd.Apply<ErodingBloodPower>(
-                choiceContext,
-                play.Target,
-                1,
-                Owner.Creature,
-                this
-            );
-        }
+            return;
 
-        var combatState = Owner.Creature.CombatState;
-        if (combatState != null && erosionPower != null && erosionPower.Amount > 0)
+        if (erosionPower != null && erosionPower.Amount > 0)
         {
-            var participants = new List<Creature>();
-            await erosionPower.AfterSideTurnStart(play.Target.Side, participants, combatState);
+            var combatState = Owner.Creature.CombatState;
+            if (combatState != null)
+            {
+                var participants = new List<Creature> { play.Target };
+                await erosionPower.AfterSideTurnStart(play.Target.Side, participants, combatState);
+            }
         }
     }
 
