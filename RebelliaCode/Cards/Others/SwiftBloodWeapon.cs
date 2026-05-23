@@ -8,6 +8,7 @@ using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
@@ -26,23 +27,43 @@ public class SwiftBloodWeapon()
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
+        var target = play.Target;
+        if (target == null)
+            return;
+
+        var eroding = target.GetPower<ErodingBloodPower>();
+        if (eroding == null || eroding.Amount <= 0)
+            return;
+
+        int currentHp = target.CurrentHp;
+        int damagePerTurn = (int)Math.Ceiling(currentHp * eroding.Amount / 100.0);
+        if (damagePerTurn <= 0)
+            return;
+
         int percent = (int)
             DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
-        if (percent > 0)
-        {
-            int damage = (int)DynamicVars.Damage.BaseValue;
-            int tempHpGain = (int)(damage * percent / 100f);
-            if (tempHpGain > 0)
-            {
-                var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(
-                    Owner.Creature,
-                    0
-                );
-                tempPower?.AddTempHp(tempHpGain);
-            }
-        }
+        if (percent <= 0)
+            return;
 
-        await CommonActions.CardBlock(this, play);
+        int tempHpGain = (int)Math.Ceiling(damagePerTurn * percent / 100.0);
+        if (tempHpGain <= 0)
+            return;
+
+        if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
+        {
+            await PowerCmd.Apply<RebelliaTmepHpPower>(
+                choiceContext,
+                Owner.Creature,
+                tempHpGain,
+                Owner.Creature,
+                this
+            );
+        }
+        else
+        {
+            var existing = Owner.Creature.GetPower<RebelliaTmepHpPower>();
+            existing?.AddTempHp(tempHpGain);
+        }
     }
 
     protected override void OnUpgrade()

@@ -6,9 +6,12 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Cards.Others;
+using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Rare;
 
@@ -17,7 +20,7 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new HpLossVar(4m), new IntVar("MaxHandSize", 10)];
+        [new HpLossVar(4m), new IntVar("MaxHandSize", 10), new PowerVar<RebelliaTmepHpPower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -34,11 +37,7 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
         if (combatState == null || player == null)
             return;
 
-        var currentHandCount = PileType.Hand.GetPile(player).Cards.Count;
         var maxHandSize = (int)DynamicVars["MaxHandSize"].BaseValue;
-        var availableSlots = maxHandSize - currentHandCount;
-        if (availableSlots <= 0)
-            return;
 
         var combos = new List<Func<List<CardModel>>>
         {
@@ -61,17 +60,43 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
             .ToList();
 
         var cardsToAdd = new List<CardModel>();
-        var takeFromGenerated = Math.Min(generatedCards.Count, availableSlots);
-        cardsToAdd.AddRange(generatedCards.Take(takeFromGenerated));
-        var remainingSlots = availableSlots - takeFromGenerated;
-        if (remainingSlots > 0)
-            cardsToAdd.AddRange(existingCards.Take(remainingSlots));
+        cardsToAdd.AddRange(generatedCards);
+        cardsToAdd.AddRange(existingCards);
 
         foreach (var card in cardsToAdd)
-            if (existingCards.Contains(card))
-                await CardPileCmd.Add(card, PileType.Hand);
+        {
+            int currentHand = PileType.Hand.GetPile(player).Cards.Count;
+            if (currentHand < maxHandSize)
+            {
+                if (existingCards.Contains(card))
+                    await CardPileCmd.Add(card, PileType.Hand);
+                else
+                    await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+            }
             else
-                await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+            {
+                if (existingCards.Contains(card))
+                    await CardPileCmd.Add(card, PileType.Discard);
+                else
+                    await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, Owner);
+            }
+        }
+
+        var tempHpGain = (int)
+            DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
+        if (tempHpGain > 0)
+        {
+            if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
+            {
+                await PowerCmd.Apply<RebelliaTmepHpPower>(
+                    choiceContext,
+                    Owner.Creature,
+                    tempHpGain,
+                    Owner.Creature,
+                    this
+                );
+            }
+        }
     }
 
     private static List<CardModel> CreateMultiple<T>(

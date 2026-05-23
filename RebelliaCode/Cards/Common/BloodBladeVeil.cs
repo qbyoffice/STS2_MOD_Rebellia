@@ -6,13 +6,14 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-public class BloodBladeVeill() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
+public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.CrimsonVeil, HoverTipsValue.KeywordSanguine];
@@ -22,15 +23,17 @@ public class BloodBladeVeill() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        var hand = PileType.Discard.GetPile(Owner).Cards;
-        var sanguineCards = hand.Where(c =>
-                c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
-            )
+        var exhaustPile = PileType.Exhaust.GetPile(Owner);
+        var sanguineCards = exhaustPile
+            .Cards.Where(c => c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
             .ToList();
+
         if (sanguineCards.Count == 0)
             return;
 
-        var selectCount = DynamicVars.Cards.IntValue;
+        int selectCount = (int)DynamicVars.Cards.BaseValue;
+        selectCount = Math.Min(selectCount, sanguineCards.Count);
+
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1, selectCount);
         var selected = await CardSelectCmd.FromSimpleGrid(
             choiceContext,
@@ -39,21 +42,22 @@ public class BloodBladeVeill() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
             prefs
         );
         var selectedList = selected.ToList();
+
         if (selectedList.Count == 0)
             return;
 
         foreach (var card in selectedList)
             card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
-        var bloodGain = selectedList.Count;
+        int bloodGain = selectedList.Count;
         if (bloodGain > 0)
             await BloodSwordArtManager.AddPoints(Owner.Creature, bloodGain);
 
-        var veilPower = Owner.Creature.GetPower<CrimsonVeilPower>();
-        if (veilPower == null || veilPower.GetVeilPoints() == 0)
+        var veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
+        if (veilGain > 0)
         {
-            var created = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
-            created?.AddVeilPoints(1);
+            var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
+            veilPower?.AddVeilPoints(veilGain);
         }
     }
 

@@ -18,7 +18,7 @@ public class CrimsonStrikeDamagePower : RebelliaPowers
     private bool _used;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ExtraHoverTips];
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
     public override bool ShouldReceiveCombatHooks => true;
 
     protected override object InitInternalData()
@@ -65,40 +65,34 @@ public class CrimsonStrikeDamagePower : RebelliaPowers
         CardModel? cardSource
     )
     {
-        var data = GetData();
-
-        if (_used)
-            return 0m;
         if (dealer != Owner)
             return 0m;
         if (!props.IsPoweredAttack())
             return 0m;
+        if (_used)
+            return 0m;
 
         if (cardSource != null)
         {
-            if (cardSource == data.SourceCard)
+            if (cardSource == GetData().SourceCard)
                 return 0m;
             if (cardSource.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt))
                 return 0m;
         }
 
-        if (data.CommandToModify != null)
-        {
-            if (cardSource == null || cardSource != data.CommandToModify.ModelSource)
-                return 0m;
-        }
-
-        _used = true;
         return Amount;
     }
 
     public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
-        if (!_used)
+        if (_used)
             return;
-        if (command != GetData().CommandToModify)
+        if (command.Attacker != Owner)
+            return;
+        if (!command.DamageProps.IsPoweredAttack())
             return;
 
+        _used = true;
         var strikePower = Owner.GetPower<CrimsonStrikePower>();
         if (strikePower != null)
             await PowerCmd.Remove(strikePower);

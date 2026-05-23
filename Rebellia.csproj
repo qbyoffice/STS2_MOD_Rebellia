@@ -93,7 +93,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.1.4" PrivateAssets="All" />
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.1.5" PrivateAssets="All" />
     <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
     <AdditionalFiles Include="Rebellia/localization/**/*.json" />
     <PackageReference Include="Book.StS2.RefLib" Version="0.106.0-beta" />
