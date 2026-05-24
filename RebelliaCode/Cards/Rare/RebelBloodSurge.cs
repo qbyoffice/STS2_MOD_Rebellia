@@ -29,11 +29,11 @@ public class RebelBloodSurge() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        var drawCount = DynamicVars.Cards.IntValue;
+        int drawCount = DynamicVars.Cards.IntValue;
         if (drawCount > 0)
             await CardPileCmd.Draw(choiceContext, drawCount, Owner);
 
-        var veilAmount = (int)
+        int veilAmount = (int)
             DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
         if (veilAmount > 0)
         {
@@ -41,22 +41,19 @@ public class RebelBloodSurge() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
             veilPower?.AddVeilPoints(veilAmount);
         }
 
-        var bloodAmount = (int)
+        int bloodAmount = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (bloodAmount > 0)
             await BloodSwordArtManager.AddPoints(Owner.Creature, bloodAmount);
 
-        var armorAmount = (int)DynamicVarsHelper.GetPowerVar<ArmorPower>(DynamicVars).BaseValue;
-        if (armorAmount > 0)
-        {
-            await PowerCmd.Apply<ArmorPower>(
-                choiceContext,
-                Owner.Creature,
-                armorAmount,
-                Owner.Creature,
-                this
-            );
-        }
+        int armorAmount = (int)DynamicVarsHelper.GetPowerVar<ArmorPower>(DynamicVars).BaseValue;
+        await Utils.GivePower<ArmorPower>(
+            choiceContext,
+            Owner.Creature,
+            DynamicVars,
+            Owner.Creature,
+            this
+        );
     }
 
     protected override void OnUpgrade()

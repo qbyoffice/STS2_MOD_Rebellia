@@ -82,21 +82,7 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
             }
         }
 
-        var tempHpGain = (int)
-            DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
-        if (tempHpGain > 0)
-        {
-            if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
-            {
-                await PowerCmd.Apply<RebelliaTmepHpPower>(
-                    choiceContext,
-                    Owner.Creature,
-                    tempHpGain,
-                    Owner.Creature,
-                    this
-                );
-            }
-        }
+        await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature, 1);
     }
 
     private static List<CardModel> CreateMultiple<T>(

@@ -38,16 +38,14 @@ public class BloodBreakArt()
             .Targeting(play.Target)
             .Execute(choiceContext);
 
-        var required = (int)
+        int required = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, required))
         {
-            var vulnerableAmount = (int)
-                DynamicVarsHelper.GetPowerVar<VulnerablePower>(DynamicVars).BaseValue;
-            await PowerCmd.Apply<VulnerablePower>(
+            await Utils.GivePower<VulnerablePower>(
                 choiceContext,
                 play.Target,
-                vulnerableAmount,
+                DynamicVars,
                 Owner.Creature,
                 this
             );

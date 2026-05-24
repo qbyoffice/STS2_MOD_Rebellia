@@ -1,6 +1,7 @@
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -49,21 +50,8 @@ public class SwiftBloodWeapon()
         if (tempHpGain <= 0)
             return;
 
-        if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
-        {
-            await PowerCmd.Apply<RebelliaTmepHpPower>(
-                choiceContext,
-                Owner.Creature,
-                tempHpGain,
-                Owner.Creature,
-                this
-            );
-        }
-        else
-        {
-            var existing = Owner.Creature.GetPower<RebelliaTmepHpPower>();
-            existing?.AddTempHp(tempHpGain);
-        }
+        var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
+        tempPower?.AddTempHp(tempHpGain);
     }
 
     protected override void OnUpgrade()

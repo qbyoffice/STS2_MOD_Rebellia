@@ -63,7 +63,11 @@
     "REBELLIA-SANGUINE_DRAW.description": "造成{Damage:diff()}点伤害。\n消耗{BloodSwordArtPower:diff()}层[gold]鲜血剑艺[/gold]\n对该敌人打出手牌中{Cards:diff()}张随机[red]鲜血牌[/red]。",
     "REBELLIA-SANGUINE_DRAW.title": "鲜血拔刀",
     "REBELLIA-BLOOD_BACKLASH.description": "",
-    "REBELLIA-BLOOD_BACKLASH.title": "碣血反噬,",
+    "REBELLIA-BLOOD_BACKLASH.title": "碣血反噬",
     "REBELLIA-SANGUINE_BLADE_FAN.description": "",
-    "REBELLIA-SANGUINE_BLADE_FAN.title": "鲜血刀扇"
+    "REBELLIA-SANGUINE_BLADE_FAN.title": "鲜血刀扇",
+    "REBELLIA-BODY_MIND_FORGE.title": "强身健体",
+    "REBELLIA-BODY_MIND_FORGE.description": "",
+    "REBELLIA-MEAL_FIRST.title": "先吃饭吧",
+    "REBELLIA-MEAL_FIRST.description": ""
 }

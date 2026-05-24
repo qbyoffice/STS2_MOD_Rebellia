@@ -50,25 +50,12 @@ public class SpectralBloodScourge()
             await Cmd.Wait(0.05f);
         }
 
-        var tempHpGain = (int)
+        int tempHpGain = (int)
             DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
         if (tempHpGain > 0)
         {
-            if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
-            {
-                await PowerCmd.Apply<RebelliaTmepHpPower>(
-                    choiceContext,
-                    Owner.Creature,
-                    tempHpGain,
-                    Owner.Creature,
-                    this
-                );
-            }
-            else
-            {
-                var existing = Owner.Creature.GetPower<RebelliaTmepHpPower>();
-                existing?.AddTempHp(tempHpGain);
-            }
+            var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
+            tempPower?.AddTempHp(tempHpGain);
         }
     }
 
