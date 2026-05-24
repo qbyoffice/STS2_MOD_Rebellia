@@ -60,7 +60,7 @@ public class CrimsonTide()
             && totalEnergyGain > 0
         )
         {
-            await PlayerCmd.GainEnergy(totalEnergyGain, Owner.Creature.Player);
+            await PlayerCmd.GainEnergy(totalEnergyGain, Owner.Creature.Player!);
         }
     }
 }

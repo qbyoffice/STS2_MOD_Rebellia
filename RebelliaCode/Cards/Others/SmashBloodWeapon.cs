@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
@@ -24,10 +25,11 @@ public class SmashBloodWeapon()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
-        await PowerCmd.Apply<ErodingBloodPower>(
+
+        await Utils.GivePower<ErodingBloodPower>(
             choiceContext,
             play.Target!,
-            (int)DynamicVarsHelper.GetPowerVar<ErodingBloodPower>(DynamicVars).BaseValue,
+            DynamicVars,
             Owner.Creature,
             this
         );

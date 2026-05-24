@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
@@ -28,9 +27,11 @@ public class CrimsonVeilPower : RebelliaPowers
         return new Data();
     }
 
+    private Data GetData() => GetInternalData<Data>();
+
     public void AddVeilPoints(int amount)
     {
-        var data = GetInternalData<Data>();
+        var data = GetData();
         data.VeilPoints = Math.Max(0, data.VeilPoints + amount);
         InvokeDisplayAmountChanged();
 
@@ -47,66 +48,15 @@ public class CrimsonVeilPower : RebelliaPowers
         }
     }
 
-    private async Task TryPlayOrExhaustStatusCard()
-    {
-        if (Owner == null)
-            return;
-        var combatState = Owner.CombatState;
-        if (combatState == null)
-            return;
-        var player = Owner.Player;
-        if (player == null)
-            return;
-
-        var drawStatus = PileType
-            .Draw.GetPile(player)
-            .Cards.Where(c =>
-                c != null
-                && c.Type == CardType.Status
-                && c.Pile != null
-                && c.Pile.Type != PileType.Exhaust
-            )
-            .ToList();
-        var handStatus = PileType
-            .Hand.GetPile(player)
-            .Cards.Where(c =>
-                c != null
-                && c.Type == CardType.Status
-                && c.Pile != null
-                && c.Pile.Type != PileType.Exhaust
-            )
-            .ToList();
-        var discardStatus = PileType
-            .Discard.GetPile(player)
-            .Cards.Where(c =>
-                c != null
-                && c.Type == CardType.Status
-                && c.Pile != null
-                && c.Pile.Type != PileType.Exhaust
-            )
-            .ToList();
-
-        var allStatusCards = drawStatus.Concat(handStatus).Concat(discardStatus).ToList();
-        if (allStatusCards.Count == 0)
-            return;
-
-        var targetCard = allStatusCards.First();
-
-        var canPlay = Hook.ShouldPlay(combatState, targetCard, out _, AutoPlayType.Default);
-        if (canPlay)
-            await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), targetCard, null);
-        else
-            await CardCmd.Discard(new BlockingPlayerChoiceContext(), targetCard);
-    }
-
     public int GetVeilPoints()
     {
-        return GetInternalData<Data>().VeilPoints;
+        return GetData().VeilPoints;
     }
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        await TryPlayOrExhaustStatusCard();
+        if (Owner?.Player != null)
+            await CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner.Player);
     }
 
     public override async Task AfterSideTurnEnd(

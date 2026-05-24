@@ -55,21 +55,8 @@ public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.Tok
         if (totalTempHpGain <= 0)
             return;
 
-        if (Owner.Creature.GetPower<RebelliaTmepHpPower>() == null)
-        {
-            await PowerCmd.Apply<RebelliaTmepHpPower>(
-                choiceContext,
-                Owner.Creature,
-                totalTempHpGain,
-                Owner.Creature,
-                this
-            );
-        }
-        else
-        {
-            var existing = Owner.Creature.GetPower<RebelliaTmepHpPower>();
-            existing?.AddTempHp(totalTempHpGain);
-        }
+        var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
+        tempPower?.AddTempHp(totalTempHpGain);
     }
 
     protected override void OnUpgrade()

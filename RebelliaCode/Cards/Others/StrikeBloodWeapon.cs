@@ -40,10 +40,10 @@ public class StrikeBloodWeapon()
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            await PowerCmd.Apply<ErodingBloodPower>(
+            await Utils.GivePower<ErodingBloodPower>(
                 choiceContext,
                 play.Target!,
-                (int)DynamicVarsHelper.GetPowerVar<ErodingBloodPower>(DynamicVars).BaseValue,
+                DynamicVars,
                 Owner.Creature,
                 this
             );

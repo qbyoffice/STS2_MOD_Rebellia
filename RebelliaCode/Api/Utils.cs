@@ -19,12 +19,13 @@ namespace Rebellia.RebelliaCode.Api;
 
 public static class Utils
 {
+    // GivePower 重载1：单个目标
     public static async Task GivePower<T>(
+        PlayerChoiceContext context,
         Creature target,
         DynamicVarSet varSet,
         Creature? applier,
-        CardModel? cardModel,
-        PlayerChoiceContext? context = null
+        CardModel? cardModel
     )
         where T : PowerModel
     {
@@ -37,12 +38,13 @@ public static class Utils
         );
     }
 
+    // GivePower 重载2：多个目标
     public static async Task GivePower<T>(
+        PlayerChoiceContext context,
         IReadOnlyList<Creature> targets,
         DynamicVarSet varSet,
         Creature? applier,
-        CardModel? cardModel,
-        PlayerChoiceContext? context = null
+        CardModel? cardModel
     )
         where T : PowerModel
     {
@@ -55,105 +57,92 @@ public static class Utils
         );
     }
 
+    // GivePower 重载3：从卡牌自动推导目标
     public static async Task GivePower<T>(
+        PlayerChoiceContext context,
         CardModel cardModel,
-        CardPlay play,
-        PlayerChoiceContext? context = null
+        CardPlay play
     )
         where T : PowerModel
     {
         switch (cardModel.TargetType)
         {
             case TargetType.Self:
-            {
                 await GivePower<T>(
+                    context,
                     cardModel.Owner.Creature,
                     cardModel.DynamicVars,
                     cardModel.Owner.Creature,
-                    cardModel,
-                    context
+                    cardModel
                 );
-                return;
-            }
+                break;
             case TargetType.AllEnemies:
-            {
                 Debug.Assert(cardModel.CombatState != null);
                 await GivePower<T>(
+                    context,
                     cardModel.CombatState.HittableEnemies,
                     cardModel.DynamicVars,
                     cardModel.Owner.Creature,
-                    cardModel,
-                    context
+                    cardModel
                 );
-                return;
-            }
+                break;
             case TargetType.RandomEnemy:
-            {
                 Debug.Assert(cardModel.CombatState != null);
                 var targets = cardModel.CombatState.HittableEnemies;
                 var target = cardModel.Owner.RunState.Rng.CombatTargets.NextItem(targets);
-                if (target == null)
-                    return;
-                await GivePower<T>(
-                    target,
-                    cardModel.DynamicVars,
-                    cardModel.Owner.Creature,
-                    cardModel,
-                    context
-                );
-                return;
-            }
-            case TargetType.None:
-            case TargetType.AnyEnemy:
-            case TargetType.AnyPlayer:
-            case TargetType.AnyAlly:
-            case TargetType.TargetedNoCreature:
-            case TargetType.Osty:
-            case TargetType.AllAllies:
+                if (target != null)
+                    await GivePower<T>(
+                        context,
+                        target,
+                        cardModel.DynamicVars,
+                        cardModel.Owner.Creature,
+                        cardModel
+                    );
+                break;
             default:
-            {
                 Debug.Assert(play.Target != null);
                 await GivePower<T>(
+                    context,
                     play.Target,
                     cardModel.DynamicVars,
                     cardModel.Owner.Creature,
-                    cardModel,
-                    context
+                    cardModel
                 );
-                return;
-            }
+                break;
         }
     }
 
+    // GivePower 重载4：遗物 - 单个目标
     public static async Task GivePower<T>(
+        PlayerChoiceContext context,
         RelicModel relicModel,
-        Creature target,
-        PlayerChoiceContext? context = null
+        Creature target
     )
         where T : PowerModel
     {
         await GivePower<T>(
+            context,
             target,
             relicModel.DynamicVars,
             relicModel.Owner.Creature,
-            null,
-            context
+            null
         );
     }
 
+    // GivePower 重载5：遗物 - 多个目标
     public static async Task GivePower<T>(
+        PlayerChoiceContext context,
         RelicModel relicModel,
-        IReadOnlyList<Creature> targets,
-        PlayerChoiceContext? context = null
+        IReadOnlyList<Creature> targets
     )
         where T : PowerModel
     {
         await GivePower<T>(
+            context,
             targets,
             relicModel.DynamicVars,
             relicModel.Owner.Creature,
-            null,
-            context
+            null
         );
     }
 
@@ -296,9 +285,15 @@ public static class Utils
 
     public static async Task<bool> TryConsumeBloodArtPoints(Creature creature, int requiredPoints)
     {
-        if (IsBloodCostExempted(creature))
+        var exemptPower = creature.GetPower<CrimsonStrikePower>();
+        if (exemptPower != null)
+        {
+            var damagePower = creature.GetPower<CrimsonStrikeDamagePower>();
+            if (damagePower != null)
+                await PowerCmd.Remove(damagePower);
+            await PowerCmd.Remove(exemptPower);
             return true;
-
+        }
         var bloodPower = await GetOrCreatePower<BloodSwordArtPower>(creature);
         if (bloodPower == null || bloodPower.GetPoints() < requiredPoints)
             return false;

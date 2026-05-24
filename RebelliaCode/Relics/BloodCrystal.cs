@@ -23,6 +23,7 @@ public class BloodCrystal : RebelliaRelics
     {
         if (side != Owner.Creature.Side || state.RoundNumber != 1)
             return;
+        await CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner);
         await BloodKeywordManager.ConsumeAllBloodCards(Owner);
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
         if (bloodPower != null)

@@ -27,16 +27,9 @@ public class CrimsonStrikePower : RebelliaPowers
         Data.SourceCard = source;
     }
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var playedCard = cardPlay.Card;
-        if (playedCard != Data.SourceCard && playedCard.Type == CardType.Attack)
-        {
-            var damagePower = Owner.GetPower<CrimsonStrikeDamagePower>();
-            if (damagePower != null)
-                await PowerCmd.Remove(damagePower);
-            await PowerCmd.Remove(this);
-        }
+        return Task.CompletedTask;
     }
 
     private class PowerData

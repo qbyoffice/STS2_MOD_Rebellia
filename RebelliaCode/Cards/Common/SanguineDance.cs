@@ -32,14 +32,14 @@ public class SanguineDance()
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        if (Owner.Creature.GetPower<CrimsonVeilPower>() != null)
+        if (Owner.Creature.HasPower<CrimsonVeilPower>())
             return;
 
-        var requiredBlood = (int)
+        int requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            var veilGain = (int)
+            int veilGain = (int)
                 DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
             if (veilGain > 0)
             {
