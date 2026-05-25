@@ -1,17 +1,12 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
-using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
@@ -32,10 +27,9 @@ public class BloodCrimsonSwift()
     {
         await CommonActions.CardBlock(this, play);
 
-        int dexterityAmount = (int)
+        var dexterityAmount = (int)
             DynamicVarsHelper.GetPowerVar<DexterityPower>(DynamicVars).BaseValue;
         if (dexterityAmount > 0)
-        {
             await Utils.GivePower<DexterityPower>(
                 choiceContext,
                 Owner.Creature,
@@ -43,9 +37,8 @@ public class BloodCrimsonSwift()
                 Owner.Creature,
                 this
             );
-        }
         if (!Owner.Creature.HasPower<BloodCrimsonSwiftPower>())
-            await Utils.GetOrCreatePower<BloodCrimsonSwiftPower>(Owner.Creature, 1);
+            await Utils.GetOrCreatePower<BloodCrimsonSwiftPower>(Owner.Creature);
     }
 
     protected override void OnUpgrade()

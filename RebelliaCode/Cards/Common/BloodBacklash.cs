@@ -1,4 +1,3 @@
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -8,7 +7,6 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
-using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
@@ -29,14 +27,14 @@ public class BloodBacklash()
             new CalculatedVar(TotalDamageKey).WithMultiplier(
                 (card, target) =>
                 {
-                    decimal baseDamage = card.DynamicVars.Damage.BaseValue;
+                    var baseDamage = card.DynamicVars.Damage.BaseValue;
                     if (target == null)
                         return baseDamage;
 
-                    int baseExtra = (int)card.DynamicVars.CalculationBase.BaseValue;
-                    int extraExtra = (int)card.DynamicVars.CalculationExtra.BaseValue;
-                    int extraPerPower = baseExtra + extraExtra;
-                    int uniquePowerCount = target.Powers.Select(p => p.Id).Distinct().Count();
+                    var baseExtra = (int)card.DynamicVars.CalculationBase.BaseValue;
+                    var extraExtra = (int)card.DynamicVars.CalculationExtra.BaseValue;
+                    var extraPerPower = baseExtra + extraExtra;
+                    var uniquePowerCount = target.Powers.Select(p => p.Id).Distinct().Count();
                     return baseDamage + uniquePowerCount * extraPerPower;
                 }
             ),
@@ -48,7 +46,7 @@ public class BloodBacklash()
         if (target == null)
             return;
 
-        bool consumed = await Utils.TryConsumeBloodArtPoints(
+        var consumed = await Utils.TryConsumeBloodArtPoints(
             Owner.Creature,
             (int)DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue
         );

@@ -1,15 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.Extensions;
-using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
@@ -33,16 +28,14 @@ public class Hemorrhage() : RebelliaCard(1, CardType.Skill, CardRarity.Common, T
         if (cardsInDraw.Count == 0)
             return;
 
-        int count = (int)DynamicVars.Cards.BaseValue;
+        var count = (int)DynamicVars.Cards.BaseValue;
         var rng = Owner.RunState.Rng.CombatCardSelection;
         var shuffled = cardsInDraw.OrderBy(_ => rng.NextInt()).ToList();
         var toModify = shuffled.Take(count).ToList();
 
         foreach (var card in toModify)
-        {
             if (!card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
                 card.AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
-        }
     }
 
     protected override void OnUpgrade()

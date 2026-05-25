@@ -7,7 +7,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 
@@ -18,6 +17,7 @@ public class EngageBloodWeapon()
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(9m, ValueProp.Move), new PowerVar<ErodingBloodPower>(1), new CardsVar(1)];
 
@@ -35,7 +35,7 @@ public class EngageBloodWeapon()
             this
         );
 
-        int drawCount = DynamicVars.Cards.IntValue;
+        var drawCount = DynamicVars.Cards.IntValue;
         await CardPileCmd.Draw(choiceContext, drawCount, Owner);
     }
 

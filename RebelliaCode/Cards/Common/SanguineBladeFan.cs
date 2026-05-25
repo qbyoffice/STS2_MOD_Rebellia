@@ -1,11 +1,9 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Cards.Others;
 
@@ -39,19 +37,19 @@ public class SanguineBladeFan()
             .TargetingAllOpponents(combatState);
         await damageCmd.Execute(choiceContext);
 
-        int enemyCount = combatState.HittableEnemies.Count;
-        int cardsPerEnemy = DynamicVars.Cards.IntValue;
-        int totalCards = enemyCount * cardsPerEnemy;
+        var enemyCount = combatState.HittableEnemies.Count;
+        var cardsPerEnemy = DynamicVars.Cards.IntValue;
+        var totalCards = enemyCount * cardsPerEnemy;
         if (totalCards <= 0)
             return;
 
         var player = Owner;
-        int maxHandSize = 10;
+        var maxHandSize = 10;
 
-        for (int i = 0; i < totalCards; i++)
+        for (var i = 0; i < totalCards; i++)
         {
             var dart = combatState.CreateCard<DartBloodWeapon>(player);
-            int currentHandCount = PileType.Hand.GetPile(player).Cards.Count;
+            var currentHandCount = PileType.Hand.GetPile(player).Cards.Count;
             if (currentHandCount < maxHandSize)
                 await CardPileCmd.AddGeneratedCardToCombat(dart, PileType.Hand, Owner);
             else

@@ -3,7 +3,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.tools;
 
-class BloodpierceTool : RebelliaPowers
+internal class BloodpierceTool : RebelliaPowers
 {
     public override PowerType Type => PowerType.None;
     public override PowerStackType StackType => PowerStackType.None;

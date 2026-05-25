@@ -53,7 +53,7 @@ public class CrimsonSpiral()
             await cmd.Execute(choiceContext);
         }
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             await CardPileCmd.Add(this, PileType.Hand);

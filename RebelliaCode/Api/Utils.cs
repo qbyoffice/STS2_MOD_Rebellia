@@ -19,6 +19,8 @@ namespace Rebellia.RebelliaCode.Api;
 
 public static class Utils
 {
+    public static bool IsBloodConsumptionSuppressed { get; private set; }
+
     // GivePower 重载1：单个目标
     public static async Task GivePower<T>(
         PlayerChoiceContext context,
@@ -294,6 +296,7 @@ public static class Utils
             await PowerCmd.Remove(exemptPower);
             return true;
         }
+
         var bloodPower = await GetOrCreatePower<BloodSwordArtPower>(creature);
         if (bloodPower == null || bloodPower.GetPoints() < requiredPoints)
             return false;
@@ -317,22 +320,17 @@ public static class Utils
         {
             var baseCmd = DamageCmd.Attack(damage).FromCard(card);
             foreach (var enemy in combatState.HittableEnemies)
-            {
                 await baseCmd.Targeting(enemy).Execute(context);
-            }
             if (onConsumeSuccess != null)
                 await onConsumeSuccess();
             return true;
         }
+
         return false;
     }
 
-    private static bool _suppressBloodConsumption = false;
-
     public static void SuppressBloodConsumption(bool suppress)
     {
-        _suppressBloodConsumption = suppress;
+        IsBloodConsumptionSuppressed = suppress;
     }
-
-    public static bool IsBloodConsumptionSuppressed => _suppressBloodConsumption;
 }

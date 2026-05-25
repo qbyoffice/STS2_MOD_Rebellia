@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers.cards;
 
@@ -17,16 +16,12 @@ public class MealFirst() : RebelliaCard(1, CardType.Skill, CardRarity.Common, Ta
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        int drawCount = (int)DynamicVars.Cards.BaseValue;
+        var drawCount = (int)DynamicVars.Cards.BaseValue;
         var drawnCards = await CardPileCmd.Draw(choiceContext, drawCount, Owner);
         if (drawnCards != null)
-        {
             foreach (var card in drawnCards)
-            {
                 if (!card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
                     card.AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
-            }
-        }
 
         await Utils.GivePower<RebelliaTmepHpPower>(choiceContext, this, play);
         await Utils.GivePower<MealFirstPower>(choiceContext, this, play);

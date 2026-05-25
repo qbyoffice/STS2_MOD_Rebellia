@@ -31,7 +31,7 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
         if (sanguineCards.Count == 0)
             return;
 
-        int selectCount = (int)DynamicVars.Cards.BaseValue;
+        var selectCount = (int)DynamicVars.Cards.BaseValue;
         selectCount = Math.Min(selectCount, sanguineCards.Count);
 
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1, selectCount);
@@ -49,7 +49,7 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
         foreach (var card in selectedList)
             card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
-        int bloodGain = selectedList.Count;
+        var bloodGain = selectedList.Count;
         if (bloodGain > 0)
             await BloodSwordArtManager.AddPoints(Owner.Creature, bloodGain);
 

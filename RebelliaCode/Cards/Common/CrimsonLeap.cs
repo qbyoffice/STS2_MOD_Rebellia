@@ -18,7 +18,7 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             return;
@@ -31,13 +31,13 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
         if (sanguineCards.Count == 0)
             return;
 
-        int removeCount = (int)DynamicVars.Cards.BaseValue;
-        removeCount = System.Math.Min(removeCount, sanguineCards.Count);
+        var removeCount = (int)DynamicVars.Cards.BaseValue;
+        removeCount = Math.Min(removeCount, sanguineCards.Count);
 
         var rng = Owner.RunState.Rng.CombatCardSelection;
         var toRemove = new List<CardModel>();
 
-        for (int i = 0; i < removeCount; i++)
+        for (var i = 0; i < removeCount; i++)
         {
             if (sanguineCards.Count == 0)
                 break;
@@ -47,11 +47,9 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
         }
 
         foreach (var card in toRemove)
-        {
             await CardCmd.Exhaust(choiceContext, card);
-        }
 
-        int energyGain = toRemove.Count * (int)DynamicVars.Energy.BaseValue;
+        var energyGain = toRemove.Count * (int)DynamicVars.Energy.BaseValue;
         if (energyGain > 0)
             await PlayerCmd.GainEnergy(energyGain, Owner);
     }

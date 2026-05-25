@@ -50,7 +50,7 @@ public class SpectralBloodScourge()
             await Cmd.Wait(0.05f);
         }
 
-        int tempHpGain = (int)
+        var tempHpGain = (int)
             DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
         if (tempHpGain > 0)
         {

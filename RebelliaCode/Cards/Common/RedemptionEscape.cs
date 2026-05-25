@@ -17,11 +17,11 @@ public class RedemptionEscape()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        int drawCount = (int)DynamicVars.Cards.BaseValue;
+        var drawCount = (int)DynamicVars.Cards.BaseValue;
         if (drawCount > 0)
             await CardPileCmd.Draw(choiceContext, drawCount, Owner);
 
-        int tempHpGain = (int)
+        var tempHpGain = (int)
             DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
         if (tempHpGain > 0)
         {

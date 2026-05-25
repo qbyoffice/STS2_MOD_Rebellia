@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -9,7 +7,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
-using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 
@@ -17,10 +14,10 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class BloodlustUrgePower : RebelliaPowers
 {
-    private int _costReduction;
-    private int _requiredAttacks;
-    private int _damageOnFail;
     private int _attacksPlayedThisTurn;
+    private int _costReduction;
+    private int _damageOnFail;
+    private int _requiredAttacks;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
@@ -44,23 +41,22 @@ public class BloodlustUrgePower : RebelliaPowers
         if (_costReduction <= 0)
             return false;
 
-        bool isBloodCard =
+        var isBloodCard =
             card.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon)
             || card.Tags.Contains(CardTagExtensions.RebelliaBloodWeaponArt);
         if (isBloodCard && originalCost > 0)
         {
-            modifiedCost = System.Math.Max(0, originalCost - _costReduction);
+            modifiedCost = Math.Max(0, originalCost - _costReduction);
             return true;
         }
+
         return false;
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Card.Type == CardType.Attack)
-        {
             _attacksPlayedThisTurn++;
-        }
         await Task.CompletedTask;
     }
 
@@ -76,7 +72,6 @@ public class BloodlustUrgePower : RebelliaPowers
             return;
 
         if (_attacksPlayedThisTurn < _requiredAttacks && _damageOnFail > 0)
-        {
             await CreatureCmd.Damage(
                 choiceContext,
                 Owner,
@@ -85,7 +80,6 @@ public class BloodlustUrgePower : RebelliaPowers
                 null,
                 null
             );
-        }
 
         await PowerCmd.Remove(this);
     }

@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -8,7 +6,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
@@ -32,9 +29,9 @@ public class CrimsonTide()
         if (combatState == null)
             return;
 
-        int aliveEnemies = combatState.HittableEnemies.Count(e => e.IsAlive);
-        int perAlive = (int)DynamicVars["CalculationBase"].BaseValue;
-        int veilGain = aliveEnemies * perAlive;
+        var aliveEnemies = combatState.HittableEnemies.Count(e => e.IsAlive);
+        var perAlive = (int)DynamicVars["CalculationBase"].BaseValue;
+        var veilGain = aliveEnemies * perAlive;
         if (veilGain > 0)
         {
             var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
@@ -48,19 +45,17 @@ public class CrimsonTide()
             .Execute(choiceContext);
 
         var bloodPower = Owner.Creature.GetPower<BloodSwordArtPower>();
-        int currentBloodPoints = bloodPower?.GetPoints() ?? 0;
+        var currentBloodPoints = bloodPower?.GetPoints() ?? 0;
         if (currentBloodPoints <= 0)
             return;
 
-        int energyPerPoint = (int)DynamicVars["Energy"].BaseValue;
-        int totalEnergyGain = currentBloodPoints * energyPerPoint;
+        var energyPerPoint = (int)DynamicVars["Energy"].BaseValue;
+        var totalEnergyGain = currentBloodPoints * energyPerPoint;
 
         if (
             await Utils.TryConsumeBloodArtPoints(Owner.Creature, currentBloodPoints)
             && totalEnergyGain > 0
         )
-        {
             await PlayerCmd.GainEnergy(totalEnergyGain, Owner.Creature.Player!);
-        }
     }
 }

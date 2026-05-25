@@ -38,10 +38,9 @@ public class BloodBreakArt()
             .Targeting(play.Target)
             .Execute(choiceContext);
 
-        int required = (int)
+        var required = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, required))
-        {
             await Utils.GivePower<VulnerablePower>(
                 choiceContext,
                 play.Target,
@@ -49,7 +48,6 @@ public class BloodBreakArt()
                 Owner.Creature,
                 this
             );
-        }
     }
 
     protected override void OnUpgrade()

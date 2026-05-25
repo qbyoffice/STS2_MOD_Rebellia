@@ -18,7 +18,7 @@ public class SanguineEssence() : RebelliaCard(0, CardType.Skill, CardRarity.Comm
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        int amount = (int)DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
+        var amount = (int)DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         await BloodSwordArtManager.AddPoints(Owner.Creature, amount, choiceContext);
     }
 

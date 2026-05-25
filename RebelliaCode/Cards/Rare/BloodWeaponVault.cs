@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Cards.Others;
 using Rebellia.RebelliaCode.Powers.cards;
@@ -65,7 +64,7 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
 
         foreach (var card in cardsToAdd)
         {
-            int currentHand = PileType.Hand.GetPile(player).Cards.Count;
+            var currentHand = PileType.Hand.GetPile(player).Cards.Count;
             if (currentHand < maxHandSize)
             {
                 if (existingCards.Contains(card))
@@ -82,7 +81,7 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
             }
         }
 
-        await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature, 1);
+        await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
     }
 
     private static List<CardModel> CreateMultiple<T>(

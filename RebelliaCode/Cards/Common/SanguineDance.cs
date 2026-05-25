@@ -35,11 +35,11 @@ public class SanguineDance()
         if (Owner.Creature.HasPower<CrimsonVeilPower>())
             return;
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int veilGain = (int)
+            var veilGain = (int)
                 DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
             if (veilGain > 0)
             {

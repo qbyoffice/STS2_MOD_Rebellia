@@ -1,7 +1,5 @@
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -20,6 +18,7 @@ public class SwiftBloodWeapon()
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.SanguineExtract];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(3m, ValueProp.Move), new PowerVar<RebelliaTmepHpPower>(10)];
 
@@ -37,17 +36,17 @@ public class SwiftBloodWeapon()
         if (eroding == null || eroding.Amount <= 0)
             return;
 
-        int currentHp = target.CurrentHp;
-        int damagePerTurn = (int)Math.Ceiling(currentHp * eroding.Amount / 100.0);
+        var currentHp = target.CurrentHp;
+        var damagePerTurn = (int)Math.Ceiling(currentHp * eroding.Amount / 100.0);
         if (damagePerTurn <= 0)
             return;
 
-        int percent = (int)
+        var percent = (int)
             DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
         if (percent <= 0)
             return;
 
-        int tempHpGain = (int)Math.Ceiling(damagePerTurn * percent / 100.0);
+        var tempHpGain = (int)Math.Ceiling(damagePerTurn * percent / 100.0);
         if (tempHpGain <= 0)
             return;
 

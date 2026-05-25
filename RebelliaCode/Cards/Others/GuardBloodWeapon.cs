@@ -1,7 +1,5 @@
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -19,7 +17,9 @@ public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.Tok
 {
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Defend, CardTagExtensions.RebelliaBloodWeapon];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.SanguineExtract];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(5, ValueProp.Move), new PowerVar<RebelliaTmepHpPower>(10)];
 
@@ -33,20 +33,20 @@ public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.Tok
         if (combatState == null)
             return;
 
-        int percent = (int)
+        var percent = (int)
             DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
         if (percent <= 0)
             return;
 
-        int totalTempHpGain = 0;
+        var totalTempHpGain = 0;
         foreach (var enemy in combatState.HittableEnemies)
         {
             var eroding = enemy.GetPower<ErodingBloodPower>();
             if (eroding == null || eroding.Amount <= 0)
                 continue;
 
-            int currentHp = enemy.CurrentHp;
-            int damagePerTurn = (int)Math.Ceiling(currentHp * eroding.Amount / 100.0);
+            var currentHp = enemy.CurrentHp;
+            var damagePerTurn = (int)Math.Ceiling(currentHp * eroding.Amount / 100.0);
             if (damagePerTurn <= 0)
                 continue;
 

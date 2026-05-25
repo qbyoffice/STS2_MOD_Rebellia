@@ -33,34 +33,30 @@ public class SanguineDraw()
         var veilPower = Owner.Creature.GetPower<CrimsonVeilPower>();
         if (veilPower != null)
         {
-            int current = veilPower.GetVeilPoints();
+            var current = veilPower.GetVeilPoints();
             if (current > 0)
                 veilPower.AddVeilPoints(-current);
         }
+
         Utils.SuppressBloodConsumption(false);
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int count = DynamicVars.Cards.IntValue;
+            var count = DynamicVars.Cards.IntValue;
             var hand = PileType.Hand.GetPile(Owner).Cards;
             var sanguineCards = hand.Where(c =>
                     c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
                 )
                 .ToList();
 
-            for (int i = 0; i < count && sanguineCards.Count > 0; i++)
+            for (var i = 0; i < count && sanguineCards.Count > 0; i++)
             {
                 var randomCard = Owner.RunState.Rng.CombatCardSelection.NextItem(sanguineCards);
                 if (randomCard != null)
                 {
-                    await CardCmd.AutoPlay(
-                        choiceContext,
-                        randomCard,
-                        play.Target,
-                        AutoPlayType.Default
-                    );
+                    await CardCmd.AutoPlay(choiceContext, randomCard, play.Target);
                     sanguineCards = PileType
                         .Hand.GetPile(Owner)
                         .Cards.Where(c =>

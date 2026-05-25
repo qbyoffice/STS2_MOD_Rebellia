@@ -1,15 +1,9 @@
-using System.Linq;
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
@@ -31,17 +25,17 @@ public class HomewardJourneyPower : RebelliaPowers
         if (Amount <= 0)
             return;
 
-        int triggers = Amount;
-        int energyPerTrigger = (int)DynamicVars.Energy.BaseValue;
-        int cardsPerTrigger = (int)DynamicVars.Cards.BaseValue;
+        var triggers = Amount;
+        var energyPerTrigger = (int)DynamicVars.Energy.BaseValue;
+        var cardsPerTrigger = (int)DynamicVars.Cards.BaseValue;
 
         await PowerCmd.Remove(this);
 
-        int totalEnergy = triggers * energyPerTrigger;
+        var totalEnergy = triggers * energyPerTrigger;
         if (totalEnergy > 0)
             await PlayerCmd.GainEnergy(totalEnergy, player);
 
-        int totalCardsToSelect = triggers * cardsPerTrigger;
+        var totalCardsToSelect = triggers * cardsPerTrigger;
         if (totalCardsToSelect <= 0)
             return;
 
@@ -50,12 +44,10 @@ public class HomewardJourneyPower : RebelliaPowers
         if (skillCards.Count == 0)
             return;
 
-        int selectable = System.Math.Min(totalCardsToSelect, skillCards.Count);
+        var selectable = Math.Min(totalCardsToSelect, skillCards.Count);
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, selectable, selectable);
         var selected = await CardSelectCmd.FromSimpleGrid(choiceContext, skillCards, player, prefs);
         foreach (var card in selected)
-        {
             await CardPileCmd.Add(card, PileType.Hand);
-        }
     }
 }

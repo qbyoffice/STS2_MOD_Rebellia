@@ -1,6 +1,5 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -27,7 +26,10 @@ public class CrimsonVeilPower : RebelliaPowers
         return new Data();
     }
 
-    private Data GetData() => GetInternalData<Data>();
+    private Data GetData()
+    {
+        return GetInternalData<Data>();
+    }
 
     public void AddVeilPoints(int amount)
     {
@@ -41,9 +43,7 @@ public class CrimsonVeilPower : RebelliaPowers
         if (data.VeilPoints == 0)
         {
             if (!Utils.IsBloodConsumptionSuppressed)
-            {
                 TaskHelper.RunSafely(BloodKeywordManager.ConsumeAllBloodCards(Owner.Player!));
-            }
             TaskHelper.RunSafely(PowerCmd.Remove(this));
         }
     }

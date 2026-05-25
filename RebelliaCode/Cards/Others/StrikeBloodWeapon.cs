@@ -1,5 +1,4 @@
 using BaseLib.Utils;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -17,6 +16,7 @@ public class StrikeBloodWeapon()
     : RebelliaCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
+
     protected override HashSet<CardTag> CanonicalTags =>
         [
             CardTag.Strike,
@@ -38,10 +38,9 @@ public class StrikeBloodWeapon()
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-        {
             await Utils.GivePower<ErodingBloodPower>(
                 choiceContext,
                 play.Target!,
@@ -49,7 +48,6 @@ public class StrikeBloodWeapon()
                 Owner.Creature,
                 this
             );
-        }
     }
 
     protected override void OnUpgrade()

@@ -31,11 +31,11 @@ public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        int requiredBlood = (int)
+        var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int tempGain = (int)
+            var tempGain = (int)
                 DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
             var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
             tempPower?.AddTempHp(tempGain);
