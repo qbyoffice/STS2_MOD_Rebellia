@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qbxerokaq4hf"
-path="res://.godot/imported/blood_blade_veill.png-6590c27c606a785c1d23014dde9f4081.ctex"
+uid="uid://cb71syxnlwje8"
+path="res://.godot/imported/homeward_journey.png-1918524f458981839212e5685e7e82a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rebellia/images/card_portraits/blood_blade_veill.png"
-dest_files=["res://.godot/imported/blood_blade_veill.png-6590c27c606a785c1d23014dde9f4081.ctex"]
+source_file="res://Rebellia/images/card_portraits/big/homeward_journey.png"
+dest_files=["res://.godot/imported/homeward_journey.png-1918524f458981839212e5685e7e82a7.ctex"]
 
 [params]
 

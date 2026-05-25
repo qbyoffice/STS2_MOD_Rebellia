@@ -34,7 +34,7 @@ public class MealFirst() : RebelliaCard(1, CardType.Skill, CardRarity.Common, Ta
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1m); // 抽牌数 1 → 2
-        EnergyCost.UpgradeBy(-1); // 费用 1 → 0
+        DynamicVars.Cards.UpgradeValueBy(1m);
+        EnergyCost.UpgradeBy(-1);
     }
 }

@@ -3,6 +3,7 @@ using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Cards.Others;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
+using Rebellia.RebelliaCode.Powers.tools;
 
 namespace Rebellia.RebelliaCode.Api;
 
@@ -42,4 +43,11 @@ public static class HoverTipsValue
     public static readonly IHoverTip KeywordSanguine = HoverTipFactory.FromKeyword(
         RCardKeywordExtensions.RebelliaSanguine
     );
+
+    public static readonly IHoverTip ErodingBlood = HoverTipFactory.FromPower<ErodingBloodPower>();
+
+    public static readonly IHoverTip BloodPierce = HoverTipFactory.FromPower<BloodpierceTool>();
+
+    public static readonly IHoverTip SanguineExtract =
+        HoverTipFactory.FromPower<SanguineExtractTool>();
 }
