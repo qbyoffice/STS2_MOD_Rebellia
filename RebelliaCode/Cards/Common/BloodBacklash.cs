@@ -22,8 +22,8 @@ public class BloodBacklash()
         [
             new DamageVar(7m, ValueProp.Move),
             new PowerVar<BloodSwordArtPower>(2),
-            new CalculationBaseVar(1),
-            new CalculationExtraVar(0),
+            new CalculationBaseVar(0),
+            new CalculationExtraVar(1),
             new CalculatedVar(TotalDamageKey).WithMultiplier(
                 (card, target) =>
                 {
