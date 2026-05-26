@@ -53,7 +53,7 @@ public class SanguineBladeFan()
             if (currentHandCount < maxHandSize)
                 await CardPileCmd.AddGeneratedCardToCombat(dart, PileType.Hand, Owner);
             else
-                await CardPileCmd.AddGeneratedCardToCombat(dart, PileType.Discard, Owner);
+                await CardPileCmd.AddGeneratedCardToCombat(dart, PileType.Draw, Owner);
         }
     }
 

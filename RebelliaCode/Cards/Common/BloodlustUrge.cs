@@ -15,18 +15,22 @@ public class BloodlustUrge() : RebelliaCard(1, CardType.Skill, CardRarity.Common
             new HpLossVar(15m),
             new CardsVar(6),
             new EnergyVar(1),
-            new PowerVar<BloodlustUrgePower>(1),
+            new PowerVar<BloodlustUrgePower>(6),
+            new PowerVar<BloodlustUrgeUpgradedPower>(4),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        var damageOnFail = (int)DynamicVars.HpLoss.BaseValue;
-        var requiredAttacks = (int)DynamicVars.Cards.BaseValue;
-        var costReductionBase = (int)DynamicVars.Energy.BaseValue;
-        var layers = (int)DynamicVarsHelper.GetPowerVar<BloodlustUrgePower>(DynamicVars).BaseValue;
-
-        if (!Owner.Creature.HasPower<CrimsonVeilPower>())
-            await Utils.GetOrCreatePower<BloodlustUrgePower>(Owner.Creature, layers);
+        if (IsUpgraded)
+        {
+            if (!Owner.Creature.HasPower<BloodlustUrgeUpgradedPower>())
+                await Utils.GivePower<BloodlustUrgeUpgradedPower>(choiceContext, this, play);
+        }
+        else
+        {
+            if (!Owner.Creature.HasPower<BloodlustUrgePower>())
+                await Utils.GivePower<BloodlustUrgePower>(choiceContext, this, play);
+        }
     }
 
     protected override void OnUpgrade()

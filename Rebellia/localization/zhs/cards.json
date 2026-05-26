@@ -83,6 +83,7 @@
     "REBELLIA-HEMORRHAGE.title": "呕血",
     "REBELLIA-HEMORRHAGE.description": "失去{HpLoss:diff()}生命。\n为抽牌堆中的随机{Cards:diff()}张牌附上鲜血",
     "REBELLIA-HOMEWARD_JOURNEY.title": "归乡旅途",
+    "REBELLIA-HOMEWARD_JOURNEY.selectionScreenPrompt": "选择一张攻击牌放入手牌",
     "REBELLIA-HOMEWARD_JOURNEY.description": "获得◉从抽牌堆中选择一张攻击牌放入你的手牌，在下回合获得◉从抽牌堆中选择一张技能牌放入你的手牌。",
     "REBELLIA-REDEMPTION_ESCAPE.title": "救赎脱身",
     "REBELLIA-REDEMPTION_ESCAPE.description": "获得{RebelliaTmepHpPower:diff()}点临时生命。\n抽{Cards:diff()}张牌。",

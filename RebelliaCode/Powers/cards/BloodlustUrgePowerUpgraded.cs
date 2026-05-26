@@ -12,10 +12,10 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
-public class BloodlustUrgePower : RebelliaPowers
+public class BloodlustUrgeUpgradedPower : BloodlustUrgePower
 {
     private const int COST_REDUCTION = 1;
-    private const int DAMAGE_ON_FAIL = 15;
+    private const int DAMAGE_ON_FAIL = 10;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;

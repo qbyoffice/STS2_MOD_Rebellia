@@ -25,29 +25,18 @@ public class HomewardJourneyPower : RebelliaPowers
         if (Amount <= 0)
             return;
 
-        var triggers = Amount;
-        var energyPerTrigger = (int)DynamicVars.Energy.BaseValue;
-        var cardsPerTrigger = (int)DynamicVars.Cards.BaseValue;
-
-        await PowerCmd.Remove(this);
-
-        var totalEnergy = triggers * energyPerTrigger;
-        if (totalEnergy > 0)
-            await PlayerCmd.GainEnergy(totalEnergy, player);
-
-        var totalCardsToSelect = triggers * cardsPerTrigger;
-        if (totalCardsToSelect <= 0)
-            return;
+        await PlayerCmd.GainEnergy(Amount, player);
 
         var drawPile = PileType.Draw.GetPile(player);
         var skillCards = drawPile.Cards.Where(c => c.Type == CardType.Skill).ToList();
         if (skillCards.Count == 0)
             return;
 
-        var selectable = Math.Min(totalCardsToSelect, skillCards.Count);
-        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, selectable, selectable);
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, Amount);
         var selected = await CardSelectCmd.FromSimpleGrid(choiceContext, skillCards, player, prefs);
         foreach (var card in selected)
             await CardPileCmd.Add(card, PileType.Hand);
+
+        await PowerCmd.Remove(this);
     }
 }

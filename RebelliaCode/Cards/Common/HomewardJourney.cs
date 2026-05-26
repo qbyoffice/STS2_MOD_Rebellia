@@ -18,8 +18,7 @@ public class HomewardJourney() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         var energyGain = (int)DynamicVars.Energy.BaseValue;
-        if (energyGain > 0)
-            await PlayerCmd.GainEnergy(energyGain, Owner);
+        await PlayerCmd.GainEnergy(energyGain, Owner);
 
         var drawPile = PileType.Draw.GetPile(Owner);
         var attackCards = drawPile.Cards.Where(c => c.Type == CardType.Attack).ToList();
@@ -38,10 +37,8 @@ public class HomewardJourney() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
                 await CardPileCmd.Add(card, PileType.Hand);
         }
 
-        var powerValue = (int)
-            DynamicVarsHelper.GetPowerVar<HomewardJourneyPower>(DynamicVars).BaseValue;
-        if (powerValue > 0)
-            await Utils.GetOrCreatePower<HomewardJourneyPower>(Owner.Creature, powerValue);
+        if (!Owner.Creature.HasPower<HomewardJourneyPower>())
+            await Utils.GivePower<HomewardJourneyPower>(choiceContext, this, play);
     }
 
     protected override void OnUpgrade()
