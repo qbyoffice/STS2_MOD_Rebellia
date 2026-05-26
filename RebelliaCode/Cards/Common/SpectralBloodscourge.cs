@@ -41,22 +41,20 @@ public class SpectralBloodScourge()
         for (var i = 0; i < DynamicVars.Cards.IntValue; i++)
         {
             var bloodclot = combatState.CreateCard<Bloodclot>(Owner);
-            await CardPileCmd.AddGeneratedCardToCombat(
+            var addResult = await CardPileCmd.AddGeneratedCardToCombat(
                 bloodclot,
                 PileType.Draw,
                 Owner,
                 CardPilePosition.Random
             );
+            CardCmd.PreviewCardPileAdd(addResult);
             await Cmd.Wait(0.05f);
         }
 
         var tempHpGain = (int)
             DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
         if (tempHpGain > 0)
-        {
-            var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
-            tempPower?.AddTempHp(tempHpGain);
-        }
+            await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
     }
 
     protected override void OnUpgrade()

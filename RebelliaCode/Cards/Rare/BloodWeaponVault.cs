@@ -65,20 +65,33 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
         foreach (var card in cardsToAdd)
         {
             var currentHand = PileType.Hand.GetPile(player).Cards.Count;
+            CardPileAddResult addResult;
+
             if (currentHand < maxHandSize)
             {
                 if (existingCards.Contains(card))
-                    await CardPileCmd.Add(card, PileType.Hand);
+                    addResult = await CardPileCmd.Add(card, PileType.Hand);
                 else
-                    await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+                    addResult = await CardPileCmd.AddGeneratedCardToCombat(
+                        card,
+                        PileType.Hand,
+                        Owner
+                    );
             }
             else
             {
                 if (existingCards.Contains(card))
-                    await CardPileCmd.Add(card, PileType.Discard);
+                    addResult = await CardPileCmd.Add(card, PileType.Discard);
                 else
-                    await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Discard, Owner);
+                    addResult = await CardPileCmd.AddGeneratedCardToCombat(
+                        card,
+                        PileType.Discard,
+                        Owner
+                    );
             }
+
+            CardCmd.PreviewCardPileAdd(addResult);
+            await Cmd.Wait(0.05f);
         }
 
         await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);

@@ -34,7 +34,7 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
         var selectCount = (int)DynamicVars.Cards.BaseValue;
         selectCount = Math.Min(selectCount, sanguineCards.Count);
 
-        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1, selectCount);
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, selectCount);
         var selected = await CardSelectCmd.FromSimpleGrid(
             choiceContext,
             sanguineCards,

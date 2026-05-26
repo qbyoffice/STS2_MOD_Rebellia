@@ -27,12 +27,13 @@ public class MealFirstPower : RebelliaPowers
             return;
 
         var bloodclot = combatState.CreateCard<Bloodclot>(player);
-        await CardPileCmd.AddGeneratedCardToCombat(
+        var addResult = await CardPileCmd.AddGeneratedCardToCombat(
             bloodclot,
             PileType.Hand,
             player,
             CardPilePosition.Top
         );
+        CardCmd.PreviewCardPileAdd(addResult);
 
         await PowerCmd.Remove(this);
     }

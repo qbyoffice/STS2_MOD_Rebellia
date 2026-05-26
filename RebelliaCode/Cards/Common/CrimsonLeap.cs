@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
@@ -37,17 +38,24 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
         var rng = Owner.RunState.Rng.CombatCardSelection;
         var toRemove = new List<CardModel>();
 
-        for (var i = 0; i < removeCount; i++)
+        for (int i = 0; i < removeCount; i++)
         {
             if (sanguineCards.Count == 0)
                 break;
             var card = rng.NextItem(sanguineCards);
-            toRemove.Add(card!);
-            sanguineCards.Remove(card!);
+            toRemove.Add(card);
+            sanguineCards.Remove(card);
         }
 
+        var previewCards = new List<CardModel>(toRemove);
+
         foreach (var card in toRemove)
-            await CardCmd.Exhaust(choiceContext, card);
+            card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
+
+        if (previewCards.Count > 0)
+        {
+            CardCmd.Preview(previewCards, time: 1.0f, CardPreviewStyle.HorizontalLayout);
+        }
 
         var energyGain = toRemove.Count * (int)DynamicVars.Energy.BaseValue;
         if (energyGain > 0)
