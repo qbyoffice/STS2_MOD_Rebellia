@@ -62,7 +62,7 @@
     "REBELLIA-CRIMSON_SPIRAL.title": "猩红螺旋",
     "REBELLIA-SANGUINE_DRAW.description": "造成{Damage:diff()}点伤害。\n消耗{BloodSwordArtPower:diff()}层[gold]鲜血剑艺[/gold]\n对该敌人打出手牌中{Cards:diff()}张随机[red]鲜血牌[/red]。",
     "REBELLIA-SANGUINE_DRAW.title": "鲜血拔刀",
-    "REBELLIA-BLOOD_BACKLASH.description": "造成{Damage:diff()}点伤害。\n消耗{BloodSwordArtPower:diff()}层[gold]鲜血剑艺[/gold]\n敌人身上每有一种效果，本牌额外造成{CalculationExtra:diff()}点伤害",
+    "REBELLIA-BLOOD_BACKLASH.description": "造成{Damage:diff()}点伤害。\n消耗{BloodSwordArtPower:diff()}层[gold]鲜血剑艺[/gold]\n敌人身上每有一种效果，本牌额外造成{CalculationBase:diff()}点伤害",
     "REBELLIA-BLOOD_BACKLASH.title": "碣血反噬",
     "REBELLIA-SANGUINE_BLADE_FAN.description": "失去{HpLoss:diff()}点生命,对所以目标造成{Damage:diff()}点伤害。\n每有一名敌人，便将{Cards:diff()}张飞刀血武添加至你的手牌",
     "REBELLIA-SANGUINE_BLADE_FAN.title": "鲜血刀扇",
