@@ -23,7 +23,7 @@ public class CrimsonVeilPower : RebelliaPowers
 
     protected override object InitInternalData()
     {
-        return new Data();
+        return new Data { VeilPoints = 1 }; // 初始为1，与Amount一致
     }
 
     private Data GetData()
@@ -55,6 +55,15 @@ public class CrimsonVeilPower : RebelliaPowers
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
+        var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
+        if (bloodPower != null)
+        {
+            var currentBlood = bloodPower.GetPoints();
+            var maxBlood = bloodPower.BloodArtMaxPoints;
+            if (currentBlood < maxBlood)
+                bloodPower.AddPoints(1);
+        }
+
         if (Owner?.Player != null)
             await CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner.Player);
     }
@@ -71,14 +80,6 @@ public class CrimsonVeilPower : RebelliaPowers
         var currentVeil = GetVeilPoints();
         if (currentVeil > 0)
             AddVeilPoints(-1);
-        var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
-        if (bloodPower != null)
-        {
-            var currentBlood = bloodPower.GetPoints();
-            var maxBlood = bloodPower.BloodArtMaxPoints;
-            if (currentBlood < maxBlood)
-                bloodPower.AddPoints(1);
-        }
     }
 
     public override async Task AfterCombatEnd(CombatRoom room)

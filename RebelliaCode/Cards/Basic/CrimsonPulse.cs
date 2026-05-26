@@ -14,12 +14,12 @@ using Rebellia.RebelliaCode.Powers;
 namespace Rebellia.RebelliaCode.Cards.Basic;
 
 public class CrimsonPulse()
-    : RebelliaCard(2, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
+    : RebelliaCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(6, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];
+        [new DamageVar(7, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
@@ -41,8 +41,6 @@ public class CrimsonPulse()
 
     protected override void OnUpgrade()
     {
-        base.OnUpgrade();
-        EnergyCost.UpgradeBy(-1);
         DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

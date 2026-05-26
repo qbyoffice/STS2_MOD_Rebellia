@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Powers;
@@ -18,19 +19,6 @@ public class BloodCrimsonSwiftPower : RebelliaPowers
     public override int DisplayAmount => Amount;
     public override bool ShouldReceiveCombatHooks => true;
 
-    public override decimal ModifyBlockAdditive(
-        Creature target,
-        decimal block,
-        ValueProp props,
-        CardModel? cardSource,
-        CardPlay? cardPlay
-    )
-    {
-        if (target != Owner)
-            return 0m;
-        return Amount;
-    }
-
     public override async Task AfterSideTurnEnd(
         PlayerChoiceContext choiceContext,
         CombatSide side,
@@ -39,6 +27,10 @@ public class BloodCrimsonSwiftPower : RebelliaPowers
     {
         if (Owner?.Side != side)
             return;
+
+        var dexterityPower = Owner.GetPower<DexterityPower>();
+        await PowerCmd.ModifyAmount(choiceContext, dexterityPower!, -Amount, null, null, true);
+
         await PowerCmd.Remove(this);
     }
 

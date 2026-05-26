@@ -13,7 +13,7 @@ public class BloodForgedBulwark()
     : RebelliaCard(2, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new HpLossVar(2m), new BlockVar(5m, ValueProp.Move)];
+        [new HpLossVar(2m), new BlockVar(6m, ValueProp.Move)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -35,6 +35,6 @@ public class BloodForgedBulwark()
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Block"].UpgradeValueBy(2m);
+        DynamicVars["Block"].UpgradeValueBy(3m);
     }
 }

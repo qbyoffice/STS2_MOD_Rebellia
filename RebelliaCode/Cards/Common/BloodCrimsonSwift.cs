@@ -29,21 +29,29 @@ public class BloodCrimsonSwift()
 
         var dexterityAmount = (int)
             DynamicVarsHelper.GetPowerVar<DexterityPower>(DynamicVars).BaseValue;
-        if (dexterityAmount > 0)
-            await Utils.GivePower<DexterityPower>(
+        await Utils.GivePower<DexterityPower>(
+            choiceContext,
+            Owner.Creature,
+            DynamicVars,
+            Owner.Creature,
+            this
+        );
+        var BloodCrimsonSwiftPowerAmount = (int)
+            DynamicVarsHelper.GetPowerVar<BloodCrimsonSwiftPower>(DynamicVars).BaseValue;
+        if (!Owner.Creature.HasPower<BloodCrimsonSwiftPower>())
+            await Utils.GivePower<BloodCrimsonSwiftPower>(
                 choiceContext,
                 Owner.Creature,
                 DynamicVars,
                 Owner.Creature,
                 this
             );
-        if (!Owner.Creature.HasPower<BloodCrimsonSwiftPower>())
-            await Utils.GetOrCreatePower<BloodCrimsonSwiftPower>(Owner.Creature);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars["Block"].UpgradeValueBy(2m);
         DynamicVarsHelper.GetPowerVar<DexterityPower>(DynamicVars).UpgradeValueBy(1m);
+        DynamicVarsHelper.GetPowerVar<BloodCrimsonSwiftPower>(DynamicVars).UpgradeValueBy(1m);
     }
 }

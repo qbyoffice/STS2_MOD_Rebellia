@@ -44,16 +44,20 @@ public class SanguineBladeFan()
             return;
 
         var player = Owner;
-        var maxHandSize = 10;
+        const int maxHandSize = 10;
 
-        for (var i = 0; i < totalCards; i++)
+        for (int i = 0; i < totalCards; i++)
         {
             var dart = combatState.CreateCard<DartBloodWeapon>(player);
-            var currentHandCount = PileType.Hand.GetPile(player).Cards.Count;
-            if (currentHandCount < maxHandSize)
-                await CardPileCmd.AddGeneratedCardToCombat(dart, PileType.Hand, Owner);
-            else
-                await CardPileCmd.AddGeneratedCardToCombat(dart, PileType.Draw, Owner);
+
+            await CardPileCmd.AddGeneratedCardToCombat(dart, PileType.Play, player);
+
+            await CardPileCmd.RemoveFromCombat(dart);
+
+            int currentHandCount = PileType.Hand.GetPile(player).Cards.Count;
+            var targetPile = currentHandCount < maxHandSize ? PileType.Hand : PileType.Draw;
+
+            await CardPileCmd.AddGeneratedCardToCombat(dart, targetPile, player);
         }
     }
 

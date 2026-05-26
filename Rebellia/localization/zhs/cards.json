@@ -1,5 +1,5 @@
 {
-    "REBELLIA-BLOOD_BITE.description": "造成{Damage:diff()}点伤害.\n消耗{BloodSwordArtPower:diff()}层[gold]鲜血剑艺[/gold]\n获得{RebelliaTmepHpPower:diff()}点临时生命",
+    "REBELLIA-BLOOD_BITE.description": "施加{ErodingBloodPower:diff()}层蚀血",
     "REBELLIA-BLOOD_BITE.title": "血咬",
     "REBELLIA-BLOOD_BRIAR.description": "失去{HpLoss:diff()}点生命,随机对敌人造成{Repeat:diff()}次{Damage:diff()}点伤害。\n消耗{BloodSwordArtPower:diff()}层[gold]鲜血剑艺[/gold]\n随机对敌人打出[gold]手牌[/gold]中{Cards:diff()}把[gold]血武[/gold]",
     "REBELLIA-BLOOD_BRIAR.title": "血棘剑丛",
