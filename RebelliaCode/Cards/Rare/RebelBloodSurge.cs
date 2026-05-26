@@ -58,7 +58,7 @@ public class RebelBloodSurge() : RebelliaCard(1, CardType.Skill, CardRarity.Rare
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(5m);
+        DynamicVars.Cards.UpgradeValueBy(2m);
         DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).UpgradeValueBy(1m);
         DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).UpgradeValueBy(2m);
         DynamicVarsHelper.GetPowerVar<ArmorPower>(DynamicVars).UpgradeValueBy(1m);

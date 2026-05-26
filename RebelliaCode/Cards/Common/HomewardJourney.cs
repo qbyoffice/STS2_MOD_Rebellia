@@ -43,7 +43,7 @@ public class HomewardJourney() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
 
     protected override void OnUpgrade()
     {
-        AddKeyword(CardKeyword.Eternal);
+        AddKeyword(CardKeyword.Retain);
         AddKeyword(CardKeyword.Innate);
     }
 }
