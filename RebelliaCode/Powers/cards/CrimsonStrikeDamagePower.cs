@@ -85,14 +85,14 @@ public class CrimsonStrikeDamagePower : RebelliaPowers
 
     public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
-        if (_used)
-            return;
-        if (command.Attacker != Owner)
-            return;
-        if (!command.DamageProps.IsPoweredAttack())
+        var data = GetData();
+        if (command != data.CommandToModify)
             return;
 
+        if (_used)
+            return;
         _used = true;
+
         var strikePower = Owner.GetPower<CrimsonStrikePower>();
         if (strikePower != null)
             await PowerCmd.Remove(strikePower);

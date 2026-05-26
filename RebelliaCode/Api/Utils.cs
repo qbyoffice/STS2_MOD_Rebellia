@@ -267,11 +267,6 @@ public static class Utils
         return creature.GetPower<T1>() != null || creature.GetPower<T2>() != null;
     }
 
-    public static bool IsBloodCostExempted(Creature creature)
-    {
-        return creature.GetPower<CrimsonStrikePower>() != null;
-    }
-
     public static CardModel? GetAvailableStrikeCard(Player player)
     {
         var combatState = player?.PlayerCombatState;
@@ -283,6 +278,11 @@ public static class Utils
             return handCard;
 
         return combatState.DrawPile?.Cards?.FirstOrDefault(c => c is RebelliaStrike);
+    }
+
+    public static bool IsBloodCostExempted(Creature creature)
+    {
+        return creature.GetPower<CrimsonStrikePower>() != null;
     }
 
     public static async Task<bool> TryConsumeBloodArtPoints(Creature creature, int requiredPoints)
