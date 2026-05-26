@@ -30,7 +30,7 @@ public class HomewardJourneyPower : RebelliaPowers
         var drawPile = PileType.Draw.GetPile(player);
         var skillCards = drawPile.Cards.Where(c => c.Type == CardType.Skill).ToList();
         if (skillCards.Count == 0)
-            return;
+            await PowerCmd.Remove(this);
 
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, Amount);
         var selected = await CardSelectCmd.FromSimpleGrid(choiceContext, skillCards, player, prefs);

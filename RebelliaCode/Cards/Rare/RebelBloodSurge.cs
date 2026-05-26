@@ -12,7 +12,7 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Rare;
 
-public class RebelBloodSurge() : RebelliaCard(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
+public class RebelBloodSurge() : RebelliaCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.CrimsonVeil, HoverTipsValue.BloodSwordArt];
@@ -21,10 +21,10 @@ public class RebelBloodSurge() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new PowerVar<CrimsonVeilPower>(3),
-            new PowerVar<BloodSwordArtPower>(3),
+            new PowerVar<CrimsonVeilPower>(2),
+            new PowerVar<BloodSwordArtPower>(4),
             new PowerVar<ArmorPower>(3),
-            new CardsVar(2),
+            new CardsVar(3),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -58,6 +58,9 @@ public class RebelBloodSurge() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1m);
+        DynamicVars.Cards.UpgradeValueBy(5m);
+        DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).UpgradeValueBy(1m);
+        DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).UpgradeValueBy(2m);
+        DynamicVarsHelper.GetPowerVar<ArmorPower>(DynamicVars).UpgradeValueBy(1m);
     }
 }

@@ -26,7 +26,7 @@ public class HomewardJourney() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
         if (attackCards.Count > 0 && selectCount > 0)
         {
             var actualSelect = Math.Min(selectCount, attackCards.Count);
-            var prefs = new CardSelectorPrefs(SelectionScreenPrompt, actualSelect, actualSelect);
+            var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, actualSelect);
             var selected = await CardSelectCmd.FromSimpleGrid(
                 choiceContext,
                 attackCards,

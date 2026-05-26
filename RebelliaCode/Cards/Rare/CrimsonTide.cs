@@ -13,7 +13,7 @@ using Rebellia.RebelliaCode.Powers.cards;
 namespace Rebellia.RebelliaCode.Cards.Rare;
 
 public class CrimsonTide()
-    : RebelliaCard(4, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
+    : RebelliaCard(2, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
