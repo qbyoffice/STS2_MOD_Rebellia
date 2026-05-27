@@ -10,111 +10,125 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 
-namespace Rebellia.RebelliaCode.Powers.cards;
-
-public class RebelliaTmepHpPower : RebelliaPowers
+namespace Rebellia.RebelliaCode.Powers.cards
 {
-    private bool _isSelfDamage;
-
-    public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Counter;
-    public override int DisplayAmount => GetInternalData<Data>().RebelliaTempHp;
-    public override bool ShouldReceiveCombatHooks => true;
-
-    protected override object InitInternalData()
+    public class RebelliaTmepHpPower : RebelliaPowers
     {
-        return new Data();
-    }
+        private bool _isSelfDamage;
+        public static event Action<Creature, int>? OnAnyTempHpChanged;
 
-    private Data GetData()
-    {
-        return GetInternalData<Data>();
-    }
+        public override PowerType Type => PowerType.Buff;
+        public override PowerStackType StackType => PowerStackType.Counter;
+        public override int DisplayAmount => GetInternalData<Data>().RebelliaTempHp;
+        public override bool ShouldReceiveCombatHooks => true;
 
-    public void AddTempHp(int amount)
-    {
-        var data = GetData();
-        data.RebelliaTempHp += amount;
-        InvokeDisplayAmountChanged();
-    }
+        protected override object InitInternalData() => new Data();
 
-    public override async Task BeforeSideTurnEnd(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        IEnumerable<Creature> participants
-    )
-    {
-        if (side != Owner.Side)
-            return;
-        var player = Owner.Player;
-        if (player == null)
-            return;
+        private Data GetData() => GetInternalData<Data>();
 
-        var hand = PileType.Hand.GetPile(player).Cards;
-        var count = hand.Count(c => c.Tags.Contains(CardTagExtensions.BloodclotExhaust));
-        if (count == 0)
-            return;
-
-        var penalty = count * 5;
-        var data = GetData();
-        var currentTemp = data.RebelliaTempHp;
-        var actualDamage = penalty - currentTemp;
-        if (actualDamage > 0)
+        private void NotifyChanged()
         {
-            _isSelfDamage = true;
-            await CreatureCmd.Damage(
-                new BlockingPlayerChoiceContext(),
-                Owner,
-                actualDamage,
-                ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-                null,
-                null
-            );
-            _isSelfDamage = false;
+            TempHpChanged?.Invoke();
+            OnAnyTempHpChanged?.Invoke(Owner, DisplayAmount);
         }
 
-        data.RebelliaTempHp = penalty;
-        InvokeDisplayAmountChanged();
-    }
+        public event Action? TempHpChanged;
 
-    public override decimal ModifyHpLostBeforeOsty(
-        Creature target,
-        decimal amount,
-        ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource
-    )
-    {
-        if (target != Owner)
-            return amount;
-        if (_isSelfDamage)
-            return amount;
-
-        var data = GetData();
-        if (data.RebelliaTempHp <= 0)
-            return amount;
-
-        var damage = (int)amount;
-        if (data.RebelliaTempHp >= damage)
+        public void AddTempHp(int amount)
         {
-            data.RebelliaTempHp -= damage;
+            var data = GetData();
+            data.RebelliaTempHp += amount;
             InvokeDisplayAmountChanged();
-            return 0;
+            NotifyChanged();
         }
 
-        var remaining = damage - data.RebelliaTempHp;
-        data.RebelliaTempHp = 0;
-        InvokeDisplayAmountChanged();
-        return remaining;
-    }
+        public override async Task BeforeSideTurnEnd(
+            PlayerChoiceContext choiceContext,
+            CombatSide side,
+            IEnumerable<Creature> participants
+        )
+        {
+            if (side != Owner.Side)
+                return;
+            var player = Owner.Player;
+            if (player == null)
+                return;
 
-    public override async Task AfterCombatEnd(CombatRoom room)
-    {
-        await PowerCmd.Remove(this);
-    }
+            var hand = PileType.Hand.GetPile(player).Cards;
+            var count = hand.Count(c => c.Tags.Contains(CardTagExtensions.BloodclotExhaust));
+            if (count == 0)
+                return;
 
-    private class Data
-    {
-        public int RebelliaTempHp;
+            var penalty = count * 5;
+            var data = GetData();
+            var currentTemp = data.RebelliaTempHp;
+            var actualDamage = penalty - currentTemp;
+            if (actualDamage > 0)
+            {
+                _isSelfDamage = true;
+                try
+                {
+                    await CreatureCmd.Damage(
+                        new BlockingPlayerChoiceContext(),
+                        Owner,
+                        actualDamage,
+                        ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
+                        null,
+                        null
+                    );
+                }
+                finally
+                {
+                    _isSelfDamage = false;
+                }
+            }
+
+            data.RebelliaTempHp = penalty;
+            InvokeDisplayAmountChanged();
+            NotifyChanged();
+        }
+
+        public override decimal ModifyHpLostBeforeOsty(
+            Creature target,
+            decimal amount,
+            ValueProp props,
+            Creature? dealer,
+            CardModel? cardSource
+        )
+        {
+            if (target != Owner)
+                return amount;
+            if (_isSelfDamage)
+                return amount;
+
+            var data = GetData();
+            if (data.RebelliaTempHp <= 0)
+                return amount;
+
+            var damage = (int)amount;
+            if (data.RebelliaTempHp >= damage)
+            {
+                data.RebelliaTempHp -= damage;
+                InvokeDisplayAmountChanged();
+                NotifyChanged();
+                return 0;
+            }
+
+            var remaining = damage - data.RebelliaTempHp;
+            data.RebelliaTempHp = 0;
+            InvokeDisplayAmountChanged();
+            NotifyChanged();
+            return remaining;
+        }
+
+        public override async Task AfterCombatEnd(CombatRoom room)
+        {
+            await PowerCmd.Remove(this);
+        }
+
+        private class Data
+        {
+            public int RebelliaTempHp;
+        }
     }
 }

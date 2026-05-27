@@ -1,9 +1,12 @@
 using System.Reflection;
+using BaseLib.Utils.NodeFactories;
 using Godot;
 using Godot.Bridge;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using Rebellia.RebelliaCode.Api.Combat;
 using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 
 namespace Rebellia.RebelliaCode;
@@ -26,5 +29,6 @@ public partial class MainFile : Node
         Harmony harmony = new(ModId);
         InitializeTools();
         harmony.PatchAll();
+        NodeFactory.RegisterSceneType<RNHealthBar>("res://scenes/combat/Rebellia_health_bar.tscn");
     }
 }

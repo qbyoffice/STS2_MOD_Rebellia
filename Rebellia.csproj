@@ -272,6 +272,7 @@
     <Folder Include="Rebellia\images\relics\tres\" />
     <Folder Include="Rebellia\images\ui\combat\Rebellia\" />
     <Folder Include="Rebellia\images\ui\top_panel\" />
+    <Folder Include="scenes\combat\" />
   </ItemGroup>
 
   <ItemGroup>
