@@ -7,9 +7,11 @@ public class RebelliaCardPool : CustomCardPoolModel
 {
     public override string Title => Rebellia.InnerName;
 
-    public override string BigEnergyIconPath => "";
+    public override string BigEnergyIconPath =>
+        "res://Rebellia/images/ui/combat/Rebellia_energy_icon.png";
 
-    public override string TextEnergyIconPath => "";
+    public override string TextEnergyIconPath =>
+        "res://Rebellia/images/ui/combat/text_Rebellia_energy_icon.png";
 
     public override string CardFrameMaterialPath => "card_frame_blood";
     public override Color ShaderColor => new("4011");
