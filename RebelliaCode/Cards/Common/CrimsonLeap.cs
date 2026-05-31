@@ -19,11 +19,6 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        var requiredBlood = (int)
-            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-            return;
-
         var drawPile = PileType.Draw.GetPile(Owner);
         var sanguineCards = drawPile
             .Cards.Where(c => c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
@@ -56,6 +51,11 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
         {
             CardCmd.Preview(previewCards, time: 1.0f, CardPreviewStyle.HorizontalLayout);
         }
+
+        var requiredBlood = (int)
+            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
+        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+            return;
 
         var energyGain = toRemove.Count * (int)DynamicVars.Energy.BaseValue;
         if (energyGain > 0)
