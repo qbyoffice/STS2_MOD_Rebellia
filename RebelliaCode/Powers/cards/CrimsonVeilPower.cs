@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Rooms;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Powers;
 
@@ -21,9 +20,14 @@ public class CrimsonVeilPower : RebelliaPowers
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrimsonVeilPower>(1)];
 
+    private class Data
+    {
+        public int VeilPoints;
+    }
+
     protected override object InitInternalData()
     {
-        return new Data { VeilPoints = 1 }; // 初始为1，与Amount一致
+        return new Data();
     }
 
     private Data GetData()
@@ -53,8 +57,15 @@ public class CrimsonVeilPower : RebelliaPowers
         return GetData().VeilPoints;
     }
 
-    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IEnumerable<Creature> participants
+    )
     {
+        if (Owner == null || Owner.Side != side)
+            return;
+
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
         if (bloodPower != null)
         {
@@ -66,29 +77,8 @@ public class CrimsonVeilPower : RebelliaPowers
 
         if (Owner?.Player != null)
             await CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner.Player);
-    }
-
-    public override async Task AfterSideTurnEnd(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        IEnumerable<Creature> participants
-    )
-    {
-        if (Owner == null || Owner.Side != side)
-            return;
-
         var currentVeil = GetVeilPoints();
         if (currentVeil > 0)
             AddVeilPoints(-1);
-    }
-
-    public override async Task AfterCombatEnd(CombatRoom room)
-    {
-        await PowerCmd.Remove(this);
-    }
-
-    private class Data
-    {
-        public int VeilPoints;
     }
 }

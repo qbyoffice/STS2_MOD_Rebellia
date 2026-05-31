@@ -1,3 +1,4 @@
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,33 +12,24 @@ using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
-public class BloodBacklash()
+public class BloodBackLash()
     : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    private const string TotalDamageKey = "TotalDamage";
-
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new DamageVar(7m, ValueProp.Move),
-            new PowerVar<BloodSwordArtPower>(2),
-            new CalculationBaseVar(1),
-            new CalculationExtraVar(0),
-            new CalculatedVar(TotalDamageKey).WithMultiplier(
+            new CalculationBaseVar(7),
+            new ExtraDamageVar(1),
+            new CalculatedDamageVar(ValueProp.Move).WithMultiplier(
                 (card, target) =>
                 {
-                    var baseDamage = card.DynamicVars.Damage.BaseValue;
                     if (target == null)
-                        return baseDamage;
-
-                    var baseExtra = (int)card.DynamicVars.CalculationBase.BaseValue;
-                    var extraExtra = (int)card.DynamicVars.CalculationExtra.BaseValue;
-                    var extraPerPower = baseExtra + extraExtra;
-                    var uniquePowerCount = target.Powers.Select(p => p.Id).Distinct().Count();
-                    return baseDamage + uniquePowerCount * extraPerPower;
+                        return 0;
+                    return target.Powers.Select(p => p.Id).Distinct().Count();
                 }
             ),
+            new PowerVar<BloodSwordArtPower>(2),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -46,20 +38,17 @@ public class BloodBacklash()
         if (target == null)
             return;
 
-        var consumed = await Utils.TryConsumeBloodArtPoints(
-            Owner.Creature,
-            (int)DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue
-        );
+        var requiredPoints = (int)
+            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
 
         decimal totalDamage;
-        if (consumed)
+        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredPoints))
         {
-            var calcVar = DynamicVars[TotalDamageKey] as CalculatedVar;
-            totalDamage = calcVar?.Calculate(target) ?? DynamicVars.Damage.BaseValue;
+            totalDamage = DynamicVars.CalculatedDamage.Calculate(target);
         }
         else
         {
-            totalDamage = DynamicVars.Damage.BaseValue;
+            totalDamage = DynamicVars.CalculationBase.BaseValue;
         }
 
         var cmd = DamageCmd.Attack(totalDamage).FromCard(this).Targeting(target);
@@ -68,6 +57,6 @@ public class BloodBacklash()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.CalculationBase.UpgradeValueBy(1);
+        DynamicVars.ExtraDamage.UpgradeValueBy(1);
     }
 }
