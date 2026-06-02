@@ -36,7 +36,7 @@ public class CrimsonVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Basic, T
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Block"].UpgradeValueBy(3m);
+        DynamicVars.Block.UpgradeValueBy(3m);
         DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).UpgradeValueBy(1m);
     }
 }
