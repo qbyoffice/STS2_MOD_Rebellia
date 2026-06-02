@@ -62,6 +62,6 @@ public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.Tok
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Block"].UpgradeValueBy(3m);
+        DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

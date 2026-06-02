@@ -19,6 +19,6 @@ public class RebelliaDefend() : RebelliaCard(1, CardType.Skill, CardRarity.Basic
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Block"].UpgradeValueBy(3m);
+        DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

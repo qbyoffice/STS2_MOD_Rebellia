@@ -50,7 +50,7 @@ public class BloodCrimsonSwift()
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Block"].UpgradeValueBy(2m);
+        DynamicVars.Block.UpgradeValueBy(2m);
         DynamicVarsHelper.GetPowerVar<DexterityPower>(DynamicVars).UpgradeValueBy(1m);
         DynamicVarsHelper.GetPowerVar<BloodCrimsonSwiftPower>(DynamicVars).UpgradeValueBy(1m);
     }
