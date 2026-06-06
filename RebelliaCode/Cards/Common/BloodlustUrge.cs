@@ -23,12 +23,18 @@ public class BloodlustUrge() : RebelliaCard(1, CardType.Skill, CardRarity.Common
     {
         if (IsUpgraded)
         {
-            if (!Owner.Creature.HasPower<BloodlustUrgeUpgradedPower>())
+            if (
+                !Owner.Creature.HasPower<BloodlustUrgeUpgradedPower>()
+                && !Owner.Creature.HasPower<BloodlustUrgePower>()
+            )
                 await Utils.GivePower<BloodlustUrgeUpgradedPower>(choiceContext, this, play);
         }
         else
         {
-            if (!Owner.Creature.HasPower<BloodlustUrgePower>())
+            if (
+                !Owner.Creature.HasPower<BloodlustUrgePower>()
+                && !Owner.Creature.HasPower<BloodlustUrgeUpgradedPower>()
+            )
                 await Utils.GivePower<BloodlustUrgePower>(choiceContext, this, play);
         }
     }
