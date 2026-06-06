@@ -23,7 +23,7 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new DamageVar(4m, ValueProp.Move),
+            new DamageVar(9m, ValueProp.Move),
             new PowerVar<BloodSwordArtPower>(1),
             new PowerVar<BloodDartDiscountPower>(1),
         ];
@@ -53,6 +53,6 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }
