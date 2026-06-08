@@ -1,5 +1,5 @@
 {
-    "REBELLIA-BLOOD_SWORD_ART_POWER.title": "鲜血剑艺",  
+    "REBELLIA-BLOOD_SWORD_ART_POWER.title": "鲜血剑艺",
     "REBELLIA-BLOOD_SWORD_ART_POWER.description": "激活卡牌额外效果的资源，拥有最大上限。",
     "REBELLIA-BLOOD_SWORD_ART_POWER.smartDescription": "特定卡牌可消费鲜血剑艺触发卡牌的额外效果。/n鲜血剑艺可通过启动猩红面纱结束回合获取，超出上限的鲜血剑艺将被浪费。",
 
@@ -7,30 +7,30 @@
     "REBELLIA-CRIMSON_VEIL_POWER.description": "将鲜血牌加入抽牌堆，并每回合获得鲜血剑艺。",
     "REBELLIA-CRIMSON_VEIL_POWER.smartDescription": "当角色激活猩红面纱时，从手牌与抽牌堆中打出一张状态牌。/n将所有带鲜血的卡牌从弃牌堆与消耗牌堆中加入抽牌堆。/n回合结束时失去[blue]1[/blue]层猩红面纱并获得[blue]1[/blue]鲜血剑艺。",
 
-    "REBELLIA-SANGUINE_DANCE_POWER.title": "激活猩红面纱",  
+    "REBELLIA-SANGUINE_DANCE_POWER.title": "激活猩红面纱",
     "REBELLIA-SANGUINE_DANCE_POWER.description": "当你激活猩红面纱状态时。",
     "REBELLIA-SANGUINE_DANCE_POWER.smartDescription": "当角色的猩红面纱层数为0时，获得1层猩红面纱，从手牌与抽牌堆中打出一张状态牌。",
-    
+
     "REBELLIA-REBELLIA_TMEP_HP_POWER.title": "临时生命",
     "REBELLIA-REBELLIA_TMEP_HP_POWER.description": "可等量抵消受到的伤害和生命减少效果。",
     "REBELLIA-REBELLIA_TMEP_HP_POWER.smartDescription": "可等量抵消受到的伤害和生命减少效果。/n当前拥有[blue]{Amount}[/blue]点[gold]临时生命[/gold]。",
-  
+
     "REBELLIA-BLOOD_SHADOW.title": "血影",
     "REBELLIA-BLOOD_SHADOW.description": "在你的回合开始时，随机对一名敌人造成10点伤害。/n消耗抽到的[gold]血武器[/gold]，如果在本回合内消耗[blue]3[/blue]张[gold]血武器[/gold]，[gold]血影[/gold][blue]3[/blue]。",
     "REBELLIA-BLOOD_SHADOW.smartDescription": "在你的回合开始时，随机对一名敌人造成[blue]{Amount}[/blue]点伤害。/n如果在本回合再抽到[blue]{CardsLeft}[/blue]张[gold]血武器[/gold]，[gold]血影[/gold][blue]{Amount}[/blue]。",
-  
+
     "REBELLIA-ARMOR_POWER.title": "霸体",
     "REBELLIA-ARMOR_POWER.description": "抽到状态牌时，将其消耗，失去[blue]1[/blue]层[gold]霸体[/gold]。",
     "REBELLIA-ARMOR_POWER.smartDescription": "抽到状态牌时，将其消耗。失去[blue]1[/blue]层[gold]霸体[/gold]。",
 
-    "REBELLIA-CRIMSON_STRIKE_POWER.title": "剑艺减免",  
+    "REBELLIA-CRIMSON_STRIKE_POWER.title": "剑艺减免",
     "REBELLIA-CRIMSON_STRIKE_POWER.description": "如果下[blue]1[/blue]张打出的是剑艺攻击牌，使其鲜血剑艺消耗变为0。",
     "REBELLIA-CRIMSON_STRIKE_POWER.smartDescription": "下[blue]1[/blue]张剑艺攻击牌，鲜血剑艺消耗变为0。",
 
-    "REBELLIA-CRIMSON_STRIKE_DAMAGE_POWER.title": "猩红打击",      
+    "REBELLIA-CRIMSON_STRIKE_DAMAGE_POWER.title": "猩红打击",
     "REBELLIA-CRIMSON_STRIKE_DAMAGE_POWER.description": "如果下[blue]1[/blue]张打出的是非剑艺攻击牌，使该牌额外造成自身当前生命[blue]{Amount}[/blue]%的伤害。",
     "REBELLIA-CRIMSON_STRIKE_DAMAGE_POWER.smartDescription": "下[blue]1[/blue]张非剑艺攻击牌，额外造成自身当前生命[blue]{Amount}[/blue]%的伤害。",
-  
+
     "REBELLIA-REND_POWER.title": "撕裂",
     "REBELLIA-REND_POWER.description": "该敌人在本回合内每攻击过一次，便会受到等同于撕裂层数的伤害。",
     "REBELLIA-REND_POWER.smartDescription": "该敌人每次攻击时，受到[blue]{Amount}[/blue]点伤害。",
@@ -67,10 +67,13 @@
     "REBELLIA-SANGUINE_EXTRACT_TOOL.title": "萃血",
     "REBELLIA-SANGUINE_EXTRACT_TOOL.description": "将[red]蚀血[/red]本应造成生命损失量转变为获得[gold]临时生命[/gold]",
     "REBELLIA-SANGUINE_EXTRACT_TOOL.smartDescription": "将[red]蚀血[/red]生命损失量的[blue]10[/blue]%转化为等量的[gold]临时生命[/gold]",
-	
+
     "REBELLIA-BLOODPIERCE_TOOL.title": "贯血",
     "REBELLIA-BLOODPIERCE_TOOL.description": "立即触发[blue]1[/blue]次目标的[red]蚀血[/red]伤害。",
-    "REBELLIA-BLOODPIERCE_TOOL.smartDescription": "立即触发[blue]1[/blue]次目标的[red]蚀血[/red]伤害。"
+    "REBELLIA-BLOODPIERCE_TOOL.smartDescription": "立即触发[blue]1[/blue]次目标的[red]蚀血[/red]伤害。",
 
-	
+    "REBELLIA-BLOOD_WEAPON_VAULT_TOOL.title": "鲜血武库抽取",
+    "REBELLIA-BLOOD_WEAPON_VAULT_TOOL.description": "[gold]抽取组合为:[/gold]/n·[blue]2[/blue]张[gold]打击血武[/gold]/n·[blue]3[/blue]张[gold]交击血武[/gold]/n·[blue]4[/blue]张[gold]飞刀血武[/gold]/n·[blue]1[/blue]张[gold]粉碎血武[/gold]/n·[blue]2[/blue]张[gold]迅捷血武[/gold]",
+    "REBELLIA-BLOOD_WEAPON_VAULT_TOOL.smartDescription": "[gold]抽取组合为:[/gold]/n·[blue]2[/blue]张[gold]打击血武[/gold]/n·[blue]3[/blue]张[gold]交击血武[/gold]/n·[blue]4[/blue]张[gold]飞刀血武[/gold]/n·[blue]1[/blue]张[gold]粉碎血武[/gold]/n·[blue]2[/blue]张[gold]迅捷血武[/gold]"
+
 }
