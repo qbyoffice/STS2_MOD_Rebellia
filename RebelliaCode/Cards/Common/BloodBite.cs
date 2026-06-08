@@ -17,7 +17,7 @@ public class BloodBite() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<ErodingBloodPower>(7)];
