@@ -6,7 +6,7 @@
     "REBELLIA-REBELLIA_DEFEND.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
     
     "REBELLIA-CRIMSON_PULSE.title": "猩红脉冲",
-    "REBELLIA-CRIMSON_PULSE.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n从抽牌堆与手牌中打出,1张[gold]打击[/gold]。",
+    "REBELLIA-CRIMSON_PULSE.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n优先从抽牌打出堆或从手牌中打出,1张[gold]打击[/gold]。",
 	
     "REBELLIA-CRIMSON_VEIL.title": "猩红面纱",
     "REBELLIA-CRIMSON_VEIL.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{CrimsonVeilPower:diff()}层[gold]猩红面纱[/gold]",
