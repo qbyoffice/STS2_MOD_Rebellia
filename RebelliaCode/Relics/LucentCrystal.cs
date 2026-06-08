@@ -45,6 +45,11 @@ public class LucentCrystal : RebelliaRelics
         }
     }
 
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        InvokeDisplayAmountChanged();
+    }
+
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext ctx,
         CombatSide side,
