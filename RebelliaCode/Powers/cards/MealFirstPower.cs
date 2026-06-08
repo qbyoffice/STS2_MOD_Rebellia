@@ -11,7 +11,7 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 public class MealFirstPower : RebelliaPowers
 {
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Single;
+    public override PowerStackType StackType => PowerStackType.Counter;
     public override bool ShouldReceiveCombatHooks => true;
 
     public override async Task AfterPlayerTurnStart(
@@ -26,14 +26,19 @@ public class MealFirstPower : RebelliaPowers
         if (combatState == null)
             return;
 
-        var bloodclot = combatState.CreateCard<Bloodclot>(player);
-        var addResult = await CardPileCmd.AddGeneratedCardToCombat(
-            bloodclot,
-            PileType.Hand,
-            player,
-            CardPilePosition.Top
-        );
-        CardCmd.PreviewCardPileAdd(addResult);
+        int count = (int)Amount;
+
+        for (int i = 0; i < count; i++)
+        {
+            var bloodclot = combatState.CreateCard<Bloodclot>(player);
+            var addResult = await CardPileCmd.AddGeneratedCardToCombat(
+                bloodclot,
+                PileType.Hand,
+                player,
+                CardPilePosition.Top
+            );
+            CardCmd.PreviewCardPileAdd(addResult);
+        }
 
         await PowerCmd.Remove(this);
     }
