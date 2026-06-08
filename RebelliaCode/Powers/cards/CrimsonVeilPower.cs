@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Powers;
 
@@ -38,11 +37,17 @@ public class CrimsonVeilPower : RebelliaPowers
     public void AddVeilPoints(int amount)
     {
         var data = GetData();
+        int oldPoints = data.VeilPoints;
         data.VeilPoints = Math.Max(0, data.VeilPoints + amount);
         InvokeDisplayAmountChanged();
 
         if (amount > 0)
             TaskHelper.RunSafely(BloodKeywordManager.MoveBloodCardsToDrawPile(Owner.Player!));
+
+        if (oldPoints == 0 && data.VeilPoints > 0)
+        {
+            TaskHelper.RunSafely(CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner.Player!));
+        }
 
         if (data.VeilPoints == 0)
         {
@@ -75,8 +80,6 @@ public class CrimsonVeilPower : RebelliaPowers
                 bloodPower.AddPoints(1);
         }
 
-        if (Owner?.Player != null)
-            await CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner.Player);
         var currentVeil = GetVeilPoints();
         if (currentVeil > 0)
             AddVeilPoints(-1);
