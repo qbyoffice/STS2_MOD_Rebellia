@@ -22,7 +22,7 @@ public class CrimsonSpiral()
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(9m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];
+        [new DamageVar(15m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -57,5 +57,10 @@ public class CrimsonSpiral()
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             await CardPileCmd.Add(this, PileType.Hand);
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(3m);
     }
 }

@@ -1,6 +1,8 @@
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
@@ -14,8 +16,9 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.KeywordSanguine];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new CardsVar(1), new EnergyVar(1), new PowerVar<BloodSwordArtPower>(1)];
+        [new CardsVar(2), new EnergyVar(1), new PowerVar<BloodSwordArtPower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -27,39 +30,54 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
         if (sanguineCards.Count == 0)
             return;
 
-        var removeCount = (int)DynamicVars.Cards.BaseValue;
-        removeCount = Math.Min(removeCount, sanguineCards.Count);
+        int targetCount = (int)DynamicVars.Cards.BaseValue;
+        int actualCount = Math.Min(targetCount, sanguineCards.Count);
+        if (actualCount == 0)
+            return;
 
-        var rng = Owner.RunState.Rng.CombatCardSelection;
-        var toRemove = new List<CardModel>();
+        List<CardModel> toRemove;
 
-        for (int i = 0; i < removeCount; i++)
+        if (IsUpgraded)
         {
-            if (sanguineCards.Count == 0)
-                break;
-            var card = rng.NextItem(sanguineCards);
-            toRemove.Add(card);
-            sanguineCards.Remove(card);
+            var prefs = new CardSelectorPrefs(SelectionScreenPrompt, actualCount);
+            var selected = await CardSelectCmd.FromSimpleGrid(
+                choiceContext,
+                sanguineCards,
+                Owner,
+                prefs
+            );
+            toRemove = selected.ToList();
+        }
+        else
+        {
+            var rng = Owner.RunState.Rng.CombatCardSelection;
+            toRemove = new List<CardModel>();
+            var tempList = new List<CardModel>(sanguineCards);
+            for (int i = 0; i < actualCount; i++)
+            {
+                if (tempList.Count == 0)
+                    break;
+                var card = rng.NextItem(tempList);
+                toRemove.Add(card!);
+                tempList.Remove(card!);
+            }
         }
 
-        var previewCards = new List<CardModel>(toRemove);
+        if (toRemove.Count == 0)
+            return;
 
         foreach (var card in toRemove)
             card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
-        if (previewCards.Count > 0)
-        {
-            CardCmd.Preview(previewCards, time: 1.0f, CardPreviewStyle.HorizontalLayout);
-        }
+        CardCmd.Preview(toRemove, time: 1.0f, CardPreviewStyle.HorizontalLayout);
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-            return;
-
-        var energyGain = toRemove.Count * (int)DynamicVars.Energy.BaseValue;
-        if (energyGain > 0)
-            await PlayerCmd.GainEnergy(energyGain, Owner);
+        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+        {
+            int totalEnergy = 1 + toRemove.Count;
+            await PlayerCmd.GainEnergy(totalEnergy, Owner);
+        }
     }
 
     protected override void OnUpgrade()
