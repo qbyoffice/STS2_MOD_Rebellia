@@ -126,7 +126,7 @@
     "REBELLIA-BLOOD_WEAPON_VAULT.description": "失去{HpLoss:diff()}点生命，随机生成一组[gold]血武器[/gold]。\n抽出[gold]抽牌堆[/gold]与[gold]弃牌堆[/gold]中所有[gold]血武器[/gold]。",
 
     "REBELLIA-CRIMSON_TIDE.title": "猩红潮汐",
-    "REBELLIA-CRIMSON_TIDE.description": "造成{Damage:diff()}点伤害，每有一名敌人，[gold]便获得{CalculationBase:diff()}层猩红面纱[/gold]。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}X\n获得X{Energy:energyIcons()}。",
+    "REBELLIA-CRIMSON_TIDE.description": "造成{Damage:diff()}点伤害，每有一名敌人，[gold]便获得{CalculationBase:diff()}层猩红面纱[/gold]。\n[gold]鲜血剑艺[/gold]X\n获得X{energyPrefix:energyIcons(1)}。",
 
     "REBELLIA-PALE_BLOOD_ESSENCE.title": "苍白血精",
     "REBELLIA-PALE_BLOOD_ESSENCE.description": "[gold]鲜血剑艺[/gold]上限提升{BloodArtMaxPoints:diff()}",
