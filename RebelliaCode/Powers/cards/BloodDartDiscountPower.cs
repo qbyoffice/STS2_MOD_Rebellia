@@ -1,5 +1,4 @@
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -12,14 +11,11 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class BloodDartDiscountPower : RebelliaPowers
 {
+    private int _cardsPlayedThisTurn;
+
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;
-
-    protected override object InitInternalData()
-    {
-        return new Data();
-    }
 
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
@@ -28,40 +24,31 @@ public class BloodDartDiscountPower : RebelliaPowers
     )
     {
         modifiedCost = originalCost;
-        var data = GetInternalData<Data>();
-        if (data.firstCardIsBloodDart == true && card is BloodDart)
+        if (_cardsPlayedThisTurn == 0 && card is BloodDart)
         {
             modifiedCost = 0;
             return true;
         }
-
         return false;
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        var data = GetInternalData<Data>();
-        if (data.firstCardIsBloodDart == null)
-        {
-            data.firstCardIsBloodDart = cardPlay.Card is BloodDart;
-            if (data.firstCardIsBloodDart == false)
-                await PowerCmd.Remove(this);
-        }
+        _cardsPlayedThisTurn++;
+        await Task.CompletedTask;
     }
 
-    public override Task AfterSideTurnStart(
+    public override async Task BeforeSideTurnStart(
+        PlayerChoiceContext choiceContext,
         CombatSide side,
         IReadOnlyList<Creature> participants,
         ICombatState combatState
     )
     {
-        if (side == Owner.Side)
-            GetInternalData<Data>().firstCardIsBloodDart = null;
-        return Task.CompletedTask;
-    }
-
-    private class Data
-    {
-        public bool? firstCardIsBloodDart;
+        if (participants.Contains(Owner))
+        {
+            _cardsPlayedThisTurn = 0;
+        }
+        await Task.CompletedTask;
     }
 }

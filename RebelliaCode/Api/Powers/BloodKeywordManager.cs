@@ -36,6 +36,11 @@ public static class BloodKeywordManager
             .ToList();
 
         foreach (var card in allCards)
+        {
+            if (card.Pile?.Type == PileType.Exhaust)
+                continue;
+
             await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
+        }
     }
 }

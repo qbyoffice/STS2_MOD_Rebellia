@@ -7,7 +7,7 @@
 
     "REBELLIA-CRIMSON_PULSE.title": "猩红脉冲",
     "REBELLIA-CRIMSON_PULSE.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n优先从抽牌打出堆或从手牌中打出1张[gold]打击[/gold]。",
-	
+
     "REBELLIA-CRIMSON_VEIL.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{CrimsonVeilPower:diff()}层[gold]猩红面纱[/gold]",
 
     "REBELLIA-VEIN_THORN_SCAB.title": "剜脉棘痂",
@@ -131,5 +131,8 @@
     "REBELLIA-PALE_BLOOD_ESSENCE.description": "[gold]鲜血剑艺[/gold]上限提升{BloodArtMaxPoints:diff()}",
 
     "REBELLIA-REBEL_BLOOD_SURGE.title": "逆血泉涌",
-    "REBELLIA-REBEL_BLOOD_SURGE.description": "抽{Cards:diff()}张牌\n获得{CrimsonVeilPower:diff()}猩红面纱，{BloodSwordArtPower:diff()}鲜血剑艺，{ArmorPower:diff()}霸体"
+    "REBELLIA-REBEL_BLOOD_SURGE.description": "抽{Cards:diff()}张牌\n获得{CrimsonVeilPower:diff()}猩红面纱，{BloodSwordArtPower:diff()}鲜血剑艺，{ArmorPower:diff()}霸体",
+
+    "REBELLIA-PRIMORDIAL_CRIMSON_RAID.title": "原初·猩红突袭",
+    "REBELLIA-PRIMORDIAL_CRIMSON_RAID.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]X\n从牌堆中选择X张牌打出。"
 }
