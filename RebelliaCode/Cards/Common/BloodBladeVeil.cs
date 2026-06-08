@@ -27,6 +27,13 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        var veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
+        if (veilGain > 0)
+        {
+            var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
+            veilPower?.AddVeilPoints(veilGain);
+        }
+
         var exhaustPile = PileType.Exhaust.GetPile(Owner);
         var sanguineCards = exhaustPile
             .Cards.Where(c => c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
@@ -56,13 +63,6 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
         var bloodGain = selectedList.Count;
         if (bloodGain > 0)
             await BloodSwordArtManager.AddPoints(Owner.Creature, bloodGain);
-
-        var veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
-        if (veilGain > 0)
-        {
-            var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
-            veilPower?.AddVeilPoints(veilGain);
-        }
     }
 
     protected override void OnUpgrade()
