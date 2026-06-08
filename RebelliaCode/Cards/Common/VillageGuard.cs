@@ -23,7 +23,7 @@ public class VillageGuard()
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new DamageVar(5m, ValueProp.Move),
+            new DamageVar(10m, ValueProp.Move),
             new PowerVar<BloodSwordArtPower>(2),
             new CalculationBaseVar(1),
             new CalculationExtraVar(0),
@@ -66,6 +66,6 @@ public class VillageGuard()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(5m);
     }
 }
