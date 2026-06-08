@@ -20,7 +20,7 @@ public class RebelBloodThrust()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(10m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1)];
+        [new DamageVar(7m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
