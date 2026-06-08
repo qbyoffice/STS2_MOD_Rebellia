@@ -29,30 +29,34 @@ public class RebelBloodThrust()
             return;
 
         var mainResult = await CommonActions.CardAttack(this, play).Execute(choiceContext);
-        var brokeBlock = mainResult
+
+        decimal unblockedDamage = mainResult
             .Results.SelectMany(list => list)
-            .Any(r => r.UnblockedDamage > 0 || r.OverkillDamage > 0);
-        if (!brokeBlock)
+            .Sum(r => r.UnblockedDamage + r.OverkillDamage);
+
+        if (unblockedDamage <= 0)
             return;
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        var bloodPower = Owner.Creature.GetPower<BloodSwordArtPower>();
-        var hasBlood = bloodPower != null && bloodPower.GetPoints() >= requiredBlood;
+        bool consumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood);
 
-        if (hasBlood && await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+        var baseCmd = DamageCmd.Attack(unblockedDamage).FromCard(this);
+        if (consumed)
         {
-            var baseCmd = DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this);
             foreach (var enemy in combatState.HittableEnemies)
                 await baseCmd.Targeting(enemy).Execute(choiceContext);
         }
-        else if (combatState.HittableEnemies.Count > 0)
+        else
         {
-            await DamageCmd
-                .Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
-                .TargetingRandomOpponents(combatState)
-                .Execute(choiceContext);
+            var enemies = combatState.HittableEnemies;
+            if (enemies.Count > 0)
+            {
+                var rng = Owner.RunState.Rng.CombatTargets;
+                var randomEnemy = rng.NextItem(enemies);
+                if (randomEnemy != null)
+                    await baseCmd.Targeting(randomEnemy).Execute(choiceContext);
+            }
         }
     }
 
