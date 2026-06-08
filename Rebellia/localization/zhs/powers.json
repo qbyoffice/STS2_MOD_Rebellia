@@ -74,6 +74,10 @@
 
     "REBELLIA-BLOOD_WEAPON_VAULT_TOOL.title": "抽取组合为:",
     "REBELLIA-BLOOD_WEAPON_VAULT_TOOL.description": "·[blue]2[/blue]张[gold]打击血武[/gold]\n·[blue]3[/blue]张[gold]交击血武[/gold]\n·[blue]4[/blue]张[gold]飞刀血武[/gold]\n·[blue]1[/blue]张[gold]粉碎血武[/gold]\n·[blue]2[/blue]张[gold]迅捷血武[/gold]",
-    "REBELLIA-BLOOD_WEAPON_VAULT_TOOL.smartDescription": "·[blue]2[/blue]张[gold]打击血武[/gold]\n·[blue]3[/blue]张[gold]交击血武[/gold]\n·[blue]4[/blue]张[gold]飞刀血武[/gold]\n·[blue]1[/blue]张[gold]粉碎血武[/gold]\n·[blue]2[/blue]张[gold]迅捷血武[/gold]"
+    "REBELLIA-BLOOD_WEAPON_VAULT_TOOL.smartDescription": "·[blue]2[/blue]张[gold]打击血武[/gold]\n·[blue]3[/blue]张[gold]交击血武[/gold]\n·[blue]4[/blue]张[gold]飞刀血武[/gold]\n·[blue]1[/blue]张[gold]粉碎血武[/gold]\n·[blue]2[/blue]张[gold]迅捷血武[/gold]",
+
+    "REBELLIA-CRIMSON_VEIL_TOOL.title": "激活鲜血面纱",
+    "REBELLIA-CRIMSON_VEIL_TOOL.description": "若未拥有猩红面纱层数，则使其层数+1",
+    "REBELLIA-CRIMSON_VEIL_TOOL.smartDescription": "若未拥有猩红面纱层数，则使其层数+1"
 
 }

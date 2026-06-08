@@ -19,7 +19,7 @@ public class SanguineDance()
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil];
+        [HoverTipsValue.BloodSwordArt, HoverTipsValue.CrimsonVeil, HoverTipsValue.CrimsonVeilTool];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
