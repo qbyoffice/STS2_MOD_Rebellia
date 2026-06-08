@@ -36,16 +36,14 @@ public class BloodCrimsonSwift()
             Owner.Creature,
             this
         );
-        var BloodCrimsonSwiftPowerAmount = (int)
-            DynamicVarsHelper.GetPowerVar<BloodCrimsonSwiftPower>(DynamicVars).BaseValue;
-        if (!Owner.Creature.HasPower<BloodCrimsonSwiftPower>())
-            await Utils.GivePower<BloodCrimsonSwiftPower>(
-                choiceContext,
-                Owner.Creature,
-                DynamicVars,
-                Owner.Creature,
-                this
-            );
+
+        await Utils.GivePower<BloodCrimsonSwiftPower>(
+            choiceContext,
+            Owner.Creature,
+            DynamicVars,
+            Owner.Creature,
+            this
+        );
     }
 
     protected override void OnUpgrade()

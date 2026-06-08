@@ -29,8 +29,7 @@ public class RebelBloodThrust()
             return;
 
         var mainResult = await CommonActions.CardAttack(this, play).Execute(choiceContext);
-
-        decimal unblockedDamage = mainResult
+        var unblockedDamage = mainResult
             .Results.SelectMany(list => list)
             .Sum(r => r.UnblockedDamage + r.OverkillDamage);
 
@@ -41,11 +40,16 @@ public class RebelBloodThrust()
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         bool consumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood);
 
-        var baseCmd = DamageCmd.Attack(unblockedDamage).FromCard(this);
         if (consumed)
         {
             foreach (var enemy in combatState.HittableEnemies)
-                await baseCmd.Targeting(enemy).Execute(choiceContext);
+            {
+                await DamageCmd
+                    .Attack(unblockedDamage)
+                    .FromCard(this)
+                    .Targeting(enemy)
+                    .Execute(choiceContext);
+            }
         }
         else
         {
@@ -55,7 +59,13 @@ public class RebelBloodThrust()
                 var rng = Owner.RunState.Rng.CombatTargets;
                 var randomEnemy = rng.NextItem(enemies);
                 if (randomEnemy != null)
-                    await baseCmd.Targeting(randomEnemy).Execute(choiceContext);
+                {
+                    await DamageCmd
+                        .Attack(unblockedDamage)
+                        .FromCard(this)
+                        .Targeting(randomEnemy)
+                        .Execute(choiceContext);
+                }
             }
         }
     }
