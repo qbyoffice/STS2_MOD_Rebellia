@@ -35,7 +35,7 @@
     "REBELLIA-REBEL_BLOOD_THRUST.description": "造成{Damage:diff()}点伤害,如果照成实际伤害则随机攻击一名敌人造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n使随机攻击变为全体攻击。",
 
     "REBELLIA-SANGUINE_DANCE.title": "鲜血舞踏",
-    "REBELLIA-SANGUINE_DANCE.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n激活[gold]{CrimsonVeilPower:diff()}猩红面纱[/gold]\n（如果不存在）",
+    "REBELLIA-SANGUINE_DANCE.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n[gold]激活猩红面纱[/gold]",
 
     "REBELLIA-BLOOD_DART.title": "迅刺血剑",
     "REBELLIA-BLOOD_DART.description": "造成{Damage:diff()}点伤害,后续在打出任意卡牌之前，此牌时[gold]免费[/gold]。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n打出后置于抽牌堆顶",
