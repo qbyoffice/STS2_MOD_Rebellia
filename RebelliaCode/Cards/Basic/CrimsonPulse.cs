@@ -19,7 +19,7 @@ public class CrimsonPulse()
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(7, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];
+        [new DamageVar(7, ValueProp.Move), new PowerVar<BloodSwordArtPower>(1)];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.RebelliaStrike];
