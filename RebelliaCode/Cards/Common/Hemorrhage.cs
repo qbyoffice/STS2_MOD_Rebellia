@@ -14,7 +14,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class Hemorrhage() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.Bloodclot];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.KeywordSanguine];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new HpLossVar(3m), new CardsVar(3)];
 

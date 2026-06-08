@@ -48,4 +48,6 @@ public static class HoverTipsValue
 
     public static readonly IHoverTip BloodWeaponVaultTool =
         HoverTipFactory.FromPower<BloodWeaponVaultTool>();
+
+    public static readonly IHoverTip ArmorPower = HoverTipFactory.FromPower<ArmorPower>();
 }
