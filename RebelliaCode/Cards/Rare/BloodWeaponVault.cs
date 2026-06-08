@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -17,6 +18,8 @@ namespace Rebellia.RebelliaCode.Cards.Rare;
 public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipsValue.BloodWeaponVaultTool];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new HpLossVar(4m), new IntVar("MaxHandSize", 10), new PowerVar<RebelliaTmepHpPower>(1)];

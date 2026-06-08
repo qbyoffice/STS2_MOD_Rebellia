@@ -18,7 +18,8 @@ public class BloodBreakArt()
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipsValue.BloodSwordArt, HoverTipFactory.FromPower<VulnerablePower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [

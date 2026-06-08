@@ -1,62 +1,62 @@
 {
     "REBELLIA-REBELLIA_STRIKE.title": "打击",
-	"REBELLIA-REBELLIA_STRIKE.description": "造成{Damage:diff()}点伤害。",
+    "REBELLIA-REBELLIA_STRIKE.description": "造成{Damage:diff()}点伤害。",
 
-    "REBELLIA-REBELLIA_DEFEND.title": "防御",	
+    "REBELLIA-REBELLIA_DEFEND.title": "防御",
     "REBELLIA-REBELLIA_DEFEND.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
-    
+
     "REBELLIA-CRIMSON_PULSE.title": "猩红脉冲",
     "REBELLIA-CRIMSON_PULSE.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n从抽牌堆与手牌中打出,1张[gold]打击[/gold]。",
-	
+
     "REBELLIA-CRIMSON_VEIL.title": "猩红面纱",
     "REBELLIA-CRIMSON_VEIL.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{CrimsonVeilPower:diff()}层[gold]猩红面纱[/gold]",
 
     "REBELLIA-VEIN_THORN_SCAB.title": "剜脉棘痂",
     "REBELLIA-VEIN_THORN_SCAB.description": "失去{HpLoss:diff()}点生命,造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n使目标获得[gold]撕裂[/gold]",
 
-    "REBELLIA-BLOOD_BITE.title": "血咬",	
+    "REBELLIA-BLOOD_BITE.title": "血咬",
     "REBELLIA-BLOOD_BITE.description": "给予{ErodingBloodPower:diff()}层[gold]蚀血[/gold]",
-	
+
     "REBELLIA-BLOOD_CRIMSON_METEOR.title": "血坏·煌红瞬星",
     "REBELLIA-BLOOD_CRIMSON_METEOR.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n每有1层[gold]敏捷[/gold]便额外攻击{CalculationBase:diff()}次\n(总计{TotalHits:diff()}次)",
-    
-	"REBELLIA-VILLAGE_GUARD.title": "村庄警卫",
+
+    "REBELLIA-VILLAGE_GUARD.title": "村庄警卫",
     "REBELLIA-VILLAGE_GUARD.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n[gold]手牌[/gold]中每有1张[gold]攻击牌[/gold]便额外攻击{CalculationBase:diff()}次\n(总计{TotalHits:diff()}次)",
 
     "REBELLIA-BLOOD_BREAK_ART.title": "摧血术式",
     "REBELLIA-BLOOD_BREAK_ART.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n目标获得{VulnerablePower:diff()}层[gold]易伤[/gold]",
-    
-	"REBELLIA-CRIMSON_SPIRAL.title": "猩红螺旋",
+
+    "REBELLIA-CRIMSON_SPIRAL.title": "猩红螺旋",
     "REBELLIA-CRIMSON_SPIRAL.description": "造成{Damage:diff()}点伤害。\n如果拥有猩红面纱，本牌改对所有敌人造成伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n将本牌返回你的[gold]手牌[/gold]",
-    
-	"REBELLIA-SANGUINE_DRAW.title": "鲜血拔刀",
+
+    "REBELLIA-SANGUINE_DRAW.title": "鲜血拔刀",
     "REBELLIA-SANGUINE_DRAW.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n对该敌人打出手牌中{Cards:diff()}张随机[red]鲜血牌[/red]。",
-    
-	"REBELLIA-REBEL_BLOOD_THRUST.title": "逆血突刺",
+
+    "REBELLIA-REBEL_BLOOD_THRUST.title": "逆血突刺",
     "REBELLIA-REBEL_BLOOD_THRUST.description": "造成{Damage:diff()}点伤害,如果照成实际伤害则随机攻击一名敌人造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n使随机攻击变为全体攻击。",
-    
-	"REBELLIA-SANGUINE_DANCE.title": "鲜血舞踏",
+
+    "REBELLIA-SANGUINE_DANCE.title": "鲜血舞踏",
     "REBELLIA-SANGUINE_DANCE.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n激活[gold]{CrimsonVeilPower:diff()}猩红面纱[/gold]\n（如果不存在）",
 
     "REBELLIA-BLOOD_DART.title": "迅刺血剑",
     "REBELLIA-BLOOD_DART.description": "造成{Damage:diff()}点伤害,后续在打出任意卡牌之前，此牌时[gold]免费[/gold]。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n打出后置于抽牌堆顶",
-    
-	"REBELLIA-SPECTRAL_BLOOD_SCOURGE.title": "灵质血灾",
+
+    "REBELLIA-SPECTRAL_BLOOD_SCOURGE.title": "灵质血灾",
     "REBELLIA-SPECTRAL_BLOOD_SCOURGE.description": "造成{Damage:diff()}点伤害。\n将{Cards:diff()}张[gold]血污块[/gold]放入[gold]抽牌堆[/gold]。",
 
     "REBELLIA-SANGUINE_BLADE_FAN.title": "鲜血刀扇",
     "REBELLIA-SANGUINE_BLADE_FAN.description": "失去{HpLoss:diff()}点生命,对所以目标造成{Damage:diff()}点伤害。\n每有一名敌人，便将{Cards:diff()}张飞刀血武添加至你的手牌",
-    
-	"REBELLIA-BLOOD_BACK_LASH.title": "碣血反噬",
+
+    "REBELLIA-BLOOD_BACK_LASH.title": "碣血反噬",
     "REBELLIA-BLOOD_BACK_LASH.description": "造成{CalculationBase:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n敌人身上每有一种效果，本牌额外造成{ExtraDamage:diff()}点伤害。",
 
     "REBELLIA-DART_BLOOD_WEAPON.title": "飞刀血武",
     "REBELLIA-DART_BLOOD_WEAPON.description": "造成{Damage:diff()}点伤害。\n立即触发1次[red]贯血[/red]",
 
-    "REBELLIA-ENGAGE_BLOOD_WEAPON.title": "交击血武",	
+    "REBELLIA-ENGAGE_BLOOD_WEAPON.title": "交击血武",
     "REBELLIA-ENGAGE_BLOOD_WEAPON.description": "造成{Damage:diff()}点伤害。\n抽{Cards:diff()}张牌。\n给予{ErodingBloodPower:diff()}层[gold]蚀血[/gold]",
 
-    "REBELLIA-GUARD_BLOOD_WEAPON.title": "防御血武",	
+    "REBELLIA-GUARD_BLOOD_WEAPON.title": "防御血武",
     "REBELLIA-GUARD_BLOOD_WEAPON.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n对场上所有敌人触发1次[red]萃血[/red]",
 
     "REBELLIA-SMASH_BLOOD_WEAPON.title": "粉碎血武",
@@ -65,9 +65,9 @@
     "REBELLIA-STRIKE_BLOOD_WEAPON.title": "打击血武",
     "REBELLIA-STRIKE_BLOOD_WEAPON.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n给予{ErodingBloodPower:diff()}层[gold]蚀血[/gold]",
 
-    "REBELLIA-SWIFT_BLOOD_WEAPON.title": "迅捷血武",	
+    "REBELLIA-SWIFT_BLOOD_WEAPON.title": "迅捷血武",
     "REBELLIA-SWIFT_BLOOD_WEAPON.description": "造成{Damage:diff()}点伤害。\n对目标敌人触发1次[red]萃血[/red]",
-	
+
     "REBELLIA-BLOOD_BLADE_VEIL.title": "血刃面纱",
     "REBELLIA-BLOOD_BLADE_VEIL.description": "选择[gold]消耗牌堆[/gold]{Cards:diff()}张带有[red]鲜血[/red]的卡牌移除[red]鲜血[/red]，获得等同移除鲜血数量的[gold]鲜血剑艺[/gold]。\n[gold]激活猩红面纱[/gold]",
     "REBELLIA-BLOOD_BLADE_VEIL.selectionScreenPrompt": "选择需要移除[red]鲜血[/red]的卡牌",
@@ -83,7 +83,7 @@
 
     "REBELLIA-HOMEWARD_JOURNEY.title": "归乡旅途",
     "REBELLIA-HOMEWARD_JOURNEY.selectionScreenPrompt": "选择一张攻击牌放入手牌",
-    "REBELLIA-HOMEWARD_JOURNEY.description": "获得◉从抽牌堆中选择一张攻击牌放入你的手牌，在下回合获得◉从抽牌堆中选择一张技能牌放入你的手牌。",
+    "REBELLIA-HOMEWARD_JOURNEY.description": "获得{energyPrefix:energyIcons(1)}从抽牌堆中选择一张攻击牌放入你的手牌，在下回合获得{energyPrefix:energyIcons(1)}从抽牌堆中选择一张技能牌放入你的手牌。",
 
     "REBELLIA-SANGUINE_ESSENCE.title": "血之精粹",
     "REBELLIA-SANGUINE_ESSENCE.description": "获得{BloodSwordArtPower:diff()}鲜血剑艺",
@@ -101,7 +101,8 @@
     "REBELLIA-BLOOD_CRIMSON_SWIFT.description": "获得{Block:diff()}点格挡。\n在本回合获得{DexterityPower:diff()}点敏捷。",
 
     "REBELLIA-CRIMSON_LEAP.title": "猩红跃动",
-    "REBELLIA-CRIMSON_LEAP.description": "随机移除抽牌堆{Cards:diff()}张卡牌的鲜血。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n获得等于移除数的能量。",
+    "REBELLIA-CRIMSON_LEAP.description": "{IfUpgraded:show:自选|随机}移除抽牌堆{Cards:diff()}张卡牌的[gold]鲜血[/gold]。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n获得{energyPrefix:energyIcons(1)}+等于移除数的{energyPrefix:energyIcons(1)}。",
+    "REBELLIA-CRIMSON_LEAP.selectionScreenPrompt": "选择移除三张[gold]鲜血[/gold]",
 
     "REBELLIA-HEMORRHAGE.title": "呕血",
     "REBELLIA-HEMORRHAGE.description": "失去{HpLoss:diff()}点生命。\n为你[gold]抽牌堆[/gold]中的{Cards:diff()}张随机牌添加[gold]鲜血[/gold]",
@@ -111,11 +112,11 @@
 
     "REBELLIA-BLOODCLOT.title": "血污块",
     "REBELLIA-BLOODCLOT.description": "获得1猩红面纱，打出后本卡牌获得[gold]鲜血[/gold]。\n回合结束时本卡牌未被打出，则获得5点临时生命。",
-	
-	"REBELLIA-BLOODCLOT_TRANS.title": "激活灵血",
+
+    "REBELLIA-BLOODCLOT_TRANS.title": "激活灵血",
     "REBELLIA-BLOODCLOT_TRANS.description": "[gold]鲜血[/gold]\n获得1猩红面纱。\n回合结束时本卡牌未被打出，则获得5点临时生命。",
-	
-    "REBELLIA-CRIMSON_STRIKE.title": "猩红打击",	
+
+    "REBELLIA-CRIMSON_STRIKE.title": "猩红打击",
     "REBELLIA-CRIMSON_STRIKE.description": "造成{Damage:diff()}点伤害。\n下一张[gold]鲜血剑艺[/gold]卡牌无消耗。\n非[gold]鲜血剑艺[/gold]卡牌额外造成 现有生命*{IfUpgraded:show:10%|6%}的伤害。",
 
     "REBELLIA-BLOOD_BRIAR.title": "血棘剑丛",
@@ -125,7 +126,7 @@
     "REBELLIA-BLOOD_WEAPON_VAULT.description": "失去{HpLoss:diff()}点生命，随机生成一组[gold]血武器[/gold]。\n抽出[gold]抽牌堆[/gold]与[gold]弃牌堆[/gold]中所有[gold]血武器[/gold]。",
 
     "REBELLIA-CRIMSON_TIDE.title": "猩红潮汐",
-    "REBELLIA-CRIMSON_TIDE.description": "造成{Damage:diff()}点伤害，每有一名敌人，[gold]便获得{CalculationBase:diff()}层猩红面纱[/gold]。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}X\n获得X{Energy:energyIcons()}。",
+    "REBELLIA-CRIMSON_TIDE.description": "造成{Damage:diff()}点伤害，每有一名敌人，[gold]便获得{CalculationBase:diff()}层猩红面纱[/gold]。\n[gold]鲜血剑艺[/gold]X\n获得X{energyPrefix:energyIcons(1)}。",
 
     "REBELLIA-PALE_BLOOD_ESSENCE.title": "苍白血精",
     "REBELLIA-PALE_BLOOD_ESSENCE.description": "[gold]鲜血剑艺[/gold]上限提升{BloodArtMaxPoints:diff()}",

@@ -21,7 +21,8 @@ public class CrimsonPulse()
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(7, ValueProp.Move), new PowerVar<BloodSwordArtPower>(2)];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+        [HoverTipsValue.BloodSwordArt, HoverTipsValue.RebelliaStrike];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

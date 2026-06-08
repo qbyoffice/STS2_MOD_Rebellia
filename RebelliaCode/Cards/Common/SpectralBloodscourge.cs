@@ -20,7 +20,7 @@ public class SpectralBloodScourge()
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
-            new DamageVar(16m, ValueProp.Move),
+            new DamageVar(20m, ValueProp.Move),
             new CardsVar(5),
             new PowerVar<CrimsonVeilPower>(1),
             new PowerVar<RebelliaTmepHpPower>(1),
@@ -59,6 +59,6 @@ public class SpectralBloodScourge()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(6m);
     }
 }

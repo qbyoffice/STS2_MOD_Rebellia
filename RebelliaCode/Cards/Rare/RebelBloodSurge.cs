@@ -15,7 +15,7 @@ namespace Rebellia.RebelliaCode.Cards.Rare;
 public class RebelBloodSurge() : RebelliaCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipsValue.CrimsonVeil, HoverTipsValue.BloodSwordArt];
+        [HoverTipsValue.CrimsonVeil, HoverTipsValue.BloodSwordArt, HoverTipsValue.ArmorPower];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 

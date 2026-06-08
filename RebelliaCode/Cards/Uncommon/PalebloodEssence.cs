@@ -11,8 +11,7 @@ namespace Rebellia.RebelliaCode.Cards.Uncommon;
 public class PaleBloodEssence()
     : RebelliaCard(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-        [HoverTipsValue.CrimsonVeil, HoverTipsValue.BloodSwordArt];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new IntVar("BloodArtMaxPoints", 2)];
