@@ -26,7 +26,8 @@ public class BloodForgedBulwark()
         );
 
         var baseBlock = (int)DynamicVars.Block.BaseValue;
-        var hasTempHp = Owner.Creature.HasPower<RebelliaTmepHpPower>();
+        var tempHpPower = Owner.Creature.GetPower<RebelliaTmepHpPower>();
+        var hasTempHp = tempHpPower != null && tempHpPower.GetCurrentTempHp() > 0;
         var finalBlock = hasTempHp ? baseBlock * 2 : baseBlock;
 
         var blockVar = new BlockVar(finalBlock, ValueProp.Move);

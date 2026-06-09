@@ -13,7 +13,7 @@
 
     "REBELLIA-REBELLIA_TMEP_HP_POWER.title": "临时生命",
     "REBELLIA-REBELLIA_TMEP_HP_POWER.description": "可等量抵消受到的伤害和生命减少效果。",
-    "REBELLIA-REBELLIA_TMEP_HP_POWER.smartDescription": "可等量抵消受到的伤害和生命减少效果。\n当前拥有[blue]{Data}[/blue]点[gold]临时生命[/gold]。",
+    "REBELLIA-REBELLIA_TMEP_HP_POWER.smartDescription": "可等量抵消受到的伤害和生命减少效果。\n当前拥有[blue]{TempHp}[/blue]点[gold]临时生命[/gold]。",
 
     "REBELLIA-BLOOD_SHADOW.title": "血影",
     "REBELLIA-BLOOD_SHADOW.description": "在你的回合开始时，随机对一名敌人造成10点伤害。\n消耗抽到的[gold]血武器[/gold]，如果在本回合内消耗[blue]3[/blue]张[gold]血武器[/gold]，[gold]血影[/gold][blue]3[/blue]。",

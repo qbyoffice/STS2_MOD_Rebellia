@@ -4,8 +4,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
@@ -14,12 +14,23 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class RebelliaTmepHpPower : RebelliaPowers
 {
+    private const string TempHpVarName = "TempHp";
     private bool _isSelfDamage;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => GetInternalData<Data>().RebelliaTempHp;
     public override bool ShouldReceiveCombatHooks => true;
+
+    protected override IEnumerable<DynamicVar> CanonicalVars
+    {
+        get
+        {
+            yield return new DynamicVar(TempHpVarName, 0);
+            foreach (var v in base.CanonicalVars)
+                yield return v;
+        }
+    }
 
     protected override object InitInternalData()
     {
@@ -31,10 +42,16 @@ public class RebelliaTmepHpPower : RebelliaPowers
         return GetInternalData<Data>();
     }
 
+    private void UpdateTempHpVar()
+    {
+        DynamicVars[TempHpVarName].BaseValue = GetData().RebelliaTempHp;
+    }
+
     public void AddTempHp(int amount)
     {
         var data = GetData();
         data.RebelliaTempHp += amount;
+        UpdateTempHpVar();
         InvokeDisplayAmountChanged();
     }
 
@@ -74,6 +91,7 @@ public class RebelliaTmepHpPower : RebelliaPowers
         }
 
         data.RebelliaTempHp = penalty;
+        UpdateTempHpVar();
         InvokeDisplayAmountChanged();
     }
 
@@ -98,23 +116,25 @@ public class RebelliaTmepHpPower : RebelliaPowers
         if (data.RebelliaTempHp >= damage)
         {
             data.RebelliaTempHp -= damage;
+            UpdateTempHpVar();
             InvokeDisplayAmountChanged();
             return 0;
         }
 
         var remaining = damage - data.RebelliaTempHp;
         data.RebelliaTempHp = 0;
+        UpdateTempHpVar();
         InvokeDisplayAmountChanged();
         return remaining;
-    }
-
-    public override async Task AfterCombatEnd(CombatRoom room)
-    {
-        await PowerCmd.Remove(this);
     }
 
     private class Data
     {
         public int RebelliaTempHp;
+    }
+
+    public int GetCurrentTempHp()
+    {
+        return GetData().RebelliaTempHp;
     }
 }
