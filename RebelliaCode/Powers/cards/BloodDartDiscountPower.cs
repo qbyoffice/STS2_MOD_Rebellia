@@ -1,6 +1,5 @@
-using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -11,8 +10,6 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class BloodDartDiscountPower : RebelliaPowers
 {
-    private int _cardsPlayedThisTurn;
-
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;
@@ -24,7 +21,7 @@ public class BloodDartDiscountPower : RebelliaPowers
     )
     {
         modifiedCost = originalCost;
-        if (_cardsPlayedThisTurn == 0 && card is BloodDart)
+        if (card is BloodDart)
         {
             modifiedCost = 0;
             return true;
@@ -32,23 +29,11 @@ public class BloodDartDiscountPower : RebelliaPowers
         return false;
     }
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        _cardsPlayedThisTurn++;
-        await Task.CompletedTask;
-    }
-
-    public override async Task BeforeSideTurnStart(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        IReadOnlyList<Creature> participants,
-        ICombatState combatState
-    )
-    {
-        if (participants.Contains(Owner))
+        if (cardPlay.Card is not BloodDart)
         {
-            _cardsPlayedThisTurn = 0;
+            await PowerCmd.Remove(this);
         }
-        await Task.CompletedTask;
     }
 }

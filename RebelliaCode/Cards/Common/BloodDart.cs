@@ -30,7 +30,7 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        if (Owner.Creature.GetPower<BloodDartDiscountPower>() == null)
+        if (!Owner.Creature.HasPower<BloodDartDiscountPower>())
         {
             var discountAmount = (int)
                 DynamicVarsHelper.GetPowerVar<BloodDartDiscountPower>(DynamicVars).BaseValue;
