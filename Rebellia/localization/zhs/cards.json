@@ -104,7 +104,7 @@
     "REBELLIA-CRIMSON_LEAP.selectionScreenPrompt": "选择移除三张[gold]鲜血[/gold]",
 
     "REBELLIA-HEMORRHAGE.title": "呕血",
-    "REBELLIA-HEMORRHAGE.description": "失去{HpLoss:diff()}点生命。\n为你[gold]抽牌堆[/gold]中的{Cards:diff()}张随机牌添加[gold]鲜血[/gold]",
+    "REBELLIA-HEMORRHAGE.description": "失去{HpLoss:diff()}点生命。\n为你[gold]抽牌堆[/gold]中的{Cards:diff()}张随机牌添加[gold]鲜血[/gold]\n[gold]激活猩红面纱[/gold]",
 
     "REBELLIA-BLOOD_FORGED_BULWARK.title": "血炼坚壁",
     "REBELLIA-BLOOD_FORGED_BULWARK.description": "失去{HpLoss:diff()}点生命。\n获得{Block:diff()}点格挡。\n如果拥有临时生命，本牌的[gold]格挡[/gold]翻倍。",
