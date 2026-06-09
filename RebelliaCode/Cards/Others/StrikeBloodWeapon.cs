@@ -1,4 +1,5 @@
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -13,7 +14,7 @@ using Rebellia.RebelliaCode.Powers;
 namespace Rebellia.RebelliaCode.Cards.Others;
 
 public class StrikeBloodWeapon()
-    : RebelliaCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
+    : RebelliaCard(1, CardType.Attack, CardRarity.None, TargetType.AnyEnemy)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
 

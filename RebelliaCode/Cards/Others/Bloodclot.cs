@@ -10,7 +10,7 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
 
-public class Bloodclot() : RebelliaCard(1, CardType.Status, CardRarity.Token, TargetType.Self)
+public class Bloodclot() : RebelliaCard(1, CardType.Status, CardRarity.None, TargetType.Self)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.BloodclotExhaust];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

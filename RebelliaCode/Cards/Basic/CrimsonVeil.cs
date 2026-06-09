@@ -14,8 +14,7 @@ namespace Rebellia.RebelliaCode.Cards.Basic;
 
 public class CrimsonVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 {
-    protected override HashSet<CardTag> CanonicalTags =>
-        [CardTag.Defend, CardTagExtensions.RebelliaBloodWeaponArt];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.CrimsonVeil];
 

@@ -13,7 +13,7 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
 
-public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
+public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.None, TargetType.Self)
 {
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Defend, CardTagExtensions.RebelliaBloodWeapon];

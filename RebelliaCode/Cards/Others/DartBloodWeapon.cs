@@ -13,7 +13,7 @@ using Rebellia.RebelliaCode.Powers;
 namespace Rebellia.RebelliaCode.Cards.Others;
 
 public class DartBloodWeapon()
-    : RebelliaCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
+    : RebelliaCard(0, CardType.Attack, CardRarity.None, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Shiv, CardTagExtensions.RebelliaBloodWeapon];

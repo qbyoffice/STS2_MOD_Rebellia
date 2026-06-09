@@ -14,7 +14,6 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class SanguineBladeFan()
     : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
-    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.Bloodshiv];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(9m, ValueProp.Move), new HpLossVar(3m), new CardsVar(1)];

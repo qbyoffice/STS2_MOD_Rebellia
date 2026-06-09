@@ -14,7 +14,7 @@ using Rebellia.RebelliaCode.Powers.cards;
 namespace Rebellia.RebelliaCode.Cards.Others;
 
 public class SwiftBloodWeapon()
-    : RebelliaCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
+    : RebelliaCard(0, CardType.Attack, CardRarity.None, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.SanguineExtract];

@@ -13,7 +13,7 @@ using Rebellia.RebelliaCode.Powers;
 namespace Rebellia.RebelliaCode.Cards.Others;
 
 public class SmashBloodWeapon()
-    : RebelliaCard(1, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
+    : RebelliaCard(1, CardType.Attack, CardRarity.None, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
