@@ -8,7 +8,9 @@ using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
 
@@ -16,7 +18,7 @@ public class Hemorrhage() : RebelliaCard(1, CardType.Skill, CardRarity.Common, T
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.KeywordSanguine];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new HpLossVar(3m), new CardsVar(3)];
+        [new PowerVar<CrimsonVeilPower>(1), new HpLossVar(3m), new CardsVar(3)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -27,6 +29,13 @@ public class Hemorrhage() : RebelliaCard(1, CardType.Skill, CardRarity.Common, T
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
             this
         );
+
+        var veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
+        if (!Owner.Creature.HasPower<CrimsonVeilPower>())
+        {
+            var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
+            veilPower?.AddVeilPoints(veilGain);
+        }
 
         var drawPile = PileType.Draw.GetPile(Owner);
         var cardsInDraw = drawPile.Cards.ToList();

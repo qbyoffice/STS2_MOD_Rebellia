@@ -14,7 +14,7 @@ using Rebellia.RebelliaCode.Powers.cards;
 namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class VeinThornScab()
-    : RebelliaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
@@ -22,7 +22,7 @@ public class VeinThornScab()
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.Rend];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(4m, ValueProp.Move), new HpLossVar(3m), new PowerVar<BloodSwordArtPower>(1)];
+        [new DamageVar(7m, ValueProp.Move), new HpLossVar(1m), new PowerVar<BloodSwordArtPower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -59,7 +59,7 @@ public class VeinThornScab()
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(3m);
         EnergyCost.UpgradeBy(-1);
     }
 }

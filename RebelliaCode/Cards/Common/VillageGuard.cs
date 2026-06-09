@@ -14,7 +14,7 @@ using Rebellia.RebelliaCode.Powers;
 namespace Rebellia.RebelliaCode.Cards.Common;
 
 public class VillageGuard()
-    : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
     private const string TotalHitsKey = "TotalHits";
 

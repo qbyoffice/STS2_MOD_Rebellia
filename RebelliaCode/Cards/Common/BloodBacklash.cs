@@ -29,7 +29,7 @@ public class BloodBackLash()
                     return target.Powers.Select(p => p.Id).Distinct().Count();
                 }
             ),
-            new PowerVar<BloodSwordArtPower>(2),
+            new PowerVar<BloodSwordArtPower>(1),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
