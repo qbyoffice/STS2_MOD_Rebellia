@@ -22,14 +22,14 @@ public class Rebellia : PlaceholderCharacterModel
 
     public override IEnumerable<CardModel> StartingDeck =>
         [
-            ModelDb.Card<RebelliaDefend>(),
-            ModelDb.Card<RebelliaDefend>(),
-            ModelDb.Card<RebelliaDefend>(),
-            ModelDb.Card<RebelliaDefend>(),
             ModelDb.Card<RebelliaStrike>(),
             ModelDb.Card<RebelliaStrike>(),
             ModelDb.Card<RebelliaStrike>(),
             ModelDb.Card<RebelliaStrike>(),
+            ModelDb.Card<RebelliaDefend>(),
+            ModelDb.Card<RebelliaDefend>(),
+            ModelDb.Card<RebelliaDefend>(),
+            ModelDb.Card<RebelliaDefend>(),
             ModelDb.Card<CrimsonPulse>(),
             ModelDb.Card<CrimsonVeil>(),
         ];
