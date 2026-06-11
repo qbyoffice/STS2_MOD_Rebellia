@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
@@ -13,8 +14,9 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
 
+[Pool(typeof(TokenCardPool))]
 public class SwiftBloodWeapon()
-    : RebelliaCard(0, CardType.Attack, CardRarity.None, TargetType.AnyEnemy)
+    : RebelliaCard(0, CardType.Attack, CardRarity.Token, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.SanguineExtract];

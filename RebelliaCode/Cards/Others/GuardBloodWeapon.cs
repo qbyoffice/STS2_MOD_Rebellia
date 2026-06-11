@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
@@ -13,7 +14,8 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
 
-public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.None, TargetType.Self)
+[Pool(typeof(TokenCardPool))]
+public class GuardBloodWeapon() : RebelliaCard(1, CardType.Skill, CardRarity.Token, TargetType.Self)
 {
     protected override HashSet<CardTag> CanonicalTags =>
         [CardTag.Defend, CardTagExtensions.RebelliaBloodWeapon];

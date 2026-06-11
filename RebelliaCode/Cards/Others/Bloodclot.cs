@@ -1,7 +1,9 @@
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
@@ -10,7 +12,8 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Others;
 
-public class Bloodclot() : RebelliaCard(1, CardType.Status, CardRarity.None, TargetType.Self)
+[Pool(typeof(StatusCardPool))]
+public class Bloodclot() : RebelliaCard(1, CardType.Status, CardRarity.Token, TargetType.Self)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.BloodclotExhaust];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
