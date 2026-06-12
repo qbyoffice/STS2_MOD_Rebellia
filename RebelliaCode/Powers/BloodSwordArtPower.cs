@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers;
@@ -41,16 +42,20 @@ public class BloodSwordArtPower : RebelliaPowers
         if (amount <= 0)
             return;
         var data = GetInternalData<Data>();
-        int newPoints = Math.Min(data.BloodArtPoints + amount, BloodArtMaxPoints);
-        int actualGain = newPoints - data.BloodArtPoints;
-        if (actualGain > 0)
+        int oldPoints = data.BloodArtPoints;
+        int newPoints = Math.Min(oldPoints + amount, BloodArtMaxPoints);
+
+        if (newPoints > oldPoints)
         {
             data.BloodArtPoints = newPoints;
-            _gainedThisTurn += actualGain;
-
-            DynamicVars["GainedThisTurn"].BaseValue = _gainedThisTurn;
-            InvokeDisplayAmountChanged();
         }
+
+        _gainedThisTurn += amount;
+        if (DynamicVars.ContainsKey("GainedThisTurn"))
+            DynamicVars["GainedThisTurn"].BaseValue = _gainedThisTurn;
+
+        if (newPoints > oldPoints)
+            InvokeDisplayAmountChanged();
     }
 
     public bool TrySpendPoints(int amount)
@@ -63,7 +68,8 @@ public class BloodSwordArtPower : RebelliaPowers
         data.BloodArtPoints -= amount;
         _spentThisTurn += amount;
 
-        DynamicVars["SpentThisTurn"].BaseValue = _spentThisTurn;
+        if (DynamicVars.ContainsKey("SpentThisTurn"))
+            DynamicVars["SpentThisTurn"].BaseValue = _spentThisTurn;
         InvokeDisplayAmountChanged();
         return true;
     }
@@ -73,6 +79,12 @@ public class BloodSwordArtPower : RebelliaPowers
     public int GetGainedThisTurn() => _gainedThisTurn;
 
     public int GetSpentThisTurn() => _spentThisTurn;
+
+    public void UpdateMaxPointsDynamicVar()
+    {
+        if (DynamicVars.ContainsKey("MaxPoints"))
+            DynamicVars["MaxPoints"].BaseValue = BloodArtMaxPoints;
+    }
 
     public void SetMaxPoints(int newMax)
     {
@@ -98,6 +110,12 @@ public class BloodSwordArtPower : RebelliaPowers
             if (DynamicVars.ContainsKey("SpentThisTurn"))
                 DynamicVars["SpentThisTurn"].BaseValue = 0;
         }
+        await Task.CompletedTask;
+    }
+
+    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    {
+        UpdateMaxPointsDynamicVar();
         await Task.CompletedTask;
     }
 
