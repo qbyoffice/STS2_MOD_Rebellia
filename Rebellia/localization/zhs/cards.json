@@ -137,5 +137,8 @@
     "REBELLIA-PRIMORDIAL_CRIMSON_RAID.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]X\n从牌堆中选择X张牌打出。",
 
     "REBELLIA-BLOOD_CRIMSON_AMBUSH.title": "血坏·猩红奇袭",
-    "REBELLIA-BLOOD_CRIMSON_AMBUSH.description": "造成 {Damage} 点伤害。\n本回合内，每获得或花费1点鲜血剑艺，此牌的攻击次数+1。\n（本回合将攻击 {TotalHits:diff()} 次）"
+    "REBELLIA-BLOOD_CRIMSON_AMBUSH.description": "造成{Damage:diff()}点伤害。\n本回合内，每获得或花费1点鲜血剑艺，此牌的攻击次数+1。\n（本回合将攻击{TotalHits:diff()}次）",
+
+    "REBELLIA-SANGUINE_BURST.title": "敛血迸射",
+    "REBELLIA-SANGUINE_BURST.description": "随机对敌人造成{Damage:diff()}点伤害。\n本牌在手牌中每[gold]保留[/gold]1回合攻击次数+1。\n[gold]鲜血剑艺[/gold]1\n每次攻击施加{ErodingBloodPower}层[red]蚀血[/red]。\n（本回合攻击{TotalHits:diff()}次）"
 }
