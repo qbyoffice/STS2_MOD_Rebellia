@@ -11,7 +11,7 @@ using Rebellia.RebelliaCode.Powers;
 namespace Rebellia.RebelliaCode.Cards.Uncommon;
 
 public class BloodCrimsonAmbush()
-    : RebelliaCard(0, CardType.Attack, CardRarity.Uncommon, TargetType.RandomEnemy)
+    : RebelliaCard(0, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 {
     private const string HitCountKey = "TotalHits";
 

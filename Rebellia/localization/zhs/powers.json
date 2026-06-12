@@ -1,7 +1,7 @@
 {
     "REBELLIA-BLOOD_SWORD_ART_POWER.title": "鲜血剑艺",
     "REBELLIA-BLOOD_SWORD_ART_POWER.description": "激活卡牌额外效果的资源，拥有最大上限。",
-    "REBELLIA-BLOOD_SWORD_ART_POWER.smartDescription": "特定卡牌可消费鲜血剑艺触发卡牌的额外效果。\n本回合获得 {GainedThisTurn} 点，当前花费 {SpentThisTurn} 点，当前拥有 {Amount} 点（最多 {MaxPoints} 点）。\n超出上限的鲜血剑艺将被浪费。",
+    "REBELLIA-BLOOD_SWORD_ART_POWER.smartDescription": "特定卡牌可消费鲜血剑艺触发卡牌的额外效果。\n本回合获得[blue]{GainedThisTurn}[/blue]点，当前花费[blue]{SpentThisTurn}[/blue]点，当前拥有[blue]{Amount}[/blue]点（最多[blue]{MaxPoints}[/blue]点）。\n超出上限的鲜血剑艺将被浪费。",
 
 
     "REBELLIA-CRIMSON_VEIL_POWER.title": "猩红面纱",
@@ -66,8 +66,8 @@
     "REBELLIA-ERODING_BLOOD_POWER.smartDescription": "该名敌人回合结束时失去[blue]{Amount}[/blue]%生命，然后[red]蚀血[/red]层数减少[blue]1[/blue]。",
 
     "REBELLIA-SANGUINE_EXTRACT_TOOL.title": "萃血",
-    "REBELLIA-SANGUINE_EXTRACT_TOOL.description": "获得等同于10%[red]蚀血[/red]伤害的[gold]临时生命[/gold]",
-    "REBELLIA-SANGUINE_EXTRACT_TOOL.smartDescription": "获得等同于10%[red]蚀血[/red]伤害的[gold]临时生命[/gold]",
+    "REBELLIA-SANGUINE_EXTRACT_TOOL.description": "获得等同于[blue]10%[/blue][red]蚀血[/red]伤害的[gold]临时生命[/gold]",
+    "REBELLIA-SANGUINE_EXTRACT_TOOL.smartDescription": "获得等同于[blue]10%[/blue][red]蚀血[/red]伤害的[gold]临时生命[/gold]",
 
     "REBELLIA-BLOODPIERCE_TOOL.title": "贯血",
     "REBELLIA-BLOODPIERCE_TOOL.description": "立即触发[blue]1[/blue]次目标的[red]蚀血[/red]伤害。",
