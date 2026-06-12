@@ -23,6 +23,7 @@ public class BloodSwordArtPower : RebelliaPowers
     {
         var data = GetInternalData<Data>();
         data.BloodArtPoints = Math.Min(data.BloodArtPoints + amount, BloodArtMaxPoints);
+        Amount = data.BloodArtPoints;
         InvokeDisplayAmountChanged();
     }
 
@@ -32,6 +33,7 @@ public class BloodSwordArtPower : RebelliaPowers
         if (data.BloodArtPoints < amount)
             return false;
         data.BloodArtPoints -= amount;
+        Amount = data.BloodArtPoints;
         InvokeDisplayAmountChanged();
         return true;
     }

@@ -71,7 +71,7 @@ public class BloodBriar()
                     await CardCmd.AutoPlay(choiceContext, randomCard, randomTarget);
 
                     bloodWeaponCards = PileType
-                        .Hand.GetPile(Owner)
+                        .Deck.GetPile(Owner)
                         .Cards.Where(c => c.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon))
                         .ToList();
                 }

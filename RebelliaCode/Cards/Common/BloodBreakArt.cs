@@ -26,6 +26,7 @@ public class BloodBreakArt()
             new DamageVar(8m, ValueProp.Move),
             new PowerVar<BloodSwordArtPower>(1),
             new PowerVar<VulnerablePower>(1),
+            new PowerVar<ErodingBloodPower>(10),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
@@ -38,13 +39,19 @@ public class BloodBreakArt()
             .FromCard(this)
             .Targeting(play.Target)
             .Execute(choiceContext);
-
+        await Utils.GivePower<VulnerablePower>(
+            choiceContext,
+            play.Target,
+            DynamicVars,
+            Owner.Creature,
+            this
+        );
         var required = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, required))
-            await Utils.GivePower<VulnerablePower>(
+            await Utils.GivePower<ErodingBloodPower>(
                 choiceContext,
-                play.Target,
+                play.Target!,
                 DynamicVars,
                 Owner.Creature,
                 this
@@ -54,6 +61,6 @@ public class BloodBreakArt()
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(1m);
-        DynamicVarsHelper.GetPowerVar<VulnerablePower>(DynamicVars).UpgradeValueBy(3m);
+        DynamicVarsHelper.GetPowerVar<VulnerablePower>(DynamicVars).UpgradeValueBy(1m);
     }
 }

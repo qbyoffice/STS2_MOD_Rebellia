@@ -29,14 +29,14 @@ public class SanguineDraw()
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        Utils.SuppressBloodConsumption(true);
+        int removedVeil = 0;
         var veilPower = Owner.Creature.GetPower<CrimsonVeilPower>();
         if (veilPower != null)
-        {
-            var current = veilPower.GetVeilPoints();
-            if (current > 0)
-                veilPower.AddVeilPoints(-current);
-        }
+            removedVeil = veilPower.GetVeilPoints();
+
+        Utils.SuppressBloodConsumption(true);
+        if (veilPower != null && removedVeil > 0)
+            veilPower.AddVeilPoints(-removedVeil);
 
         Utils.SuppressBloodConsumption(false);
 
@@ -44,14 +44,14 @@ public class SanguineDraw()
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            var count = DynamicVars.Cards.IntValue;
+            int count = DynamicVars.Cards.IntValue;
             var hand = PileType.Hand.GetPile(Owner).Cards;
             var sanguineCards = hand.Where(c =>
                     c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
                 )
                 .ToList();
 
-            for (var i = 0; i < count && sanguineCards.Count > 0; i++)
+            for (int i = 0; i < count && sanguineCards.Count > 0; i++)
             {
                 var randomCard = Owner.RunState.Rng.CombatCardSelection.NextItem(sanguineCards);
                 if (randomCard != null)
@@ -65,6 +65,18 @@ public class SanguineDraw()
                         .ToList();
                 }
             }
+        }
+
+        if (removedVeil > 0)
+        {
+            var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(
+                Owner.Creature,
+                0,
+                Owner.Creature,
+                this,
+                choiceContext
+            );
+            bloodPower!.AddPoints(removedVeil);
         }
     }
 
