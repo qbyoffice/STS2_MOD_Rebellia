@@ -134,5 +134,8 @@
     "REBELLIA-REBEL_BLOOD_SURGE.description": "抽{Cards:diff()}张牌\n获得{CrimsonVeilPower:diff()}猩红面纱，{BloodSwordArtPower:diff()}鲜血剑艺，{ArmorPower:diff()}霸体",
 
     "REBELLIA-PRIMORDIAL_CRIMSON_RAID.title": "原初·猩红突袭",
-    "REBELLIA-PRIMORDIAL_CRIMSON_RAID.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]X\n从牌堆中选择X张牌打出。"
+    "REBELLIA-PRIMORDIAL_CRIMSON_RAID.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]X\n从牌堆中选择X张牌打出。",
+
+    "REBELLIA-BLOOD_CRIMSON_AMBUSH.title": "血坏·猩红奇袭",
+    "REBELLIA-BLOOD_CRIMSON_AMBUSH.description": "造成 {Damage} 点伤害。\n本回合内，每获得或花费1点鲜血剑艺，此牌的攻击次数+1。\n（本回合将攻击 {TotalHits:diff()} 次）"
 }
