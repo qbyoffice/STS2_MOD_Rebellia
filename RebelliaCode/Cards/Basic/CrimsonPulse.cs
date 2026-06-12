@@ -9,6 +9,7 @@ using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Basic;
@@ -28,16 +29,27 @@ public class CrimsonPulse()
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        var strikeCard = Utils.GetAvailableStrikeCard(Owner);
-        if (strikeCard == null)
-            return;
-
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-            return;
 
-        await CardCmd.AutoPlay(choiceContext, strikeCard, play.Target);
+        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+        {
+            var strikeHandCard = PileType
+                .Hand.GetPile(Owner)
+                .Cards.FirstOrDefault(c => c is RebelliaStrike);
+            var strikeDrawCard = PileType
+                .Draw.GetPile(Owner)
+                .Cards.FirstOrDefault(c => c is RebelliaStrike);
+            if (strikeHandCard != null)
+            {
+                await CardCmd.AutoPlay(choiceContext, strikeHandCard, play.Target);
+            }
+            else
+            {
+                await CardCmd.AutoPlay(choiceContext, strikeDrawCard!, play.Target);
+                await BloodSwordArtManager.AddPoints(Owner.Creature, requiredBlood, choiceContext);
+            }
+        }
     }
 
     protected override void OnUpgrade()

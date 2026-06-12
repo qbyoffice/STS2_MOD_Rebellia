@@ -1,4 +1,5 @@
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -26,27 +27,40 @@ public class SanguineDance()
             new DamageVar(12m, ValueProp.Move),
             new PowerVar<CrimsonVeilPower>(1),
             new PowerVar<BloodSwordArtPower>(1),
+            new CardsVar(1),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        if (Owner.Creature.HasPower<CrimsonVeilPower>())
-            return;
+        var veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
+        if (!Owner.Creature.HasPower<CrimsonVeilPower>())
+        {
+            var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
+            veilPower?.AddVeilPoints(veilGain);
+        }
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-        {
-            var veilGain = (int)
-                DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
-            if (veilGain > 0)
-            {
-                var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
-                veilPower?.AddVeilPoints(veilGain);
-            }
-        }
+        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+            return;
+
+        var drawPile = PileType.Draw.GetPile(Owner);
+        var discardPile = PileType.Discard.GetPile(Owner);
+        var attackCards = drawPile
+            .Cards.Concat(discardPile.Cards)
+            .Where(c => c.Type == CardType.Attack)
+            .ToList();
+
+        if (attackCards.Count == 0)
+            return;
+
+        var randomCard = Owner.RunState.Rng.CombatCardSelection.NextItem(attackCards);
+        if (randomCard == null)
+            return;
+        var addResult = await CardPileCmd.Add(randomCard, PileType.Hand);
+        CardCmd.PreviewCardPileAdd(addResult);
     }
 
     protected override void OnUpgrade()

@@ -18,11 +18,7 @@ namespace Rebellia.RebelliaCode.Cards.Ancient
             : base(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy) { }
 
         protected override IEnumerable<DynamicVar> CanonicalVars =>
-            new DynamicVar[]
-            {
-                new DamageVar(11m, ValueProp.Move),
-                new PowerVar<BloodSwordArtPower>(0),
-            };
+            [new DamageVar(11m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(0)];
 
         protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
         {

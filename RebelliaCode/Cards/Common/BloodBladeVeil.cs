@@ -49,19 +49,20 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
                 card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
             }
 
+            var veilGain = (int)
+                DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
+            if (!Owner.Creature.HasPower<CrimsonVeilPower>())
+            {
+                var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
+                veilPower?.AddVeilPoints(veilGain);
+            }
+
             int removedCount = selected.Count();
             if (removedCount > 0)
             {
                 var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
                 bloodPower?.AddPoints(removedCount);
             }
-        }
-
-        var veilGain = (int)DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
-        if (!Owner.Creature.HasPower<CrimsonVeilPower>())
-        {
-            var veilPower = await Utils.GetOrCreatePower<CrimsonVeilPower>(Owner.Creature);
-            veilPower?.AddVeilPoints(veilGain);
         }
     }
 
