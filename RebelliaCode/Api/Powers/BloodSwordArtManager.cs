@@ -59,5 +59,6 @@ public static class BloodSwordArtManager
     {
         var power = await GetOrCreatePower(creature, context);
         power.BloodArtMaxPoints += amount;
+        power.UpdateMaxPointsDynamicVar();
     }
 }

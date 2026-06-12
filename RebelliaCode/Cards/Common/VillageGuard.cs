@@ -16,7 +16,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class VillageGuard()
     : RebelliaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    private const string TotalHitsKey = "TotalHits";
+    private const string ExtraHitsKey = "TotalHits";
 
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
@@ -27,14 +27,14 @@ public class VillageGuard()
             new PowerVar<BloodSwordArtPower>(2),
             new CalculationBaseVar(1),
             new CalculationExtraVar(0),
-            new CalculatedVar(TotalHitsKey).WithMultiplier(
+            new CalculatedVar(ExtraHitsKey).WithMultiplier(
                 (card, target) =>
                 {
                     var hand = PileType.Hand.GetPile(card.Owner).Cards;
-                    var attackCount = hand.Count(c => c != null && c.Type == CardType.Attack);
-                    var baseVal = (int)card.DynamicVars.CalculationBase.BaseValue;
-                    var extra = (int)card.DynamicVars.CalculationExtra.BaseValue;
-                    return attackCount * (baseVal + extra);
+                    int attackCount = hand.Count(c => c.Type == CardType.Attack);
+                    int baseVal = (int)card.DynamicVars.CalculationBase.BaseValue;
+                    int extraVal = (int)card.DynamicVars.CalculationExtra.BaseValue;
+                    return attackCount * (baseVal + extraVal);
                 }
             ),
         ];
@@ -48,18 +48,15 @@ public class VillageGuard()
         if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
             return;
 
-        var hand = PileType.Hand.GetPile(Owner).Cards;
-        var attackCount = hand.Count(c => c.Type == CardType.Attack);
-        var baseVal = (int)DynamicVars.CalculationBase.BaseValue;
-        var extra = (int)DynamicVars.CalculationExtra.BaseValue;
-        var extraAttacks = attackCount * (baseVal + extra);
+        var extraHitsVar = DynamicVars[ExtraHitsKey] as CalculatedVar;
+        int extraHits = (int)(extraHitsVar?.Calculate(play.Target) ?? 0m);
+        if (extraHits <= 0)
+            return;
 
-        for (var i = 0; i < extraAttacks; i++)
+        var damage = DynamicVars.Damage.BaseValue;
+        for (int i = 0; i < extraHits; i++)
         {
-            var cmd = DamageCmd
-                .Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
-                .Targeting(play.Target!);
+            var cmd = DamageCmd.Attack(damage).FromCard(this).Targeting(play.Target!);
             await cmd.Execute(choiceContext);
         }
     }
@@ -67,5 +64,6 @@ public class VillageGuard()
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(5m);
+        DynamicVars.CalculationBase.UpgradeValueBy(1);
     }
 }
