@@ -35,6 +35,9 @@ public static class HoverTipsValue
 
     public static readonly IHoverTip RebelliaStrike = HoverTipFactory.FromCard<RebelliaStrike>();
 
+    public static readonly IHoverTip SwiftBloodWeapon =
+        HoverTipFactory.FromCard<SwiftBloodWeapon>();
+
     public static readonly IHoverTip ExtraHoverTips =
         HoverTipFactory.FromPower<CrimsonStrikeDamagePower>();
 
