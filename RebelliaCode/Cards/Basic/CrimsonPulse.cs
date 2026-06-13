@@ -34,20 +34,20 @@ public class CrimsonPulse()
 
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            var strikeHandCard = PileType
+            var strikeCard = PileType
                 .Hand.GetPile(Owner)
                 .Cards.FirstOrDefault(c => c is RebelliaStrike);
-            var strikeDrawCard = PileType
-                .Draw.GetPile(Owner)
-                .Cards.FirstOrDefault(c => c is RebelliaStrike);
-            if (strikeHandCard != null)
+            if (strikeCard == null)
             {
-                await CardCmd.AutoPlay(choiceContext, strikeHandCard, play.Target);
-            }
-            else
-            {
-                await CardCmd.AutoPlay(choiceContext, strikeDrawCard!, play.Target);
+                strikeCard = PileType
+                    .Draw.GetPile(Owner)
+                    .Cards.FirstOrDefault(c => c is RebelliaStrike);
                 await BloodSwordArtManager.AddPoints(Owner.Creature, requiredBlood, choiceContext);
+            }
+
+            if (strikeCard != null)
+            {
+                await CardCmd.AutoPlay(choiceContext, strikeCard, play.Target);
             }
         }
     }

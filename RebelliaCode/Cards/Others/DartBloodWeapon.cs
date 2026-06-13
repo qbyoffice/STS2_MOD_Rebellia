@@ -27,15 +27,10 @@ public class DartBloodWeapon()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CommonActions.CardAttack(this, play).Execute(choiceContext);
-
         if (play.Target == null)
             return;
 
         var erosionPower = play.Target.GetPower<ErodingBloodPower>();
-        if (erosionPower == null)
-            return;
-
         if (erosionPower != null && erosionPower.Amount > 0)
         {
             var combatState = Owner.Creature.CombatState;
@@ -45,6 +40,7 @@ public class DartBloodWeapon()
                 await erosionPower.AfterSideTurnStart(play.Target.Side, participants, combatState);
             }
         }
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

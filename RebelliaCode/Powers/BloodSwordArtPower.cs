@@ -1,3 +1,4 @@
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -8,7 +9,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers;
 
-public class BloodSwordArtPower : RebelliaPowers
+public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
 {
     public int BloodArtMaxPoints { get; set; } = 2;
 
@@ -32,10 +33,7 @@ public class BloodSwordArtPower : RebelliaPowers
         }
     }
 
-    protected override object InitInternalData()
-    {
-        return new Data();
-    }
+    protected override object InitInternalData() => new Data();
 
     public void AddPoints(int amount)
     {
@@ -84,6 +82,7 @@ public class BloodSwordArtPower : RebelliaPowers
     {
         if (DynamicVars.ContainsKey("MaxPoints"))
             DynamicVars["MaxPoints"].BaseValue = BloodArtMaxPoints;
+        InvokeDisplayAmountChanged();
     }
 
     public void SetMaxPoints(int newMax)
@@ -91,7 +90,10 @@ public class BloodSwordArtPower : RebelliaPowers
         BloodArtMaxPoints = newMax;
         if (DynamicVars.ContainsKey("MaxPoints"))
             DynamicVars["MaxPoints"].BaseValue = newMax;
+        InvokeDisplayAmountChanged();
     }
+
+    public string GetSecondAmount() => $"{BloodArtMaxPoints}";
 
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext choiceContext,

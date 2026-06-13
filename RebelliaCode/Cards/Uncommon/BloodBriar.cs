@@ -45,37 +45,39 @@ public class BloodBriar()
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
+        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+            return;
+
         var hand = PileType.Hand.GetPile(Owner).Cards;
-        var bloodWeaponCards = hand.Where(c =>
-                c.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon)
-            )
+        var draw = PileType.Draw.GetPile(Owner).Cards;
+        var discard = PileType.Discard.GetPile(Owner).Cards;
+        var allBloodWeaponCards = hand.Concat(draw)
+            .Concat(discard)
+            .Where(c => c.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon))
             .ToList();
 
-        if (
-            bloodWeaponCards.Count > 0
-            && await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood)
-        )
+        if (allBloodWeaponCards.Count == 0)
+            return;
+
+        var cardCount = DynamicVars.Cards.IntValue;
+        var combatState = Owner.Creature.CombatState;
+        if (combatState == null)
+            return;
+
+        var rngCard = Owner.RunState.Rng.CombatCardSelection;
+        var rngTarget = Owner.RunState.Rng.CombatTargets;
+        var enemies = combatState.HittableEnemies;
+
+        for (int i = 0; i < cardCount && allBloodWeaponCards.Count > 0 && enemies.Count > 0; i++)
         {
-            var cardCount = DynamicVars.Cards.IntValue;
-            var combatState = Owner.Creature.CombatState;
-            if (combatState == null)
-                return;
-            var enemies = combatState.HittableEnemies;
+            var randomCard = rngCard.NextItem(allBloodWeaponCards);
+            if (randomCard == null)
+                continue;
 
-            for (var i = 0; i < cardCount && bloodWeaponCards.Count > 0 && enemies.Count > 0; i++)
-            {
-                var randomCard = Owner.RunState.Rng.CombatCardSelection.NextItem(bloodWeaponCards);
-                if (randomCard != null)
-                {
-                    var randomTarget = Owner.RunState.Rng.CombatTargets.NextItem(enemies);
-                    await CardCmd.AutoPlay(choiceContext, randomCard, randomTarget);
+            var randomTarget = rngTarget.NextItem(enemies);
+            await CardCmd.AutoPlay(choiceContext, randomCard, randomTarget);
 
-                    bloodWeaponCards = PileType
-                        .Deck.GetPile(Owner)
-                        .Cards.Where(c => c.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon))
-                        .ToList();
-                }
-            }
+            allBloodWeaponCards.Remove(randomCard);
         }
     }
 
