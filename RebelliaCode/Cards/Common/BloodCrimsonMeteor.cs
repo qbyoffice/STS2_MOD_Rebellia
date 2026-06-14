@@ -28,20 +28,22 @@ public class BloodCrimsonMeteor()
             new DamageVar(5m, ValueProp.Move),
             new PowerVar<BloodSwordArtPower>(1),
             new CalculationBaseVar(1),
-            new CalculationExtraVar(0),
+            new CalculationExtraVar(1),
             new CalculatedVar(TotalHitsKey).WithMultiplier(
                 (card, target) =>
                 {
-                    var dex = card.Owner.Creature.GetPowerAmount<DexterityPower>();
+                    var dex =
+                        card.Owner.Creature.GetPowerAmount<DexterityPower>()
+                        * card.DynamicVars.CalculationExtra.BaseValue;
                     var baseVal = card.DynamicVars.CalculationBase.BaseValue;
-                    return baseVal + dex;
+                    return baseVal + dex - 1;
                 }
             ),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        var mainResult = await CommonActions.CardAttack(this, play).Execute(choiceContext);
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
         var target = play.Target;
         if (target == null)
             return;

@@ -144,5 +144,10 @@
     "REBELLIA-SANGUINE_BURST.description": "随机对敌人造成{Damage:diff()}点伤害。\n本牌在手牌中每[gold]保留[/gold]1回合攻击次数+1。\n[gold]鲜血剑艺[/gold]1\n每次攻击施加{ErodingBloodPower}层[red]蚀血[/red]。\n（本回合攻击{TotalHits:diff()}次）",
 
     "REBELLIA-FRAUD_JUDGMENT.title": "欺诈审判",
-    "REBELLIA-FRAUD_JUDGMENT.description": "将{Cards:diff()}张{IfUpgraded:show:[red]迅捷血武+[/red]|[red]迅捷血武[/red]}生成并置于[gold]抽牌堆顶部[/gold]。"
+    "REBELLIA-FRAUD_JUDGMENT.description": "将{Cards:diff()}张{IfUpgraded:show:[red]迅捷血武+[/red]|[red]迅捷血武[/red]}生成并置于[gold]抽牌堆顶部[/gold]。",
+
+    "REBELLIA-MALICE_GAME.title": "欲极恶戏",
+    "REBELLIA-MALICE_GAME.description": "失去{HpLoss:diff()}生命，选择弃牌堆中的{Cards:diff()}张牌加入[gold]手牌[/gold]。\n当拥有猩红面纱，消耗{CrimsonVeilPower:diff()}猩红面纱，本卡牌回到[gold]手牌[/gold]。",
+    "REBELLIA-MALICE_GAME.selectionScreenPrompt": "选择弃牌堆中的卡牌"
+
 }

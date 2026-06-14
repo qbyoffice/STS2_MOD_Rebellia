@@ -9,7 +9,7 @@ using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Cards.Others;
 
-namespace Rebellia.RebelliaCode.Cards.Common;
+namespace Rebellia.RebelliaCode.Cards.Uncommon;
 
 public class FraudJudgment() : RebelliaCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
