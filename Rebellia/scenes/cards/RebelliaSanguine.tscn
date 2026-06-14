@@ -1,0 +1,92 @@
+[gd_scene load_steps=36 format=3 uid="uid://rhup5hqaj6ss"]
+
+[ext_resource type="Texture2D" uid="uid://c61pnwwcqsb1l" path="res://Rebellia/images/card_overplay/blood_00.png" id="1_eulwx"]
+[ext_resource type="Texture2D" uid="uid://bs74e16b8bva2" path="res://Rebellia/images/card_overplay/blood_01.png" id="2_4hjb2"]
+[ext_resource type="Texture2D" uid="uid://wng5xqav0rg7" path="res://Rebellia/images/card_overplay/blood_02.png" id="3_4gg0m"]
+[ext_resource type="Texture2D" uid="uid://ba5at0bnjqay" path="res://Rebellia/images/card_overplay/blood_03.png" id="4_nakmk"]
+[ext_resource type="Texture2D" uid="uid://bjyf525sall02" path="res://Rebellia/images/card_overplay/blood_04.png" id="5_nthoa"]
+[ext_resource type="Texture2D" uid="uid://cghnnablqfsns" path="res://Rebellia/images/card_overplay/blood_05.png" id="6_w2fpm"]
+[ext_resource type="Texture2D" uid="uid://cdc2yca0xq2q0" path="res://Rebellia/images/card_overplay/blood_06.png" id="7_gplte"]
+[ext_resource type="Texture2D" uid="uid://qw04rngx17di" path="res://Rebellia/images/card_overplay/blood_07.png" id="8_eklyt"]
+[ext_resource type="Texture2D" uid="uid://uhvnt4ll4qb6" path="res://Rebellia/images/card_overplay/blood_08.png" id="9_n1xtj"]
+[ext_resource type="Texture2D" uid="uid://boihaxqj3nudw" path="res://Rebellia/images/card_overplay/blood_09.png" id="10_1at3w"]
+[ext_resource type="Texture2D" uid="uid://v3jyp0a8yse5" path="res://Rebellia/images/card_overplay/blood_10.png" id="11_fu0a8"]
+[ext_resource type="Texture2D" uid="uid://svd5bjwtwky2" path="res://Rebellia/images/card_overplay/blood_11.png" id="12_2cwgq"]
+[ext_resource type="Texture2D" uid="uid://cmftkhypphuto" path="res://Rebellia/images/card_overplay/blood_12.png" id="13_ubcxl"]
+[ext_resource type="Texture2D" uid="uid://dy8woobl46ku4" path="res://Rebellia/images/card_overplay/blood_13.png" id="14_5cqhx"]
+[ext_resource type="Texture2D" uid="uid://ddhrvniiy7kg8" path="res://Rebellia/images/card_overplay/blood_14.png" id="15_x0khy"]
+[ext_resource type="Texture2D" uid="uid://bntfeand4fqew" path="res://Rebellia/images/card_overplay/blood_15.png" id="16_5prq0"]
+[ext_resource type="Texture2D" uid="uid://dvytek2swdjhi" path="res://Rebellia/images/card_overplay/blood_16.png" id="17_ed63w"]
+[ext_resource type="Texture2D" uid="uid://d8wn8kif32go" path="res://Rebellia/images/card_overplay/blood_17.png" id="18_qwl03"]
+[ext_resource type="Texture2D" uid="uid://biniebgwt8acw" path="res://Rebellia/images/card_overplay/blood_18.png" id="19_33y7f"]
+[ext_resource type="Texture2D" uid="uid://b7ha015y7uvr5" path="res://Rebellia/images/card_overplay/blood_19.png" id="20_3pmrp"]
+[ext_resource type="Texture2D" uid="uid://trmmsn077lk3" path="res://Rebellia/images/card_overplay/blood_20.png" id="21_83v3s"]
+[ext_resource type="Texture2D" uid="uid://riqxrqvjaua1" path="res://Rebellia/images/card_overplay/blood_21.png" id="22_fhheo"]
+[ext_resource type="Texture2D" uid="uid://78c1befw1her" path="res://Rebellia/images/card_overplay/blood_22.png" id="23_sd3e1"]
+[ext_resource type="Texture2D" uid="uid://dbicpfmpdcg3q" path="res://Rebellia/images/card_overplay/blood_23.png" id="24_00tc2"]
+[ext_resource type="Texture2D" uid="uid://ci02ke7j16pp2" path="res://Rebellia/images/card_overplay/blood_24.png" id="25_jjll6"]
+[ext_resource type="Texture2D" uid="uid://2ngirxj3ni1n" path="res://Rebellia/images/card_overplay/blood_25.png" id="26_wvgyw"]
+[ext_resource type="Texture2D" uid="uid://d71gaa4jrd58" path="res://Rebellia/images/card_overplay/blood_26.png" id="27_r84lh"]
+[ext_resource type="Texture2D" uid="uid://fkkkut65y14e" path="res://Rebellia/images/card_overplay/blood_27.png" id="28_6jmhk"]
+[ext_resource type="Texture2D" uid="uid://c0l1x43c1xlct" path="res://Rebellia/images/card_overplay/blood_28.png" id="29_oqpi2"]
+[ext_resource type="Texture2D" uid="uid://3gnabrw3vpux" path="res://Rebellia/images/card_overplay/blood_29.png" id="30_28lmm"]
+[ext_resource type="Texture2D" uid="uid://wjwudqnw0st4" path="res://Rebellia/images/card_overplay/blood_30.png" id="31_c1bpc"]
+[ext_resource type="Texture2D" uid="uid://di8mmp4dkvwmw" path="res://Rebellia/images/card_overplay/blood_31.png" id="32_wfpbk"]
+
+[sub_resource type="Animation" id="Animation_cgmjf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_eulwx")]
+}
+
+[sub_resource type="Animation" id="Animation_bo5jy"]
+resource_name = "RebelliaSanguine"
+length = 0.62
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28, 0.3, 0.32, 0.34, 0.36, 0.38, 0.4, 0.42, 0.44, 0.46, 0.48, 0.5, 0.52, 0.54, 0.56, 0.58, 0.6, 0.62),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_eulwx"), ExtResource("2_4hjb2"), ExtResource("3_4gg0m"), ExtResource("4_nakmk"), ExtResource("5_nthoa"), ExtResource("6_w2fpm"), ExtResource("7_gplte"), ExtResource("8_eklyt"), ExtResource("9_n1xtj"), ExtResource("10_1at3w"), ExtResource("11_fu0a8"), ExtResource("12_2cwgq"), ExtResource("13_ubcxl"), ExtResource("14_5cqhx"), ExtResource("15_x0khy"), ExtResource("16_5prq0"), ExtResource("17_ed63w"), ExtResource("18_qwl03"), ExtResource("19_33y7f"), ExtResource("20_3pmrp"), ExtResource("21_83v3s"), ExtResource("22_fhheo"), ExtResource("23_sd3e1"), ExtResource("24_00tc2"), ExtResource("25_jjll6"), ExtResource("26_wvgyw"), ExtResource("27_r84lh"), ExtResource("28_6jmhk"), ExtResource("29_oqpi2"), ExtResource("30_28lmm"), ExtResource("31_c1bpc"), ExtResource("32_wfpbk")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l4v47"]
+_data = {
+&"RESET": SubResource("Animation_cgmjf"),
+&"RebelliaSanguine": SubResource("Animation_bo5jy")
+}
+
+[node name="RebelliaSanguine" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VisualLayer1" type="Sprite2D" parent="."]
+position = Vector2(-2.5, -7.99999)
+scale = Vector2(0.473862, 0.47199)
+
+[node name="VisualLayer2" type="Sprite2D" parent="."]
+position = Vector2(0, -23)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("1_eulwx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualLayer2"]
+libraries = {
+&"": SubResource("AnimationLibrary_l4v47")
+}
+autoplay = "RebelliaSanguine"

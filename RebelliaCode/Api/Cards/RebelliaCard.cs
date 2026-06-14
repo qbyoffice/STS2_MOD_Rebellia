@@ -16,6 +16,7 @@ public abstract class RebelliaCard(
     bool autoAdd = true
 ) : CustomCardModel(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
 {
+    public override bool HasBuiltInOverlay => false;
     public override string? CustomPortraitPath =>
         $"res://{MainFile.ModId}/images/card_portraits/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png";
 }
