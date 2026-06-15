@@ -141,7 +141,7 @@
     "REBELLIA-BLOOD_CRIMSON_AMBUSH.description": "造成{Damage:diff()}点伤害。\n本回合内，每获得或花费1点鲜血剑艺，此牌的攻击次数+1。\n（本回合将攻击{TotalHits:diff()}次）",
 
     "REBELLIA-SANGUINE_BURST.title": "敛血迸射",
-    "REBELLIA-SANGUINE_BURST.description": "随机对敌人造成{Damage:diff()}点伤害。\n本牌在手牌中每[gold]保留[/gold]1回合攻击次数+1。\n[gold]鲜血剑艺[/gold]1\n每次攻击施加{ErodingBloodPower}层[red]蚀血[/red]。\n（本回合攻击{TotalHits:diff()}次）",
+    "REBELLIA-SANGUINE_BURST.description": "随机对敌人造成{Damage:diff()}点伤害。\n本牌在手牌中每[gold]存在[/gold]过1回合攻击次数+1。\n[gold]鲜血剑艺[/gold]1\n每次攻击施加{ErodingBloodPower}层[red]蚀血[/red]。\n（本回合攻击{TotalHits:diff()}次）",
 
     "REBELLIA-FRAUD_JUDGMENT.title": "欺诈审判",
     "REBELLIA-FRAUD_JUDGMENT.description": "将{Cards:diff()}张{IfUpgraded:show:[red]迅捷血武+[/red]|[red]迅捷血武[/red]}生成并置于[gold]抽牌堆顶部[/gold]。",
@@ -152,7 +152,12 @@
 
     "REBELLIA-SANGUINE_SHADOW_DANCE.title": "舞光血影",
     "REBELLIA-SANGUINE_SHADOW_DANCE.description": "从[gold]弃牌堆[/gold]中选择{Cards:diff()}张牌将其带[gold]消耗[/gold]的[gold]复制品[/gold]将其加入[gold]手牌[/gold]。",
-    "REBELLIA-SANGUINE_SHADOW_DANCE.selectionScreenPrompt": "选择弃牌堆中需要复制的卡牌"
+    "REBELLIA-SANGUINE_SHADOW_DANCE.selectionScreenPrompt": "选择弃牌堆中需要复制的卡牌",
 
+    "REBELLIA-CULTIVATE.title": "耕耘",
+    "REBELLIA-CULTIVATE.description": "抽{Cards:diff()}张牌。\n丢弃至多{DiscardCards:diff()}张牌。\n每丢1张牌获得{energyPrefix:energyIcons(1)}。",
+    "REBELLIA-CULTIVATE.selectionScreenPrompt": "选择需要丢弃的卡牌",
 
+    "REBELLIA-CRIMSON_HUSK.title": "猩红躯壳",
+    "REBELLIA-CRIMSON_HUSK.description": "本回合内承受的[gold]未被格挡[/gold]的伤害，在下一回合开始时，转化为等量[gold]临时生命[/gold]。"
 }

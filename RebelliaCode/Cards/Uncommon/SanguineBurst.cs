@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
@@ -32,27 +31,11 @@ public class SanguineBurst()
             new CalculationBaseVar(1m),
             new CalculationExtraVar(1m),
             new CalculatedVar(HitCountKey).WithMultiplier(
-                (card, _) =>
-                {
-                    return card.DynamicVars[TurnsInHandKey].BaseValue;
-                }
+                (card, _) => card.DynamicVars[TurnsInHandKey].BaseValue
             ),
         ];
 
-    public override Task AfterCardDrawn(
-        PlayerChoiceContext choiceContext,
-        CardModel card,
-        bool fromHandDraw
-    )
-    {
-        if (card == this)
-        {
-            DynamicVars[TurnsInHandKey].BaseValue = 0;
-        }
-        return Task.CompletedTask;
-    }
-
-    public override async Task AfterSideTurnEnd(
+    public override async Task BeforeSideTurnEnd(
         PlayerChoiceContext choiceContext,
         CombatSide side,
         IEnumerable<Creature> participants
@@ -72,37 +55,31 @@ public class SanguineBurst()
         if (combatState == null)
             return;
 
-        var target = play.Target;
-        if (target == null)
-        {
-            var enemies = combatState.HittableEnemies;
-            if (enemies.Count == 0)
-                return;
-            target = Owner.RunState.Rng.CombatTargets.NextItem(enemies);
-        }
-        if (target == null)
-            return;
-
         var hitCountVar = DynamicVars[HitCountKey] as CalculatedVar;
-        int hitCount = (int)(hitCountVar?.Calculate(target) ?? 1m);
+        int hitCount = (int)(hitCountVar?.Calculate(null) ?? 1m);
         if (hitCount < 1)
             hitCount = 1;
 
         decimal damage = DynamicVars.Damage.BaseValue;
+        var requiredBlood = (int)
+            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
+        bool bloodConsumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood);
+        int erodingPerHit = (int)
+            DynamicVarsHelper.GetPowerVar<ErodingBloodPower>(DynamicVars).BaseValue;
 
         for (int i = 0; i < hitCount; i++)
         {
-            var cmd = DamageCmd.Attack(damage).FromCard(this).Targeting(target);
-            await cmd.Execute(choiceContext);
-        }
+            var aliveEnemies = combatState.HittableEnemies;
+            if (aliveEnemies.Count == 0)
+                break;
+            var target = Owner.RunState.Rng.CombatTargets.NextItem(aliveEnemies);
+            if (target == null)
+                break;
 
-        var requiredBlood = (int)
-            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-        {
-            int erodingPerHit = (int)
-                DynamicVarsHelper.GetPowerVar<ErodingBloodPower>(DynamicVars).BaseValue;
-            for (int i = 0; i < hitCount; i++)
+            var damageCmd = DamageCmd.Attack(damage).FromCard(this).Targeting(target);
+            await damageCmd.Execute(choiceContext);
+
+            if (bloodConsumed)
             {
                 await PowerCmd.Apply<ErodingBloodPower>(
                     choiceContext,
@@ -113,6 +90,8 @@ public class SanguineBurst()
                 );
             }
         }
+
+        DynamicVars[TurnsInHandKey].BaseValue = 0;
     }
 
     protected override void OnUpgrade()

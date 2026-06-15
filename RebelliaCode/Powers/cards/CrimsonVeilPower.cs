@@ -62,23 +62,17 @@ public class CrimsonVeilPower : RebelliaPowers
         return GetData().VeilPoints;
     }
 
-    public override async Task AfterSideTurnEnd(
-        PlayerChoiceContext choiceContext,
+    public override async Task AfterSideTurnStart(
         CombatSide side,
-        IEnumerable<Creature> participants
+        IReadOnlyList<Creature> participants,
+        ICombatState combatState
     )
     {
-        if (Owner == null || Owner.Side != side)
+        if (side != Owner.Side)
             return;
 
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
-        if (bloodPower != null)
-        {
-            var currentBlood = bloodPower.GetPoints();
-            var maxBlood = bloodPower.BloodArtMaxPoints;
-            if (currentBlood < maxBlood)
-                bloodPower.AddPoints(1);
-        }
+        bloodPower?.AddPoints(1);
 
         var currentVeil = GetVeilPoints();
         if (currentVeil > 0)
