@@ -148,6 +148,11 @@
 
     "REBELLIA-MALICE_GAME.title": "欲极恶戏",
     "REBELLIA-MALICE_GAME.description": "失去{HpLoss:diff()}生命，选择弃牌堆中的{Cards:diff()}张牌加入[gold]手牌[/gold]。\n当拥有猩红面纱，消耗{CrimsonVeilPower:diff()}猩红面纱，本卡牌回到[gold]手牌[/gold]。",
-    "REBELLIA-MALICE_GAME.selectionScreenPrompt": "选择弃牌堆中的卡牌"
+    "REBELLIA-MALICE_GAME.selectionScreenPrompt": "选择弃牌堆中的卡牌",
+
+    "REBELLIA-SANGUINE_SHADOW_DANCE.title": "舞光血影",
+    "REBELLIA-SANGUINE_SHADOW_DANCE.description": "从[gold]弃牌堆[/gold]中选择{Cards:diff()}张牌将其带[gold]消耗[/gold]的[gold]复制品[/gold]将其加入[gold]手牌[/gold]。",
+    "REBELLIA-SANGUINE_SHADOW_DANCE.selectionScreenPrompt": "选择弃牌堆中需要复制的卡牌"
+
 
 }
