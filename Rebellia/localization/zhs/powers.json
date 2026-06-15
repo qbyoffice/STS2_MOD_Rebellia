@@ -87,5 +87,9 @@
 
     "REBELLIA-CRIMSON_PLATE_POWER.title": "猩红刃铠",
     "REBELLIA-CRIMSON_PLATE_POWER.description": "[gold]本回合[/gold]受到攻击时,对攻击者触发[red]贯血[/red]。",
-    "REBELLIA-CRIMSON_PLATE_POWER.smartDescription": "[gold]本回合[/gold]受到攻击时,对攻击者触发[red]贯血[/red]。"
+    "REBELLIA-CRIMSON_PLATE_POWER.smartDescription": "[gold]本回合[/gold]受到攻击时,对攻击者触发[red]贯血[/red]。",
+
+    "REBELLIA-SPECTRAL_FORM_POWER.title": "灵质态",
+    "REBELLIA-SPECTRAL_FORM_POWER.description": "[gold]本回合[/gold]无法打出攻击牌。",
+    "REBELLIA-SPECTRAL_FORM_POWER.smartDescription": "[gold]本回合[/gold]无法打出攻击牌。"
 }
