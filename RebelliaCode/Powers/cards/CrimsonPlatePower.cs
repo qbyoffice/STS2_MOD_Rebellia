@@ -44,10 +44,10 @@ public class CrimsonPlatePower : RebelliaPowers
         }
     }
 
-    public override async Task AfterSideTurnEnd(
-        PlayerChoiceContext choiceContext,
+    public override async Task AfterSideTurnStart(
         CombatSide side,
-        IEnumerable<Creature> participants
+        IReadOnlyList<Creature> participants,
+        ICombatState combatState
     )
     {
         await PowerCmd.Remove(this);

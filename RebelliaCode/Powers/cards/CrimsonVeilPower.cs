@@ -2,7 +2,6 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Rebellia.RebelliaCode.Api;
@@ -71,11 +70,10 @@ public class CrimsonVeilPower : RebelliaPowers
         if (side != Owner.Side)
             return;
 
-        var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
-        bloodPower?.AddPoints(1);
-
         if (combatState.RoundNumber > 1)
         {
+            var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
+            bloodPower?.AddPoints(1);
             var currentVeil = GetVeilPoints();
             if (currentVeil > 0)
                 AddVeilPoints(-1);

@@ -47,7 +47,7 @@
     "REBELLIA-SANGUINE_BLADE_FAN.description": "失去{HpLoss:diff()}点生命,对所有目标造成{Damage:diff()}点伤害。\n每有一名敌人，便将{Cards:diff()}张飞刀血武添加至你的手牌",
 
     "REBELLIA-BLOOD_BACK_LASH.title": "碣血反噬",
-    "REBELLIA-BLOOD_BACK_LASH.description": "造成{CalculationBase:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n敌人身上每有一种效果，本牌额外造成{ExtraDamage:diff()}点伤害。",
+    "REBELLIA-BLOOD_BACK_LASH.description": "造成{CalculationBase:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n敌人身上每有一种效果，本牌额外造成{ExtraDamage:diff()}点伤害。\n(总计造成{CalculatedDamage:diff()}点伤害)",
 
     "REBELLIA-DART_BLOOD_WEAPON.title": "飞刀血武",
     "REBELLIA-DART_BLOOD_WEAPON.description": "造成{Damage:diff()}点伤害。\n立即触发1次[red]贯血[/red]",
