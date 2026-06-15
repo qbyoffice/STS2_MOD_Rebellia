@@ -99,5 +99,9 @@
 
     "REBELLIA-BLOOD_SANGUINE_CHAIN_POWER.title": "血坏·鲜血锁链",
     "REBELLIA-BLOOD_SANGUINE_CHAIN_POWER.description": "当承受伤害时，将本牌加入[gold]手牌[/gold]。",
-    "REBELLIA-BLOOD_SANGUINE_CHAIN_POWER.smartDescription": "当承受伤害时，将本牌加入[gold]手牌[/gold]。"
+    "REBELLIA-BLOOD_SANGUINE_CHAIN_POWER.smartDescription": "当承受伤害时，将本牌加入[gold]手牌[/gold]。",
+
+    "REBELLIA-SANGUINE_HEART_CHAIN_POWER.title": "剜心血链",
+    "REBELLIA-SANGUINE_HEART_CHAIN_POWER.description": "下张攻击牌攻击的目标触发[red]贯血[/red]。",
+    "REBELLIA-SANGUINE_HEART_CHAIN_POWER.smartDescription": "下张攻击牌攻击的目标触发[blue]{Amount}[/blue]次[red]贯血[/red]。"
 }
