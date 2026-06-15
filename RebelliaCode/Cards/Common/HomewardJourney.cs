@@ -36,9 +36,7 @@ public class HomewardJourney() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
             foreach (var card in selected)
                 await CardPileCmd.Add(card, PileType.Hand);
         }
-
-        if (!Owner.Creature.HasPower<HomewardJourneyPower>())
-            await Utils.GivePower<HomewardJourneyPower>(choiceContext, this, play);
+        await Utils.GivePower<HomewardJourneyPower>(choiceContext, this, play);
     }
 
     protected override void OnUpgrade()
