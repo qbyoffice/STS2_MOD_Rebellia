@@ -74,8 +74,11 @@ public class CrimsonVeilPower : RebelliaPowers
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
         bloodPower?.AddPoints(1);
 
-        var currentVeil = GetVeilPoints();
-        if (currentVeil > 0)
-            AddVeilPoints(-1);
+        if (combatState.RoundNumber > 1)
+        {
+            var currentVeil = GetVeilPoints();
+            if (currentVeil > 0)
+                AddVeilPoints(-1);
+        }
     }
 }
