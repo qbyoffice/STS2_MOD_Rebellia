@@ -159,5 +159,8 @@
     "REBELLIA-CULTIVATE.selectionScreenPrompt": "选择需要丢弃的卡牌",
 
     "REBELLIA-CRIMSON_HUSK.title": "猩红躯壳",
-    "REBELLIA-CRIMSON_HUSK.description": "本回合内承受的[gold]未被格挡[/gold]的伤害，在下一回合开始时，转化为等量[gold]临时生命[/gold]。"
+    "REBELLIA-CRIMSON_HUSK.description": "本回合内承受的[gold]未被格挡[/gold]的伤害，在下一回合开始时，转化为等量[gold]临时生命[/gold]。",
+
+    "REBELLIA-CRIMSON_PLATE.title": "猩红刃铠",
+    "REBELLIA-CRIMSON_PLATE.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]本回合[/gold]受到攻击时,对攻击者触发[red]贯血[/red]"
 }
