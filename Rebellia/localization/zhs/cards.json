@@ -174,5 +174,8 @@
     "REBELLIA-BLOOD_SANGUINE_CHAIN.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n若拥有[gold]猩红面纱[/gold]，获得{ArmorPower:diff()}[gold]霸体[/gold]。\n当承受伤害时，本牌加入[gold]手牌[/gold]。",
 
     "REBELLIA-SANGUINE_HEART_CHAIN.title": "剜心血链",
-    "REBELLIA-SANGUINE_HEART_CHAIN.description": "随机给予敌人{ErodingBloodPower:diff()}层[red]蚀血[/red]。\n牌堆中每有{CalculationBase:diff()}张[red]鲜血牌[/red]，则额外给予{CalculationExtra:diff()}次。\n(总计{TotalHits:diff()}次)\n下张攻击牌攻击的目标触发{SanguineHeartChainPower:diff()}次[red]贯血[/red]。"
+    "REBELLIA-SANGUINE_HEART_CHAIN.description": "随机给予敌人{ErodingBloodPower:diff()}层[red]蚀血[/red]。\n牌堆中每有{CalculationBase:diff()}张[red]鲜血牌[/red]，则额外给予{CalculationExtra:diff()}次。\n(总计{TotalHits:diff()}次)\n下张攻击牌攻击的目标触发{SanguineHeartChainPower:diff()}次[red]贯血[/red]。",
+
+    "REBELLIA-HARVEST_FEAST.title": "丰收宴会",
+    "REBELLIA-HARVEST_FEAST.description": "失去所有[gold]临时生命[/gold]获得等量生命值。\n获得{Block:diff()}[gold]格挡[/gold]。\n获得{RebelliaTmepHpPower:diff()}[gold]临时生命[/gold]。\n获得{VigorPower:diff()}[gold]活力[/gold]。"
 }
