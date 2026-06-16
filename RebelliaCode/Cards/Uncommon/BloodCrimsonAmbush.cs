@@ -18,20 +18,19 @@ public class BloodCrimsonAmbush()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(5m, ValueProp.Move),
-            new CalculationBaseVar(1),
-            new CalculationExtraVar(1),
-            new CalculatedVar(HitCountKey).WithMultiplier(
-                (card, target) =>
-                {
-                    var bloodPower = card.Owner?.Creature?.GetPower<BloodSwordArtPower>();
-                    if (bloodPower == null)
-                        return 0m;
-                    return bloodPower.GetGainedThisTurn() + bloodPower.GetSpentThisTurn();
-                }
-            ),
-        ];
+    [
+        new DamageVar(5m, ValueProp.Move),
+        new CalculationBaseVar(1),
+        new CalculationExtraVar(1),
+        new CalculatedVar(HitCountKey).WithMultiplier((card, target) =>
+            {
+                var bloodPower = card.Owner?.Creature?.GetPower<BloodSwordArtPower>();
+                if (bloodPower == null)
+                    return 0m;
+                return bloodPower.GetGainedThisTurn() + bloodPower.GetSpentThisTurn();
+            }
+        )
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
