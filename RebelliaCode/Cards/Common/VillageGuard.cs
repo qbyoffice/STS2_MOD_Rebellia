@@ -31,11 +31,9 @@ public class VillageGuard()
                 (card, target) =>
                 {
                     var hand = PileType.Hand.GetPile(card.Owner).Cards;
-                    var attackCount =
-                        hand.Count(c => c.Type == CardType.Attack)
-                        * card.DynamicVars.CalculationExtra.BaseValue;
+                    var attackCount = hand.Count(c => c.Type == CardType.Attack);
                     var baseVal = card.DynamicVars.CalculationBase.BaseValue;
-                    return attackCount * baseVal;
+                    return attackCount * baseVal - 1;
                 }
             ),
         ];
