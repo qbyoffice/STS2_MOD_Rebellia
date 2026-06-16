@@ -17,18 +17,19 @@ public class BloodBackLash()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new CalculationBaseVar(7),
-        new ExtraDamageVar(1),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, target) =>
-            {
-                if (target == null)
-                    return 0;
-                return target.Powers.Select(p => p.Id).Distinct().Count();
-            }
-        ),
-        new PowerVar<BloodSwordArtPower>(1)
-    ];
+        [
+            new CalculationBaseVar(7),
+            new ExtraDamageVar(1),
+            new CalculatedDamageVar(ValueProp.Move).WithMultiplier(
+                (card, target) =>
+                {
+                    if (target == null)
+                        return 0;
+                    return target.Powers.Select(p => p.Id).Distinct().Count();
+                }
+            ),
+            new PowerVar<BloodSwordArtPower>(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

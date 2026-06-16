@@ -16,11 +16,11 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
-        HoverTipsValue.CrimsonVeil,
-        HoverTipsValue.KeywordSanguine,
-        HoverTipsValue.CrimsonVeilTool
-    ];
+        [
+            HoverTipsValue.CrimsonVeil,
+            HoverTipsValue.KeywordSanguine,
+            HoverTipsValue.CrimsonVeilTool,
+        ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<CrimsonVeilPower>(1), new CardsVar(1)];

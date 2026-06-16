@@ -124,5 +124,5 @@
     "REBELLIA-SPECTRAL_BLOOD_FORM.title": "灵质血躯",
     "REBELLIA-SPECTRAL_BLOOD_FORM.description": "本回合内，以临时生命承受的伤害减{SpectralBloodFormPower:diff()}。",
     "REBELLIA-BLOOD_CRIMSON_SURGE.title": "血坏·猩红狂潮",
-    "REBELLIA-BLOOD_CRIMSON_SURGE.description": "为牌堆中的所有状态牌附上鲜血。\n每有{CalculationBase:diff()}张牌被附上鲜血便对全体敌人施加{CalculationExtra:diff()}层[red]蚀血[/red]。\n（本回合施加{TotalHits:diff()}次）"
+    "REBELLIA-BLOOD_CRIMSON_SURGE.description": "为牌堆中的所有状态牌附上鲜血。\n每有一张牌被附上鲜血便对全体敌人施加{CalculationExtra:diff()}层[red]蚀血[/red]。\n（本回合施加{TotalHits:diff()}次）"
 }

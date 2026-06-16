@@ -12,11 +12,11 @@ public class BloodCrimsonLink()
     : RebelliaCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new PowerVar<BloodCrimsonLinkPower>(1),
-        new PowerVar<DexterityPower>(2),
-        new PowerVar<StrengthPower>(2)
-    ];
+        [
+            new PowerVar<BloodCrimsonLinkPower>(1),
+            new PowerVar<DexterityPower>(2),
+            new PowerVar<StrengthPower>(2),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

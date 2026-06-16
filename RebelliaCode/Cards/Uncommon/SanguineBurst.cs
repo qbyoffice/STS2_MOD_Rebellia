@@ -23,16 +23,17 @@ public class SanguineBurst()
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.ErodingBlood];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(3m, ValueProp.Move),
-        new PowerVar<BloodSwordArtPower>(1),
-        new PowerVar<ErodingBloodPower>(1),
-        new(TurnsInHandKey, 0m),
-        new CalculationBaseVar(1m),
-        new CalculationExtraVar(1m),
-        new CalculatedVar(HitCountKey).WithMultiplier((card, _) => card.DynamicVars[TurnsInHandKey].BaseValue
-        )
-    ];
+        [
+            new DamageVar(3m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<ErodingBloodPower>(1),
+            new(TurnsInHandKey, 0m),
+            new CalculationBaseVar(1m),
+            new CalculationExtraVar(1m),
+            new CalculatedVar(HitCountKey).WithMultiplier(
+                (card, _) => card.DynamicVars[TurnsInHandKey].BaseValue
+            ),
+        ];
 
     public override async Task BeforeSideTurnEnd(
         PlayerChoiceContext choiceContext,

@@ -15,9 +15,7 @@ namespace Rebellia.RebelliaCode.Cards.Ancient;
 public class PrimordialCrimsonRaid : RebelliaCard
 {
     public PrimordialCrimsonRaid()
-        : base(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
-    {
-    }
+        : base(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy) { }
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(11m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(0)];

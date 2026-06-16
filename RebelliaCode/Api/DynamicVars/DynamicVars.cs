@@ -7,9 +7,7 @@ public class PlayCountVar : IntVar
     public const string DefaultName = "PlayCount";
 
     public PlayCountVar(decimal baseValue)
-        : base(DefaultName, baseValue)
-    {
-    }
+        : base(DefaultName, baseValue) { }
 }
 
 public class ExtraAttackCountVar : IntVar
@@ -17,7 +15,5 @@ public class ExtraAttackCountVar : IntVar
     public const string DefaultName = "ExtraAttackCount";
 
     public ExtraAttackCountVar(decimal baseValue)
-        : base(DefaultName, baseValue)
-    {
-    }
+        : base(DefaultName, baseValue) { }
 }

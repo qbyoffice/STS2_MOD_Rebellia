@@ -20,11 +20,11 @@ public class BloodCrimsonSurge()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new CalculationBaseVar(0m),
-        new CalculationExtraVar(1m),
-        new CalculatedVar(PreviewCountKey).WithMultiplier(CountStatusCardsWithoutSanguine)
-    ];
+        [
+            new CalculationBaseVar(0m),
+            new CalculationExtraVar(1m),
+            new CalculatedVar(PreviewCountKey).WithMultiplier(CountStatusCardsWithoutSanguine),
+        ];
 
     private static decimal CountStatusCardsWithoutSanguine(CardModel card, Creature? target)
     {
@@ -62,7 +62,8 @@ public class BloodCrimsonSurge()
             )
             .ToList();
 
-        foreach (var card in statusCardsToModify) card.AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
+        foreach (var card in statusCardsToModify)
+            card.AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
         var addedCount = statusCardsToModify.Count;
         if (addedCount <= 0)

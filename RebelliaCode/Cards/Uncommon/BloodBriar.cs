@@ -21,13 +21,13 @@ public class BloodBriar()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(5m, ValueProp.Move),
-        new HpLossVar(3m),
-        new PowerVar<BloodSwordArtPower>(2),
-        new RepeatVar(2),
-        new CardsVar(1)
-    ];
+        [
+            new DamageVar(5m, ValueProp.Move),
+            new HpLossVar(3m),
+            new PowerVar<BloodSwordArtPower>(2),
+            new RepeatVar(2),
+            new CardsVar(1),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

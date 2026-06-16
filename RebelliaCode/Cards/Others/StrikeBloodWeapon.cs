@@ -20,18 +20,18 @@ public class StrikeBloodWeapon()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
 
     protected override HashSet<CardTag> CanonicalTags =>
-    [
-        CardTag.Strike,
-        CardTagExtensions.RebelliaBloodWeapon,
-        CardTagExtensions.RebelliaBloodWeaponArt
-    ];
+        [
+            CardTag.Strike,
+            CardTagExtensions.RebelliaBloodWeapon,
+            CardTagExtensions.RebelliaBloodWeaponArt,
+        ];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new DamageVar(6m, ValueProp.Move),
-        new PowerVar<BloodSwordArtPower>(1),
-        new PowerVar<ErodingBloodPower>(2)
-    ];
+        [
+            new DamageVar(6m, ValueProp.Move),
+            new PowerVar<BloodSwordArtPower>(1),
+            new PowerVar<ErodingBloodPower>(2),
+        ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [CardKeyword.Ethereal, CardKeyword.Exhaust];

@@ -48,7 +48,7 @@ public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rar
             () => CreateMultiple<EngageBloodWeapon>(3, combatState, player),
             () => CreateMultiple<DartBloodWeapon>(4, combatState, player),
             () => CreateMultiple<SmashBloodWeapon>(1, combatState, player),
-            () => CreateMultiple<SwiftBloodWeapon>(2, combatState, player)
+            () => CreateMultiple<SwiftBloodWeapon>(2, combatState, player),
         };
         var randomCombo = Owner.RunState.Rng.Niche.NextItem(combos);
         if (randomCombo == null)

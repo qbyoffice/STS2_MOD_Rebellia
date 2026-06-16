@@ -20,12 +20,12 @@ public class RebelBloodSurge() : RebelliaCard(1, CardType.Skill, CardRarity.Rare
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new PowerVar<CrimsonVeilPower>(2),
-        new PowerVar<BloodSwordArtPower>(4),
-        new PowerVar<ArmorPower>(3),
-        new CardsVar(3)
-    ];
+        [
+            new PowerVar<CrimsonVeilPower>(2),
+            new PowerVar<BloodSwordArtPower>(4),
+            new PowerVar<ArmorPower>(3),
+            new CardsVar(3),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

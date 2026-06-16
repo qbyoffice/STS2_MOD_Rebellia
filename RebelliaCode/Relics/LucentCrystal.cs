@@ -19,9 +19,11 @@ public class LucentCrystal : RebelliaRelics
 {
     private const int UpgradeThreshold = 5;
 
-    [SavedProperty] public int Rebellia_MonsterCombatWins { get; set; }
+    [SavedProperty]
+    public int Rebellia_MonsterCombatWins { get; set; }
 
-    [SavedProperty] public int Rebellia_EliteCombatWins { get; set; }
+    [SavedProperty]
+    public int Rebellia_EliteCombatWins { get; set; }
 
     public override RelicRarity Rarity => RelicRarity.Starter;
     public override bool ShowCounter => true;

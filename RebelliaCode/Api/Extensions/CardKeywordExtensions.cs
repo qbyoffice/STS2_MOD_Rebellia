@@ -6,7 +6,8 @@ namespace Rebellia.RebelliaCode.Api.Extensions;
 
 public static class RCardKeywordExtensions
 {
-    [CustomEnum("REBELLIASANGUINE")] [KeywordProperties(AutoKeywordPosition.Before)]
+    [CustomEnum("REBELLIASANGUINE")]
+    [KeywordProperties(AutoKeywordPosition.Before)]
     public static CardKeyword RebelliaSanguine;
 
     public static bool IsRebelliaSanguine(this CardModel card)

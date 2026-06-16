@@ -20,27 +20,28 @@ public class SanguineHeartChain()
         [HoverTipsValue.BloodPierce, HoverTipsValue.ErodingBlood];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-    [
-        new PowerVar<ErodingBloodPower>(1),
-        new PowerVar<SanguineHeartChainPower>(1),
-        new CalculationBaseVar(1m),
-        new CalculationExtraVar(1m),
-        new CalculatedVar(ExtraTimesKey).WithMultiplier((card, _) =>
-            {
-                var player = card.Owner;
-                if (player == null)
-                    return 0m;
-                var allCards = PileType
-                    .Draw.GetPile(player)
-                    .Cards.Concat(PileType.Discard.GetPile(player).Cards)
-                    .Concat(PileType.Exhaust.GetPile(player).Cards)
-                    .Concat(PileType.Hand.GetPile(player).Cards);
-                return allCards.Count(c =>
-                    c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
-                );
-            }
-        )
-    ];
+        [
+            new PowerVar<ErodingBloodPower>(1),
+            new PowerVar<SanguineHeartChainPower>(1),
+            new CalculationBaseVar(1m),
+            new CalculationExtraVar(1m),
+            new CalculatedVar(ExtraTimesKey).WithMultiplier(
+                (card, _) =>
+                {
+                    var player = card.Owner;
+                    if (player == null)
+                        return 0m;
+                    var allCards = PileType
+                        .Draw.GetPile(player)
+                        .Cards.Concat(PileType.Discard.GetPile(player).Cards)
+                        .Concat(PileType.Exhaust.GetPile(player).Cards)
+                        .Concat(PileType.Hand.GetPile(player).Cards);
+                    return allCards.Count(c =>
+                        c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
+                    );
+                }
+            ),
+        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
