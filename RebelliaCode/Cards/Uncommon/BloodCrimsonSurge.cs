@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.Extensions;
@@ -16,10 +15,16 @@ namespace Rebellia.RebelliaCode.Cards.Uncommon;
 public class BloodCrimsonSurge()
     : RebelliaCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
 {
+    private const string PreviewCountKey = "TotalHits";
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
 
-    private const string PreviewCountKey = "TotalHits";
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new CalculationBaseVar(0m),
+        new CalculationExtraVar(1m),
+        new CalculatedVar(PreviewCountKey).WithMultiplier(CountStatusCardsWithoutSanguine)
+    ];
 
     private static decimal CountStatusCardsWithoutSanguine(CardModel card, Creature? target)
     {
@@ -37,13 +42,6 @@ public class BloodCrimsonSurge()
                 && !c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine)
             );
     }
-
-    protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new CalculationBaseVar(0m),
-            new CalculationExtraVar(1m),
-            new CalculatedVar(PreviewCountKey).WithMultiplier(CountStatusCardsWithoutSanguine),
-        ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -64,20 +62,16 @@ public class BloodCrimsonSurge()
             )
             .ToList();
 
-        foreach (var card in statusCardsToModify)
-        {
-            card.AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
-        }
+        foreach (var card in statusCardsToModify) card.AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
-        int addedCount = statusCardsToModify.Count;
+        var addedCount = statusCardsToModify.Count;
         if (addedCount <= 0)
             return;
 
-        int layersPerCard = (int)DynamicVars.CalculationExtra.BaseValue;
-        int totalLayers = addedCount * layersPerCard;
+        var layersPerCard = (int)DynamicVars.CalculationExtra.BaseValue;
+        var totalLayers = addedCount * layersPerCard;
 
         foreach (var enemy in combatState.HittableEnemies)
-        {
             await PowerCmd.Apply<ErodingBloodPower>(
                 choiceContext,
                 enemy,
@@ -85,7 +79,6 @@ public class BloodCrimsonSurge()
                 Owner.Creature,
                 this
             );
-        }
     }
 
     protected override void OnUpgrade()

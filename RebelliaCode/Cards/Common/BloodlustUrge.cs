@@ -10,13 +10,13 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class BloodlustUrge() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new HpLossVar(15m),
-            new CardsVar(6),
-            new EnergyVar(1),
-            new PowerVar<BloodlustUrgePower>(6),
-            new PowerVar<BloodlustUrgeUpgradedPower>(4),
-        ];
+    [
+        new HpLossVar(15m),
+        new CardsVar(6),
+        new EnergyVar(1),
+        new PowerVar<BloodlustUrgePower>(6),
+        new PowerVar<BloodlustUrgeUpgradedPower>(4)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

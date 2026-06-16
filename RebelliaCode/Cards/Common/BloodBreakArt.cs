@@ -22,12 +22,12 @@ public class BloodBreakArt()
         [HoverTipsValue.BloodSwordArt, HoverTipFactory.FromPower<VulnerablePower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(8m, ValueProp.Move),
-            new PowerVar<BloodSwordArtPower>(1),
-            new PowerVar<VulnerablePower>(1),
-            new PowerVar<ErodingBloodPower>(10),
-        ];
+    [
+        new DamageVar(8m, ValueProp.Move),
+        new PowerVar<BloodSwordArtPower>(1),
+        new PowerVar<VulnerablePower>(1),
+        new PowerVar<ErodingBloodPower>(10)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

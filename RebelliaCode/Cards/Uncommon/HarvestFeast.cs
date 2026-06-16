@@ -21,11 +21,11 @@ public class HarvestFeast() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommo
         [HoverTipFactory.FromPower<VigorPower>(), HoverTipsValue.RebelliaTempHp];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new BlockVar(11, ValueProp.Move),
-            new PowerVar<RebelliaTmepHpPower>(7),
-            new PowerVar<VigorPower>(7),
-        ];
+    [
+        new BlockVar(11, ValueProp.Move),
+        new PowerVar<RebelliaTmepHpPower>(7),
+        new PowerVar<VigorPower>(7)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

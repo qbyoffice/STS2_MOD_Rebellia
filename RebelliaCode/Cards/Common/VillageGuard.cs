@@ -22,21 +22,20 @@ public class VillageGuard()
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(10m, ValueProp.Move),
-            new PowerVar<BloodSwordArtPower>(2),
-            new CalculationBaseVar(1),
-            new CalculationExtraVar(1),
-            new CalculatedVar(ExtraHitsKey).WithMultiplier(
-                (card, target) =>
-                {
-                    var hand = PileType.Hand.GetPile(card.Owner).Cards;
-                    var attackCount = hand.Count(c => c.Type == CardType.Attack);
-                    var baseVal = card.DynamicVars.CalculationBase.BaseValue;
-                    return attackCount * baseVal - 1;
-                }
-            ),
-        ];
+    [
+        new DamageVar(10m, ValueProp.Move),
+        new PowerVar<BloodSwordArtPower>(2),
+        new CalculationBaseVar(1),
+        new CalculationExtraVar(1),
+        new CalculatedVar(ExtraHitsKey).WithMultiplier((card, target) =>
+            {
+                var hand = PileType.Hand.GetPile(card.Owner).Cards;
+                var attackCount = hand.Count(c => c.Type == CardType.Attack);
+                var baseVal = card.DynamicVars.CalculationBase.BaseValue;
+                return attackCount * baseVal - 1;
+            }
+        )
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {

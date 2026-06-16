@@ -15,11 +15,11 @@ public class BloodSanguineChain()
     : RebelliaCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new BlockVar(9m, ValueProp.Move),
-            new PowerVar<ArmorPower>(1),
-            new PowerVar<BloodSanguineChainPower>(1),
-        ];
+    [
+        new BlockVar(9m, ValueProp.Move),
+        new PowerVar<ArmorPower>(1),
+        new PowerVar<BloodSanguineChainPower>(1)
+    ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
