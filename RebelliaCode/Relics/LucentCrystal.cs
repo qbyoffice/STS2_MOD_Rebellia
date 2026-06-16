@@ -58,13 +58,9 @@ public class LucentCrystal : RebelliaRelics
             return;
 
         if (Owner.Creature.HasPower<CrimsonVeilPower>())
-        {
             await BloodKeywordManager.MoveBloodCardsToDrawPile(Owner);
-        }
         else
-        {
             await BloodKeywordManager.ConsumeAllBloodCards(Owner);
-        }
     }
 
     public override async Task BeforeSideTurnStart(
@@ -82,13 +78,9 @@ public class LucentCrystal : RebelliaRelics
             return;
         await CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner);
         if (Owner.Creature.HasPower<CrimsonVeilPower>())
-        {
             await BloodKeywordManager.MoveBloodCardsToDrawPile(Owner);
-        }
         else
-        {
             await BloodKeywordManager.ConsumeAllBloodCards(Owner);
-        }
 
         if (bloodPower.BloodArtMaxPoints < 2)
             bloodPower.BloodArtMaxPoints = 2;

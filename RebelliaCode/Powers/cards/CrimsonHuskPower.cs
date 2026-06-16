@@ -12,16 +12,22 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class CrimsonHuskPower : RebelliaPowers
 {
-    private int _DamageThisTurn = 0;
+    private int _DamageThisTurn;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => _DamageThisTurn;
     public override bool ShouldReceiveCombatHooks => true;
 
-    protected override object InitInternalData() => new Data();
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
 
-    private Data GetData() => GetInternalData<Data>();
+    private Data GetData()
+    {
+        return GetInternalData<Data>();
+    }
 
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,
@@ -38,6 +44,7 @@ public class CrimsonHuskPower : RebelliaPowers
             GetData().Damage += result.UnblockedDamage;
             InvokeDisplayAmountChanged();
         }
+
         await Task.CompletedTask;
     }
 
@@ -49,12 +56,13 @@ public class CrimsonHuskPower : RebelliaPowers
     {
         if (side == Owner.Side && participants.Contains(Owner))
         {
-            int damage = _DamageThisTurn;
+            var damage = _DamageThisTurn;
             if (damage > 0)
             {
                 var tempHpPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner);
                 tempHpPower?.AddTempHp(damage);
             }
+
             await PowerCmd.Remove(this);
         }
     }
@@ -68,6 +76,6 @@ public class CrimsonHuskPower : RebelliaPowers
 
     private class Data
     {
-        public int Damage = 0;
+        public int Damage;
     }
 }

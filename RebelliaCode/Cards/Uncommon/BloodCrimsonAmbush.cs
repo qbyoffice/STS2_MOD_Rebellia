@@ -40,11 +40,11 @@ public class BloodCrimsonAmbush()
             return;
 
         var calcVar = DynamicVars[HitCountKey] as CalculatedVar;
-        int hitCount = (int)(calcVar?.Calculate(target) ?? 1m);
+        var hitCount = (int)(calcVar?.Calculate(target) ?? 1m);
         if (hitCount < 1)
             hitCount = 1;
 
-        decimal damage = DynamicVars.Damage.BaseValue;
+        var damage = DynamicVars.Damage.BaseValue;
         var cmd = DamageCmd.Attack(damage).FromCard(this).Targeting(target).WithHitCount(hitCount);
         await cmd.Execute(choiceContext);
     }

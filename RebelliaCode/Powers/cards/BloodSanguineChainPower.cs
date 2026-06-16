@@ -18,7 +18,10 @@ public class BloodSanguineChainPower : RebelliaPowers
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;
 
-    public void SetLinkedCard(CardModel card) => _linkedCard = card;
+    public void SetLinkedCard(CardModel card)
+    {
+        _linkedCard = card;
+    }
 
     public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,

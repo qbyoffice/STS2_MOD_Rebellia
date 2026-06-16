@@ -1,4 +1,3 @@
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -43,13 +42,9 @@ public class BloodBackLash()
 
         decimal totalDamage;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredPoints))
-        {
             totalDamage = DynamicVars.CalculatedDamage.Calculate(target);
-        }
         else
-        {
             totalDamage = DynamicVars.CalculationBase.BaseValue;
-        }
 
         var cmd = DamageCmd.Attack(totalDamage).FromCard(this).Targeting(target);
         await cmd.Execute(choiceContext);

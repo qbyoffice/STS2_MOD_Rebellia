@@ -13,7 +13,7 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 public class BloodCrimsonLinkPower : RebelliaPowers
 {
     private bool _nextAttackFree = true;
-    private bool _nextSkillFree = false;
+    private bool _nextSkillFree;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
@@ -31,11 +31,13 @@ public class BloodCrimsonLinkPower : RebelliaPowers
             modifiedCost = 0;
             return true;
         }
+
         if (_nextSkillFree && card.Type == CardType.Skill)
         {
             modifiedCost = 0;
             return true;
         }
+
         return false;
     }
 

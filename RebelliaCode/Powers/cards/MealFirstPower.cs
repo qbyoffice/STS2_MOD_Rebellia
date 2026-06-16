@@ -26,9 +26,9 @@ public class MealFirstPower : RebelliaPowers
         if (combatState == null)
             return;
 
-        int count = (int)Amount;
+        var count = Amount;
 
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
             var bloodclot = combatState.CreateCard<Bloodclot>(player);
             var addResult = await CardPileCmd.AddGeneratedCardToCombat(

@@ -18,6 +18,7 @@ namespace Rebellia.RebelliaCode.Cards.Rare;
 public class BloodWeaponVault() : RebelliaCard(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeapon];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodWeaponVaultTool];
 

@@ -22,7 +22,7 @@ public class MaliceGame() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommon,
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        int hpLoss = (int)DynamicVars.HpLoss.BaseValue;
+        var hpLoss = (int)DynamicVars.HpLoss.BaseValue;
         await CreatureCmd.Damage(
             choiceContext,
             Owner.Creature,
@@ -31,7 +31,7 @@ public class MaliceGame() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommon,
             this
         );
 
-        int cardsToPick = (int)DynamicVars.Cards.BaseValue;
+        var cardsToPick = (int)DynamicVars.Cards.BaseValue;
         var discardPile = PileType.Discard.GetPile(Owner);
         var availableCards = discardPile.Cards.ToList();
 
@@ -54,12 +54,10 @@ public class MaliceGame() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommon,
             }
 
             foreach (var card in selectedCards)
-            {
                 await CardPileCmd.Add(card, PileType.Hand);
-            }
         }
 
-        int requiredVeil = (int)
+        var requiredVeil = (int)
             DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
         var veilPower = Owner.Creature.GetPower<CrimsonVeilPower>();
         if (veilPower != null && veilPower.GetVeilPoints() >= requiredVeil)

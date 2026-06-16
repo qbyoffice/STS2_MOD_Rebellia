@@ -16,6 +16,7 @@ namespace Rebellia.RebelliaCode.Cards.Uncommon;
 public class HarvestFeast() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<VigorPower>(), HoverTipsValue.RebelliaTempHp];
 
@@ -33,7 +34,7 @@ public class HarvestFeast() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommo
         var tempHpPower = Owner.Creature.GetPower<RebelliaTmepHpPower>();
         if (tempHpPower != null)
         {
-            int currentTempHp = tempHpPower.GetCurrentTempHp();
+            var currentTempHp = tempHpPower.GetCurrentTempHp();
             if (currentTempHp > 0)
             {
                 await CreatureCmd.Heal(Owner.Creature, currentTempHp);

@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
@@ -36,6 +35,7 @@ public class HomewardJourney() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
             foreach (var card in selected)
                 await CardPileCmd.Add(card, PileType.Hand);
         }
+
         await Utils.GivePower<HomewardJourneyPower>(choiceContext, this, play);
     }
 

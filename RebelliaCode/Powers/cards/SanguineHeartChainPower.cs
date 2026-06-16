@@ -28,17 +28,14 @@ public class SanguineHeartChainPower : RebelliaPowers
         {
             var combatState = Owner.CombatState;
             if (combatState != null)
-            {
-                for (int i = 0; i < (int)Amount; i++)
-                {
+                for (var i = 0; i < Amount; i++)
                     await erosionPower.AfterSideTurnStart(
                         target.Side,
                         new List<Creature> { target },
                         combatState
                     );
-                }
-            }
         }
+
         await PowerCmd.Remove(this);
     }
 }

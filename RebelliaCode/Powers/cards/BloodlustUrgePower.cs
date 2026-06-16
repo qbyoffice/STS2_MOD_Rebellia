@@ -33,6 +33,7 @@ public class BloodlustUrgePower : RebelliaPowers
             modifiedCost = Math.Max(0, originalCost - COST_REDUCTION);
             return true;
         }
+
         return false;
     }
 
@@ -55,7 +56,6 @@ public class BloodlustUrgePower : RebelliaPowers
         if (Owner?.Side != side || Owner.Player == null)
             return;
         if (Amount > 0)
-        {
             await CreatureCmd.Damage(
                 choiceContext,
                 Owner,
@@ -64,9 +64,11 @@ public class BloodlustUrgePower : RebelliaPowers
                 null,
                 null
             );
-        }
         await PowerCmd.Remove(this);
     }
 
-    public override async Task AfterCombatEnd(CombatRoom room) => await PowerCmd.Remove(this);
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        await PowerCmd.Remove(this);
+    }
 }

@@ -17,20 +17,20 @@ public class Cultivate() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommon, 
         var drawCount = DynamicVars.Cards.BaseValue;
         await CardPileCmd.Draw(choiceContext, drawCount, Owner);
 
-        int maxDiscard = (int)DynamicVars["DiscardCards"].BaseValue;
+        var maxDiscard = (int)DynamicVars["DiscardCards"].BaseValue;
         var handPile = PileType.Hand.GetPile(Owner);
         if (handPile.Cards.Count > 0 && maxDiscard > 0)
         {
-            int actualMax = Math.Min(maxDiscard, handPile.Cards.Count);
+            var actualMax = Math.Min(maxDiscard, handPile.Cards.Count);
             var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, actualMax);
             var selected = await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this);
             var toDiscard = selected.ToList();
-            int discardedCount = toDiscard.Count;
+            var discardedCount = toDiscard.Count;
             if (discardedCount > 0)
             {
                 await CardCmd.Discard(choiceContext, toDiscard);
-                int energyPerDiscard = (int)DynamicVars.Energy.BaseValue;
-                int totalEnergy = discardedCount * energyPerDiscard;
+                var energyPerDiscard = (int)DynamicVars.Energy.BaseValue;
+                var totalEnergy = discardedCount * energyPerDiscard;
                 if (totalEnergy > 0)
                     await PlayerCmd.GainEnergy(totalEnergy, Owner);
             }

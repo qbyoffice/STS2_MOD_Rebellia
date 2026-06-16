@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Api.Cards;
 
 namespace Rebellia.RebelliaCode.Cards.Uncommon;
@@ -32,10 +31,10 @@ public class SanguineShadowDance()
 
         foreach (var original in selectedList)
         {
-            CardModel clone = original.CreateClone();
+            var clone = original.CreateClone();
             clone.AddKeyword(CardKeyword.Exhaust);
             var addResult = await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Hand, Owner);
-            CardCmd.PreviewCardPileAdd(addResult, 1.2f);
+            CardCmd.PreviewCardPileAdd(addResult);
         }
     }
 

@@ -38,18 +38,16 @@ public class RebelBloodThrust()
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        bool consumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood);
+        var consumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood);
 
         if (consumed)
         {
             foreach (var enemy in combatState.HittableEnemies)
-            {
                 await DamageCmd
                     .Attack(unblockedDamage)
                     .FromCard(this)
                     .Targeting(enemy)
                     .Execute(choiceContext);
-            }
         }
         else
         {
@@ -59,13 +57,11 @@ public class RebelBloodThrust()
                 var rng = Owner.RunState.Rng.CombatTargets;
                 var randomEnemy = rng.NextItem(enemies);
                 if (randomEnemy != null)
-                {
                     await DamageCmd
                         .Attack(unblockedDamage)
                         .FromCard(this)
                         .Targeting(randomEnemy)
                         .Execute(choiceContext);
-                }
             }
         }
     }

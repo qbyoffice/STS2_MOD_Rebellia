@@ -26,7 +26,6 @@ public class BloodSanguineChain()
         await CommonActions.CardBlock(this, play);
 
         if (Owner.Creature.HasPower<CrimsonVeilPower>())
-        {
             await PowerCmd.Apply<ArmorPower>(
                 choiceContext,
                 Owner.Creature,
@@ -34,7 +33,6 @@ public class BloodSanguineChain()
                 Owner.Creature,
                 this
             );
-        }
 
         var power = await PowerCmd.Apply<BloodSanguineChainPower>(
             choiceContext,

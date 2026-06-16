@@ -18,11 +18,6 @@ public class CrimsonVeilPower : RebelliaPowers
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrimsonVeilPower>(1)];
 
-    private class Data
-    {
-        public int VeilPoints;
-    }
-
     protected override object InitInternalData()
     {
         return new Data();
@@ -36,7 +31,7 @@ public class CrimsonVeilPower : RebelliaPowers
     public void AddVeilPoints(int amount)
     {
         var data = GetData();
-        int oldPoints = data.VeilPoints;
+        var oldPoints = data.VeilPoints;
         data.VeilPoints = Math.Max(0, data.VeilPoints + amount);
         InvokeDisplayAmountChanged();
 
@@ -44,9 +39,7 @@ public class CrimsonVeilPower : RebelliaPowers
             TaskHelper.RunSafely(BloodKeywordManager.MoveBloodCardsToDrawPile(Owner.Player!));
 
         if (oldPoints == 0 && data.VeilPoints > 0)
-        {
             TaskHelper.RunSafely(CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner.Player!));
-        }
 
         if (data.VeilPoints == 0)
         {
@@ -78,5 +71,10 @@ public class CrimsonVeilPower : RebelliaPowers
             if (currentVeil > 0)
                 AddVeilPoints(-1);
         }
+    }
+
+    private class Data
+    {
+        public int VeilPoints;
     }
 }

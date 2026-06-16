@@ -8,7 +8,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Extensions;
-using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
@@ -33,6 +32,7 @@ public class BloodlustUrgeUpgradedPower : BloodlustUrgePower
             modifiedCost = Math.Max(0, originalCost - COST_REDUCTION);
             return true;
         }
+
         return false;
     }
 
@@ -55,7 +55,6 @@ public class BloodlustUrgeUpgradedPower : BloodlustUrgePower
         if (Owner?.Side != side || Owner.Player == null)
             return;
         if (Amount > 0)
-        {
             await CreatureCmd.Damage(
                 choiceContext,
                 Owner,
@@ -64,9 +63,11 @@ public class BloodlustUrgeUpgradedPower : BloodlustUrgePower
                 null,
                 null
             );
-        }
         await PowerCmd.Remove(this);
     }
 
-    public override async Task AfterCombatEnd(CombatRoom room) => await PowerCmd.Remove(this);
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        await PowerCmd.Remove(this);
+    }
 }

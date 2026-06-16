@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -14,8 +12,10 @@ namespace Rebellia.RebelliaCode.Cards.Uncommon;
 public class SpectralForm() : RebelliaCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<IntangiblePower>(), HoverTipsValue.CrimsonVeil];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<IntangiblePower>(1), new PowerVar<SpectralFormPower>(1)];
 
@@ -24,7 +24,7 @@ public class SpectralForm() : RebelliaCard(1, CardType.Skill, CardRarity.Uncommo
         var veilPower = Owner.Creature.GetPower<CrimsonVeilPower>();
         if (veilPower != null)
         {
-            int currentVeil = veilPower.GetVeilPoints();
+            var currentVeil = veilPower.GetVeilPoints();
             if (currentVeil > 0)
                 veilPower.AddVeilPoints(-currentVeil);
         }

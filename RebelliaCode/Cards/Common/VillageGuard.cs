@@ -48,12 +48,12 @@ public class VillageGuard()
             return;
 
         var extraHitsVar = DynamicVars[ExtraHitsKey] as CalculatedVar;
-        int extraHits = (int)(extraHitsVar?.Calculate(play.Target) ?? 0m);
+        var extraHits = (int)(extraHitsVar?.Calculate(play.Target) ?? 0m);
         if (extraHits <= 0)
             return;
 
         var damage = DynamicVars.Damage.BaseValue;
-        for (int i = 0; i < extraHits; i++)
+        for (var i = 0; i < extraHits; i++)
         {
             var cmd = DamageCmd.Attack(damage).FromCard(this).Targeting(play.Target!);
             await cmd.Execute(choiceContext);

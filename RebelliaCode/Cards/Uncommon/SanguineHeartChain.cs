@@ -57,13 +57,13 @@ public class SanguineHeartChain()
                 return;
             target = Owner.RunState.Rng.CombatTargets.NextItem(enemies);
         }
+
         if (target == null)
             return;
 
         var extraVar = DynamicVars[ExtraTimesKey] as CalculatedVar;
-        int extraTimes = (int)(extraVar?.Calculate(target) ?? 0m);
-        for (int i = 0; i < extraTimes; i++)
-        {
+        var extraTimes = (int)(extraVar?.Calculate(target) ?? 0m);
+        for (var i = 0; i < extraTimes; i++)
             await Utils.GivePower<ErodingBloodPower>(
                 choiceContext,
                 target,
@@ -71,7 +71,6 @@ public class SanguineHeartChain()
                 Owner.Creature,
                 this
             );
-        }
 
         await Utils.GivePower<SanguineHeartChainPower>(
             choiceContext,

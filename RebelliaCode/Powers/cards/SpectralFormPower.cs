@@ -29,8 +29,6 @@ public class SpectralFormPower : RebelliaPowers
     )
     {
         if (Owner?.Side == side)
-        {
             await PowerCmd.Remove(this);
-        }
     }
 }

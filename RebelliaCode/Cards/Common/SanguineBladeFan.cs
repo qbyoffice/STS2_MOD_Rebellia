@@ -14,6 +14,7 @@ public class SanguineBladeFan()
     : RebelliaCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.Bloodshiv];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(9m, ValueProp.Move), new HpLossVar(2m), new CardsVar(1)];
 
@@ -48,7 +49,7 @@ public class SanguineBladeFan()
         var enemyCount = combatState.HittableEnemies.Count;
         var cardsPerEnemy = DynamicVars.Cards.IntValue;
         var totalExtraCards = enemyCount * cardsPerEnemy;
-        for (int i = 0; i < totalExtraCards; i++)
+        for (var i = 0; i < totalExtraCards; i++)
         {
             var dart = combatState.CreateCard<DartBloodWeapon>(Owner);
             currentHandCount = PileType.Hand.GetPile(Owner).Cards.Count;

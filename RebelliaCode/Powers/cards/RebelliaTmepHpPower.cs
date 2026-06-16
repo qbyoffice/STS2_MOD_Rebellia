@@ -128,13 +128,13 @@ public class RebelliaTmepHpPower : RebelliaPowers
         return remaining;
     }
 
-    private class Data
-    {
-        public int RebelliaTempHp;
-    }
-
     public int GetCurrentTempHp()
     {
         return GetData().RebelliaTempHp;
+    }
+
+    private class Data
+    {
+        public int RebelliaTempHp;
     }
 }

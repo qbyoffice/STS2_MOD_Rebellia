@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.Extensions;
@@ -23,21 +22,15 @@ public class MealFirst() : RebelliaCard(1, CardType.Skill, CardRarity.Common, Ta
         var modifiedCards = new List<CardModel>();
 
         if (drawnCards != null)
-        {
             foreach (var card in drawnCards)
-            {
                 if (!card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
                 {
                     card.AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
                     modifiedCards.Add(card);
                 }
-            }
-        }
 
         if (modifiedCards.Count > 0)
-        {
-            CardCmd.Preview(modifiedCards, time: 1.0f, CardPreviewStyle.HorizontalLayout);
-        }
+            CardCmd.Preview(modifiedCards, 1.0f);
 
         await Utils.GivePower<RebelliaTmepHpPower>(choiceContext, this, play);
         await Utils.GivePower<MealFirstPower>(choiceContext, this, play);

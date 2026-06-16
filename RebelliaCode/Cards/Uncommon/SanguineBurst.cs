@@ -27,7 +27,7 @@ public class SanguineBurst()
             new DamageVar(3m, ValueProp.Move),
             new PowerVar<BloodSwordArtPower>(1),
             new PowerVar<ErodingBloodPower>(1),
-            new DynamicVar(TurnsInHandKey, 0m),
+            new(TurnsInHandKey, 0m),
             new CalculationBaseVar(1m),
             new CalculationExtraVar(1m),
             new CalculatedVar(HitCountKey).WithMultiplier(
@@ -46,6 +46,7 @@ public class SanguineBurst()
             var turns = DynamicVars[TurnsInHandKey].BaseValue + 1;
             DynamicVars[TurnsInHandKey].BaseValue = turns;
         }
+
         await Task.CompletedTask;
     }
 
@@ -56,18 +57,18 @@ public class SanguineBurst()
             return;
 
         var hitCountVar = DynamicVars[HitCountKey] as CalculatedVar;
-        int hitCount = (int)(hitCountVar?.Calculate(null) ?? 1m);
+        var hitCount = (int)(hitCountVar?.Calculate(null) ?? 1m);
         if (hitCount < 1)
             hitCount = 1;
 
-        decimal damage = DynamicVars.Damage.BaseValue;
+        var damage = DynamicVars.Damage.BaseValue;
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
-        bool bloodConsumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood);
-        int erodingPerHit = (int)
+        var bloodConsumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood);
+        var erodingPerHit = (int)
             DynamicVarsHelper.GetPowerVar<ErodingBloodPower>(DynamicVars).BaseValue;
 
-        for (int i = 0; i < hitCount; i++)
+        for (var i = 0; i < hitCount; i++)
         {
             var aliveEnemies = combatState.HittableEnemies;
             if (aliveEnemies.Count == 0)
@@ -80,7 +81,6 @@ public class SanguineBurst()
             await damageCmd.Execute(choiceContext);
 
             if (bloodConsumed)
-            {
                 await PowerCmd.Apply<ErodingBloodPower>(
                     choiceContext,
                     target,
@@ -88,7 +88,6 @@ public class SanguineBurst()
                     Owner.Creature,
                     this
                 );
-            }
         }
 
         DynamicVars[TurnsInHandKey].BaseValue = 0;

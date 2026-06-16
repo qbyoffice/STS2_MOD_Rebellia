@@ -21,13 +21,9 @@ public class GlimmerCrystal : RebelliaRelics
             return;
 
         if (Owner.Creature.HasPower<CrimsonVeilPower>())
-        {
             await BloodKeywordManager.MoveBloodCardsToDrawPile(Owner);
-        }
         else
-        {
             await BloodKeywordManager.ConsumeAllBloodCards(Owner);
-        }
     }
 
     public override async Task BeforeSideTurnStart(
@@ -41,13 +37,9 @@ public class GlimmerCrystal : RebelliaRelics
             return;
         await CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner);
         if (Owner.Creature.HasPower<CrimsonVeilPower>())
-        {
             await BloodKeywordManager.MoveBloodCardsToDrawPile(Owner);
-        }
         else
-        {
             await BloodKeywordManager.ConsumeAllBloodCards(Owner);
-        }
         var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
         if (bloodPower != null)
         {
