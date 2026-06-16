@@ -124,5 +124,7 @@
     "REBELLIA-SPECTRAL_BLOOD_FORM.title": "灵质血躯",
     "REBELLIA-SPECTRAL_BLOOD_FORM.description": "本回合内，以临时生命承受的伤害减{SpectralBloodFormPower:diff()}。",
     "REBELLIA-BLOOD_CRIMSON_SURGE.title": "血坏·猩红狂潮",
-    "REBELLIA-BLOOD_CRIMSON_SURGE.description": "为牌堆中的所有状态牌附上鲜血。\n每有一张牌被附上鲜血便对全体敌人施加{CalculationExtra:diff()}层[red]蚀血[/red]。\n（本回合施加{TotalHits:diff()}次）"
+    "REBELLIA-BLOOD_CRIMSON_SURGE.description": "为牌堆中的所有状态牌附上鲜血。\n每有一张牌被附上鲜血便对全体敌人施加{CalculationExtra:diff()}层[red]蚀血[/red]。\n（本回合施加{TotalHits:diff()}次）",
+    "REBELLIA-FURY_BLOOD_SHADOW.title": "狂怒血影",
+    "REBELLIA-FURY_BLOOD_SHADOW.description": "获得{BloodShadow:diff()}[red]血影[/red]。\n[gold]自动消耗[/gold]抽到的[red]血武[/red]与[red]鲜血牌[/red]。\n当[red]鲜血牌[/red]被[gold]消耗[/gold]时，[gold]移除该鲜血牌[/gold]的[red]鲜血[/red]。\n[gold]单回合内每消耗[/gold]3张[red]血武[/red]获得{IfUpgraded:show:4|3}[red]血影[/red]。"
 }

@@ -9,6 +9,7 @@ using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
@@ -67,7 +68,7 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
             return;
 
         foreach (var card in toRemove)
-            card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
+            await BloodKeywordManager.RemoveSanguineFromCard(Owner, card);
 
         CardCmd.Preview(toRemove, 1.0f);
 

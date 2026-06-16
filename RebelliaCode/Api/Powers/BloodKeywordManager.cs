@@ -2,7 +2,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Api.Powers;
 
@@ -41,6 +43,15 @@ public static class BloodKeywordManager
                 continue;
 
             await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
+        }
+    }
+
+    public static async Task RemoveSanguineFromCard(Player player, CardModel card)
+    {
+        if (card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
+        {
+            card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
+            await BloodShadow.TriggerSanguineRemoved(player);
         }
     }
 }
