@@ -89,5 +89,13 @@
 
     "REBELLIA-FURY_BLOOD_SHADOW_UPGRADED_POWER.title": "狂怒血影",
     "REBELLIA-FURY_BLOOD_SHADOW_UPGRADED_POWER.description": "[gold]自动消耗[/gold]抽到的[red]血武[/red]与[red]鲜血牌[/red]。\n当[red]鲜血牌[/red]被[gold]消耗[/gold]时，[gold]移除该鲜血牌[/gold]的[red]鲜血[/red]。\n[gold]单回合内每消耗[/gold]3张[red]血武[/red]获得4[red]血影[/red]。",
-    "REBELLIA-FURY_BLOOD_SHADOW_UPGRADED_POWER.smartDescription": "[gold]自动消耗[/gold]抽到的[red]血武[/red]与[red]鲜血牌[/red]。\n当[red]鲜血牌[/red]被[gold]消耗[/gold]时，[gold]移除该鲜血牌[/gold]的[red]鲜血[/red]。\n[gold]单回合内每消耗[/gold]3张[red]血武[/red]获得4[red]血影[/red]。"
+    "REBELLIA-FURY_BLOOD_SHADOW_UPGRADED_POWER.smartDescription": "[gold]自动消耗[/gold]抽到的[red]血武[/red]与[red]鲜血牌[/red]。\n当[red]鲜血牌[/red]被[gold]消耗[/gold]时，[gold]移除该鲜血牌[/gold]的[red]鲜血[/red]。\n[gold]单回合内每消耗[/gold]3张[red]血武[/red]获得4[red]血影[/red]。",
+
+    "REBELLIA-BLOOD_BLADE_TEMPER_POWER.title": "血刃淬炼",
+    "REBELLIA-BLOOD_BLADE_TEMPER_POWER.description": "[gold]本场战斗[/gold]中。\n每失去1次生命，所有[red]血武[/red]造成的伤害提升。",
+    "REBELLIA-BLOOD_BLADE_TEMPER_POWER.smartDescription": "[gold]本场战斗[/gold]失去了[blue]{LostLifeCount}[/blue]次生命，\n所有[red]血武[/red]造成的伤害提升[blue]{TotalBonus}[/blue]。",
+
+    "REBELLIA-BLOOD_BLADE_TEMPER_UPGRADED_POWER.title": "血刃淬炼",
+    "REBELLIA-BLOOD_BLADE_TEMPER_UPGRADED_POWER.description": "[gold]本场战斗[/gold]中。\n每失去1次生命，所有[red]血武[/red]造成的伤害提升。",
+    "REBELLIA-BLOOD_BLADE_TEMPER_UPGRADED_POWER.smartDescription": "[gold]本场战斗[/gold]失去了[blue]{LostLifeCount}[/blue]次生命，\n所有[red]血武[/red]造成的伤害提升[blue]{TotalBonus}[/blue]。"
 }
