@@ -46,9 +46,7 @@ public class CrimsonPulse()
             }
 
             if (strikeCard != null)
-            {
                 await CardCmd.AutoPlay(choiceContext, strikeCard, play.Target);
-            }
         }
     }
 

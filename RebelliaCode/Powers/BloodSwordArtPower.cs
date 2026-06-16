@@ -11,10 +11,9 @@ namespace Rebellia.RebelliaCode.Powers;
 
 public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
 {
-    public int BloodArtMaxPoints { get; set; } = 2;
-
     private int _gainedThisTurn;
     private int _spentThisTurn;
+    public int BloodArtMaxPoints { get; set; } = 2;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -33,20 +32,26 @@ public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
         }
     }
 
-    protected override object InitInternalData() => new Data();
+    public string GetSecondAmount()
+    {
+        return $"{BloodArtMaxPoints}";
+    }
+
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
 
     public void AddPoints(int amount)
     {
         if (amount <= 0)
             return;
         var data = GetInternalData<Data>();
-        int oldPoints = data.BloodArtPoints;
-        int newPoints = Math.Min(oldPoints + amount, BloodArtMaxPoints);
+        var oldPoints = data.BloodArtPoints;
+        var newPoints = Math.Min(oldPoints + amount, BloodArtMaxPoints);
 
         if (newPoints > oldPoints)
-        {
             data.BloodArtPoints = newPoints;
-        }
 
         _gainedThisTurn += amount;
         if (DynamicVars.ContainsKey("GainedThisTurn"))
@@ -72,11 +77,20 @@ public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
         return true;
     }
 
-    public int GetPoints() => GetInternalData<Data>().BloodArtPoints;
+    public int GetPoints()
+    {
+        return GetInternalData<Data>().BloodArtPoints;
+    }
 
-    public int GetGainedThisTurn() => _gainedThisTurn;
+    public int GetGainedThisTurn()
+    {
+        return _gainedThisTurn;
+    }
 
-    public int GetSpentThisTurn() => _spentThisTurn;
+    public int GetSpentThisTurn()
+    {
+        return _spentThisTurn;
+    }
 
     public void UpdateMaxPointsDynamicVar()
     {
@@ -92,8 +106,6 @@ public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
             DynamicVars["MaxPoints"].BaseValue = newMax;
         InvokeDisplayAmountChanged();
     }
-
-    public string GetSecondAmount() => $"{BloodArtMaxPoints}";
 
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext choiceContext,
@@ -112,6 +124,7 @@ public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
             if (DynamicVars.ContainsKey("SpentThisTurn"))
                 DynamicVars["SpentThisTurn"].BaseValue = 0;
         }
+
         await Task.CompletedTask;
     }
 

@@ -32,7 +32,7 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
             .Cards.Where(c => c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
             .ToList();
 
-        int maxSelect = Math.Min((int)DynamicVars.Cards.BaseValue, sanguineCards.Count);
+        var maxSelect = Math.Min((int)DynamicVars.Cards.BaseValue, sanguineCards.Count);
 
         if (maxSelect > 0)
         {
@@ -45,9 +45,7 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
             );
 
             foreach (var card in selected)
-            {
                 card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
-            }
 
             var veilGain = (int)
                 DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;
@@ -57,7 +55,7 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
                 veilPower?.AddVeilPoints(veilGain);
             }
 
-            int removedCount = selected.Count();
+            var removedCount = selected.Count();
             if (removedCount > 0)
             {
                 var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);

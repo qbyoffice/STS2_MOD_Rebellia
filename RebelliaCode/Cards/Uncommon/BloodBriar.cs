@@ -68,7 +68,7 @@ public class BloodBriar()
         var rngTarget = Owner.RunState.Rng.CombatTargets;
         var enemies = combatState.HittableEnemies;
 
-        for (int i = 0; i < cardCount && allBloodWeaponCards.Count > 0 && enemies.Count > 0; i++)
+        for (var i = 0; i < cardCount && allBloodWeaponCards.Count > 0 && enemies.Count > 0; i++)
         {
             var randomCard = rngCard.NextItem(allBloodWeaponCards);
             if (randomCard == null)

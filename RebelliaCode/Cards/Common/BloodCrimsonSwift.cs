@@ -14,8 +14,6 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class BloodCrimsonSwift()
     : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
-    protected override HashSet<CardTag> CanonicalTags => [CardTag.Defend];
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new BlockVar(9, ValueProp.Move),

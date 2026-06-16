@@ -4,12 +4,11 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Cards.Others;
 
-namespace Rebellia.RebelliaCode.Cards.Common;
+namespace Rebellia.RebelliaCode.Cards.Uncommon;
 
 public class FraudJudgment() : RebelliaCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 {
@@ -22,10 +21,10 @@ public class FraudJudgment() : RebelliaCard(1, CardType.Skill, CardRarity.Uncomm
         if (combatState == null)
             return;
 
-        int count = (int)DynamicVars.Cards.BaseValue;
+        var count = (int)DynamicVars.Cards.BaseValue;
         var generatedCards = new List<CardModel>();
 
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
             var card = combatState.CreateCard<SwiftBloodWeapon>(Owner);
             if (IsUpgraded)
@@ -40,7 +39,7 @@ public class FraudJudgment() : RebelliaCard(1, CardType.Skill, CardRarity.Uncomm
         }
 
         if (generatedCards.Count > 0)
-            CardCmd.Preview(generatedCards, time: 1.0f, CardPreviewStyle.HorizontalLayout);
+            CardCmd.Preview(generatedCards, 1.0f);
     }
 
     protected override void OnUpgrade()

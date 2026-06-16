@@ -112,29 +112,36 @@ public class RebelliaTmepHpPower : RebelliaPowers
         if (data.RebelliaTempHp <= 0)
             return amount;
 
+        var spectralPower = Owner.GetPower<SpectralBloodFormPower>();
+        var reduction = spectralPower?.Amount ?? 0;
+
         var damage = (int)amount;
-        if (data.RebelliaTempHp >= damage)
+        var requiredTempHp = Math.Max(0, damage - reduction);
+
+        if (data.RebelliaTempHp >= requiredTempHp)
         {
-            data.RebelliaTempHp -= damage;
+            data.RebelliaTempHp -= requiredTempHp;
             UpdateTempHpVar();
             InvokeDisplayAmountChanged();
-            return 0;
+
+            return Math.Max(0, damage - requiredTempHp);
         }
 
-        var remaining = damage - data.RebelliaTempHp;
+        var remainingDamage = damage - reduction - data.RebelliaTempHp;
+        remainingDamage = Math.Max(0, remainingDamage);
         data.RebelliaTempHp = 0;
         UpdateTempHpVar();
         InvokeDisplayAmountChanged();
-        return remaining;
-    }
-
-    private class Data
-    {
-        public int RebelliaTempHp;
+        return remainingDamage;
     }
 
     public int GetCurrentTempHp()
     {
         return GetData().RebelliaTempHp;
+    }
+
+    private class Data
+    {
+        public int RebelliaTempHp;
     }
 }

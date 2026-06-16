@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
@@ -17,6 +16,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.KeywordSanguine];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(2), new EnergyVar(1), new PowerVar<BloodSwordArtPower>(1)];
 
@@ -30,8 +30,8 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
         if (sanguineCards.Count == 0)
             return;
 
-        int targetCount = (int)DynamicVars.Cards.BaseValue;
-        int actualCount = Math.Min(targetCount, sanguineCards.Count);
+        var targetCount = (int)DynamicVars.Cards.BaseValue;
+        var actualCount = Math.Min(targetCount, sanguineCards.Count);
         if (actualCount == 0)
             return;
 
@@ -53,7 +53,7 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
             var rng = Owner.RunState.Rng.CombatCardSelection;
             toRemove = new List<CardModel>();
             var tempList = new List<CardModel>(sanguineCards);
-            for (int i = 0; i < actualCount; i++)
+            for (var i = 0; i < actualCount; i++)
             {
                 if (tempList.Count == 0)
                     break;
@@ -69,13 +69,13 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
         foreach (var card in toRemove)
             card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
-        CardCmd.Preview(toRemove, time: 1.0f, CardPreviewStyle.HorizontalLayout);
+        CardCmd.Preview(toRemove, 1.0f);
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            int totalEnergy = 1 + toRemove.Count;
+            var totalEnergy = 1 + toRemove.Count;
             await PlayerCmd.GainEnergy(totalEnergy, Owner);
         }
     }

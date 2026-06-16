@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Common;
@@ -37,8 +36,7 @@ public class HomewardJourney() : RebelliaCard(1, CardType.Skill, CardRarity.Comm
                 await CardPileCmd.Add(card, PileType.Hand);
         }
 
-        if (!Owner.Creature.HasPower<HomewardJourneyPower>())
-            await Utils.GivePower<HomewardJourneyPower>(choiceContext, this, play);
+        await Utils.GivePower<HomewardJourneyPower>(choiceContext, this, play);
     }
 
     protected override void OnUpgrade()

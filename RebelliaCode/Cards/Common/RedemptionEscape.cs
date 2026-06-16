@@ -14,6 +14,7 @@ public class RedemptionEscape()
     : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.RebelliaTempHp];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(1), new PowerVar<RebelliaTmepHpPower>(5)];
 

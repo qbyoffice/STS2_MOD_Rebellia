@@ -30,6 +30,7 @@ public class BloodDartDiscountPower : RebelliaPowers
             modifiedCost = 0;
             return true;
         }
+
         return false;
     }
 
@@ -39,9 +40,7 @@ public class BloodDartDiscountPower : RebelliaPowers
         {
             _CheckedFirstCard = true;
             if (!(cardPlay.Card is BloodDart))
-            {
                 await PowerCmd.Remove(this);
-            }
         }
     }
 
@@ -53,9 +52,7 @@ public class BloodDartDiscountPower : RebelliaPowers
     )
     {
         if (participants.Contains(Owner))
-        {
             _CheckedFirstCard = false;
-        }
         await Task.CompletedTask;
     }
 }

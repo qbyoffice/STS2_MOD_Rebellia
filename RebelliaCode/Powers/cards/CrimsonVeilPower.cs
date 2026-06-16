@@ -2,7 +2,6 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Rebellia.RebelliaCode.Api;
@@ -19,11 +18,6 @@ public class CrimsonVeilPower : RebelliaPowers
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<CrimsonVeilPower>(1)];
 
-    private class Data
-    {
-        public int VeilPoints;
-    }
-
     protected override object InitInternalData()
     {
         return new Data();
@@ -37,7 +31,7 @@ public class CrimsonVeilPower : RebelliaPowers
     public void AddVeilPoints(int amount)
     {
         var data = GetData();
-        int oldPoints = data.VeilPoints;
+        var oldPoints = data.VeilPoints;
         data.VeilPoints = Math.Max(0, data.VeilPoints + amount);
         InvokeDisplayAmountChanged();
 
@@ -45,9 +39,7 @@ public class CrimsonVeilPower : RebelliaPowers
             TaskHelper.RunSafely(BloodKeywordManager.MoveBloodCardsToDrawPile(Owner.Player!));
 
         if (oldPoints == 0 && data.VeilPoints > 0)
-        {
             TaskHelper.RunSafely(CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner.Player!));
-        }
 
         if (data.VeilPoints == 0)
         {
@@ -62,26 +54,27 @@ public class CrimsonVeilPower : RebelliaPowers
         return GetData().VeilPoints;
     }
 
-    public override async Task AfterSideTurnEnd(
-        PlayerChoiceContext choiceContext,
+    public override async Task AfterSideTurnStart(
         CombatSide side,
-        IEnumerable<Creature> participants
+        IReadOnlyList<Creature> participants,
+        ICombatState combatState
     )
     {
-        if (Owner == null || Owner.Side != side)
+        if (side != Owner.Side)
             return;
 
-        var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
-        if (bloodPower != null)
+        if (combatState.RoundNumber > 1)
         {
-            var currentBlood = bloodPower.GetPoints();
-            var maxBlood = bloodPower.BloodArtMaxPoints;
-            if (currentBlood < maxBlood)
-                bloodPower.AddPoints(1);
+            var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner);
+            bloodPower?.AddPoints(1);
+            var currentVeil = GetVeilPoints();
+            if (currentVeil > 0)
+                AddVeilPoints(-1);
         }
+    }
 
-        var currentVeil = GetVeilPoints();
-        if (currentVeil > 0)
-            AddVeilPoints(-1);
+    private class Data
+    {
+        public int VeilPoints;
     }
 }

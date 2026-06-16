@@ -40,6 +40,7 @@ public class DartBloodWeapon()
                 await erosionPower.AfterSideTurnStart(play.Target.Side, participants, combatState);
             }
         }
+
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
     }
 

@@ -26,15 +26,14 @@ public class VillageGuard()
             new DamageVar(10m, ValueProp.Move),
             new PowerVar<BloodSwordArtPower>(2),
             new CalculationBaseVar(1),
-            new CalculationExtraVar(0),
+            new CalculationExtraVar(1),
             new CalculatedVar(ExtraHitsKey).WithMultiplier(
                 (card, target) =>
                 {
                     var hand = PileType.Hand.GetPile(card.Owner).Cards;
-                    int attackCount = hand.Count(c => c.Type == CardType.Attack);
-                    int baseVal = (int)card.DynamicVars.CalculationBase.BaseValue;
-                    int extraVal = (int)card.DynamicVars.CalculationExtra.BaseValue;
-                    return attackCount * (baseVal + extraVal);
+                    var attackCount = hand.Count(c => c.Type == CardType.Attack);
+                    var baseVal = card.DynamicVars.CalculationBase.BaseValue;
+                    return attackCount * baseVal - 1;
                 }
             ),
         ];
@@ -49,12 +48,12 @@ public class VillageGuard()
             return;
 
         var extraHitsVar = DynamicVars[ExtraHitsKey] as CalculatedVar;
-        int extraHits = (int)(extraHitsVar?.Calculate(play.Target) ?? 0m);
+        var extraHits = (int)(extraHitsVar?.Calculate(play.Target) ?? 0m);
         if (extraHits <= 0)
             return;
 
         var damage = DynamicVars.Damage.BaseValue;
-        for (int i = 0; i < extraHits; i++)
+        for (var i = 0; i < extraHits; i++)
         {
             var cmd = DamageCmd.Attack(damage).FromCard(this).Targeting(play.Target!);
             await cmd.Execute(choiceContext);
