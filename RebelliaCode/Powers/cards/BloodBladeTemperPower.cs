@@ -1,4 +1,5 @@
 using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -15,7 +16,8 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
 {
     private bool _eventSubscribed;
-    private const int BonusPerLost = 1;
+
+    protected virtual int BonusPerLost => 1;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -85,7 +87,6 @@ public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
     {
         if (target != Owner)
             return;
-
         if (result.UnblockedDamage > 0)
             IncrementLostLife();
         await Task.CompletedTask;
@@ -124,8 +125,6 @@ public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
             RebelliaTmepHpPower.TempHpLost -= OnTempHpLost;
             _eventSubscribed = false;
         }
-        _data.LostLifeCount = 0;
-        UpdateDynamicVars();
-        await base.AfterCombatEnd(room);
+        await PowerCmd.Remove(this);
     }
 }

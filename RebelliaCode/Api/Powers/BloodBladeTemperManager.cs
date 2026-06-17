@@ -1,53 +1,68 @@
+using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Powers.cards;
 
-namespace Rebellia.RebelliaCode.Api.Powers;
-
-public static class BloodBladeTemperManager
+namespace Rebellia.RebelliaCode.Api.Powers
 {
-    public static async Task ApplyTemperCard(
-        PlayerChoiceContext context,
-        Creature owner,
-        CardModel? source,
-        bool isUpgraded
-    )
+    public static class BloodBladeTemperManager
     {
-        var existingBase = owner.GetPower<BloodBladeTemperPower>();
-        var existingUpgraded = owner.GetPower<BloodBladeTemperUpgradedPower>();
-
-        if (isUpgraded)
+        public static async Task ApplyTemperCard(
+            PlayerChoiceContext context,
+            Creature owner,
+            CardModel? source,
+            bool isUpgraded
+        )
         {
-            if (existingUpgraded != null)
-                return;
+            bool hasBase = owner.HasPower<BloodBladeTemperPower>();
+            bool hasUpgraded = owner.HasPower<BloodBladeTemperUpgradedPower>();
 
-            int inheritedCount = 0;
-            if (existingBase != null)
+            if (isUpgraded)
             {
-                inheritedCount = existingBase.GetLostLifeCount();
-                await PowerCmd.Remove(existingBase);
+                if (hasUpgraded)
+                    return;
+
+                if (hasBase)
+                {
+                    var existingBase = owner.GetPower<BloodBladeTemperPower>();
+                    int inheritedCount = existingBase.GetLostLifeCount();
+                    await PowerCmd.Remove(existingBase);
+                    var upgraded = await PowerCmd.Apply<BloodBladeTemperUpgradedPower>(
+                        context,
+                        owner,
+                        1,
+                        owner,
+                        source
+                    );
+                    upgraded?.SetLostLifeCount(inheritedCount);
+                    return;
+                }
+
+                var newUpgraded = await PowerCmd.Apply<BloodBladeTemperUpgradedPower>(
+                    context,
+                    owner,
+                    1,
+                    owner,
+                    source
+                );
+                newUpgraded?.SetLostLifeCount(0);
             }
+            else
+            {
+                if (hasBase || hasUpgraded)
+                    return;
 
-            var upgraded = await PowerCmd.Apply<BloodBladeTemperUpgradedPower>(
-                context,
-                owner,
-                1,
-                owner,
-                source
-            );
-            if (upgraded != null)
-                upgraded.SetLostLifeCount(inheritedCount);
-        }
-        else
-        {
-            if (existingUpgraded != null)
-                return;
-            if (existingBase != null)
-                return;
-
-            await PowerCmd.Apply<BloodBladeTemperPower>(context, owner, 1, owner, source);
+                var newBase = await PowerCmd.Apply<BloodBladeTemperPower>(
+                    context,
+                    owner,
+                    1,
+                    owner,
+                    source
+                );
+                newBase?.SetLostLifeCount(0);
+            }
         }
     }
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tf2pt0bciext"
-path="res://.godot/imported/rebellia_tmep_hp_power.png-40502c4307a397cd2475d2fbd811e957.ctex"
+uid="uid://dpnjxuh8acr36"
+path="res://.godot/imported/blood_crimson_demon.png-44175a626b11e9c8dbb80168d3f2485e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rebellia/images/powers/rebellia_tmep_hp_power.png"
-dest_files=["res://.godot/imported/rebellia_tmep_hp_power.png-40502c4307a397cd2475d2fbd811e957.ctex"]
+source_file="res://Rebellia/images/card_portraits/big/blood_crimson_demon.png"
+dest_files=["res://.godot/imported/blood_crimson_demon.png-44175a626b11e9c8dbb80168d3f2485e.ctex"]
 
 [params]
 
