@@ -23,6 +23,7 @@ public class FuryBloodShadowPower : RebelliaPowers, IHasSecondAmount
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool ShouldReceiveCombatHooks => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     public int GetConsumedCount() => _bloodWeaponsConsumedThisTurn;
 

@@ -1,3 +1,5 @@
+using Godot;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -26,7 +28,24 @@ public class FuryBloodShadow()
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await FuryBloodShadowManager.ApplyFuryCard(choiceContext, Owner.Creature, this, IsUpgraded);
+        // await FuryBloodShadowManager.ApplyFuryCard(choiceContext, Owner.Creature, this, IsUpgraded);
+
+        await PowerCmd.Apply<BloodShadow>(
+            choiceContext,
+            Owner.Creature,
+            DynamicVarsHelper.GetPowerVar<BloodShadow>(DynamicVars).BaseValue,
+            Owner.Creature,
+            this
+        );
+
+        if (IsUpgraded)
+        {
+            await Utils.GivePower<FuryBloodShadowUpgradedPower>(choiceContext, this, play);
+        }
+        else
+        {
+            await Utils.GivePower<FuryBloodShadowPower>(choiceContext, this, play);
+        }
     }
 
     protected override void OnUpgrade()

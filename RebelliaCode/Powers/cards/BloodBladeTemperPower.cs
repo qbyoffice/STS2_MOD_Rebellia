@@ -23,10 +23,21 @@ public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => GetLostLifeCount();
     public override bool ShouldReceiveCombatHooks => true;
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     public string GetSecondAmount() => (GetLostLifeCount() * BonusPerLost).ToString();
 
+    /*
     private readonly Data _data = new();
+    private class Data
+    {
+        public int LostLifeCount { get; set; }
+    }
+    */
+
+    protected override object InitInternalData() => new Data(); // 使用 InitInternalData
+
+    private Data GetData() => GetInternalData<Data>();
 
     private class Data
     {
@@ -43,20 +54,32 @@ public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
         }
     }
 
-    public int GetLostLifeCount() => _data.LostLifeCount;
+    public int GetLostLifeCount()
+    {
+        var data = GetInternalData<Data>();
+        return data?.LostLifeCount ?? 0;
+    }
 
     public void SetLostLifeCount(int value)
     {
-        _data.LostLifeCount = value;
-        UpdateDynamicVars();
-        InvokeDisplayAmountChanged();
+        var data = GetData(); //_data
+        if (data != null)
+        {
+            data.LostLifeCount = value;
+            UpdateDynamicVars();
+            InvokeDisplayAmountChanged();
+        }
     }
 
     public void IncrementLostLife()
     {
-        _data.LostLifeCount++;
-        UpdateDynamicVars();
-        InvokeDisplayAmountChanged();
+        var data = GetData(); //_data
+        if (data != null)
+        {
+            data.LostLifeCount++;
+            UpdateDynamicVars();
+            InvokeDisplayAmountChanged();
+        }
     }
 
     private void UpdateDynamicVars()

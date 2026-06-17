@@ -20,16 +20,13 @@ class SanguinePurity() : RebelliaCard(2, CardType.Power, CardRarity.Uncommon, Ta
         var increase = (int)DynamicVars["BloodArtMaxPoints"].BaseValue;
         await BloodSwordArtManager.IncreaseMaxPoints(Owner.Creature, increase, choiceContext);
 
-        if (!Owner.Creature.HasPower<SanguinePurityPower>())
-        {
-            await Utils.GivePower<SanguinePurityPower>(
-                choiceContext,
-                Owner.Creature,
-                DynamicVars,
-                Owner.Creature,
-                this
-            );
-        }
+        await Utils.GivePower<SanguinePurityPower>(
+            choiceContext,
+            Owner.Creature,
+            DynamicVars,
+            Owner.Creature,
+            this
+        );
     }
 
     protected override void OnUpgrade()
