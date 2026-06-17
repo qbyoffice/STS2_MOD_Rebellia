@@ -1,7 +1,5 @@
 using BaseLib.Abstracts;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -16,7 +14,7 @@ public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
 {
     private int _bloodWeaponsConsumedThisTurn;
     private const int TriggerThreshold = 3;
-    private const int BonusPerTrigger = 4;
+    protected int BonusPerTrigger = 4;
 
     public override int DisplayAmount => _bloodWeaponsConsumedThisTurn;
 
@@ -53,9 +51,8 @@ public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
             return;
 
         bool isBloodWeapon = card.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon);
-        bool isSanguine = card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine);
 
-        if (isBloodWeapon || isSanguine)
+        if (isBloodWeapon)
         {
             await CardCmd.Exhaust(choiceContext, card, causedByEthereal: false);
         }
@@ -72,6 +69,22 @@ public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
             }
             InvokeDisplayAmountChanged();
         }
+    }
+
+    public override async Task AfterCardExhausted(
+        PlayerChoiceContext choiceContext,
+        CardModel card,
+        bool causedByEthereal
+    )
+    {
+        if (card.Owner != Owner.Player)
+            return;
+
+        if (card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
+        {
+            card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
+        }
+        await Task.CompletedTask;
     }
 
     private async Task AddBloodShadowLayers(int amount)

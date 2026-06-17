@@ -97,5 +97,9 @@
 
     "REBELLIA-BLOOD_BLADE_TEMPER_UPGRADED_POWER.title": "血刃淬炼",
     "REBELLIA-BLOOD_BLADE_TEMPER_UPGRADED_POWER.description": "[gold]本场战斗[/gold]中。\n每失去1次生命，所有[red]血武[/red]造成的伤害提升。",
-    "REBELLIA-BLOOD_BLADE_TEMPER_UPGRADED_POWER.smartDescription": "[gold]本场战斗[/gold]失去了[blue]{LostLifeCount}[/blue]次生命，\n所有[red]血武[/red]造成的伤害提升[blue]{TotalBonus}[/blue]。"
+    "REBELLIA-BLOOD_BLADE_TEMPER_UPGRADED_POWER.smartDescription": "[gold]本场战斗[/gold]失去了[blue]{LostLifeCount}[/blue]次生命，\n所有[red]血武[/red]造成的伤害提升[blue]{TotalBonus}[/blue]。",
+
+    "REBELLIA-SANGUINE_PURITY_POWER.title": "崇高净血",
+    "REBELLIA-SANGUINE_PURITY_POWER.description": "每打出一张[gold]手牌[/gold]，获得1[gold]鲜血剑艺[/gold]。\n[red]鲜血牌[/red]费用-1，打后移[red]除鲜血[/red]，失去1层[gold]猩红面纱[/gold]。",
+    "REBELLIA-SANGUINE_PURITY_POWER.smartDescription": "每打出一张[gold]手牌[/gold]，获得1[gold]鲜血剑艺[/gold]。\n[red]鲜血牌[/red]费用-1，打后移[red]除鲜血[/red]，失去1层[gold]猩红面纱[/gold]。"
 }

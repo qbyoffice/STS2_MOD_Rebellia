@@ -16,11 +16,7 @@ public class BloodBladeTemper()
         [HoverTipFactory.FromPower<BloodBladeTemperPower>()];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [
-            new DamageVar(1, ValueProp.Move),
-            new PowerVar<BloodBladeTemperPower>(1),
-            new PowerVar<BloodBladeTemperUpgradedPower>(1),
-        ];
+        [new PowerVar<BloodBladeTemperPower>(1), new PowerVar<BloodBladeTemperUpgradedPower>(1)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -35,7 +31,6 @@ public class BloodBladeTemper()
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Innate);
-        DynamicVars.Damage.UpgradeValueBy(1m);
         EnergyCost.UpgradeBy(-1);
     }
 }
