@@ -105,5 +105,9 @@
 
     "REBELLIA-BLOOD_CRIMSON_DEMON_POWER.title": "血坏·猩红鬼人",
     "REBELLIA-BLOOD_CRIMSON_DEMON_POWER.description": "每回合开始时，获得等量[gold]霸体[/gold]层数的临时[gold]力量[/gold]与[gold]敏捷[/gold]。",
-    "REBELLIA-BLOOD_CRIMSON_DEMON_POWER.smartDescription": "每回合开始时，获得等量[gold]霸体[/gold]层数的临时[gold]力量[/gold]与[gold]敏捷[/gold]。"
+    "REBELLIA-BLOOD_CRIMSON_DEMON_POWER.smartDescription": "每回合开始时，获得等量[gold]霸体[/gold]层数的临时[gold]力量[/gold]与[gold]敏捷[/gold]。",
+
+    "REBELLIA-SANGUINE_WELL_POWER.title": "鲜血魔井",
+    "REBELLIA-SANGUINE_WELL_POWER.description": "[red]致死伤害[/red][gold]全数抵消[/gold]，消耗所有层数[gold]恢复等量生命[/gold]。\n来自卡牌的非致死则仅消耗层数抵消部分伤害。",
+    "REBELLIA-SANGUINE_WELL_POWER.smartDescription": "[red]致死伤害[/red][gold]全数抵消[/gold]，消耗所有层数[gold]恢复等量生命[/gold]。\n来自卡牌的非致死则仅消耗层数抵消部分伤害。"
 }
