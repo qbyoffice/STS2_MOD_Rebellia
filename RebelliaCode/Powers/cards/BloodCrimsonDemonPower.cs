@@ -15,6 +15,8 @@ public class BloodCrimsonDemonPower : RebelliaPowers
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;
 
+    public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
+
     protected override object InitInternalData() => new Data();
 
     private class Data
