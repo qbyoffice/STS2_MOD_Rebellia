@@ -142,5 +142,8 @@
     "REBELLIA-SANGUINE_WELL.description": "获得等同于{IfUpgraded:show:2+|}[gold]血之精粹[/gold]数量*{IfUpgraded:show:4%|3%}[gold]生命最大值层数[/gold]的[gold]鲜血魔井[/gold]层数。\n（总计{WellLayers:diff()}层）",
 
     "REBELLIA-BLOOD_CRIMSON_RAGE.title": "血坏·猩红狂暴",
-    "REBELLIA-BLOOD_CRIMSON_RAGE.description": "[gold]每回合开始时[/gold]。\n获得{IfUpgraded:show:2|1}[gold]霸体[/gold]。\n当失去[gold]霸体[/gold]时，抽1张牌。"
+    "REBELLIA-BLOOD_CRIMSON_RAGE.description": "[gold]每回合开始时[/gold]。\n获得{IfUpgraded:show:2|1}[gold]霸体[/gold]。\n当失去[gold]霸体[/gold]时，抽1张牌。",
+
+    "REBELLIA-BODY_MIND_CURSE.title": "咒诅身心",
+    "REBELLIA-BODY_MIND_CURSE.description": "牌堆中每有一张[gold]诅咒[/gold]牌获得{IfUpgraded:show:2|1}力量。\n每当[gold]诅咒牌被消耗[/gold]获得{IfUpgraded:show:{energyPrefix:energyIcons(3)}|{energyPrefix:energyIcons(2)}}，抽{IfUpgraded:show:3|2}张牌。"
 }
