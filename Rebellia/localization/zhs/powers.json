@@ -141,5 +141,9 @@
 
     "REBELLIA-SHADOW_SCORCH_UPGRADED_POWER.title": "踪匿焚墟+",
     "REBELLIA-SHADOW_SCORCH_UPGRADED_POWER.description": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽2张卡。",
-    "REBELLIA-SHADOW_SCORCH_UPGRADED_POWER.smartDescription": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽2张卡。"
+    "REBELLIA-SHADOW_SCORCH_UPGRADED_POWER.smartDescription": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽2张卡。",
+
+    "REBELLIA-BLOOD_COIL_POWER.title": "缠身血棘",
+    "REBELLIA-BLOOD_COIL_POWER.description": "失去[gold]临时生命[/gold]时。\n对所有敌人造成等于现有[gold]临时生命[/gold]的伤害。",
+    "REBELLIA-BLOOD_COIL_POWER.smartDescription": "失去[gold]临时生命[/gold]时。\n对所有敌人造成等于现有[gold]临时生命[/gold]的伤害。"
 }

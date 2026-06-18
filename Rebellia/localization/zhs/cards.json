@@ -151,5 +151,8 @@
     "REBELLIA-ARTIFACT_SPIRIT.description": "每次[gold]触发鲜血剑艺[/gold]效果,抽{IfUpgraded:show:2|1}张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得{IfUpgraded:show:3|2}格挡。",
 
     "REBELLIA-SHADOW_SCORCH.title": "踪匿焚墟",
-    "REBELLIA-SHADOW_SCORCH.description": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽{IfUpgraded:show:2|1}张卡。"
+    "REBELLIA-SHADOW_SCORCH.description": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽{IfUpgraded:show:2|1}张卡。",
+
+    "REBELLIA-BLOOD_COIL.title": "缠身血棘",
+    "REBELLIA-BLOOD_COIL.description": "失去[gold]临时生命[/gold]时。\n对所有敌人造成等于现有[gold]临时生命[/gold]的伤害。"
 }
