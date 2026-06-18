@@ -154,5 +154,8 @@
     "REBELLIA-SHADOW_SCORCH.description": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽{IfUpgraded:show:2|1}张卡。",
 
     "REBELLIA-BLOOD_COIL.title": "缠身血棘",
-    "REBELLIA-BLOOD_COIL.description": "失去[gold]临时生命[/gold]时。\n对所有敌人造成等于现有[gold]临时生命[/gold]的伤害。"
+    "REBELLIA-BLOOD_COIL.description": "失去[gold]临时生命[/gold]时。\n对所有敌人造成等于现有[gold]临时生命[/gold]的伤害。",
+
+    "REBELLIA-PALE_BLOOD_RIDER.title": "白血骑姬",
+    "REBELLIA-PALE_BLOOD_RIDER.description": "[gold]每回合开始时[/gold]。\n从[gold]抽牌堆[/gold]，[gold]手牌[/gold]，[gold]弃牌堆[/gold]中打出{IfUpgraded:show:2|1}张[red]血武[/red]。"
 }

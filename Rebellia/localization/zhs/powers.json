@@ -145,5 +145,13 @@
 
     "REBELLIA-BLOOD_COIL_POWER.title": "缠身血棘",
     "REBELLIA-BLOOD_COIL_POWER.description": "失去[gold]临时生命[/gold]时。\n对所有敌人造成等于现有[gold]临时生命[/gold]的伤害。",
-    "REBELLIA-BLOOD_COIL_POWER.smartDescription": "失去[gold]临时生命[/gold]时。\n对所有敌人造成等于现有[gold]临时生命[/gold]的伤害。"
+    "REBELLIA-BLOOD_COIL_POWER.smartDescription": "失去[gold]临时生命[/gold]时。\n对所有敌人造成等于现有[gold]临时生命[/gold]的伤害。",
+
+    "REBELLIA-PALE_BLOOD_RIDER_POWER.title": "白血骑姬",
+    "REBELLIA-PALE_BLOOD_RIDER_POWER.description": "[gold]每回合开始时[/gold]。\n从[gold]抽牌堆[/gold]，[gold]手牌[/gold]，[gold]弃牌堆[/gold]中打出1张[red]血武[/red]。",
+    "REBELLIA-PALE_BLOOD_RIDER_POWER.smartDescription": "[gold]每回合开始时[/gold]。\n从[gold]抽牌堆[/gold]，[gold]手牌[/gold]，[gold]弃牌堆[/gold]中打出1张[red]血武[/red]。",
+
+    "REBELLIA-PALE_BLOOD_RIDER_UPGRADED_POWER.title": "白血骑姬+",
+    "REBELLIA-PALE_BLOOD_RIDER_UPGRADED_POWER.description": "[gold]每回合开始时[/gold]。\n从[gold]抽牌堆[/gold]，[gold]手牌[/gold]，[gold]弃牌堆[/gold]中打出2张[red]血武[/red]。",
+    "REBELLIA-PALE_BLOOD_RIDER_UPGRADED_POWER.smartDescription": "[gold]每回合开始时[/gold]。\n从[gold]抽牌堆[/gold]，[gold]手牌[/gold]，[gold]弃牌堆[/gold]中打出2张[red]血武[/red]。"
 }
