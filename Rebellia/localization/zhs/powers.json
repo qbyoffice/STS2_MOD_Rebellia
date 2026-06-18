@@ -133,5 +133,13 @@
 
     "REBELLIA-ARTIFACT_SPIRIT_UPGRADED_POWER.title": "魔具器灵+",
     "REBELLIA-ARTIFACT_SPIRIT_UPGRADED_POWER.description": "每次[gold]触发鲜血剑艺[/gold]效果,抽2张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得3格挡。",
-    "REBELLIA-ARTIFACT_SPIRIT_UPGRADED_POWER.smartDescription": "每次[gold]触发鲜血剑艺[/gold]效果,抽2张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得3格挡。"
+    "REBELLIA-ARTIFACT_SPIRIT_UPGRADED_POWER.smartDescription": "每次[gold]触发鲜血剑艺[/gold]效果,抽2张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得3格挡。",
+
+    "REBELLIA-SHADOW_SCORCH_POWER.title": "踪匿焚墟",
+    "REBELLIA-SHADOW_SCORCH_POWER.description": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽1张卡。",
+    "REBELLIA-SHADOW_SCORCH_POWER.smartDescription": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽1张卡。",
+
+    "REBELLIA-SHADOW_SCORCH_UPGRADED_POWER.title": "踪匿焚墟+",
+    "REBELLIA-SHADOW_SCORCH_UPGRADED_POWER.description": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽2张卡。",
+    "REBELLIA-SHADOW_SCORCH_UPGRADED_POWER.smartDescription": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽2张卡。"
 }

@@ -148,5 +148,8 @@
     "REBELLIA-BODY_MIND_CURSE.description": "牌堆中每有一张[gold]诅咒[/gold]牌获得{IfUpgraded:show:2|1}力量。\n每当[gold]诅咒牌被消耗[/gold]获得{IfUpgraded:show:{energyPrefix:energyIcons(3)}|{energyPrefix:energyIcons(2)}}，抽{IfUpgraded:show:3|2}张牌。",
 
     "REBELLIA-ARTIFACT_SPIRIT.title": "魔具器灵",
-    "REBELLIA-ARTIFACT_SPIRIT.description": "每次[gold]触发鲜血剑艺[/gold]效果,抽{IfUpgraded:show:2|1}张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得{IfUpgraded:show:3|2}格挡。"
+    "REBELLIA-ARTIFACT_SPIRIT.description": "每次[gold]触发鲜血剑艺[/gold]效果,抽{IfUpgraded:show:2|1}张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得{IfUpgraded:show:3|2}格挡。",
+
+    "REBELLIA-SHADOW_SCORCH.title": "踪匿焚墟",
+    "REBELLIA-SHADOW_SCORCH.description": "[gold]每回合开始时[/gold]。\n获得{energyPrefix:energyIcons(1)}，抽{IfUpgraded:show:2|1}张卡。"
 }
