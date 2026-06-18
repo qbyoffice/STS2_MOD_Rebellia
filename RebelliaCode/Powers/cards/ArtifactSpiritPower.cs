@@ -58,7 +58,7 @@ public class ArtifactSpiritPower : RebelliaPowers
         if (handCount > 0)
         {
             int blockAmount = handCount * BlockPerCard;
-            await CreatureCmd.GainBlock(Owner, blockAmount, ValueProp.Move, null);
+            await CreatureCmd.GainBlock(Owner, blockAmount, ValueProp.Unpowered, null);
         }
     }
 }
