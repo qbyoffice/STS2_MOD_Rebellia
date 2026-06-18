@@ -16,7 +16,7 @@ public class ShadowScorchPower : RebelliaPowers
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool ShouldReceiveCombatHooks => true;
-    public override int DisplayAmount => 1;
+    public override int DisplayAmount => DrawCount;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     public override async Task AfterPlayerTurnStart(
