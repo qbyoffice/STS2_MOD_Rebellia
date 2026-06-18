@@ -125,5 +125,13 @@
 
     "REBELLIA-BODY_MIND_CURSE_UPGRADED_POWER.title": "咒诅身心+",
     "REBELLIA-BODY_MIND_CURSE_UPGRADED_POWER.description": "牌堆中每有一张[gold]诅咒[/gold]牌获得2力量。\n每当[gold]诅咒牌被消耗[/gold]获得{energyPrefix:energyIcons(3)}，抽3张牌。",
-    "REBELLIA-BODY_MIND_CURSE_UPGRADED_POWER.smartDescription": "牌堆中每有一张[gold]诅咒[/gold]牌获得2力量。\n每当[gold]诅咒牌被消耗[/gold]获得{energyPrefix:energyIcons(3)}，抽3张牌。"
+    "REBELLIA-BODY_MIND_CURSE_UPGRADED_POWER.smartDescription": "牌堆中每有一张[gold]诅咒[/gold]牌获得2力量。\n每当[gold]诅咒牌被消耗[/gold]获得{energyPrefix:energyIcons(3)}，抽3张牌。",
+
+    "REBELLIA-ARTIFACT_SPIRIT_POWER.title": "魔具器灵",
+    "REBELLIA-ARTIFACT_SPIRIT_POWER.description": "每次[gold]触发鲜血剑艺[/gold]效果,抽1张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得2格挡。",
+    "REBELLIA-ARTIFACT_SPIRIT_POWER.smartDescription": "每次[gold]触发鲜血剑艺[/gold]效果,抽1张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得2格挡。",
+
+    "REBELLIA-ARTIFACT_SPIRIT_UPGRADED_POWER.title": "魔具器灵+",
+    "REBELLIA-ARTIFACT_SPIRIT_UPGRADED_POWER.description": "每次[gold]触发鲜血剑艺[/gold]效果,抽2张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得3格挡。",
+    "REBELLIA-ARTIFACT_SPIRIT_UPGRADED_POWER.smartDescription": "每次[gold]触发鲜血剑艺[/gold]效果,抽2张牌。\n[gold]回合结束时[/gold]，每有一张手牌则获得3格挡。"
 }
