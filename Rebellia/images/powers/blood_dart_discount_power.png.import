@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h4mdypvpkx6n"
-path="res://.godot/imported/blood_dart_power.png-6f6098c3b62db3095274aefc0c50ed0c.ctex"
+uid="uid://jp0k26laiswe"
+path="res://.godot/imported/blood_dart_discount_power.png-050cbcf3fabdecceea518fe884693a31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rebellia/images/powers/big/blood_dart_power.png"
-dest_files=["res://.godot/imported/blood_dart_power.png-6f6098c3b62db3095274aefc0c50ed0c.ctex"]
+source_file="res://Rebellia/images/powers/blood_dart_discount_power.png"
+dest_files=["res://.godot/imported/blood_dart_discount_power.png-050cbcf3fabdecceea518fe884693a31.ctex"]
 
 [params]
 

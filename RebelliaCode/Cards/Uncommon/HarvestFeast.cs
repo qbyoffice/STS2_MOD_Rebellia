@@ -38,7 +38,7 @@ public class HarvestFeast() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommo
             if (currentTempHp > 0)
             {
                 await CreatureCmd.Heal(Owner.Creature, currentTempHp);
-                tempHpPower.AddTempHp(-currentTempHp);
+                tempHpPower?.AddTempHp(-currentTempHp);
             }
         }
 
