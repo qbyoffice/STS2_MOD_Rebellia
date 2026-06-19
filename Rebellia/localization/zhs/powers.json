@@ -161,5 +161,13 @@
 
     "REBELLIA-STEELHEART_BLOOD_CHAIN_UPGRADED_POWER.title": "钢心血链+",
     "REBELLIA-STEELHEART_BLOOD_CHAIN_UPGRADED_POWER.description": "回合开始时。\n每有1[gold]霸体[/gold]，获得5[gold]格挡[/gold]。",
-    "REBELLIA-STEELHEART_BLOOD_CHAIN_UPGRADED_POWER.smartDescription": "回合开始时。\n每有1[gold]霸体[/gold]，获得5[gold]格挡[/gold]。"
+    "REBELLIA-STEELHEART_BLOOD_CHAIN_UPGRADED_POWER.smartDescription": "回合开始时。\n每有1[gold]霸体[/gold]，获得5[gold]格挡[/gold]。",
+
+    "REBELLIA-REDEMPTION_BOND_POWER.title": "救恩亲情",
+    "REBELLIA-REDEMPTION_BOND_POWER.description": "[gold]每回合[/gold]第1张[gold]技能牌[/gold]可[gold]免费[/gold]打出。",
+    "REBELLIA-REDEMPTION_BOND_POWER.smartDescription": "[gold]每回合[/gold]第1张[gold]技能牌[/gold]可[gold]免费[/gold]打出。",
+
+    "REBELLIA-REDEMPTION_BOND_UPGRADED_POWER.title": "救恩亲情+",
+    "REBELLIA-REDEMPTION_BOND_UPGRADED_POWER.description": "[gold]每回合[/gold]第2张[gold]技能牌[/gold]可[gold]免费[/gold]打出。",
+    "REBELLIA-REDEMPTION_BOND_UPGRADED_POWER.smartDescription": "[gold]每回合[/gold]第2张[gold]技能牌[/gold]可[gold]免费[/gold]打出。"
 }

@@ -160,5 +160,8 @@
     "REBELLIA-PALE_BLOOD_RIDER.description": "[gold]每回合开始时[/gold]。\n从[gold]抽牌堆[/gold]，[gold]手牌[/gold]，[gold]弃牌堆[/gold]中打出{IfUpgraded:show:2|1}张[red]血武[/red]。",
 
     "REBELLIA-STEELHEART_BLOOD_CHAIN.title": "钢心血链",
-    "REBELLIA-STEELHEART_BLOOD_CHAIN.description": "回合开始时。\n每有1[gold]霸体[/gold]，获得{IfUpgraded:show:5|3}[gold]格挡[/gold]。"
+    "REBELLIA-STEELHEART_BLOOD_CHAIN.description": "[gold]回合开始时[/gold]。\n每有1[gold]霸体[/gold]，获得{IfUpgraded:show:5|3}[gold]格挡[/gold]。",
+
+    "REBELLIA-REDEMPTION_BOND.title": "救恩亲情",
+    "REBELLIA-REDEMPTION_BOND.description": "[gold]每回合[/gold]第{IfUpgraded:show:2|1}张[gold]技能牌[/gold]可[gold]免费[/gold]打出。"
 }
