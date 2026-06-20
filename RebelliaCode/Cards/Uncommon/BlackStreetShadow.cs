@@ -20,6 +20,7 @@ public class BlackStreetShadow()
             await Utils.GivePower<BlackStreetShadowUpgradedPower>(choiceContext, this, play);
         }
         else
+        {
             await Utils.GivePower<BlackStreetShadowPower>(choiceContext, this, play);
         }
     }
