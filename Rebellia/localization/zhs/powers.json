@@ -169,5 +169,13 @@
 
     "REBELLIA-REDEMPTION_BOND_UPGRADED_POWER.title": "救恩亲情+",
     "REBELLIA-REDEMPTION_BOND_UPGRADED_POWER.description": "[gold]每回合[/gold]第2张[gold]技能牌[/gold]可[gold]免费[/gold]打出。",
-    "REBELLIA-REDEMPTION_BOND_UPGRADED_POWER.smartDescription": "[gold]每回合[/gold]第2张[gold]技能牌[/gold]可[gold]免费[/gold]打出。"
+    "REBELLIA-REDEMPTION_BOND_UPGRADED_POWER.smartDescription": "[gold]每回合[/gold]第2张[gold]技能牌[/gold]可[gold]免费[/gold]打出。",
+
+    "REBELLIA-BLACK_STREET_SHADOW_POWER.title": "黑街幽影",
+    "REBELLIA-BLACK_STREET_SHADOW_POWER.description": "获得2层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
+    "REBELLIA-BLACK_STREET_SHADOW_POWER.smartDescription": "获得2层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
+
+    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.title": "黑街幽影+",
+    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.description": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
+    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.smartDescription": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。"
 }

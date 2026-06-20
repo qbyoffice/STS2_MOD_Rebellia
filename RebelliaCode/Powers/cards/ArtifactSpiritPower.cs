@@ -21,7 +21,7 @@ public class ArtifactSpiritPower : RebelliaPowers
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool ShouldReceiveCombatHooks => true;
-    public override int DisplayAmount => 2;
+    public override int DisplayAmount => DrawCount;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
@@ -60,5 +60,15 @@ public class ArtifactSpiritPower : RebelliaPowers
             int blockAmount = handCount * BlockPerCard;
             await CreatureCmd.GainBlock(Owner, blockAmount, ValueProp.Unpowered, null);
         }
+    }
+
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        if (_eventSubscribed)
+        {
+            Utils.BloodArtConsumed -= OnBloodArtConsumed;
+            _eventSubscribed = false;
+        }
+        await base.AfterCombatEnd(room);
     }
 }

@@ -25,8 +25,6 @@ public class BloodCrimsonSwift()
     {
         await CommonActions.CardBlock(this, play);
 
-        var dexterityAmount = (int)
-            DynamicVarsHelper.GetPowerVar<DexterityPower>(DynamicVars).BaseValue;
         await Utils.GivePower<DexterityPower>(
             choiceContext,
             Owner.Creature,

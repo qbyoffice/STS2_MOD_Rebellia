@@ -58,7 +58,14 @@ public class BloodCrimsonMeteor()
         var damage = DynamicVars.Damage.BaseValue;
 
         for (var i = 0; i < extraHits; i++)
-            await DamageCmd.Attack(damage).FromCard(this).Targeting(target).Execute(choiceContext);
+        {
+            var cmd = await DamageCmd
+                .Attack(damage)
+                .FromCard(this)
+                .Targeting(target)
+                .Execute(choiceContext);
+            await cmd.Execute(choiceContext);
+        }
     }
 
     protected override void OnUpgrade()
