@@ -10,52 +10,45 @@ namespace Rebellia.RebelliaCode.Api;
 
 public static class HoverTipsValue
 {
-    public static readonly IHoverTip CrimsonVeil = HoverTipFactory.FromPower<CrimsonVeilPower>();
+    public static IHoverTip CrimsonVeil => HoverTipFactory.FromPower<CrimsonVeilPower>();
 
-    public static readonly IHoverTip BloodSwordArt =
-        HoverTipFactory.FromPower<BloodSwordArtPower>();
+    public static IHoverTip BloodSwordArt => HoverTipFactory.FromPower<BloodSwordArtPower>();
 
-    public static readonly IHoverTip RebelliaTempHp =
-        HoverTipFactory.FromPower<RebelliaTmepHpPower>();
+    public static IHoverTip RebelliaTempHp => HoverTipFactory.FromPower<RebelliaTmepHpPower>();
 
-    public static readonly IHoverTip CrimsonStrikeDamage =
+    public static IHoverTip CrimsonStrikeDamage =>
         HoverTipFactory.FromPower<CrimsonStrikeDamagePower>();
 
-    public static readonly IHoverTip CrimsonStrike =
-        HoverTipFactory.FromPower<CrimsonStrikePower>();
+    public static IHoverTip CrimsonStrike => HoverTipFactory.FromPower<CrimsonStrikePower>();
 
-    public static readonly IHoverTip Rend = HoverTipFactory.FromPower<RendPower>();
+    public static IHoverTip Rend => HoverTipFactory.FromPower<RendPower>();
 
-    public static readonly IHoverTip BloodDartDiscount =
+    public static IHoverTip BloodDartDiscount =>
         HoverTipFactory.FromPower<BloodDartDiscountPower>();
 
-    public static readonly IHoverTip Bloodclot = HoverTipFactory.FromCard<Bloodclot>();
+    public static IHoverTip Bloodclot => HoverTipFactory.FromCard<Bloodclot>();
 
-    public static readonly IHoverTip Bloodshiv = HoverTipFactory.FromCard<DartBloodWeapon>();
+    public static IHoverTip Bloodshiv => HoverTipFactory.FromCard<DartBloodWeapon>();
 
-    public static readonly IHoverTip RebelliaStrike = HoverTipFactory.FromCard<RebelliaStrike>();
+    public static IHoverTip RebelliaStrike => HoverTipFactory.FromCard<RebelliaStrike>();
 
-    public static readonly IHoverTip SwiftBloodWeapon =
-        HoverTipFactory.FromCard<SwiftBloodWeapon>();
+    public static IHoverTip SwiftBloodWeapon => HoverTipFactory.FromCard<SwiftBloodWeapon>();
 
-    public static readonly IHoverTip ExtraHoverTips =
-        HoverTipFactory.FromPower<CrimsonStrikeDamagePower>();
+    public static IHoverTip ExtraHoverTips => HoverTipFactory.FromPower<CrimsonStrikeDamagePower>();
 
-    public static readonly IHoverTip KeywordSanguine = HoverTipFactory.FromKeyword(
-        RCardKeywordExtensions.RebelliaSanguine
-    );
+    public static IHoverTip KeywordSanguine =>
+        HoverTipFactory.FromKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
-    public static readonly IHoverTip ErodingBlood = HoverTipFactory.FromPower<ErodingBloodPower>();
+    public static IHoverTip ErodingBlood => HoverTipFactory.FromPower<ErodingBloodPower>();
 
-    public static readonly IHoverTip BloodPierce = HoverTipFactory.FromPower<BloodpierceTool>();
+    public static IHoverTip BloodPierce => HoverTipFactory.FromPower<BloodpierceTool>();
 
-    public static readonly IHoverTip SanguineExtract =
-        HoverTipFactory.FromPower<SanguineExtractTool>();
+    public static IHoverTip SanguineExtract => HoverTipFactory.FromPower<SanguineExtractTool>();
 
-    public static readonly IHoverTip BloodWeaponVaultTool =
+    public static IHoverTip BloodWeaponVaultTool =>
         HoverTipFactory.FromPower<BloodWeaponVaultTool>();
 
-    public static readonly IHoverTip ArmorPower = HoverTipFactory.FromPower<ArmorPower>();
+    public static IHoverTip ArmorPower => HoverTipFactory.FromPower<ArmorPower>();
 
-    public static readonly IHoverTip CrimsonVeilTool = HoverTipFactory.FromPower<CrimsonVeilTool>();
+    public static IHoverTip CrimsonVeilTool => HoverTipFactory.FromPower<CrimsonVeilTool>();
 }
