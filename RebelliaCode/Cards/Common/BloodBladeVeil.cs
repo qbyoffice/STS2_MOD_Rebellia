@@ -8,6 +8,7 @@ using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
 
@@ -45,7 +46,7 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
             );
 
             foreach (var card in selected)
-                card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
+                await BloodKeywordManager.RemoveSanguineFromCard(Owner, card);
 
             var veilGain = (int)
                 DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;

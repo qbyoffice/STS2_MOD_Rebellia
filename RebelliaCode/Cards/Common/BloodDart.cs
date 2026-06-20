@@ -32,12 +32,10 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
     {
         if (!Owner.Creature.HasPower<BloodDartDiscountPower>())
         {
-            var discountAmount = (int)
-                DynamicVarsHelper.GetPowerVar<BloodDartDiscountPower>(DynamicVars).BaseValue;
             await PowerCmd.Apply<BloodDartDiscountPower>(
                 choiceContext,
                 Owner.Creature,
-                discountAmount,
+                DynamicVarsHelper.GetPowerVar<BloodDartDiscountPower>(DynamicVars).BaseValue,
                 Owner.Creature,
                 this
             );

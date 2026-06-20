@@ -285,6 +285,8 @@ public static class Utils
         return creature.GetPower<CrimsonStrikePower>() != null;
     }
 
+    public static event Func<Creature, Task>? BloodArtConsumed;
+
     public static async Task<bool> TryConsumeBloodArtPoints(Creature creature, int requiredPoints)
     {
         var exemptPower = creature.GetPower<CrimsonStrikePower>();
@@ -294,13 +296,18 @@ public static class Utils
             if (damagePower != null)
                 await PowerCmd.Remove(damagePower);
             await PowerCmd.Remove(exemptPower);
+            if (BloodArtConsumed != null)
+                await BloodArtConsumed.Invoke(creature);
             return true;
         }
 
         var bloodPower = await GetOrCreatePower<BloodSwordArtPower>(creature);
         if (bloodPower == null || bloodPower.GetPoints() < requiredPoints)
             return false;
-        return bloodPower.TrySpendPoints(requiredPoints);
+        bool success = bloodPower.TrySpendPoints(requiredPoints);
+        if (success && BloodArtConsumed != null)
+            await BloodArtConsumed.Invoke(creature);
+        return success;
     }
 
     public static async Task<bool> TryUpgradeToAllEnemies(

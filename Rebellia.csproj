@@ -88,15 +88,15 @@
 
   <PropertyGroup>
     <!-- Diasble architecture mismatch warning; mods are ideally built for all platforms (MSIL)
-                                         while your local StS2 version will be for your specific platform. -->
+                                             while your local StS2 version will be for your specific platform. -->
     <NoWarn>$(NoWarn);MSB3270</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.2.0" PrivateAssets="All" />
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.3.0" PrivateAssets="All" />
     <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.9" />
     <AdditionalFiles Include="Rebellia/localization/**/*.json" />
-    <PackageReference Include="Book.StS2.RefLib" Version="0.107.0-beta" />
+    <PackageReference Include="Book.StS2.RefLib" Version="0.107.1" />
     <PackageReference Include="CSharpier.MsBuild" Version="1.2.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

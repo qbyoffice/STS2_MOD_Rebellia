@@ -20,10 +20,10 @@ public class ArmorPower : RebelliaPowers
         InvokeDisplayAmountChanged();
     }
 
-    public override async Task AfterCardChangedPiles(
+    public override async Task AfterCardDrawn(
+        PlayerChoiceContext choiceContext,
         CardModel card,
-        PileType oldPile,
-        AbstractModel? source
+        bool fromHandDraw
     )
     {
         if (Amount <= 0)
