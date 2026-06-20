@@ -16,17 +16,18 @@ public class BloodBite() : RebelliaCard(1, CardType.Skill, CardRarity.Common, Ta
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.ErodingBlood];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new PowerVar<ErodingBloodPower>(7)];
+        [new PowerVar<ErodingBloodPower>(7), new RepeatVar(2)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await Utils.GivePower<ErodingBloodPower>(
-            choiceContext,
-            play.Target!,
-            DynamicVars,
-            Owner.Creature,
-            this
-        );
+        for (int i = 0; i < base.DynamicVars.Repeat.IntValue; i++)
+            await Utils.GivePower<ErodingBloodPower>(
+                choiceContext,
+                play.Target!,
+                DynamicVars,
+                Owner.Creature,
+                this
+            );
     }
 
     protected override void OnUpgrade()

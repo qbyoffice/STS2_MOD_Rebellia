@@ -9,7 +9,7 @@
     "REBELLIA-VEIN_THORN_SCAB.title": "剜脉棘痂",
     "REBELLIA-VEIN_THORN_SCAB.description": "失去{HpLoss:diff()}点生命,造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n使目标获得[gold]撕裂[/gold]",
     "REBELLIA-BLOOD_BITE.title": "血咬",
-    "REBELLIA-BLOOD_BITE.description": "给予{ErodingBloodPower:diff()}层[gold]蚀血[/gold]",
+    "REBELLIA-BLOOD_BITE.description": "给予{ErodingBloodPower:diff()}层[gold]蚀血[/gold]{Repeat:diff()}次。",
     "REBELLIA-BLOOD_CRIMSON_METEOR.title": "血坏·煌红瞬星",
     "REBELLIA-BLOOD_CRIMSON_METEOR.description": "造成{Damage:diff()}点伤害。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}\n每有1层[gold]敏捷[/gold]便额外攻击{CalculationBase:diff()}次\n(总计{TotalHits:diff()}次)",
     "REBELLIA-VILLAGE_GUARD.title": "村庄警卫",
