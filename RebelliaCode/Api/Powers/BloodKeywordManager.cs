@@ -42,6 +42,9 @@ public static class BloodKeywordManager
             if (card.Pile?.Type == PileType.Exhaust)
                 continue;
 
+            if (card.Pile?.Type == PileType.Hand)
+                continue;
+
             await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
         }
     }
