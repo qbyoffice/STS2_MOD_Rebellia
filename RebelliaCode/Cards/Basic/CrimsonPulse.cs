@@ -29,24 +29,38 @@ public class CrimsonPulse()
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
+        var handStrike = PileType
+            .Hand.GetPile(Owner)
+            .Cards.FirstOrDefault(c => c is RebelliaStrike);
+        var drawStrike = PileType
+            .Draw.GetPile(Owner)
+            .Cards.FirstOrDefault(c => c is RebelliaStrike);
+
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
 
-        if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+        if (handStrike == null && drawStrike == null)
         {
-            var strikeCard = PileType
-                .Hand.GetPile(Owner)
-                .Cards.FirstOrDefault(c => c is RebelliaStrike);
-            if (strikeCard == null)
-            {
-                strikeCard = PileType
-                    .Draw.GetPile(Owner)
-                    .Cards.FirstOrDefault(c => c is RebelliaStrike);
-                await BloodSwordArtManager.AddPoints(Owner.Creature, requiredBlood, choiceContext);
-            }
+            await BloodSwordArtManager.AddPoints(Owner.Creature, 1, choiceContext);
+            return;
+        }
 
-            if (strikeCard != null)
-                await CardCmd.AutoPlay(choiceContext, strikeCard, play.Target);
+        if (handStrike == null && drawStrike != null)
+        {
+            if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+            {
+                await BloodSwordArtManager.AddPoints(Owner.Creature, 1, choiceContext);
+                await CardCmd.AutoPlay(choiceContext, drawStrike, play.Target);
+            }
+            return;
+        }
+
+        if (handStrike != null)
+        {
+            if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+            {
+                await CardCmd.AutoPlay(choiceContext, handStrike, play.Target);
+            }
         }
     }
 

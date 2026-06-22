@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -9,6 +10,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using Rebellia.RebelliaCode.Api;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Api.Relics;
 using Rebellia.RebelliaCode.Powers;
@@ -93,6 +95,19 @@ public class LucentCrystal : RebelliaRelics
         }
     }
 
+    public override async Task BeforeCombatStart()
+    {
+        var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
+        if (bloodPower == null)
+            return;
+
+        if (bloodPower.BloodArtMaxPoints < 2)
+            bloodPower.BloodArtMaxPoints = 2;
+
+        if (bloodPower.GetPoints() < 2)
+            bloodPower.AddPoints(1);
+    }
+
     public override async Task AfterCombatVictory(CombatRoom room)
     {
         if (room.RoomType == RoomType.Monster)
@@ -142,11 +157,11 @@ public class LucentCrystal : RebelliaRelics
         }
     }
 
-    // 原有血卡管理（不变）
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Owner == null)
             return;
+
         if (Owner.Creature.HasPower<CrimsonVeilPower>())
             await BloodKeywordManager.MoveBloodCardsToDrawPile(Owner);
         else
@@ -163,21 +178,38 @@ public class LucentCrystal : RebelliaRelics
         if (side != Owner.Creature.Side || state.RoundNumber != 1)
             return;
 
-        var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(Owner.Creature);
-        if (bloodPower == null)
-            return;
-
         await CrimsonVeilPowerManager.TryPlayOrExhaustStatusCard(Owner);
+
         if (Owner.Creature.HasPower<CrimsonVeilPower>())
             await BloodKeywordManager.MoveBloodCardsToDrawPile(Owner);
         else
             await BloodKeywordManager.ConsumeAllBloodCards(Owner);
+    }
 
-        if (bloodPower.BloodArtMaxPoints < 2)
-            bloodPower.BloodArtMaxPoints = 2;
+    public override async Task AfterFlush(
+        PlayerChoiceContext choiceContext,
+        Player player,
+        IReadOnlyCollection<CardModel> flushedCards,
+        IReadOnlyCollection<CardModel> retainedCards
+    )
+    {
+        if (player != Owner)
+            return;
 
-        if (bloodPower.GetPoints() < 2)
-            bloodPower.AddPoints(1);
+        if (!Owner.Creature.HasPower<CrimsonVeilPower>())
+        {
+            var bloodCards = flushedCards
+                .Where(c => c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
+                .ToList();
+            if (bloodCards.Count > 0)
+            {
+                foreach (var card in bloodCards)
+                {
+                    if (card.Pile?.Type != PileType.Exhaust)
+                        await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
+                }
+            }
+        }
     }
 
     public override async Task AfterCombatEnd(CombatRoom room)
