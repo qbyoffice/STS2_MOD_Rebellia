@@ -166,5 +166,8 @@
     "REBELLIA-REDEMPTION_BOND.description": "[gold]每回合[/gold]第{IfUpgraded:show:2|1}张[gold]技能牌[/gold]可[gold]免费[/gold]打出。",
 
     "REBELLIA-BLACK_STREET_SHADOW.title": "黑街幽影",
-    "REBELLIA-BLACK_STREET_SHADOW.description": "获得{IfUpgraded:show:3|2}层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。"
+    "REBELLIA-BLACK_STREET_SHADOW.description": "获得{IfUpgraded:show:3|2}层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
+
+    "REBELLIA-BLOOD_TITHE.title": "助纣积血",
+    "REBELLIA-BLOOD_TITHE.description": "造成{Damage:diff()}点伤害。\n获得{RebelliaTmepHpPower:diff()}点[gold]临时生命[/gold]。\n每打出一次，这张牌在[gold]本局游戏[/gold]中临时生命[gold]永久增加[/gold]{Increment:diff()}。\n(本局游戏总计{TempHpGain:diff()}点[gold]临时生命[/gold])"
 }
