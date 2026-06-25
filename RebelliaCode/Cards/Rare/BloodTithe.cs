@@ -16,7 +16,7 @@ public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, Ta
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     private int _incrementTmepHp;
-    private int _currentTmepHpGain;
+    private int _currentTmepHpGain = 9;
 
     [SavedProperty]
     public int CurrentTmepHpGain
@@ -26,6 +26,8 @@ public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, Ta
         {
             AssertMutable();
             _currentTmepHpGain = value;
+            DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue =
+                _currentTmepHpGain;
         }
     }
 
@@ -42,17 +44,15 @@ public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, Ta
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(9m, ValueProp.Move),
-            new PowerVar<RebelliaTmepHpPower>(9m),
+            new PowerVar<RebelliaTmepHpPower>(CurrentTmepHpGain),
             new IntVar("Increment", 3m),
-            new IntVar("TempHpGain", CurrentTmepHpGain),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
-        var tempHpGain =
-            (int)DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue
-            + DynamicVars["TempHpGain"].IntValue;
+        var tempHpGain = (int)
+            DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
         var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
         tempPower?.AddTempHp(tempHpGain);
 
@@ -65,7 +65,6 @@ public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, Ta
     {
         DynamicVars.Damage.UpgradeValueBy(3m);
         DynamicVars["Increment"].UpgradeValueBy(1m);
-        DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).UpgradeValueBy(3m);
     }
 
     protected override void AfterDowngraded()
@@ -81,6 +80,6 @@ public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, Ta
 
     private void UpdateCurrentGain()
     {
-        CurrentTmepHpGain = IncrementTmepHp;
+        CurrentTmepHpGain = 9 + IncrementTmepHp;
     }
 }
