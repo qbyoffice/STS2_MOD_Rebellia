@@ -47,7 +47,7 @@ public class VeinThornScab()
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            var rendPower = await PowerCmd.Apply<RendPower>(
+            await PowerCmd.Apply<RendPower>(
                 choiceContext,
                 play.Target,
                 (int)damageAmount,

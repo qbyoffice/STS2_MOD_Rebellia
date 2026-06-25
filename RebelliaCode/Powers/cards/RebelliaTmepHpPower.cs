@@ -176,4 +176,9 @@ public class RebelliaTmepHpPower : RebelliaPowers
     }
 
     public int GetCurrentTempHp() => GetData().RebelliaTempHp;
+
+    public static implicit operator int(RebelliaTmepHpPower? v)
+    {
+        throw new NotImplementedException();
+    }
 }
