@@ -1,4 +1,4 @@
-using MegaCrit.Sts2.Core.Commands;
+using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -15,49 +15,72 @@ public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, Ta
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
+    private int _incrementTmepHp;
+    private int _currentTmepHpGain;
+
     [SavedProperty]
-    public int ExtraTempHp { get; set; } = 0;
+    public int CurrentTmepHpGain
+    {
+        get { return _currentTmepHpGain; }
+        set
+        {
+            AssertMutable();
+            _currentTmepHpGain = value;
+        }
+    }
 
-    private int Increment => (int)DynamicVars["Increment"].BaseValue;
-
-    private int CurrentTempHpGain =>
-        (int)DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue
-        + ExtraTempHp;
-
+    [SavedProperty]
+    public int IncrementTmepHp
+    {
+        get { return _incrementTmepHp; }
+        set
+        {
+            AssertMutable();
+            _incrementTmepHp = value;
+        }
+    }
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(9m, ValueProp.Move),
-            new IntVar("Increment", 3),
-            new PowerVar<RebelliaTmepHpPower>(9),
-            new IntVar("TempHpGain", CurrentTempHpGain),
+            new PowerVar<RebelliaTmepHpPower>(9m),
+            new IntVar("Increment", 3m),
+            new IntVar("TempHpGain", CurrentTmepHpGain),
         ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        await CreatureCmd.Damage(
-            choiceContext,
-            Owner.Creature,
-            DynamicVars.Damage.BaseValue,
-            ValueProp.Move,
-            Owner.Creature,
-            this
-        );
-
+        await CommonActions.CardAttack(this, play).Execute(choiceContext);
+        var tempHpGain =
+            (int)DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue
+            + DynamicVars["TempHpGain"].IntValue;
         var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
-        if (tempPower == null)
-            return;
+        tempPower?.AddTempHp(tempHpGain);
 
-        int hpGain = CurrentTempHpGain;
-        await tempPower.AddTempHp(hpGain);
-
-        ExtraTempHp += Increment;
-        DynamicVars["TempHpGain"].BaseValue = CurrentTempHpGain;
+        int intIncrementValue = DynamicVars["Increment"].IntValue;
+        BuffFromPlay(intIncrementValue);
+        (DeckVersion as BloodTithe)?.BuffFromPlay(intIncrementValue);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3m);
-        DynamicVars["Increment"].UpgradeValueBy(1);
+        DynamicVars["Increment"].UpgradeValueBy(1m);
         DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).UpgradeValueBy(3m);
+    }
+
+    protected override void AfterDowngraded()
+    {
+        UpdateCurrentGain();
+    }
+
+    private void BuffFromPlay(int extraTmepHp)
+    {
+        IncrementTmepHp += extraTmepHp;
+        UpdateCurrentGain();
+    }
+
+    private void UpdateCurrentGain()
+    {
+        CurrentTmepHpGain = IncrementTmepHp;
     }
 }

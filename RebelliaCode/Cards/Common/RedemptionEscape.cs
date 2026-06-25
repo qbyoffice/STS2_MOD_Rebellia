@@ -26,11 +26,8 @@ public class RedemptionEscape()
 
         var tempHpGain = (int)
             DynamicVarsHelper.GetPowerVar<RebelliaTmepHpPower>(DynamicVars).BaseValue;
-        if (tempHpGain > 0)
-        {
-            var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
-            tempPower?.AddTempHp(tempHpGain);
-        }
+        var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
+        tempPower?.AddTempHp(tempHpGain);
     }
 
     protected override void OnUpgrade()
