@@ -39,7 +39,7 @@ public class SpectralOblivion()
 
         var tempHpPower = Owner.Creature.GetPower<RebelliaTmepHpPower>();
         var currentTempHp = tempHpPower!.GetCurrentTempHp();
-        decimal damage = DynamicVars.CalculatedDamage.Calculate(target);
+        var damage = DynamicVars.CalculatedDamage.Calculate(target);
         if (currentTempHp > 0)
         {
             tempHpPower?.AddTempHp(-currentTempHp);
