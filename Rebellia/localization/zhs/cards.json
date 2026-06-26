@@ -175,5 +175,8 @@
     "REBELLIA-SPECTRAL_OBLIVION.description": "失去所有[gold]临时生命[/gold]，每有1点[gold]临时生命[/gold]，使目标失去{ExtraDamage:diff()}生命。\n（总计 {CalculatedDamage:diff()}）\n[gold]剑艺3[/gold]\n当该伤害击杀敌人时，获得[gold]临时生命等量治疗[/gold]。",
 
     "REBELLIA-BLOODTIDE_NECROPOLIS.title": "血潮死城",
-    "REBELLIA-BLOODTIDE_NECROPOLIS.description": "对[gold]所有敌人[/gold]造成{CalculationBase:diff()}伤害。\n[gold]牌堆[/gold]中每有一张[red]鲜血牌[/red]，本卡牌伤害提升{ExtraDamage:diff()}。\n[gold]丢弃所有手牌[/gold]将所有手牌附上[red]鲜血[/red]。\n(总计造成{CalculatedDamage:diff()}点伤害)"
+    "REBELLIA-BLOODTIDE_NECROPOLIS.description": "对[gold]所有敌人[/gold]造成{CalculationBase:diff()}伤害。\n[gold]牌堆[/gold]中每有一张[red]鲜血牌[/red]，本卡牌伤害提升{ExtraDamage:diff()}。\n[gold]丢弃所有手牌[/gold]将所有手牌附上[red]鲜血[/red]。\n(总计造成{CalculatedDamage:diff()}点伤害)",
+
+    "REBELLIA-IMPISH_PRANK.title": "妖童欲戏",
+    "REBELLIA-IMPISH_PRANK.description": "造成{Damage:diff()}伤害。\n[gold]消耗全部手牌[/gold]。\n将[gold]牌堆[/gold]中的所有[red]鲜血牌[/red]加入[gold]手牌[/gold]。"
 }
