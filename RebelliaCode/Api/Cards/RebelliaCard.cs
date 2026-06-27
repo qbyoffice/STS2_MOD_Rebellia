@@ -1,6 +1,7 @@
 using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using Rebellia.RebelliaCode.Character;
 
@@ -16,6 +17,18 @@ public abstract class RebelliaCard(
     bool autoAdd = true
 ) : CustomCardModel(baseCost, type, rarity, target, showInCardLibrary, autoAdd)
 {
-    public override string? CustomPortraitPath =>
-        $"res://{MainFile.ModId}/images/card_portraits/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png";
+    private const string DefaultCardImage = "a_rebellia_beat";
+
+    public override string? CustomPortraitPath
+    {
+        get
+        {
+            string cardId = Id.Entry.RemovePrefix().ToLowerInvariant();
+            string targetPath = $"res://{MainFile.ModId}/images/card_portraits/{cardId}.png";
+
+            return ResourceLoader.Exists(targetPath)
+                ? targetPath
+                : $"res://{MainFile.ModId}/images/card_portraits/{DefaultCardImage}.png";
+        }
+    }
 }

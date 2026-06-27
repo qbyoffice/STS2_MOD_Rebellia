@@ -191,5 +191,8 @@
 
     "REBELLIA-SANGUINE_IMPRINT.title": "鲜血剑拓",
     "REBELLIA-SANGUINE_IMPRINT.description": "选择[gold]手牌[/gold]中{Cards:diff()}张[gold]攻击牌[/gold]附上[gold]消耗[/gold]并[gold]免费[/gold]。\n[gold]剑艺[/gold]X\n生成X张[gold]免费[/gold]{IfUpgraded:show:复制品+|[gold]复制品[/gold]}。\n(当前可复制{CloneCount:diff()}张)",
-    "REBELLIA-SANGUINE_IMPRINT.selectionScreenPrompt": "选择需要复制的攻击牌"
+    "REBELLIA-SANGUINE_IMPRINT.selectionScreenPrompt": "选择需要复制的攻击牌",
+
+    "REBELLIA-REBEL_ARMAMENT.title": "抗争武装",
+    "REBELLIA-REBEL_ARMAMENT.description": "用随机[red]血武[/red]填满[gold]手牌[/gold]。\n本回合内，[red]血武[/red]费用-1。"
 }
