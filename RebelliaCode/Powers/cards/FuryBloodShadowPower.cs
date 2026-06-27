@@ -83,7 +83,7 @@ public class FuryBloodShadowPower : RebelliaPowers, IHasSecondAmount
 
         if (card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
         {
-            card.RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
+            await BloodKeywordManager.RemoveSanguineFromCard(card.Owner, card);
         }
         await Task.CompletedTask;
     }
