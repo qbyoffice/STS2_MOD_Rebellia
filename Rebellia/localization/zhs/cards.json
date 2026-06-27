@@ -181,5 +181,8 @@
     "REBELLIA-IMPISH_PRANK.description": "造成{Damage:diff()}伤害。\n[gold]消耗全部手牌[/gold]。\n将[gold]牌堆[/gold]中的所有[red]鲜血牌[/red]加入[gold]手牌[/gold]。",
 
     "REBELLIA-BLOOD_WEAPON_NIGHT_KINGS_MARCH.title": "血武剑庭·夜王入阵曲",
-    "REBELLIA-BLOOD_WEAPON_NIGHT_KINGS_MARCH.description": "{IfUpgraded:show:升级并|}打出[gold]牌堆[/gold]中所有[red]血武器[/red]。"
+    "REBELLIA-BLOOD_WEAPON_NIGHT_KINGS_MARCH.description": "{IfUpgraded:show:升级并|}打出[gold]牌堆[/gold]中所有[red]血武器[/red]。",
+
+    "REBELLIA-FINAL_BLOOD_KISS.title": "落幕血吻",
+    "REBELLIA-FINAL_BLOOD_KISS.description": "对[gold]所有敌人[/gold]造成{CalculationBase:diff()}点伤害。\n[gold]解除面纱[/gold]\n每层拥有的[gold]面纱[/gold]提升{ExtraDamage:diff()}点伤害。\n(总计造成{CalculatedDamage:diff()}点伤害)"
 }
