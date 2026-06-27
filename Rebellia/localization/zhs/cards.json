@@ -187,5 +187,9 @@
     "REBELLIA-FINAL_BLOOD_KISS.description": "对[gold]所有敌人[/gold]造成{CalculationBase:diff()}点伤害。\n[gold]解除面纱[/gold]\n每层拥有的[gold]面纱[/gold]提升{ExtraDamage:diff()}点伤害。\n(总计造成{CalculatedDamage:diff()}点伤害)",
 
     "REBELLIA-SPECTRAL_JOURNEY.title": "灵界漫游",
-    "REBELLIA-SPECTRAL_JOURNEY.description": "获得{SpectralJourneyPower:diff()}[gold]灵界漫游[/gold]。"
+    "REBELLIA-SPECTRAL_JOURNEY.description": "获得{SpectralJourneyPower:diff()}[gold]灵界漫游[/gold]。",
+
+    "REBELLIA-SANGUINE_IMPRINT.title": "鲜血剑拓",
+    "REBELLIA-SANGUINE_IMPRINT.description": "选择[gold]手牌[/gold]中{Cards:diff()}张[gold]攻击牌[/gold]附上[gold]消耗[/gold]并[gold]免费[/gold]。\n[gold]剑艺[/gold]X\n生成X张[gold]免费[/gold]{IfUpgraded:show:复制品+|[gold]复制品[/gold]}。\n(当前可复制{CloneCount:diff()}张)",
+    "REBELLIA-SANGUINE_IMPRINT.selectionScreenPrompt": "选择需要复制的攻击牌"
 }
