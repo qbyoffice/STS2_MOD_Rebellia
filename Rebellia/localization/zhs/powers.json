@@ -177,5 +177,9 @@
 
     "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.title": "黑街幽影+",
     "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.description": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
-    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.smartDescription": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。"
+    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.smartDescription": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
+
+    "REBELLIA-SPECTRAL_JOURNEY_POWER.title": "灵界漫游",
+    "REBELLIA-SPECTRAL_JOURNEY_POWER.description": "承受的非自身的伤害降低为1。\n每打出一张攻击牌失去{energyPrefix:energyIcons(1)}。\n回合内无法额外抽牌。\n每回合开始时失去6点生命，并将一张虚空放入抽牌堆。",
+    "REBELLIA-SPECTRAL_JOURNEY_POWER.smartDescription": "承受的非自身的伤害降低为1。\n每打出一张攻击牌失去{energyPrefix:energyIcons(1)}。\n回合内无法额外抽牌。\n每回合开始时失去6点生命，并将一张虚空放入抽牌堆。"
 }

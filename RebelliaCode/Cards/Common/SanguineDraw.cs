@@ -39,11 +39,15 @@ public class SanguineDraw()
 
         if (veilPower != null && removedVeil > 0)
         {
-            await BloodSwordArtManager.AddPoints(Owner.Creature, removedVeil, choiceContext);
             veilPower.AddVeilPoints(-removedVeil);
         }
 
         Utils.SuppressBloodConsumption(false);
+
+        if (removedVeil > 0)
+        {
+            await BloodSwordArtManager.AddPoints(Owner.Creature, removedVeil, choiceContext);
+        }
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
@@ -70,18 +74,6 @@ public class SanguineDraw()
                         .ToList();
                 }
             }
-        }
-
-        if (removedVeil > 0)
-        {
-            var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(
-                Owner.Creature,
-                0,
-                Owner.Creature,
-                this,
-                choiceContext
-            );
-            bloodPower!.AddPoints(removedVeil);
         }
     }
 
