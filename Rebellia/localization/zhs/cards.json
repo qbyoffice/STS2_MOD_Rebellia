@@ -208,5 +208,8 @@
 
     "REBELLIA-BUBONIC_PLAGUE.title": "黑死灾疫",
     "REBELLIA-BUBONIC_PLAGUE.description": "选择[gold]手牌[/gold]将其[gold]变化[/gold]为{IfUpgraded:show:粉碎血武+|[gold]粉碎血武[/gold]}。\n[gold]同时[/gold]当前[gold]手牌[/gold]的[red]血武[/red][gold]免费[/gold]。",
-    "REBELLIA-BUBONIC_PLAGUE.selectionScreenPrompt": "选择需要[gold]变化[/gold]的卡牌"
+    "REBELLIA-BUBONIC_PLAGUE.selectionScreenPrompt": "选择需要[gold]变化[/gold]的卡牌",
+
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH.title": "原初·鲜血重诞",
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH.description": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机1张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。"
 }

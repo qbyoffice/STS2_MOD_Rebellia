@@ -189,5 +189,9 @@
 
     "REBELLIA-PALE_WATCH_POWER.title": "苍白守望",
     "REBELLIA-PALE_WATCH_POWER.description": "获得当前[gold]手牌[/gold][red]血武[/red]数量的{energyPrefix:energyIcons(1)}。",
-    "REBELLIA-PALE_WATCH_POWER.smartDescription": "获得当前[gold]手牌[/gold][red]血武[/red]数量的{energyPrefix:energyIcons(1)}。"
+    "REBELLIA-PALE_WATCH_POWER.smartDescription": "获得当前[gold]手牌[/gold][red]血武[/red]数量的{energyPrefix:energyIcons(1)}。",
+
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.title": "原初·鲜血重诞",
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.description": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机{Amount}张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。",
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.smartDescription": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机{Amount}张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。"
 }
