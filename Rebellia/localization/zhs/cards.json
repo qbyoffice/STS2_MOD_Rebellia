@@ -211,5 +211,5 @@
     "REBELLIA-BUBONIC_PLAGUE.selectionScreenPrompt": "选择需要[gold]变化[/gold]的卡牌",
 
     "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH.title": "原初·鲜血重诞",
-    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH.description": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机1张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。"
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH.description": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n从[gold]牌堆[/gold]随机加入1张[red]鲜血牌[/red]到[gold]手牌[/gold]中并且当前回合[gold]免费[/gold]。"
 }

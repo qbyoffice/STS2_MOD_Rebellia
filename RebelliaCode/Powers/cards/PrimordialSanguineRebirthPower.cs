@@ -29,29 +29,26 @@ public class PrimordialSanguineRebirthPower : RebelliaPowers
         if (player != Owner.Player)
             return;
 
-        var allCards = ModelDb
-            .CardPool<RebelliaCardPool>()
-            .GetUnlockedCards(player.UnlockState, player.RunState.CardMultiplayerConstraint);
-        var bloodWeaponCards = allCards
-            .Where(c => c.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon))
+        var candidates = PileType
+            .Draw.GetPile(player)
+            .Cards.Concat(PileType.Discard.GetPile(player).Cards)
+            .Concat(PileType.Exhaust.GetPile(player).Cards)
+            .Where(c => c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
             .ToList();
 
-        if (!bloodWeaponCards.Any())
+        if (candidates.Count == 0)
             return;
 
-        var cards = CardFactory
-            .GetDistinctForCombat(
-                player,
-                bloodWeaponCards,
-                Amount,
-                player.RunState.Rng.CombatCardGeneration
-            )
-            .ToList();
+        int count = Math.Min(Amount, candidates.Count);
 
-        foreach (var card in cards)
+        var rng = player.RunState.Rng.CombatCardGeneration;
+        var selected = candidates.OrderBy(_ => rng.NextInt()).Take(count).ToList();
+
+        foreach (var card in selected)
         {
+            card.RemoveFromCurrentPile();
+            var result = await CardPileCmd.Add(card, PileType.Hand, CardPilePosition.Bottom);
             card.SetToFreeThisTurn();
-            var result = await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);
             CardCmd.PreviewCardPileAdd(result);
         }
 
