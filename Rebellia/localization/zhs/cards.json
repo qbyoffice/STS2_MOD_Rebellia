@@ -198,5 +198,8 @@
 
     "REBELLIA-BELYE_NOCHI.title": "白夜邂逅",
     "REBELLIA-BELYE_NOCHI.description": "选择[gold]消耗牌堆[/gold]中卡牌移除[red]鲜血[/red]。\n每移除[red]鲜血[/red]，获得{Block:diff()}点[gold]格挡[/gold]与{energyPrefix:energyIcons(1)}。",
-    "REBELLIA-BELYE_NOCHI.selectionScreenPrompt": "选择移除[gold]鲜血[/gold]"
+    "REBELLIA-BELYE_NOCHI.selectionScreenPrompt": "选择移除[gold]鲜血[/gold]",
+
+    "REBELLIA-BLOOD_PRAMADA_ANATMAN.title": "血坏·纵狂无我",
+    "REBELLIA-BLOOD_PRAMADA_ANATMAN.description": "[gold]当前生命[/gold]转化为[gold]临时生命[/gold]。\n生命值变为1。\n当前[gold]手牌[/gold]在[gold]本回合免费[/gold]。"
 }
