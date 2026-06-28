@@ -198,11 +198,15 @@
 
     "REBELLIA-BELYE_NOCHI.title": "白夜邂逅",
     "REBELLIA-BELYE_NOCHI.description": "选择[gold]消耗牌堆[/gold]中卡牌移除[red]鲜血[/red]。\n每移除[red]鲜血[/red]，获得{Block:diff()}点[gold]格挡[/gold]与{energyPrefix:energyIcons(1)}。",
-    "REBELLIA-BELYE_NOCHI.selectionScreenPrompt": "选择移除[gold]鲜血[/gold]",
+    "REBELLIA-BELYE_NOCHI.selectionScreenPrompt": "选择需要移除[gold]鲜血[/gold]的卡牌",
 
     "REBELLIA-BLOOD_PRAMADA_ANATMAN.title": "血坏·纵狂无我",
     "REBELLIA-BLOOD_PRAMADA_ANATMAN.description": "[gold]当前生命[/gold]转化为[gold]临时生命[/gold]。\n生命值变为1。\n当前[gold]手牌[/gold]在[gold]本回合免费[/gold]。",
 
     "REBELLIA-PALE_WATCH.title": "苍白守望",
-    "REBELLIA-PALE_WATCH.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]下回合开始时[/gold]获得当前[gold]手牌[/gold][red]血武[/red]数量的{energyPrefix:energyIcons(1)}。"
+    "REBELLIA-PALE_WATCH.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]下回合开始时[/gold]获得当前[gold]手牌[/gold][red]血武[/red]数量的{energyPrefix:energyIcons(1)}。",
+
+    "REBELLIA-BUBONIC_PLAGUE.title": "黑死灾疫",
+    "REBELLIA-BUBONIC_PLAGUE.description": "选择[gold]手牌[/gold]将其[gold]变化[/gold]为{IfUpgraded:show:粉碎血武+|[gold]粉碎血武[/gold]}。\n[gold]同时[/gold]当前[gold]手牌[/gold]的[red]血武[/red][gold]免费[/gold]。",
+    "REBELLIA-BUBONIC_PLAGUE.selectionScreenPrompt": "选择需要[gold]变化[/gold]的卡牌"
 }
