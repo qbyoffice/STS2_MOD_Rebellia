@@ -53,5 +53,8 @@
   "REBELLIA-SANGUINE_EXTRACT_TOOL.smartDescription": "",
   "REBELLIA-BLOODPIERCE_TOOL.title": "贯血",
   "REBELLIA-BLOODPIERCE_TOOL.description": "立即触发1次目标的[red]蚀血[/red]伤害。",
-  "REBELLIA-BLOODPIERCE_TOOL.smartDescription": "立即触发1次目标的[red]蚀血[/red]伤害。"
+  "REBELLIA-BLOODPIERCE_TOOL.smartDescription": "立即触发1次目标的[red]蚀血[/red]伤害。",
+  "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.title": "血艺影刃",
+  "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.description": "下回合将本卡牌的复制品加入手牌。",
+  "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.smartDescription": "下回合将本卡牌的复制品加入手牌。"
 }
