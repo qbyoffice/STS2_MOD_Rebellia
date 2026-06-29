@@ -205,5 +205,9 @@
 
     "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.title": "血池刃林",
     "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.description": "获得[gold]剑艺[/gold]超出最大值时，每溢出1剑艺将一张随机[red]血武[/red]加入抽牌堆。",
-    "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.smartDescription": "将{Amount}张随机[red]血武[/red]加入抽牌堆。"
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.smartDescription": "将{Amount}张随机[red]血武[/red]加入抽牌堆。",
+
+    "REBELLIA-BLOOD_CRIMSON_FRENZY_POWER.title": "血坏·猩红死狂",
+    "REBELLIA-BLOOD_CRIMSON_FRENZY_POWER.description": "因打出卡牌失去生命时，卡牌的格挡与伤害加上失去生命的等量数值。",
+    "REBELLIA-BLOOD_CRIMSON_FRENZY_POWER.smartDescription": "因打出卡牌失去生命时，卡牌的格挡与伤害加上失去生命的等量数值。"
 }
