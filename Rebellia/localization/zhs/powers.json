@@ -217,5 +217,13 @@
 
     "REBELLIA-BLOOD_FORGE_ARTS_POWER.title": "血铸技艺",
     "REBELLIA-BLOOD_FORGE_ARTS_POWER.description": "能量不足以打出鲜血牌时，该鲜血牌本回合免费。\n打出被免费的牌失去卡牌费用*2的生命。",
-    "REBELLIA-BLOOD_FORGE_ARTS_POWER.smartDescription": "能量不足以打出鲜血牌时，该鲜血牌本回合免费。\n打出被免费的牌失去卡牌费用*2的生命。"
+    "REBELLIA-BLOOD_FORGE_ARTS_POWER.smartDescription": "能量不足以打出鲜血牌时，该鲜血牌本回合免费。\n打出被免费的牌失去卡牌费用*2的生命。",
+
+    "REBELLIA-BLOOD_FORGED_BODY_POWER.title": "炼血铸体",
+    "REBELLIA-BLOOD_FORGED_BODY_POWER.description": "获得格挡时。\n获得1[gold]临时生命[/gold]。",
+    "REBELLIA-BLOOD_FORGED_BODY_POWER.smartDescription": "获得格挡时。\n获得{Amount}[gold]临时生命[/gold]。",
+
+    "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.title": "炼血铸体+",
+    "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.description": "获得格挡时。\n获得2[gold]临时生命[/gold]。",
+    "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.smartDescription": "获得格挡时。\n获得2*{Amount}[gold]临时生命[/gold]。"
 }

@@ -226,6 +226,9 @@
     "REBELLIA-MAGIC_TOOL_FORM.description": "在你的回合结束前\n鲜血牌从手牌消耗时，打出并移除该牌的鲜血。",
 
     "REBELLIA-BLOOD_FORGE_ARTS.title": "血铸技艺",
-    "REBELLIA-BLOOD_FORGE_ARTS.description": "能量不足以打出鲜血牌时，该鲜血牌本回合免费。\n打出被免费的牌失去卡牌费用*2的生命。"
+    "REBELLIA-BLOOD_FORGE_ARTS.description": "能量不足以打出鲜血牌时，该鲜血牌本回合免费。\n打出被免费的牌失去卡牌费用*2的生命。",
+
+    "REBELLIA-BLOOD_FORGED_BODY.title": "炼血铸体",
+    "REBELLIA-BLOOD_FORGED_BODY.description": "获得格挡时。\n获得{IfUpgraded:show:2|1}[gold]临时生命[/gold]。"
 
 }
