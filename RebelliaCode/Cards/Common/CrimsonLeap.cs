@@ -18,7 +18,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.KeywordSanguine];
-
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(2), new EnergyVar(1), new PowerVar<BloodSwordArtPower>(1)];
 

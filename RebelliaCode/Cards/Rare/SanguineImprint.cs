@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Rare;
@@ -12,7 +13,7 @@ namespace Rebellia.RebelliaCode.Cards.Rare;
 public class SanguineImprint() : RebelliaCard(3, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     private const string CloneCountKey = "CloneCount";
-
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new CardsVar(1),

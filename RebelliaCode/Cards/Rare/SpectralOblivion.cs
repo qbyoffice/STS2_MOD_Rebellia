@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
 
@@ -16,6 +17,7 @@ namespace Rebellia.RebelliaCode.Cards.Rare;
 public class SpectralOblivion()
     : RebelliaCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [

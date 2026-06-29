@@ -223,6 +223,9 @@
     "REBELLIA-BLOOD_CRIMSON_FRENZY.description": "因打出卡牌失去生命时，卡牌的格挡与伤害加上失去生命的等量数值。",
 
     "REBELLIA-MAGIC_TOOL_FORM.title": "魔具形态",
-    "REBELLIA-MAGIC_TOOL_FORM.description": "在你的回合结束前\n鲜血牌从手牌消耗时，打出并移除该牌的鲜血。"
+    "REBELLIA-MAGIC_TOOL_FORM.description": "在你的回合结束前\n鲜血牌从手牌消耗时，打出并移除该牌的鲜血。",
+
+    "REBELLIA-BLOOD_FORGE_ARTS.title": "血铸技艺",
+    "REBELLIA-BLOOD_FORGE_ARTS.description": "能量不足以打出鲜血牌时，该鲜血牌本回合免费。\n打出被免费的牌失去卡牌费用*2的生命。"
 
 }

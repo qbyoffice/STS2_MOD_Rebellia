@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Ancient;
@@ -14,6 +15,7 @@ namespace Rebellia.RebelliaCode.Cards.Ancient;
 public class PrimordialCrimsonRaid()
     : RebelliaCard(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
 {
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(11m, ValueProp.Move)];
 
