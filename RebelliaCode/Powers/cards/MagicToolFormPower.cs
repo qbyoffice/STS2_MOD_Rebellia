@@ -13,11 +13,10 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class MagicToolFormPower : RebelliaPowers
 {
+    private readonly HashSet<CardModel> _handSanguineCards = new();
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override bool ShouldReceiveCombatHooks => true;
-
-    private readonly HashSet<CardModel> _handSanguineCards = new();
 
     private void UpdateHandSanguineSet(Player player)
     {

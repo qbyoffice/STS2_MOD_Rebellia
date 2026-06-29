@@ -27,7 +27,7 @@ public class PaleWatchPower : RebelliaPowers
         if (player == null)
             return;
 
-        int bloodWeaponCount = PileType
+        var bloodWeaponCount = PileType
             .Hand.GetPile(player)
             .Cards.Count(c => c.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon));
 

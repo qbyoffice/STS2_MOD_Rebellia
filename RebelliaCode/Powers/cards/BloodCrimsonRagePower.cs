@@ -10,8 +10,8 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class BloodCrimsonRagePower : RebelliaPowers
 {
+    private int _lastArmorAmount;
     protected int ArmorAmount = 1;
-    private int _lastArmorAmount = 0;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
@@ -26,6 +26,7 @@ public class BloodCrimsonRagePower : RebelliaPowers
             armor.DisplayAmountChanged += OnArmorAmountChanged;
             _lastArmorAmount = armor.Amount;
         }
+
         await base.AfterApplied(applier, cardSource);
     }
 
@@ -65,15 +66,14 @@ public class BloodCrimsonRagePower : RebelliaPowers
         var armor = Owner.GetPower<ArmorPower>();
         if (armor == null)
             return;
-        int current = armor.Amount;
+        var current = armor.Amount;
         if (current < _lastArmorAmount)
         {
-            int decrease = _lastArmorAmount - current;
+            var decrease = _lastArmorAmount - current;
             if (decrease > 0)
-            {
                 CardPileCmd.Draw(new BlockingPlayerChoiceContext(), decrease, Owner.Player!);
-            }
         }
+
         _lastArmorAmount = current;
     }
 }

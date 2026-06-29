@@ -16,16 +16,15 @@ public class BloodCrimsonFrenzyPower : RebelliaPowers
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool ShouldReceiveCombatHooks => true;
 
-    protected override object InitInternalData() => new Data();
-
-    private class Data
+    protected override object InitInternalData()
     {
-        public CardModel? CurrentCard { get; set; }
-        public readonly Dictionary<CardModel, int> BonusCardList = new();
-        public bool IsSubscribed { get; set; }
+        return new Data();
     }
 
-    private Data GetData() => GetInternalData<Data>();
+    private Data GetData()
+    {
+        return GetInternalData<Data>();
+    }
 
     public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
@@ -43,9 +42,7 @@ public class BloodCrimsonFrenzyPower : RebelliaPowers
     {
         var data = GetData();
         if (cardPlay.Card.Owner.Creature == Owner)
-        {
             data.CurrentCard = null;
-        }
         await Task.CompletedTask;
     }
 
@@ -57,6 +54,7 @@ public class BloodCrimsonFrenzyPower : RebelliaPowers
             RebelliaTmepHpPower.TempHpLost += OnTempHpLost;
             data.IsSubscribed = true;
         }
+
         await Task.CompletedTask;
     }
 
@@ -71,7 +69,7 @@ public class BloodCrimsonFrenzyPower : RebelliaPowers
             return;
 
         var card = data.CurrentCard;
-        if (data.BonusCardList.TryGetValue(card, out int currentBonus))
+        if (data.BonusCardList.TryGetValue(card, out var currentBonus))
             data.BonusCardList[card] = currentBonus + lostAmount;
         else
             data.BonusCardList[card] = lostAmount;
@@ -98,11 +96,11 @@ public class BloodCrimsonFrenzyPower : RebelliaPowers
         if (cardSource != data.CurrentCard)
             return;
 
-        int lost = result.UnblockedDamage + result.OverkillDamage;
+        var lost = result.UnblockedDamage + result.OverkillDamage;
         if (lost <= 0)
             return;
 
-        if (data.BonusCardList.TryGetValue(cardSource, out int currentBonus))
+        if (data.BonusCardList.TryGetValue(cardSource, out var currentBonus))
             data.BonusCardList[cardSource] = currentBonus + lost;
         else
             data.BonusCardList[cardSource] = lost;
@@ -123,7 +121,7 @@ public class BloodCrimsonFrenzyPower : RebelliaPowers
         if (cardSource == null)
             return 0m;
         var data = GetData();
-        if (data.BonusCardList.TryGetValue(cardSource, out int bonus))
+        if (data.BonusCardList.TryGetValue(cardSource, out var bonus))
             return bonus * Amount;
         return 0m;
     }
@@ -141,7 +139,7 @@ public class BloodCrimsonFrenzyPower : RebelliaPowers
         if (cardSource == null)
             return 0m;
         var data = GetData();
-        if (data.BonusCardList.TryGetValue(cardSource, out int bonus))
+        if (data.BonusCardList.TryGetValue(cardSource, out var bonus))
             return bonus * Amount;
         return 0m;
     }
@@ -154,8 +152,16 @@ public class BloodCrimsonFrenzyPower : RebelliaPowers
             RebelliaTmepHpPower.TempHpLost -= OnTempHpLost;
             data.IsSubscribed = false;
         }
+
         data.BonusCardList.Clear();
         data.CurrentCard = null;
         await Task.CompletedTask;
+    }
+
+    private class Data
+    {
+        public readonly Dictionary<CardModel, int> BonusCardList = new();
+        public CardModel? CurrentCard { get; set; }
+        public bool IsSubscribed { get; set; }
     }
 }

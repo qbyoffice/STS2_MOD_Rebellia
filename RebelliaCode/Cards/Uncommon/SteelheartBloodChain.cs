@@ -19,12 +19,8 @@ public class SteelheartBloodChain()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (IsUpgraded)
-        {
             await Utils.GivePower<SteelheartBloodChainUpgradedPower>(choiceContext, this, play);
-        }
         else
-        {
             await Utils.GivePower<SteelheartBloodChainPower>(choiceContext, this, play);
-        }
     }
 }

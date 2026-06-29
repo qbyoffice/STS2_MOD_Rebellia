@@ -9,7 +9,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
-class BodyMindCurseUpgradedPower : RebelliaPowers
+internal class BodyMindCurseUpgradedPower : RebelliaPowers
 {
     protected virtual int PowerPerCurse => 2;
     protected virtual int EnergyOnExhaust => 3;
@@ -34,10 +34,9 @@ class BodyMindCurseUpgradedPower : RebelliaPowers
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        int curseCount = GetCurseCount();
-        int strengthGain = curseCount * PowerPerCurse;
+        var curseCount = GetCurseCount();
+        var strengthGain = curseCount * PowerPerCurse;
         if (strengthGain > 0)
-        {
             await PowerCmd.Apply<StrengthPower>(
                 new BlockingPlayerChoiceContext(),
                 Owner,
@@ -45,7 +44,6 @@ class BodyMindCurseUpgradedPower : RebelliaPowers
                 Owner,
                 null
             );
-        }
         await base.AfterApplied(applier, cardSource);
     }
 

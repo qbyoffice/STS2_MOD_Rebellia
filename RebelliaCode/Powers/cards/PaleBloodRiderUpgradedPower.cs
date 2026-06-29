@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Rooms;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
 
@@ -49,8 +48,6 @@ public class PaleBloodRiderUpgradedPower : RebelliaPowers
             .ToList();
 
         foreach (var card in toPlay)
-        {
             await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), card, null);
-        }
     }
 }

@@ -13,15 +13,15 @@ namespace Rebellia.RebelliaCode.Cards.Rare;
 
 public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    private int _currentTmepHpGain = 9;
 
     private int _incrementTmepHp;
-    private int _currentTmepHpGain = 9;
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     [SavedProperty]
     public int CurrentTmepHpGain
     {
-        get { return _currentTmepHpGain; }
+        get => _currentTmepHpGain;
         set
         {
             AssertMutable();
@@ -34,13 +34,14 @@ public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, Ta
     [SavedProperty]
     public int IncrementTmepHp
     {
-        get { return _incrementTmepHp; }
+        get => _incrementTmepHp;
         set
         {
             AssertMutable();
             _incrementTmepHp = value;
         }
     }
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new DamageVar(9m, ValueProp.Move),
@@ -56,7 +57,7 @@ public class BloodTithe() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, Ta
         var tempPower = await Utils.GetOrCreatePower<RebelliaTmepHpPower>(Owner.Creature);
         tempPower?.AddTempHp(tempHpGain);
 
-        int intIncrementValue = DynamicVars["Increment"].IntValue;
+        var intIncrementValue = DynamicVars["Increment"].IntValue;
         BuffFromPlay(intIncrementValue);
         (DeckVersion as BloodTithe)?.BuffFromPlay(intIncrementValue);
     }

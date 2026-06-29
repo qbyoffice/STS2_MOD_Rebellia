@@ -6,16 +6,14 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.Extensions;
-using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Rare;
 
-class BelyeNochi() : RebelliaCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
+internal class BelyeNochi() : RebelliaCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.KeywordSanguine];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

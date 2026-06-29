@@ -12,18 +12,16 @@ public class RedemptionBondPower : RebelliaPowers
 {
     private const int MaxFreeSkills = 1;
 
-    private class Data
-    {
-        public int SkillsPlayedThisTurn;
-    }
-
-    protected override object InitInternalData() => new Data();
-
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => MaxFreeSkills;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
     public override bool ShouldReceiveCombatHooks => true;
+
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
 
     public override async Task BeforeSideTurnStart(
         PlayerChoiceContext choiceContext,
@@ -67,5 +65,10 @@ public class RedemptionBondPower : RebelliaPowers
 
         GetInternalData<Data>().SkillsPlayedThisTurn++;
         await Task.CompletedTask;
+    }
+
+    private class Data
+    {
+        public int SkillsPlayedThisTurn;
     }
 }

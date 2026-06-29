@@ -7,7 +7,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
-class CrimsonMadmanUpgradedPower : RebelliaPowers
+internal class CrimsonMadmanUpgradedPower : RebelliaPowers
 {
     private readonly int _extraDamage = 8;
 

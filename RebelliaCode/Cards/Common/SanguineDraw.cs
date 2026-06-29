@@ -38,16 +38,12 @@ public class SanguineDraw()
         Utils.SuppressBloodConsumption(true);
 
         if (veilPower != null && removedVeil > 0)
-        {
             veilPower.AddVeilPoints(-removedVeil);
-        }
 
         Utils.SuppressBloodConsumption(false);
 
         if (removedVeil > 0)
-        {
             await BloodSwordArtManager.AddPoints(Owner.Creature, removedVeil, choiceContext);
-        }
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;

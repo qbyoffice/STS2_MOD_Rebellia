@@ -20,6 +20,7 @@ public class SanguineBurst()
     private const string HitCountKey = "TotalHits";
     private const string TurnsInHandKey = "TurnsInHand";
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.ErodingBlood];
 

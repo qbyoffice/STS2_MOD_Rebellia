@@ -15,6 +15,7 @@ public class RebelArmament() : RebelliaCard(2, CardType.Skill, CardRarity.Rare, 
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<RebelArmamentPower>()];
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -25,9 +26,9 @@ public class RebelArmament() : RebelliaCard(2, CardType.Skill, CardRarity.Rare, 
         await Utils.GivePower<RebelArmamentPower>(choiceContext, this, play);
 
         var handPile = PileType.Hand.GetPile(Owner);
-        int currentCount = handPile.Cards.Count;
+        var currentCount = handPile.Cards.Count;
         const int maxHandSize = 10;
-        int emptySlots = Math.Max(0, maxHandSize - currentCount);
+        var emptySlots = Math.Max(0, maxHandSize - currentCount);
         if (emptySlots <= 0)
             return;
 
@@ -46,7 +47,7 @@ public class RebelArmament() : RebelliaCard(2, CardType.Skill, CardRarity.Rare, 
         };
 
         var rng = Owner.RunState.Rng.CombatCardSelection;
-        for (int i = 0; i < emptySlots; i++)
+        for (var i = 0; i < emptySlots; i++)
         {
             var prototype = rng.NextItem(bloodWeaponPrototypes);
             var card = combatState.CreateCard(prototype!, Owner);

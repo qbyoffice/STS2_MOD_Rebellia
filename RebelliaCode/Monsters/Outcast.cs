@@ -7,7 +7,7 @@ namespace Rebellia.RebelliaCode.Monsters;
 public class Outcast : CustomPetModel
 {
     public Outcast()
-        : base(visibleHp: true) { }
+        : base(true) { }
 
     public override int MinInitialHp => 20;
     public override int MaxInitialHp => 30;
@@ -19,13 +19,13 @@ public class Outcast : CustomPetModel
     {
         return SetupAnimationState(
             controller,
-            idleName: "idle_loop",
-            deadName: "die",
-            deadLoop: false,
-            hitName: "hurt",
-            hitLoop: false,
-            attackName: "attack",
-            attackLoop: false
+            "idle_loop",
+            "die",
+            false,
+            "hurt",
+            false,
+            "attack",
+            false
         );
     }
 }

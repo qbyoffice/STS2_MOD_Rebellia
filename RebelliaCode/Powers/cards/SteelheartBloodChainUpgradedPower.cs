@@ -7,7 +7,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
-class SteelheartBloodChainUpgradedPower : RebelliaPowers
+internal class SteelheartBloodChainUpgradedPower : RebelliaPowers
 {
     private const int BlockPerArmor = 5;
 
@@ -26,11 +26,11 @@ class SteelheartBloodChainUpgradedPower : RebelliaPowers
             return;
 
         var armor = Owner.GetPower<ArmorPower>();
-        int armorAmount = armor?.Amount ?? 0;
+        var armorAmount = armor?.Amount ?? 0;
         if (armorAmount <= 0)
             return;
 
-        int blockGain = armorAmount * BlockPerArmor;
+        var blockGain = armorAmount * BlockPerArmor;
         await CreatureCmd.GainBlock(Owner, blockGain, ValueProp.Move, null);
     }
 }

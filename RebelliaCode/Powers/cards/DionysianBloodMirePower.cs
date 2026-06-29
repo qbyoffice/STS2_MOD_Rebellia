@@ -48,7 +48,7 @@ public class DionysianBloodMirePower : RebelliaPowers
         var bloodWeaponCards = overflowAmount * Amount;
         var rng = player.RunState.Rng.CombatCardGeneration;
 
-        for (int i = 0; i < bloodWeaponCards; i++)
+        for (var i = 0; i < bloodWeaponCards; i++)
         {
             var prototype = rng.NextItem(bloodWeaponPrototypes);
             var card = combatState.CreateCard(prototype!, player);

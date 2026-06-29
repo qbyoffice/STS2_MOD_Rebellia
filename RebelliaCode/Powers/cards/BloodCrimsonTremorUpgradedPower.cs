@@ -9,7 +9,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
-class BloodCrimsonTremorUpgradedPower : RebelliaPowers
+internal class BloodCrimsonTremorUpgradedPower : RebelliaPowers
 {
     private const int BaseDamage = 8;
 
@@ -35,13 +35,12 @@ class BloodCrimsonTremorUpgradedPower : RebelliaPowers
         if (combatState == null)
             return;
 
-        int totalDamage = BaseDamage * Amount;
+        var totalDamage = BaseDamage * Amount;
         var enemies = combatState.HittableEnemies;
         if (enemies.Count == 0)
             return;
 
         foreach (var enemy in enemies)
-        {
             await CreatureCmd.Damage(
                 new BlockingPlayerChoiceContext(),
                 enemy,
@@ -50,6 +49,5 @@ class BloodCrimsonTremorUpgradedPower : RebelliaPowers
                 Owner,
                 null
             );
-        }
     }
 }

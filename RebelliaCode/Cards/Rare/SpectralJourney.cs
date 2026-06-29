@@ -14,7 +14,9 @@ public class SpectralJourney() : RebelliaCard(1, CardType.Skill, CardRarity.Rare
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<SpectralJourneyPower>(), HoverTipFactory.FromCard<Void>()];
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<SpectralJourneyPower>(1)];
 

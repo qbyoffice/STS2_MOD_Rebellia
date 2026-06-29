@@ -1,6 +1,4 @@
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -19,6 +17,7 @@ public class SpectralOblivion()
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new PowerVar<BloodSwordArtPower>(3),
@@ -43,9 +42,7 @@ public class SpectralOblivion()
         var currentTempHp = tempHpPower!.GetCurrentTempHp();
         var damage = DynamicVars.CalculatedDamage.Calculate(target);
         if (currentTempHp > 0)
-        {
             tempHpPower?.AddTempHp(-currentTempHp);
-        }
 
         var mainResult = await DamageCmd
             .Attack(damage!)

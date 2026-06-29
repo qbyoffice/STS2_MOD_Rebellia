@@ -7,7 +7,8 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Rare;
 
-class DionysianBloodMire() : RebelliaCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+internal class DionysianBloodMire()
+    : RebelliaCard(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<DionysianBloodMirePower>(1)];

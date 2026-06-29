@@ -25,7 +25,20 @@ public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
     public override bool ShouldReceiveCombatHooks => true;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    public string GetSecondAmount() => (GetLostLifeCount() * BonusPerLost).ToString();
+    protected override IEnumerable<DynamicVar> CanonicalVars
+    {
+        get
+        {
+            yield return new DynamicVar("LostLifeCount", GetLostLifeCount());
+            yield return new DynamicVar("BonusPerLost", BonusPerLost);
+            yield return new DynamicVar("TotalBonus", GetLostLifeCount() * BonusPerLost);
+        }
+    }
+
+    public string GetSecondAmount()
+    {
+        return (GetLostLifeCount() * BonusPerLost).ToString();
+    }
 
     /*
     private readonly Data _data = new();
@@ -35,23 +48,15 @@ public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
     }
     */
 
-    protected override object InitInternalData() => new Data(); // 使用 InitInternalData
-
-    private Data GetData() => GetInternalData<Data>();
-
-    private class Data
+    protected override object InitInternalData()
     {
-        public int LostLifeCount { get; set; }
+        return new Data();
+        // 使用 InitInternalData
     }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars
+    private Data GetData()
     {
-        get
-        {
-            yield return new DynamicVar("LostLifeCount", GetLostLifeCount());
-            yield return new DynamicVar("BonusPerLost", BonusPerLost);
-            yield return new DynamicVar("TotalBonus", GetLostLifeCount() * BonusPerLost);
-        }
+        return GetInternalData<Data>();
     }
 
     public int GetLostLifeCount()
@@ -95,6 +100,7 @@ public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
             RebelliaTmepHpPower.TempHpLost += OnTempHpLost;
             _eventSubscribed = true;
         }
+
         UpdateDynamicVars();
         await base.AfterApplied(applier, cardSource);
     }
@@ -148,6 +154,12 @@ public class BloodBladeTemperPower : RebelliaPowers, IHasSecondAmount
             RebelliaTmepHpPower.TempHpLost -= OnTempHpLost;
             _eventSubscribed = false;
         }
+
         await PowerCmd.Remove(this);
+    }
+
+    private class Data
+    {
+        public int LostLifeCount { get; set; }
     }
 }

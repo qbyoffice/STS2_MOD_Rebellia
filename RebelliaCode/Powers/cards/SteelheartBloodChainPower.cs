@@ -26,11 +26,11 @@ public class SteelheartBloodChainPower : RebelliaPowers
             return;
 
         var armor = Owner.GetPower<ArmorPower>();
-        int armorAmount = armor?.Amount ?? 0;
+        var armorAmount = armor?.Amount ?? 0;
         if (armorAmount <= 0)
             return;
 
-        int blockGain = armorAmount * BlockPerArmor;
+        var blockGain = armorAmount * BlockPerArmor;
         await CreatureCmd.GainBlock(Owner, blockGain, ValueProp.Move, null);
     }
 }

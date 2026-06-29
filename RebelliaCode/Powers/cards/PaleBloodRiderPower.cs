@@ -48,8 +48,6 @@ public class PaleBloodRiderPower : RebelliaPowers
             .ToList();
 
         foreach (var card in toPlay)
-        {
             await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), card, null);
-        }
     }
 }

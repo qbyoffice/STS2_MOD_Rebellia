@@ -16,6 +16,7 @@ public class PrimordialCrimsonRaid()
     : RebelliaCard(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
 {
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(11m, ValueProp.Move)];
 
@@ -23,7 +24,7 @@ public class PrimordialCrimsonRaid()
     {
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        int points = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() ?? 0;
+        var points = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() ?? 0;
         if (points <= 0)
             return;
 
@@ -37,7 +38,7 @@ public class PrimordialCrimsonRaid()
             .Concat(PileType.Hand.GetPile(Owner).Cards)
             .ToList();
 
-        int selectCount = System.Math.Min(points, allCards.Count);
+        var selectCount = Math.Min(points, allCards.Count);
         if (selectCount == 0)
             return;
 

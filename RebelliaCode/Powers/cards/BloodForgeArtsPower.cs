@@ -1,4 +1,3 @@
-using System.Linq;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -14,13 +13,12 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class BloodForgeArtsPower : RebelliaPowers
 {
+    private readonly HashSet<CardModel> _freeCards = new();
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
     public override int DisplayAmount => 2;
     public override bool ShouldReceiveCombatHooks => true;
-
-    private readonly HashSet<CardModel> _freeCards = new();
 
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
@@ -38,8 +36,8 @@ public class BloodForgeArtsPower : RebelliaPowers
         if (player == null)
             return false;
 
-        int currentEnergy = player.PlayerCombatState?.Energy ?? 0;
-        int cost = (int)originalCost;
+        var currentEnergy = player.PlayerCombatState?.Energy ?? 0;
+        var cost = (int)originalCost;
         if (cost <= 0)
             return false;
         if (currentEnergy >= cost)
@@ -58,8 +56,8 @@ public class BloodForgeArtsPower : RebelliaPowers
         if (!_freeCards.Remove(card))
             return;
 
-        int cost = card.EnergyCost.Canonical;
-        int damage = cost * 2;
+        var cost = card.EnergyCost.Canonical;
+        var damage = cost * 2;
         if (damage <= 0)
             return;
 
@@ -80,9 +78,7 @@ public class BloodForgeArtsPower : RebelliaPowers
     )
     {
         if (side == Owner.Side)
-        {
             _freeCards.Clear();
-        }
         await Task.CompletedTask;
     }
 }

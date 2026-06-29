@@ -10,7 +10,7 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
-class BlackStreetShadowUpgradedPower : RebelliaPowers
+internal class BlackStreetShadowUpgradedPower : RebelliaPowers
 {
     private const int BonusAgility = 3;
 
@@ -20,11 +20,9 @@ class BlackStreetShadowUpgradedPower : RebelliaPowers
     public override int DisplayAmount => BonusAgility;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    protected override object InitInternalData() => new Data();
-
-    private class Data
+    protected override object InitInternalData()
     {
-        public int Deducted { get; set; }
+        return new Data();
     }
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
@@ -53,7 +51,6 @@ class BlackStreetShadowUpgradedPower : RebelliaPowers
         {
             var dexterity = Owner.GetPower<DexterityPower>();
             if (dexterity != null)
-            {
                 await PowerCmd.ModifyAmount(
                     new BlockingPlayerChoiceContext(),
                     dexterity,
@@ -61,7 +58,6 @@ class BlackStreetShadowUpgradedPower : RebelliaPowers
                     null,
                     null
                 );
-            }
             data.Deducted = 0;
         }
     }
@@ -78,10 +74,13 @@ class BlackStreetShadowUpgradedPower : RebelliaPowers
         {
             var dexterity = Owner.GetPower<DexterityPower>();
             if (dexterity != null)
-            {
                 await PowerCmd.ModifyAmount(choiceContext, dexterity, -1, null, null);
-            }
             data.Deducted = 1;
         }
+    }
+
+    private class Data
+    {
+        public int Deducted { get; set; }
     }
 }

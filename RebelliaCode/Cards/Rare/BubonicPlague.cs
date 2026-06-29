@@ -2,7 +2,6 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Cards.Others;
@@ -33,15 +32,11 @@ public class BubonicPlague() : RebelliaCard(3, CardType.Skill, CardRarity.Rare, 
             await CardCmd.TransformTo<SmashBloodWeapon>(card);
         }
 
-        foreach (CardModel card in PileType.Hand.GetPile(Owner).Cards)
-        {
+        foreach (var card in PileType.Hand.GetPile(Owner).Cards)
             if (
                 !card.EnergyCost.CostsX && card.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon)
             )
-            {
                 card.SetToFreeThisTurn();
-            }
-        }
     }
 
     protected override void OnUpgrade()

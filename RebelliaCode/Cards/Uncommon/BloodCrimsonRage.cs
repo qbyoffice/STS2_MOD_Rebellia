@@ -16,13 +16,9 @@ public class BloodCrimsonRage()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (IsUpgraded)
-        {
             await Utils.GivePower<BloodCrimsonRageUpgradedPower>(choiceContext, this, play);
-        }
         else
-        {
             await Utils.GivePower<BloodCrimsonRagePower>(choiceContext, this, play);
-        }
     }
 
     protected override void OnUpgrade()

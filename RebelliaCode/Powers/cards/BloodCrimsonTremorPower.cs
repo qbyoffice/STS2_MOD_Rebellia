@@ -35,13 +35,12 @@ public class BloodCrimsonTremorPower : RebelliaPowers
         if (combatState == null)
             return;
 
-        int totalDamage = BaseDamage * Amount;
+        var totalDamage = BaseDamage * Amount;
         var enemies = combatState.HittableEnemies;
         if (enemies.Count == 0)
             return;
 
         foreach (var enemy in enemies)
-        {
             await CreatureCmd.Damage(
                 new BlockingPlayerChoiceContext(),
                 enemy,
@@ -50,6 +49,5 @@ public class BloodCrimsonTremorPower : RebelliaPowers
                 Owner,
                 null
             );
-        }
     }
 }

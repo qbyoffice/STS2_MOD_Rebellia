@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -48,7 +45,8 @@ public class BloodShadow : RebelliaPowers
             SanguineRemoved += OnSanguineRemoved;
             _eventSubscribed = true;
         }
-        this.DisplayAmountChanged += OnDisplayAmountChanged;
+
+        DisplayAmountChanged += OnDisplayAmountChanged;
         UpdateTotalDamage();
         await base.AfterApplied(applier, cardSource);
     }
@@ -69,7 +67,7 @@ public class BloodShadow : RebelliaPowers
         if (target == null)
             return;
 
-        int totalDamage = (int)DynamicVars["TotalDamage"].BaseValue;
+        var totalDamage = (int)DynamicVars["TotalDamage"].BaseValue;
         await CreatureCmd.Damage(
             new BlockingPlayerChoiceContext(),
             target,
@@ -96,7 +94,7 @@ public class BloodShadow : RebelliaPowers
         if (target == null)
             return;
 
-        int totalDamage = (int)DynamicVars["TotalDamage"].BaseValue;
+        var totalDamage = (int)DynamicVars["TotalDamage"].BaseValue;
         await CreatureCmd.Damage(
             new BlockingPlayerChoiceContext(),
             target,
@@ -114,7 +112,7 @@ public class BloodShadow : RebelliaPowers
 
     private void UpdateTotalDamage()
     {
-        int baseDamage = (int)DynamicVars["BaseDamage"].BaseValue;
+        var baseDamage = (int)DynamicVars["BaseDamage"].BaseValue;
         DynamicVars["TotalDamage"].BaseValue = baseDamage + Amount;
     }
 
@@ -136,7 +134,8 @@ public class BloodShadow : RebelliaPowers
             SanguineRemoved -= OnSanguineRemoved;
             _eventSubscribed = false;
         }
-        this.DisplayAmountChanged -= OnDisplayAmountChanged;
+
+        DisplayAmountChanged -= OnDisplayAmountChanged;
         await base.AfterCombatEnd(room);
     }
 }
