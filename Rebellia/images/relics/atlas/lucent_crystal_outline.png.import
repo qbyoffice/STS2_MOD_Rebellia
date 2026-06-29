@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c85rhkovxii0w"
-path="res://.godot/imported/lucent_crystal.png-f8434ca541e0ab093050c33f5e2e4cd6.ctex"
+uid="uid://dgyvhd6dagi84"
+path="res://.godot/imported/lucent_crystal_outline.png-32dfc265fc352d242890b2324678636f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rebellia/images/relics/atlas/lucent_crystal.png"
-dest_files=["res://.godot/imported/lucent_crystal.png-f8434ca541e0ab093050c33f5e2e4cd6.ctex"]
+source_file="res://Rebellia/images/relics/atlas/lucent_crystal_outline.png"
+dest_files=["res://.godot/imported/lucent_crystal_outline.png-32dfc265fc352d242890b2324678636f.ctex"]
 
 [params]
 
