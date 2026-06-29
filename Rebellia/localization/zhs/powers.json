@@ -225,5 +225,13 @@
 
     "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.title": "炼血铸体+",
     "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.description": "获得格挡时。\n获得2[gold]临时生命[/gold]。",
-    "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.smartDescription": "获得格挡时。\n获得2*{Amount}[gold]临时生命[/gold]。"
+    "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.smartDescription": "获得格挡时。\n获得2*{Amount}[gold]临时生命[/gold]。",
+
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_POWER.title": "血坏·猩红震荡",
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_POWER.description": "获得[gold]临时生命[/gold]时。\n对所有敌人造成6伤害。",
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_POWER.smartDescription": "获得[gold]临时生命[/gold]时。\n对所有敌人造成6*{Amount}伤害。",
+
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_UPGRADED_POWER.title": "血坏·猩红震荡+",
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_UPGRADED_POWER.description": "获得[gold]临时生命[/gold]时。\n对所有敌人造成8伤害。",
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_UPGRADED_POWER.smartDescription": "获得[gold]临时生命[/gold]时。\n对所有敌人造成8*{Amount}伤害。"
 }
