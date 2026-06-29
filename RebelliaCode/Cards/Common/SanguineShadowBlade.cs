@@ -16,9 +16,9 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class SanguineShadowBlade()
     : RebelliaCard(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 {
-    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt]; //“剑艺牌”标签
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt];
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.BloodSwordArt]; //预定义的“鲜血剑艺”说明
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
@@ -30,7 +30,7 @@ public class SanguineShadowBlade()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         var powerAmount = DynamicVarsHelper
-            .GetPowerVar<SanguineShadowBladePower>(DynamicVars)
+            .GetPowerVar<SanguineShadowBladePower>(DynamicVars) //读取这张牌生成多少buff
             .BaseValue;
         var power = await Utils.ApplyPower<SanguineShadowBladePower>(
             Owner.Creature,
@@ -42,12 +42,12 @@ public class SanguineShadowBlade()
         power?.SetSourceCard(this);
 
         var requiredBlood = (int)
-            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
+            DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue; //读取这张牌需要消耗多少
 
-        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
+        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood)) //尝试消耗剑艺点数
             return;
 
-        await CommonActions.CardAttack(this, play).Execute(choiceContext);
+        await CommonActions.CardAttack(this, play).Execute(choiceContext); //attack
     }
 
     protected override void OnUpgrade()

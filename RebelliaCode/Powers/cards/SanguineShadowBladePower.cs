@@ -24,7 +24,7 @@ public class SanguineShadowBladePower : RebelliaPowers
 
     public void SetSourceCard(CardModel source)
     {
-        PowerData.SourceCard = source;
+        PowerData.SourceCards.Add(source.CreateClone());//记录不同升级状态
     }
 
     public override async Task AfterPlayerTurnStart(
@@ -39,15 +39,17 @@ public class SanguineShadowBladePower : RebelliaPowers
         if (combatState == null)
             return;
 
-        var count = Amount;
+        var sourceCards = PowerData.SourceCards;
+        var count = Math.Max(Amount, sourceCards.Count);// Amount 是 Power 层数。sourceCards.Count 是实际记录了多少张源卡
 
         for (var i = 0; i < count; i++)
         {
             var card =
-                PowerData.SourceCard?.CreateClone()
-                ?? combatState.CreateCard<SanguineShadowBlade>(player);
+                i < sourceCards.Count
+                    ? sourceCards[i].CreateClone()
+                    : combatState.CreateCard<SanguineShadowBlade>(player);//没有的话创建默认的
 
-            var addResult = await CardPileCmd.AddGeneratedCardToCombat(
+            var addResult = await CardPileCmd.AddGeneratedCardToCombat(//卡加入战斗手牌
                 card,
                 PileType.Hand,
                 player,
@@ -62,6 +64,6 @@ public class SanguineShadowBladePower : RebelliaPowers
 
     private class Data
     {
-        public CardModel? SourceCard;
+        public List<CardModel> SourceCards { get; } = [];
     }
 }
