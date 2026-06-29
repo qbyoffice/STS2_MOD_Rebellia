@@ -181,7 +181,8 @@
 
     "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.title": "血艺影刃",
     "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.description": "下回合将本卡牌的复制品加入手牌。",
-    "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.smartDescription": "下回合将本卡牌的复制品加入手牌。"
+    "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.smartDescription": "下回合将本卡牌的复制品加入手牌。",
+    
     "REBELLIA-SPECTRAL_JOURNEY_POWER.title": "灵界漫游",
     "REBELLIA-SPECTRAL_JOURNEY_POWER.description": "承受的非自身的伤害降低为1。\n每打出一张攻击牌失去{energyPrefix:energyIcons(1)}。\n回合内无法额外抽牌。\n每回合开始时失去6点生命，并将一张虚空放入抽牌堆。",
     "REBELLIA-SPECTRAL_JOURNEY_POWER.smartDescription": "承受的非自身的伤害降低为1。\n每打出一张攻击牌失去{energyPrefix:energyIcons(1)}。\n回合内无法额外抽牌。\n每回合开始时失去6点生命，并将一张虚空放入抽牌堆。",
