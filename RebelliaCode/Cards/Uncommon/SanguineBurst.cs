@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
+using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Uncommon;
@@ -18,7 +19,7 @@ public class SanguineBurst()
 {
     private const string HitCountKey = "TotalHits";
     private const string TurnsInHandKey = "TurnsInHand";
-
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.ErodingBlood];
 

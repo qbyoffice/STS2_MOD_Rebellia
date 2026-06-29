@@ -15,7 +15,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class SteelBloodVeil() : RebelliaCard(2, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
-
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<CrimsonVeilPower>(1), new PowerVar<BloodSwordArtPower>(1)];
 

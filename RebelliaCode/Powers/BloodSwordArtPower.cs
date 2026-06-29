@@ -43,25 +43,28 @@ public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
         return new Data();
     }
 
+    public static event Func<Creature, int, Task>? BloodArtOverflow;
+
     public void AddPoints(int amount)
     {
         if (amount <= 0)
             return;
         var data = GetInternalData<Data>();
         var oldPoints = data.BloodArtPoints;
+        var overflow = Math.Max(0, oldPoints + amount - BloodArtMaxPoints);
         var newPoints = Math.Min(oldPoints + amount, BloodArtMaxPoints);
 
         if (newPoints > oldPoints)
             data.BloodArtPoints = newPoints;
 
         _gainedThisTurn += amount;
-        if (DynamicVars.ContainsKey("GainedThisTurn"))
-            DynamicVars["GainedThisTurn"].BaseValue = _gainedThisTurn;
 
-        DynamicVars["BloodArtPoints"].BaseValue = data.BloodArtPoints;
+        if (overflow > 0 && BloodArtOverflow != null)
+        {
+            BloodArtOverflow.Invoke(Owner, overflow);
+        }
 
-        if (newPoints > oldPoints)
-            InvokeDisplayAmountChanged();
+        InvokeDisplayAmountChanged();
     }
 
     public bool TrySpendPoints(int amount)

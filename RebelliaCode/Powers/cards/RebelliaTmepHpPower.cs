@@ -56,14 +56,31 @@ public class RebelliaTmepHpPower : RebelliaPowers
         DynamicVars[TempHpVarName].BaseValue = GetData().RebelliaTempHp;
     }
 
+    public static event Func<Player, int, CardModel?, Task>? TempHpGained;
+
+    private static async Task TriggerTempHpGained(
+        Player player,
+        int gainedAmount,
+        CardModel? cardSource
+    )
+    {
+        if (TempHpGained != null)
+            await TempHpGained.Invoke(player, gainedAmount, cardSource);
+    }
+
     public async Task AddTempHp(int amount)
     {
         var data = GetData();
         int oldValue = data.RebelliaTempHp;
         data.RebelliaTempHp += amount;
-
         if (data.RebelliaTempHp < 0)
             data.RebelliaTempHp = 0;
+
+        int gained = data.RebelliaTempHp - oldValue;
+        if (gained > 0)
+        {
+            await TriggerTempHpGained(Owner.Player!, gained, null);
+        }
 
         int actualLost = oldValue - data.RebelliaTempHp;
         if (actualLost > 0)
@@ -106,7 +123,7 @@ public class RebelliaTmepHpPower : RebelliaPowers
                 Owner,
                 actualDamage,
                 ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-                null,
+                Owner,
                 null
             );
             _isSelfDamage = false;
