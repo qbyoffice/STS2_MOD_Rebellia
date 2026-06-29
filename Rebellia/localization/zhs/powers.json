@@ -193,5 +193,13 @@
 
     "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.title": "原初·鲜血重诞",
     "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.description": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机{Amount}张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。",
-    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.smartDescription": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机{Amount}张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。"
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.smartDescription": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机{Amount}张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。",
+
+    "REBELLIA-CRIMSON_MADMAN_POWER.title": "猩红狂徒",
+    "REBELLIA-CRIMSON_MADMAN_POWER.description": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升5。",
+    "REBELLIA-CRIMSON_MADMAN_POWER.smartDescription": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升。",
+
+    "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.title": "猩红狂徒+",
+    "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.description": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升8。",
+    "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.smartDescription": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升。"
 }
