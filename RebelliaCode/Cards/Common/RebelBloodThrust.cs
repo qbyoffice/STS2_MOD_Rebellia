@@ -42,11 +42,12 @@ public class RebelBloodThrust()
 
         if (consumed)
         {
-            await DamageCmd
-                .Attack(unblockedDamage)
-                .FromCard(this)
-                .TargetingAllOpponents(combatState)
-                .Execute(choiceContext);
+            foreach (var enemy in combatState.HittableEnemies)
+                await DamageCmd
+                    .Attack(unblockedDamage)
+                    .FromCard(this)
+                    .Targeting(enemy)
+                    .Execute(choiceContext);
         }
         else
         {

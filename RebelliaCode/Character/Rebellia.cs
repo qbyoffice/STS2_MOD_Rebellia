@@ -13,9 +13,6 @@ public class Rebellia : PlaceholderCharacterModel
     public static readonly Color CharacterColor = new("74011f");
 
     public override Color NameColor => CharacterColor;
-
-    public static readonly Color Color = new(0.7f, 0.1f, 0.0f);
-    public override Color MapDrawingColor => Color;
     public override CharacterGender Gender => CharacterGender.Feminine;
     public override int StartingHp => 70;
 

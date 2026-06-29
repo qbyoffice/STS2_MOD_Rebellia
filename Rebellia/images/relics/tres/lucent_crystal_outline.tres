@@ -1,6 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://6ha38wq7xroc"]
-
-[ext_resource type="Texture2D" uid="uid://dgyvhd6dagi84" path="res://Rebellia/images/relics/atlas/lucent_crystal_outline.png" id="1_qtb5w"]
-
-[resource]
-atlas = ExtResource("1_qtb5w")

@@ -7,48 +7,72 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
-using Rebellia.RebelliaCode.Api.Extensions;
+using Rebellia.RebelliaCode.Cards.Basic;
 using Rebellia.RebelliaCode.Powers;
 
 namespace Rebellia.RebelliaCode.Cards.Ancient;
 
-public class PrimordialCrimsonRaid()
-    : RebelliaCard(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy)
+public class PrimordialCrimsonRaid : RebelliaCard
 {
-    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+    public PrimordialCrimsonRaid()
+        : base(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy) { }
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [new DamageVar(11m, ValueProp.Move)];
+        [new DamageVar(11m, ValueProp.Move), new PowerVar<BloodSwordArtPower>(0)];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
+        var target = play.Target;
+        if (target == null)
+            return;
+
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 
-        int points = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() ?? 0;
-        if (points <= 0)
+        var bloodPower = Owner.Creature.GetPower<BloodSwordArtPower>();
+        if (bloodPower == null)
             return;
 
-        if (!await Utils.TryConsumeBloodArtPoints(Owner.Creature, points))
+        var currentPoints = bloodPower.GetPoints();
+        if (currentPoints <= 0)
             return;
 
-        var allCards = PileType
-            .Draw.GetPile(Owner)
-            .Cards.Concat(PileType.Discard.GetPile(Owner).Cards)
-            .Concat(PileType.Exhaust.GetPile(Owner).Cards)
-            .Concat(PileType.Hand.GetPile(Owner).Cards)
-            .ToList();
+        var consumed = await Utils.TryConsumeBloodArtPoints(Owner.Creature, currentPoints);
+        if (!consumed)
+            return;
 
-        int selectCount = System.Math.Min(points, allCards.Count);
+        var drawPile = PileType.Draw.GetPile(Owner);
+        var availableCards = drawPile.Cards.ToList();
+        var selectCount = Math.Min(currentPoints, availableCards.Count);
         if (selectCount == 0)
             return;
 
         var prefs = new CardSelectorPrefs(SelectionScreenPrompt, selectCount, selectCount);
-        var selected = await CardSelectCmd.FromSimpleGrid(choiceContext, allCards, Owner, prefs);
-        var toPlay = selected.ToList();
-        if (toPlay.Count == 0)
+        var selectedCards = await CardSelectCmd.FromSimpleGrid(
+            choiceContext,
+            availableCards,
+            Owner,
+            prefs
+        );
+        var cardsToPlay = selectedCards.ToList();
+
+        if (cardsToPlay.Count == 0)
             return;
 
-        foreach (var card in toPlay)
-            await CardCmd.AutoPlay(choiceContext, card, null);
+        foreach (var card in cardsToPlay)
+        {
+            if (card is RebelliaStrike)
+            {
+                var strikeCard = Utils.GetAvailableStrikeCard(Owner);
+                if (strikeCard != null)
+                    await CardCmd.AutoPlay(choiceContext, strikeCard, target);
+            }
+            else
+            {
+                await CardCmd.AutoPlay(choiceContext, card, null);
+            }
+
+            await Cmd.Wait(0.1f);
+        }
     }
 
     protected override void OnUpgrade()

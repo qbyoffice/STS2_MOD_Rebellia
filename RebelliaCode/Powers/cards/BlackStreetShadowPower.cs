@@ -71,6 +71,8 @@ public class BlackStreetShadowPower : RebelliaPowers
     {
         if (cardPlay.Card.Owner.Creature != Owner)
             return;
+        if (cardPlay.IsAutoPlay)
+            return;
         if (cardPlay.Card.Type != CardType.Attack)
             return;
 

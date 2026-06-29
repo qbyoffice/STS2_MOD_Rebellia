@@ -1,4 +1,3 @@
-using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -38,22 +37,20 @@ public class VeinThornScab()
         if (play.Target == null)
             return;
         var damageAmount = DynamicVars.Damage.BaseValue;
-        var mainResult = await CommonActions.CardAttack(this, play).Execute(choiceContext);
-        var unblockedDamage = mainResult
-            .Results.SelectMany(list => list)
-            .Sum(r => r.UnblockedDamage + r.OverkillDamage);
-
-        if (unblockedDamage <= 0)
-            return;
+        await DamageCmd
+            .Attack(damageAmount)
+            .FromCard(this)
+            .Targeting(play.Target)
+            .Execute(choiceContext);
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
         {
-            await PowerCmd.Apply<RendPower>(
+            var rendPower = await PowerCmd.Apply<RendPower>(
                 choiceContext,
                 play.Target,
-                unblockedDamage,
+                (int)damageAmount,
                 Owner.Creature,
                 this
             );

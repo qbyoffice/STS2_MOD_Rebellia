@@ -57,9 +57,4 @@ public static class BloodKeywordManager
             await BloodShadow.TriggerSanguineRemoved(player);
         }
     }
-
-    public static async Task RemoveSanguineFromCard(Player player, CardPlay cardPlay)
-    {
-        await RemoveSanguineFromCard(player, cardPlay.Card);
-    }
 }

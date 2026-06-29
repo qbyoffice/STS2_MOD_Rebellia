@@ -9,7 +9,6 @@ using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
 using Rebellia.RebelliaCode.Api.Extensions;
-using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Powers;
 using Rebellia.RebelliaCode.Powers.cards;
 
@@ -36,18 +35,10 @@ public class SanguineDraw()
             removedVeil = veilPower.GetVeilPoints();
 
         Utils.SuppressBloodConsumption(true);
-
         if (veilPower != null && removedVeil > 0)
-        {
             veilPower.AddVeilPoints(-removedVeil);
-        }
 
         Utils.SuppressBloodConsumption(false);
-
-        if (removedVeil > 0)
-        {
-            await BloodSwordArtManager.AddPoints(Owner.Creature, removedVeil, choiceContext);
-        }
 
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
@@ -74,6 +65,18 @@ public class SanguineDraw()
                         .ToList();
                 }
             }
+        }
+
+        if (removedVeil > 0)
+        {
+            var bloodPower = await Utils.GetOrCreatePower<BloodSwordArtPower>(
+                Owner.Creature,
+                0,
+                Owner.Creature,
+                this,
+                choiceContext
+            );
+            bloodPower!.AddPoints(removedVeil);
         }
     }
 

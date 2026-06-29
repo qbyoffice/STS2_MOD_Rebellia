@@ -289,13 +289,6 @@ public static class Utils
 
     public static async Task<bool> TryConsumeBloodArtPoints(Creature creature, int requiredPoints)
     {
-        if (IsBloodConsumptionSuppressed)
-        {
-            if (BloodArtConsumed != null)
-                await BloodArtConsumed.Invoke(creature);
-            return true;
-        }
-
         var exemptPower = creature.GetPower<CrimsonStrikePower>();
         if (exemptPower != null)
         {
