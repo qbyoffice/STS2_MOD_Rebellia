@@ -201,5 +201,9 @@
 
     "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.title": "猩红狂徒+",
     "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.description": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升8。",
-    "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.smartDescription": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升。"
+    "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.smartDescription": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升。",
+
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.title": "血池刃林",
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.description": "获得[gold]剑艺[/gold]超出最大值时，每溢出1剑艺将一张随机[red]血武[/red]加入抽牌堆。",
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.smartDescription": "将{Amount}张随机[red]血武[/red]加入抽牌堆。"
 }

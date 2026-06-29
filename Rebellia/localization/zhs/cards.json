@@ -214,5 +214,8 @@
     "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH.description": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n从[gold]牌堆[/gold]随机加入1张[red]鲜血牌[/red]到[gold]手牌[/gold]中并且当前回合[gold]免费[/gold]。",
 
     "REBELLIA-CRIMSON_MADMAN.title": "猩红狂徒",
-    "REBELLIA-CRIMSON_MADMAN.description": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升{IfUpgraded:show:8|5}。"
+    "REBELLIA-CRIMSON_MADMAN.description": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升{IfUpgraded:show:8|5}。",
+
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE.title": "血池刃林",
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE.description": "获得[gold]剑艺[/gold]超出最大值时，每溢出1剑艺将一张随机[red]血武[/red]加入抽牌堆。"
 }
