@@ -33,14 +33,11 @@ public class CrimsonSpiral()
 
         if (hasVeil)
         {
-            foreach (var enemy in combatState.HittableEnemies)
-            {
-                var cmd = DamageCmd
-                    .Attack(DynamicVars.Damage.BaseValue)
-                    .FromCard(this)
-                    .Targeting(enemy);
-                await cmd.Execute(choiceContext);
-            }
+            await DamageCmd
+                .Attack(DynamicVars.Damage.BaseValue)
+                .FromCard(this)
+                .TargetingAllOpponents(combatState)
+                .Execute(choiceContext);
         }
         else
         {

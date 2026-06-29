@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
@@ -46,7 +47,7 @@ public class BloodBladeVeil() : RebelliaCard(1, CardType.Skill, CardRarity.Commo
             );
 
             foreach (var card in selected)
-                await BloodKeywordManager.RemoveSanguineFromCard(Owner, card);
+                RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
             var veilGain = (int)
                 DynamicVarsHelper.GetPowerVar<CrimsonVeilPower>(DynamicVars).BaseValue;

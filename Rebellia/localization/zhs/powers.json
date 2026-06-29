@@ -177,5 +177,61 @@
 
     "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.title": "黑街幽影+",
     "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.description": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
-    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.smartDescription": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。"
+    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.smartDescription": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
+
+    "REBELLIA-SPECTRAL_JOURNEY_POWER.title": "灵界漫游",
+    "REBELLIA-SPECTRAL_JOURNEY_POWER.description": "承受的非自身的伤害降低为1。\n每打出一张攻击牌失去{energyPrefix:energyIcons(1)}。\n回合内无法额外抽牌。\n每回合开始时失去6点生命，并将一张虚空放入抽牌堆。",
+    "REBELLIA-SPECTRAL_JOURNEY_POWER.smartDescription": "承受的非自身的伤害降低为1。\n每打出一张攻击牌失去{energyPrefix:energyIcons(1)}。\n回合内无法额外抽牌。\n每回合开始时失去6点生命，并将一张虚空放入抽牌堆。",
+
+    "REBELLIA-REBEL_ARMAMENT_POWER.title": "抗争武装",
+    "REBELLIA-REBEL_ARMAMENT_POWER.description": "本回合内，减少[red]血武[/red]费用。",
+    "REBELLIA-REBEL_ARMAMENT_POWER.smartDescription": "本回合内，[red]血武[/red]费用-{Amount}。",
+
+    "REBELLIA-PALE_WATCH_POWER.title": "苍白守望",
+    "REBELLIA-PALE_WATCH_POWER.description": "获得当前[gold]手牌[/gold][red]血武[/red]数量的{energyPrefix:energyIcons(1)}。",
+    "REBELLIA-PALE_WATCH_POWER.smartDescription": "获得当前[gold]手牌[/gold][red]血武[/red]数量的{energyPrefix:energyIcons(1)}。",
+
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.title": "原初·鲜血重诞",
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.description": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机{Amount}张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。",
+    "REBELLIA-PRIMORDIAL_SANGUINE_REBIRTH_POWER.smartDescription": "抽到[gold]能力牌[/gold]时自动打出。\n[gold]每回合开始时[/gold]\n随机{Amount}张[red]鲜血牌[/red]加入[gold]手牌[/gold]当前回合[gold]免费[/gold]。",
+
+    "REBELLIA-CRIMSON_MADMAN_POWER.title": "猩红狂徒",
+    "REBELLIA-CRIMSON_MADMAN_POWER.description": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升5。",
+    "REBELLIA-CRIMSON_MADMAN_POWER.smartDescription": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升。",
+
+    "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.title": "猩红狂徒+",
+    "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.description": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升8。",
+    "REBELLIA-CRIMSON_MADMAN_UPGRADED_POWER.smartDescription": "具有[gold]消耗[/gold]的[gold]攻击牌[/gold]伤害提升。",
+
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.title": "血池刃林",
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.description": "获得[gold]剑艺[/gold]超出最大值时，每溢出1剑艺将一张随机[red]血武[/red]加入抽牌堆。",
+    "REBELLIA-DIONYSIAN_BLOOD_MIRE_POWER.smartDescription": "将{Amount}张随机[red]血武[/red]加入抽牌堆。",
+
+    "REBELLIA-BLOOD_CRIMSON_FRENZY_POWER.title": "血坏·猩红死狂",
+    "REBELLIA-BLOOD_CRIMSON_FRENZY_POWER.description": "因打出卡牌失去生命时，卡牌的格挡与伤害加上失去生命的等量数值。",
+    "REBELLIA-BLOOD_CRIMSON_FRENZY_POWER.smartDescription": "因打出卡牌失去生命时，卡牌的格挡与伤害加上失去生命的等量数值。",
+
+    "REBELLIA-MAGIC_TOOL_FORM_POWER.title": "魔具形态",
+    "REBELLIA-MAGIC_TOOL_FORM_POWER.description": "回合结束前\n鲜血牌从手牌消耗时，打出并移除该牌的鲜血。",
+    "REBELLIA-MAGIC_TOOL_FORM_POWER.smartDescription": "回合结束前\n鲜血牌从手牌消耗时，打出并移除该牌的鲜血。",
+
+    "REBELLIA-BLOOD_FORGE_ARTS_POWER.title": "血铸技艺",
+    "REBELLIA-BLOOD_FORGE_ARTS_POWER.description": "能量不足以打出鲜血牌时，该鲜血牌本回合免费。\n打出被免费的牌失去卡牌费用*2的生命。",
+    "REBELLIA-BLOOD_FORGE_ARTS_POWER.smartDescription": "能量不足以打出鲜血牌时，该鲜血牌本回合免费。\n打出被免费的牌失去卡牌费用*2的生命。",
+
+    "REBELLIA-BLOOD_FORGED_BODY_POWER.title": "炼血铸体",
+    "REBELLIA-BLOOD_FORGED_BODY_POWER.description": "获得格挡时。\n获得1[gold]临时生命[/gold]。",
+    "REBELLIA-BLOOD_FORGED_BODY_POWER.smartDescription": "获得格挡时。\n获得{Amount}[gold]临时生命[/gold]。",
+
+    "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.title": "炼血铸体+",
+    "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.description": "获得格挡时。\n获得2[gold]临时生命[/gold]。",
+    "REBELLIA-BLOOD_FORGED_BODY_UPGRADED_POWER.smartDescription": "获得格挡时。\n获得2*{Amount}[gold]临时生命[/gold]。",
+
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_POWER.title": "血坏·猩红震荡",
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_POWER.description": "获得[gold]临时生命[/gold]时。\n对所有敌人造成6伤害。",
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_POWER.smartDescription": "获得[gold]临时生命[/gold]时。\n对所有敌人造成6*{Amount}伤害。",
+
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_UPGRADED_POWER.title": "血坏·猩红震荡+",
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_UPGRADED_POWER.description": "获得[gold]临时生命[/gold]时。\n对所有敌人造成8伤害。",
+    "REBELLIA-BLOOD_CRIMSON_TREMOR_UPGRADED_POWER.smartDescription": "获得[gold]临时生命[/gold]时。\n对所有敌人造成8*{Amount}伤害。"
 }

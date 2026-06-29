@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Api.DynamicVars;
@@ -17,7 +18,7 @@ namespace Rebellia.RebelliaCode.Cards.Common;
 public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipsValue.KeywordSanguine];
-
+    protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new CardsVar(2), new EnergyVar(1), new PowerVar<BloodSwordArtPower>(1)];
 
@@ -68,7 +69,7 @@ public class CrimsonLeap() : RebelliaCard(1, CardType.Skill, CardRarity.Common, 
             return;
 
         foreach (var card in toRemove)
-            await BloodKeywordManager.RemoveSanguineFromCard(Owner, card);
+            RemoveKeyword(RCardKeywordExtensions.RebelliaSanguine);
 
         CardCmd.Preview(toRemove, 1.0f);
 
