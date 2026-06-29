@@ -26,5 +26,7 @@
   "REBELLIA-BLOODCLOT_TRANS.description": "[gold]鲜血[/gold]\n获得1猩红面纱。\n回合结束时本卡牌未被打出，则获得5点临时生命。",
   "REBELLIA-BLOODCLOT_TRANS.title": "激活灵血",
   "REBELLIA-BLOOD_BITE.description": "造成{Damage:diff()}点伤害.\n消耗{BloodSwordArtPower:diff()}层[gold]鲜血剑艺[/gold]\n获得{RebelliaTmepHpPower:diff()}点临时生命",
-  "REBELLIA-BLOOD_BITE.title": "血咬"
+  "REBELLIA-BLOOD_BITE.title": "血咬",
+  "REBELLIA-SANGUINE_SHADOW_BLADE.description": "下回合将本卡牌的复制品加入手牌。\n[gold]鲜血剑艺[/gold]{BloodSwordArtPower:diff()}：造成{Damage:diff()}点伤害。",
+  "REBELLIA-SANGUINE_SHADOW_BLADE.title": "血艺影刃"
 }

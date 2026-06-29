@@ -177,5 +177,9 @@
 
     "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.title": "黑街幽影+",
     "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.description": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
-    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.smartDescription": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。"
+    "REBELLIA-BLACK_STREET_SHADOW_UPGRADED_POWER.smartDescription": "获得3层[gold]敏捷[/gold]。\n每回合中如果打出攻击牌，那么[gold]临时失去[/gold]1层获得的[gold]敏捷[/gold]。",
+
+    "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.title": "血艺影刃",
+    "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.description": "下回合将本卡牌的复制品加入手牌。",
+    "REBELLIA-SANGUINE_SHADOW_BLADE_POWER.smartDescription": "下回合将本卡牌的复制品加入手牌。"
 }
