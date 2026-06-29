@@ -1,16 +1,13 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
-using Rebellia.RebelliaCode.Character;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
@@ -39,7 +36,7 @@ public class PrimordialSanguineRebirthPower : RebelliaPowers
         if (candidates.Count == 0)
             return;
 
-        int count = Math.Min(Amount, candidates.Count);
+        var count = Math.Min(Amount, candidates.Count);
 
         var rng = player.RunState.Rng.CombatCardGeneration;
         var selected = candidates.OrderBy(_ => rng.NextInt()).Take(count).ToList();
@@ -47,7 +44,7 @@ public class PrimordialSanguineRebirthPower : RebelliaPowers
         foreach (var card in selected)
         {
             card.RemoveFromCurrentPile();
-            var result = await CardPileCmd.Add(card, PileType.Hand, CardPilePosition.Bottom);
+            var result = await CardPileCmd.Add(card, PileType.Hand);
             card.SetToFreeThisTurn();
             CardCmd.PreviewCardPileAdd(result);
         }
@@ -75,10 +72,9 @@ public class PrimordialSanguineRebirthPower : RebelliaPowers
         {
             var combatState = Owner.CombatState;
             if (combatState != null && combatState.HittableEnemies.Any())
-            {
                 target = combatState.HittableEnemies.FirstOrDefault();
-            }
         }
+
         await CardCmd.AutoPlay(choiceContext, card, target);
     }
 }

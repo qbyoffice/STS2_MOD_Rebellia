@@ -34,10 +34,9 @@ public class BodyMindCursePower : RebelliaPowers
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        int curseCount = GetCurseCount();
-        int strengthGain = curseCount * PowerPerCurse;
+        var curseCount = GetCurseCount();
+        var strengthGain = curseCount * PowerPerCurse;
         if (strengthGain > 0)
-        {
             await PowerCmd.Apply<StrengthPower>(
                 new BlockingPlayerChoiceContext(),
                 Owner,
@@ -45,7 +44,6 @@ public class BodyMindCursePower : RebelliaPowers
                 Owner,
                 null
             );
-        }
         await base.AfterApplied(applier, cardSource);
     }
 

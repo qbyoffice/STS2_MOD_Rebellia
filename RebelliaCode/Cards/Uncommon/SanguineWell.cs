@@ -13,13 +13,14 @@ public class SanguineWell() : RebelliaCard(3, CardType.Power, CardRarity.Uncommo
 {
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<SanguineWellPower>()];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new PowerVar<SanguineWellPower>(1),
             new CalculationBaseVar(0m),
             new CalculationExtraVar(1m),
-            new DynamicVar("UpgradeBonus", 0m),
-            new DynamicVar("Percent", 3m),
+            new("UpgradeBonus", 0m),
+            new("Percent", 3m),
             new CalculatedVar("WellLayers").WithMultiplier(
                 (card, _) =>
                 {
@@ -32,11 +33,11 @@ public class SanguineWell() : RebelliaCard(3, CardType.Power, CardRarity.Uncommo
                         return 0m;
 
                     decimal essence = crystal.BloodEssence;
-                    decimal bonus = card.DynamicVars["UpgradeBonus"].BaseValue;
-                    decimal percent = card.DynamicVars["Percent"].BaseValue;
+                    var bonus = card.DynamicVars["UpgradeBonus"].BaseValue;
+                    var percent = card.DynamicVars["Percent"].BaseValue;
                     decimal maxHp = player.Creature.MaxHp;
 
-                    decimal layers = (essence + bonus) * (percent / 100m) * maxHp;
+                    var layers = (essence + bonus) * (percent / 100m) * maxHp;
                     return Math.Ceiling(layers);
                 }
             ),
@@ -48,7 +49,7 @@ public class SanguineWell() : RebelliaCard(3, CardType.Power, CardRarity.Uncommo
         if (calcVar == null)
             return;
 
-        int layers = (int)calcVar.Calculate(null);
+        var layers = (int)calcVar.Calculate(null);
         if (layers <= 0)
             return;
 

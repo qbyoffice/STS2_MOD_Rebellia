@@ -7,7 +7,8 @@ using Rebellia.RebelliaCode.Powers.cards;
 
 namespace Rebellia.RebelliaCode.Cards.Uncommon;
 
-class BodyMindCurse() : RebelliaCard(3, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+internal class BodyMindCurse()
+    : RebelliaCard(3, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new PowerVar<BodyMindCursePower>(1), new PowerVar<BodyMindCurseUpgradedPower>(1)];
@@ -15,13 +16,9 @@ class BodyMindCurse() : RebelliaCard(3, CardType.Power, CardRarity.Uncommon, Tar
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (IsUpgraded)
-        {
             await Utils.GivePower<BodyMindCurseUpgradedPower>(choiceContext, this, play);
-        }
         else
-        {
             await Utils.GivePower<BodyMindCursePower>(choiceContext, this, play);
-        }
     }
 
     protected override void OnUpgrade()

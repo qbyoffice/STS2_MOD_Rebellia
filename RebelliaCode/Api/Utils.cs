@@ -311,7 +311,7 @@ public static class Utils
         var bloodPower = await GetOrCreatePower<BloodSwordArtPower>(creature);
         if (bloodPower == null || bloodPower.GetPoints() < requiredPoints)
             return false;
-        bool success = bloodPower.TrySpendPoints(requiredPoints);
+        var success = bloodPower.TrySpendPoints(requiredPoints);
         if (success && BloodArtConsumed != null)
             await BloodArtConsumed.Invoke(creature);
         return success;

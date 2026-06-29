@@ -31,7 +31,6 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (!Owner.Creature.HasPower<BloodDartDiscountPower>())
-        {
             await PowerCmd.Apply<BloodDartDiscountPower>(
                 choiceContext,
                 Owner.Creature,
@@ -39,7 +38,6 @@ public class BloodDart() : RebelliaCard(1, CardType.Attack, CardRarity.Common, T
                 Owner.Creature,
                 this
             );
-        }
 
         await CommonActions.CardAttack(this, play).Execute(choiceContext);
 

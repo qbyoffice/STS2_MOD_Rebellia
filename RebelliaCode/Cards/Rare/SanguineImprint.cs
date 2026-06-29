@@ -14,6 +14,7 @@ public class SanguineImprint() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
 {
     private const string CloneCountKey = "CloneCount";
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [
             new CardsVar(1),
@@ -23,7 +24,7 @@ public class SanguineImprint() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
                 (card, target) =>
                 {
                     var bloodPower = card.Owner.Creature.GetPower<BloodSwordArtPower>();
-                    int points = bloodPower?.GetPoints() ?? 0;
+                    var points = bloodPower?.GetPoints() ?? 0;
                     return points;
                 }
             ),
@@ -37,7 +38,7 @@ public class SanguineImprint() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
         if (attackCards.Count == 0)
             return;
 
-        int currentBloodPoints = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() ?? 0;
+        var currentBloodPoints = Owner.Creature.GetPower<BloodSwordArtPower>()?.GetPoints() ?? 0;
         if (currentBloodPoints <= 0)
             return;
 
@@ -52,15 +53,13 @@ public class SanguineImprint() : RebelliaCard(3, CardType.Skill, CardRarity.Rare
 
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, currentBloodPoints))
         {
-            bool upgradeClones = IsUpgraded;
-            for (int i = 0; i < currentBloodPoints; i++)
+            var upgradeClones = IsUpgraded;
+            for (var i = 0; i < currentBloodPoints; i++)
             {
                 var clone = originalCard.CreateClone();
 
                 if (upgradeClones && !clone.IsUpgraded)
-                {
                     CardCmd.Upgrade(clone);
-                }
 
                 var addResult = await CardPileCmd.AddGeneratedCardToCombat(
                     clone,

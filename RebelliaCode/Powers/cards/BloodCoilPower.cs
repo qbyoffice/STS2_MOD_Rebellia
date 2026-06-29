@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Powers;
 
@@ -12,7 +11,7 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class BloodCoilPower : RebelliaPowers
 {
-    private int _storedTempHp = 0;
+    private int _storedTempHp;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -20,14 +19,15 @@ public class BloodCoilPower : RebelliaPowers
     public override bool ShouldReceiveCombatHooks => true;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    private class PowerData
+    protected override object InitInternalData()
     {
-        public int TempHp { get; set; }
+        return new PowerData();
     }
 
-    protected override object InitInternalData() => new PowerData();
-
-    private PowerData GetData() => GetInternalData<PowerData>();
+    private PowerData GetData()
+    {
+        return GetInternalData<PowerData>();
+    }
 
     private void SetStoredTempHp(int value)
     {
@@ -46,11 +46,9 @@ public class BloodCoilPower : RebelliaPowers
         var tempPower = Owner?.GetPower<RebelliaTmepHpPower>();
         if (tempPower != null)
         {
-            int currentTempHp = tempPower.GetCurrentTempHp();
+            var currentTempHp = tempPower.GetCurrentTempHp();
             if (currentTempHp != GetStoredTempHp())
-            {
                 SetStoredTempHp(currentTempHp);
-            }
         }
     }
 
@@ -72,6 +70,7 @@ public class BloodCoilPower : RebelliaPowers
             SyncTempHpToData();
             _storedTempHp = GetStoredTempHp();
         }
+
         await base.BeforeSideTurnEnd(choiceContext, side, participants);
     }
 
@@ -88,14 +87,13 @@ public class BloodCoilPower : RebelliaPowers
         {
             SyncTempHpToData();
 
-            int currentTempHp = GetStoredTempHp();
+            var currentTempHp = GetStoredTempHp();
             if (currentTempHp != _storedTempHp && currentTempHp > 0)
             {
                 var combatState = Owner.CombatState;
                 if (combatState != null)
                 {
                     foreach (var enemy in combatState.HittableEnemies)
-                    {
                         await CreatureCmd.Damage(
                             new BlockingPlayerChoiceContext(),
                             enemy,
@@ -104,11 +102,16 @@ public class BloodCoilPower : RebelliaPowers
                             Owner,
                             null
                         );
-                    }
                     _storedTempHp = currentTempHp;
                 }
             }
         }
+
         await base.AfterDamageReceived(choiceContext, target, result, props, dealer, cardSource);
+    }
+
+    private class PowerData
+    {
+        public int TempHp { get; set; }
     }
 }

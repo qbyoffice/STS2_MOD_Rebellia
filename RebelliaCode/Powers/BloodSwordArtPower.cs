@@ -60,9 +60,7 @@ public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
         _gainedThisTurn += amount;
 
         if (overflow > 0 && BloodArtOverflow != null)
-        {
             BloodArtOverflow.Invoke(Owner, overflow);
-        }
 
         InvokeDisplayAmountChanged();
     }
@@ -139,6 +137,7 @@ public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
             if (DynamicVars.ContainsKey("SpentThisTurn"))
                 DynamicVars["SpentThisTurn"].BaseValue = 0;
         }
+
         await Task.CompletedTask;
     }
 

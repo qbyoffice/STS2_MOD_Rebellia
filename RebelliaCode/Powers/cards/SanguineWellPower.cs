@@ -27,15 +27,15 @@ public class SanguineWellPower : RebelliaPowers
         if (Amount <= 0)
             return amount;
 
-        int damage = (int)amount;
-        bool isSelfDamage = cardSource != null && cardSource.Owner == Owner.Player;
+        var damage = (int)amount;
+        var isSelfDamage = cardSource != null && cardSource.Owner == Owner.Player;
 
-        int tempHp = Owner.GetPower<RebelliaTmepHpPower>()?.GetCurrentTempHp() ?? 0;
-        bool isFatal = damage >= Owner.CurrentHp + tempHp;
+        var tempHp = Owner.GetPower<RebelliaTmepHpPower>()?.GetCurrentTempHp() ?? 0;
+        var isFatal = damage >= Owner.CurrentHp + tempHp;
 
         if (isFatal)
         {
-            int layers = Amount;
+            var layers = Amount;
             CreatureCmd.Heal(Owner, layers);
             SetAmount(0);
             PowerCmd.Remove(this);
@@ -45,8 +45,8 @@ public class SanguineWellPower : RebelliaPowers
 
         if (isSelfDamage)
         {
-            int layers = Amount;
-            int absorbed = Math.Min(layers, damage);
+            var layers = Amount;
+            var absorbed = Math.Min(layers, damage);
             if (absorbed > 0)
             {
                 SetAmount(layers - absorbed);

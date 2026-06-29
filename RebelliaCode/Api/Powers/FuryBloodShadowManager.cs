@@ -16,12 +16,12 @@ public static class FuryBloodShadowManager
     )
     {
         var bloodShadow = owner.GetPower<BloodShadow>();
-        int targetLayers = isUpgraded ? 7 : 5;
+        var targetLayers = isUpgraded ? 7 : 5;
         if (bloodShadow != null)
         {
             if (bloodShadow.Amount < targetLayers)
             {
-                int diff = targetLayers - bloodShadow.Amount;
+                var diff = targetLayers - bloodShadow.Amount;
                 await PowerCmd.ModifyAmount(context, bloodShadow, diff, null, source);
             }
         }
@@ -38,7 +38,7 @@ public static class FuryBloodShadowManager
             if (existingUpgraded != null)
                 return;
 
-            int inheritedCount = 0;
+            var inheritedCount = 0;
             if (existingBase != null)
             {
                 inheritedCount = existingBase.GetConsumedCount();

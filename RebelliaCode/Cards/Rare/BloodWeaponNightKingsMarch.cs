@@ -47,20 +47,12 @@ public class BloodWeaponNightKingsMarch()
             return;
 
         if (IsUpgraded)
-        {
             foreach (var card in orderedCards)
-            {
                 if (!card.IsUpgraded)
-                {
                     CardCmd.Upgrade(card);
-                }
-            }
-        }
 
         foreach (var card in orderedCards)
-        {
             await CardCmd.AutoPlay(choiceContext, card, play.Target);
-        }
     }
 
     protected override void OnUpgrade()

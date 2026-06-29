@@ -21,11 +21,6 @@ public class CrimsonPulse()
     : RebelliaCard(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy),
         ITranscendenceCard
 {
-    public CardModel GetTranscendenceTransformedCard()
-    {
-        return ModelDb.Card<PrimordialCrimsonRaid>();
-    }
-
     protected override HashSet<CardTag> CanonicalTags => [CardTagExtensions.RebelliaBloodWeaponArt];
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -33,6 +28,11 @@ public class CrimsonPulse()
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipsValue.BloodSwordArt, HoverTipsValue.RebelliaStrike];
+
+    public CardModel GetTranscendenceTransformedCard()
+    {
+        return ModelDb.Card<PrimordialCrimsonRaid>();
+    }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
@@ -61,16 +61,13 @@ public class CrimsonPulse()
                 await BloodSwordArtManager.AddPoints(Owner.Creature, 1, choiceContext);
                 await CardCmd.AutoPlay(choiceContext, drawStrike, play.Target);
             }
+
             return;
         }
 
         if (handStrike != null)
-        {
             if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-            {
                 await CardCmd.AutoPlay(choiceContext, handStrike, play.Target);
-            }
-        }
     }
 
     protected override void OnUpgrade()

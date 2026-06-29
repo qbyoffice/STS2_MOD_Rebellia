@@ -23,9 +23,9 @@ public class LucentCrystal : RebelliaRelics
     private const int MaxCounter = 10;
     private const int FirstUpgradeThreshold = 5;
     private const int SecondUpgradeThreshold = 10;
+    private int _bloodBlessing;
 
     private int _bloodEssence;
-    private int _bloodBlessing;
 
     [SavedProperty]
     public int BloodEssence
@@ -77,14 +77,18 @@ public class LucentCrystal : RebelliaRelics
         }
     }
 
-    private bool CanSwitchFirst() =>
-        !HasSwitchedOnce
-        && (BloodEssence >= FirstUpgradeThreshold || BloodBlessing >= FirstUpgradeThreshold);
+    private bool CanSwitchFirst()
+    {
+        return !HasSwitchedOnce
+            && (BloodEssence >= FirstUpgradeThreshold || BloodBlessing >= FirstUpgradeThreshold);
+    }
 
-    private bool CanSwitchSecond() =>
-        HasSwitchedOnce
-        && !HasSwitchedTwice
-        && (BloodEssence >= SecondUpgradeThreshold || BloodBlessing >= SecondUpgradeThreshold);
+    private bool CanSwitchSecond()
+    {
+        return HasSwitchedOnce
+            && !HasSwitchedTwice
+            && (BloodEssence >= SecondUpgradeThreshold || BloodBlessing >= SecondUpgradeThreshold);
+    }
 
     private void UpdateDynamicVars()
     {
@@ -126,6 +130,7 @@ public class LucentCrystal : RebelliaRelics
                 Flash();
             }
         }
+
         await Task.CompletedTask;
     }
 
@@ -202,13 +207,9 @@ public class LucentCrystal : RebelliaRelics
                 .Where(c => c.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
                 .ToList();
             if (bloodCards.Count > 0)
-            {
                 foreach (var card in bloodCards)
-                {
                     if (card.Pile?.Type != PileType.Exhaust)
                         await CardCmd.Exhaust(new BlockingPlayerChoiceContext(), card);
-                }
-            }
         }
     }
 

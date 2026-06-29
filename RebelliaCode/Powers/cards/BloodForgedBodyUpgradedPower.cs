@@ -7,9 +7,9 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
-class BloodForgedBodyUpgradedPower : RebelliaPowers
+internal class BloodForgedBodyUpgradedPower : RebelliaPowers
 {
-    private int _TempHpGain = 2;
+    private readonly int _TempHpGain = 2;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => _TempHpGain * Amount;

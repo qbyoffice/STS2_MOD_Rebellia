@@ -47,6 +47,7 @@ public class SanguinePurityPower : RebelliaPowers
             modifiedCost = Math.Max(0, originalCost - 1);
             return true;
         }
+
         return false;
     }
 }

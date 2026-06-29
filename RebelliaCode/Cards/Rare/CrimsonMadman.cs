@@ -15,12 +15,8 @@ public class CrimsonMadman() : RebelliaCard(1, CardType.Power, CardRarity.Rare, 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (IsUpgraded)
-        {
             await Utils.GivePower<CrimsonMadmanUpgradedPower>(choiceContext, this, play);
-        }
         else
-        {
             await Utils.GivePower<CrimsonMadmanPower>(choiceContext, this, play);
-        }
     }
 }

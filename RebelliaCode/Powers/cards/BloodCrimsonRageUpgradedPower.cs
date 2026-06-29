@@ -1,7 +1,6 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -9,10 +8,10 @@ using Rebellia.RebelliaCode.Api.Powers;
 
 namespace Rebellia.RebelliaCode.Powers.cards;
 
-class BloodCrimsonRageUpgradedPower : RebelliaPowers
+internal class BloodCrimsonRageUpgradedPower : RebelliaPowers
 {
+    private int _lastArmorAmount;
     protected int ArmorAmount = 2;
-    private int _lastArmorAmount = 0;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
@@ -27,6 +26,7 @@ class BloodCrimsonRageUpgradedPower : RebelliaPowers
             armor.DisplayAmountChanged += OnArmorAmountChanged;
             _lastArmorAmount = armor.Amount;
         }
+
         await base.AfterApplied(applier, cardSource);
     }
 
@@ -66,15 +66,14 @@ class BloodCrimsonRageUpgradedPower : RebelliaPowers
         var armor = Owner.GetPower<ArmorPower>();
         if (armor == null)
             return;
-        int current = armor.Amount;
+        var current = armor.Amount;
         if (current < _lastArmorAmount)
         {
-            int decrease = _lastArmorAmount - current;
+            var decrease = _lastArmorAmount - current;
             if (decrease > 0)
-            {
                 CardPileCmd.Draw(new BlockingPlayerChoiceContext(), decrease, Owner.Player!);
-            }
         }
+
         _lastArmorAmount = current;
     }
 }

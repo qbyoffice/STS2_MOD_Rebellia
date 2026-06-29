@@ -13,6 +13,7 @@ public class ImpishPrank() : RebelliaCard(2, CardType.Attack, CardRarity.Rare, T
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         [RCardKeywordExtensions.RebelliaSanguine];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new DamageVar(16m, ValueProp.Move)];
 

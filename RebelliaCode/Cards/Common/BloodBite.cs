@@ -20,7 +20,7 @@ public class BloodBite() : RebelliaCard(1, CardType.Skill, CardRarity.Common, Ta
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
-        for (int i = 0; i < base.DynamicVars.Repeat.IntValue; i++)
+        for (var i = 0; i < DynamicVars.Repeat.IntValue; i++)
             await Utils.GivePower<ErodingBloodPower>(
                 choiceContext,
                 play.Target!,

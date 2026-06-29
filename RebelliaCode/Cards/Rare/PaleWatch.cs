@@ -13,8 +13,10 @@ namespace Rebellia.RebelliaCode.Cards.Rare;
 public class PaleWatch() : RebelliaCard(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
         [HoverTipFactory.FromPower<PaleWatchPower>()];
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [new BlockVar(16m, ValueProp.Move), new PowerVar<PaleWatchPower>(1)];
 

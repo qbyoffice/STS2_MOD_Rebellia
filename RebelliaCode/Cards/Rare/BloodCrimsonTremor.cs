@@ -19,13 +19,9 @@ public class BloodCrimsonTremor()
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay play)
     {
         if (IsUpgraded)
-        {
             await Utils.GivePower<BloodCrimsonTremorUpgradedPower>(choiceContext, this, play);
-        }
         else
-        {
             await Utils.GivePower<BloodCrimsonTremorPower>(choiceContext, this, play);
-        }
     }
 
     protected override void OnUpgrade()

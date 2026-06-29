@@ -23,8 +23,8 @@ public abstract class RebelliaCard(
     {
         get
         {
-            string cardId = Id.Entry.RemovePrefix().ToLowerInvariant();
-            string targetPath = $"res://{MainFile.ModId}/images/card_portraits/{cardId}.png";
+            var cardId = Id.Entry.RemovePrefix().ToLowerInvariant();
+            var targetPath = $"res://{MainFile.ModId}/images/card_portraits/{cardId}.png";
 
             return ResourceLoader.Exists(targetPath)
                 ? targetPath

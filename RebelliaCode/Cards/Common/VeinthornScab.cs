@@ -49,7 +49,6 @@ public class VeinThornScab()
         var requiredBlood = (int)
             DynamicVarsHelper.GetPowerVar<BloodSwordArtPower>(DynamicVars).BaseValue;
         if (await Utils.TryConsumeBloodArtPoints(Owner.Creature, requiredBlood))
-        {
             await PowerCmd.Apply<RendPower>(
                 choiceContext,
                 play.Target,
@@ -57,7 +56,6 @@ public class VeinThornScab()
                 Owner.Creature,
                 this
             );
-        }
     }
 
     protected override void OnUpgrade()

@@ -1,7 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
 using Rebellia.RebelliaCode.Api;
 using Rebellia.RebelliaCode.Api.Cards;
 using Rebellia.RebelliaCode.Powers.cards;
@@ -21,12 +20,8 @@ public class BloodPramadaAnatman()
 
         await CreatureCmd.SetCurrentHp(Owner.Creature, 1m);
 
-        foreach (CardModel card in PileType.Hand.GetPile(base.Owner).Cards)
-        {
+        foreach (var card in PileType.Hand.GetPile(Owner).Cards)
             if (!card.EnergyCost.CostsX)
-            {
                 card.SetToFreeThisTurn();
-            }
-        }
     }
 }

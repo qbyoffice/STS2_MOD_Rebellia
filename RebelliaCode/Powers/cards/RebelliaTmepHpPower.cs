@@ -7,7 +7,6 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Extensions;
 using Rebellia.RebelliaCode.Api.Powers;
@@ -42,14 +41,15 @@ public class RebelliaTmepHpPower : RebelliaPowers
             await TempHpLost.Invoke(player, lostAmount);
     }
 
-    private class Data
+    protected override object InitInternalData()
     {
-        public int RebelliaTempHp { get; set; }
+        return new Data();
     }
 
-    protected override object InitInternalData() => new Data();
-
-    private Data GetData() => GetInternalData<Data>();
+    private Data GetData()
+    {
+        return GetInternalData<Data>();
+    }
 
     private void UpdateTempHpVar()
     {
@@ -71,28 +71,27 @@ public class RebelliaTmepHpPower : RebelliaPowers
     public async Task AddTempHp(int amount)
     {
         var data = GetData();
-        int oldValue = data.RebelliaTempHp;
+        var oldValue = data.RebelliaTempHp;
         data.RebelliaTempHp += amount;
         if (data.RebelliaTempHp < 0)
             data.RebelliaTempHp = 0;
 
-        int gained = data.RebelliaTempHp - oldValue;
+        var gained = data.RebelliaTempHp - oldValue;
         if (gained > 0)
-        {
             await TriggerTempHpGained(Owner.Player!, gained, null);
-        }
 
-        int actualLost = oldValue - data.RebelliaTempHp;
+        var actualLost = oldValue - data.RebelliaTempHp;
         if (actualLost > 0)
-        {
             await TriggerTempHpLost(Owner.Player!, actualLost);
-        }
 
         UpdateTempHpVar();
         InvokeDisplayAmountChanged();
     }
 
-    public async Task ReduceTempHp(int amount) => await AddTempHp(-amount);
+    public async Task ReduceTempHp(int amount)
+    {
+        await AddTempHp(-amount);
+    }
 
     public override async Task BeforeSideTurnEnd(
         PlayerChoiceContext choiceContext,
@@ -129,18 +128,14 @@ public class RebelliaTmepHpPower : RebelliaPowers
             _isSelfDamage = false;
         }
 
-        int reduceAmount = Math.Max(0, data.RebelliaTempHp - penalty);
+        var reduceAmount = Math.Max(0, data.RebelliaTempHp - penalty);
         if (reduceAmount > 0)
-        {
             await ReduceTempHp(reduceAmount);
-        }
-        int old = data.RebelliaTempHp;
+        var old = data.RebelliaTempHp;
         data.RebelliaTempHp = penalty;
-        int lost = old - penalty;
+        var lost = old - penalty;
         if (lost > 0)
-        {
             await TriggerTempHpLost(Owner.Player!, lost);
-        }
         UpdateTempHpVar();
         InvokeDisplayAmountChanged();
     }
@@ -177,20 +172,24 @@ public class RebelliaTmepHpPower : RebelliaPowers
             InvokeDisplayAmountChanged();
             return Math.Max(0, damage - requiredTempHp);
         }
-        else
-        {
-            int consumed = data.RebelliaTempHp;
-            int remainingDamage = damage - reduction - consumed;
-            data.RebelliaTempHp = 0;
-            if (consumed > 0)
-            {
-                Task.Run(async () => await TriggerTempHpLost(Owner.Player!, consumed));
-            }
-            UpdateTempHpVar();
-            InvokeDisplayAmountChanged();
-            return Math.Max(0, remainingDamage);
-        }
+
+        var consumed = data.RebelliaTempHp;
+        var remainingDamage = damage - reduction - consumed;
+        data.RebelliaTempHp = 0;
+        if (consumed > 0)
+            Task.Run(async () => await TriggerTempHpLost(Owner.Player!, consumed));
+        UpdateTempHpVar();
+        InvokeDisplayAmountChanged();
+        return Math.Max(0, remainingDamage);
     }
 
-    public int GetCurrentTempHp() => GetData().RebelliaTempHp;
+    public int GetCurrentTempHp()
+    {
+        return GetData().RebelliaTempHp;
+    }
+
+    private class Data
+    {
+        public int RebelliaTempHp { get; set; }
+    }
 }

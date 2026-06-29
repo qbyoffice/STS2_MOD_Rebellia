@@ -2,7 +2,6 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -21,11 +20,9 @@ public class BlackStreetShadowPower : RebelliaPowers
     public override int DisplayAmount => BonusAgility;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    protected override object InitInternalData() => new Data();
-
-    private class Data
+    protected override object InitInternalData()
     {
-        public int Deducted { get; set; }
+        return new Data();
     }
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
@@ -54,7 +51,6 @@ public class BlackStreetShadowPower : RebelliaPowers
         {
             var dexterity = Owner.GetPower<DexterityPower>();
             if (dexterity != null)
-            {
                 await PowerCmd.ModifyAmount(
                     new BlockingPlayerChoiceContext(),
                     dexterity,
@@ -62,7 +58,6 @@ public class BlackStreetShadowPower : RebelliaPowers
                     null,
                     null
                 );
-            }
             data.Deducted = 0;
         }
     }
@@ -79,10 +74,13 @@ public class BlackStreetShadowPower : RebelliaPowers
         {
             var dexterity = Owner.GetPower<DexterityPower>();
             if (dexterity != null)
-            {
                 await PowerCmd.ModifyAmount(choiceContext, dexterity, -1, null, null);
-            }
             data.Deducted = 1;
         }
+    }
+
+    private class Data
+    {
+        public int Deducted { get; set; }
     }
 }

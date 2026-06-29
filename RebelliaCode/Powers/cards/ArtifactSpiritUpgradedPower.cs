@@ -14,9 +14,9 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class ArtifactSpiritUpgradedPower : RebelliaPowers
 {
-    private bool _eventSubscribed;
     private const int DrawCount = 2;
     private const int BlockPerCard = 3;
+    private bool _eventSubscribed;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -31,6 +31,7 @@ public class ArtifactSpiritUpgradedPower : RebelliaPowers
             Utils.BloodArtConsumed += OnBloodArtConsumed;
             _eventSubscribed = true;
         }
+
         await base.AfterApplied(applier, cardSource);
     }
 
@@ -57,7 +58,7 @@ public class ArtifactSpiritUpgradedPower : RebelliaPowers
         var handCount = PileType.Hand.GetPile(Owner.Player).Cards.Count;
         if (handCount > 0)
         {
-            int blockAmount = handCount * BlockPerCard;
+            var blockAmount = handCount * BlockPerCard;
             await CreatureCmd.GainBlock(Owner, blockAmount, ValueProp.Unpowered, null);
         }
     }
@@ -69,6 +70,7 @@ public class ArtifactSpiritUpgradedPower : RebelliaPowers
             Utils.BloodArtConsumed -= OnBloodArtConsumed;
             _eventSubscribed = false;
         }
+
         await base.AfterCombatEnd(room);
     }
 }

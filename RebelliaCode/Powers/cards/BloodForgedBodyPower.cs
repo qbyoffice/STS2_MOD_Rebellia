@@ -9,7 +9,7 @@ namespace Rebellia.RebelliaCode.Powers.cards;
 
 public class BloodForgedBodyPower : RebelliaPowers
 {
-    private int _TempHpGain = 1;
+    private readonly int _TempHpGain = 1;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override int DisplayAmount => _TempHpGain * Amount;

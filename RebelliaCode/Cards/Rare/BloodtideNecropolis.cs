@@ -50,12 +50,9 @@ public class BloodtideNecropolis()
             return;
 
         foreach (var card in handPile.Cards)
-        {
             if (!card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
-            {
                 card.AddKeyword(RCardKeywordExtensions.RebelliaSanguine);
-            }
-        }
+
         await CardCmd.Discard(choiceContext, handPile.Cards);
     }
 

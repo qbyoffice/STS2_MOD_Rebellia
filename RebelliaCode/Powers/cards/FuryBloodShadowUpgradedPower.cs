@@ -12,22 +12,31 @@ namespace Rebellia.RebelliaCode.Powers;
 
 public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
 {
-    private int _bloodWeaponsConsumedThisTurn;
     private const int TriggerThreshold = 3;
+    private int _bloodWeaponsConsumedThisTurn;
     protected int BonusPerTrigger = 4;
 
     public override int DisplayAmount => _bloodWeaponsConsumedThisTurn;
-
-    public string GetSecondAmount() => BonusPerTrigger.ToString();
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     public override bool ShouldReceiveCombatHooks => true;
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    public int GetConsumedCount() => _bloodWeaponsConsumedThisTurn;
+    public string GetSecondAmount()
+    {
+        return BonusPerTrigger.ToString();
+    }
 
-    public void SetConsumedCount(int value) => _bloodWeaponsConsumedThisTurn = value;
+    public int GetConsumedCount()
+    {
+        return _bloodWeaponsConsumedThisTurn;
+    }
+
+    public void SetConsumedCount(int value)
+    {
+        _bloodWeaponsConsumedThisTurn = value;
+    }
 
     public override async Task AfterPlayerTurnStart(
         PlayerChoiceContext choiceContext,
@@ -39,6 +48,7 @@ public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
             _bloodWeaponsConsumedThisTurn = 0;
             InvokeDisplayAmountChanged();
         }
+
         await Task.CompletedTask;
     }
 
@@ -51,23 +61,22 @@ public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
         if (card.Owner != Owner.Player)
             return;
 
-        bool isBloodWeapon = card.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon);
+        var isBloodWeapon = card.Tags.Contains(CardTagExtensions.RebelliaBloodWeapon);
 
         if (isBloodWeapon)
-        {
-            await CardCmd.Exhaust(choiceContext, card, causedByEthereal: false);
-        }
+            await CardCmd.Exhaust(choiceContext, card);
 
         if (isBloodWeapon)
         {
             _bloodWeaponsConsumedThisTurn++;
-            int triggerCount = _bloodWeaponsConsumedThisTurn / TriggerThreshold;
+            var triggerCount = _bloodWeaponsConsumedThisTurn / TriggerThreshold;
             if (triggerCount > 0)
             {
-                int totalBonus = triggerCount * BonusPerTrigger;
+                var totalBonus = triggerCount * BonusPerTrigger;
                 await AddBloodShadowLayers(totalBonus);
                 _bloodWeaponsConsumedThisTurn %= TriggerThreshold;
             }
+
             InvokeDisplayAmountChanged();
         }
     }
@@ -82,9 +91,7 @@ public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
             return;
 
         if (card.Keywords.Contains(RCardKeywordExtensions.RebelliaSanguine))
-        {
             await BloodKeywordManager.RemoveSanguineFromCard(card.Owner, card);
-        }
         await Task.CompletedTask;
     }
 
@@ -92,7 +99,6 @@ public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
     {
         var bloodShadow = Owner.GetPower<BloodShadow>();
         if (bloodShadow != null)
-        {
             await PowerCmd.ModifyAmount(
                 new BlockingPlayerChoiceContext(),
                 bloodShadow,
@@ -100,7 +106,6 @@ public class FuryBloodShadowUpgradedPower : RebelliaPowers, IHasSecondAmount
                 null,
                 null
             );
-        }
     }
 
     public override async Task AfterCombatEnd(CombatRoom room)

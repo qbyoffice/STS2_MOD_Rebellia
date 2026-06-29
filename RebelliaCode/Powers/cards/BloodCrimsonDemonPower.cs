@@ -17,12 +17,9 @@ public class BloodCrimsonDemonPower : RebelliaPowers
 
     public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 
-    protected override object InitInternalData() => new Data();
-
-    private class Data
+    protected override object InitInternalData()
     {
-        public int StrengthAddedThisTurn = 0;
-        public int DexterityAddedThisTurn = 0;
+        return new Data();
     }
 
     private int GetArmorAmount()
@@ -49,7 +46,7 @@ public class BloodCrimsonDemonPower : RebelliaPowers
     {
         if (Owner?.CombatState == null)
             return;
-        int armor = GetArmorAmount();
+        var armor = GetArmorAmount();
         await ApplyTempStrengthDexterity(null, armor);
     }
 
@@ -61,7 +58,7 @@ public class BloodCrimsonDemonPower : RebelliaPowers
     {
         if (side != Owner.Side)
             return;
-        int armor = GetArmorAmount();
+        var armor = GetArmorAmount();
         await ApplyTempStrengthDexterity(null, armor);
     }
 
@@ -87,6 +84,7 @@ public class BloodCrimsonDemonPower : RebelliaPowers
                     null
                 );
         }
+
         if (data.DexterityAddedThisTurn > 0)
         {
             var dexterity = Owner.GetPower<DexterityPower>();
@@ -99,7 +97,14 @@ public class BloodCrimsonDemonPower : RebelliaPowers
                     null
                 );
         }
+
         data.StrengthAddedThisTurn = 0;
         data.DexterityAddedThisTurn = 0;
+    }
+
+    private class Data
+    {
+        public int DexterityAddedThisTurn;
+        public int StrengthAddedThisTurn;
     }
 }
