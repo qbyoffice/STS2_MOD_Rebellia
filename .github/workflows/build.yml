@@ -10,6 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build STS2 Mod
-        uses: qbyoffice/qbyoffice_actions/STS2/build@master
+        uses: qbyoffice/AOShiRo-STS2_Actions/STS2/build@master
         with:
           project-name: ${{ github.event.repository.name }}
