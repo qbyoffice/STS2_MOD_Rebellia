@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Release STS2 Mod
-        uses: qbyoffice/qbyoffice_actions/sts2/release@main
+        uses: qbyoffice/qbyoffice_actions/STS2/release@main
         with:
           project-name: ${{ github.event.repository.name }}
