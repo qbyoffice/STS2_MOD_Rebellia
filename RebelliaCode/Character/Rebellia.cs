@@ -12,10 +12,10 @@ public class Rebellia : PlaceholderCharacterModel
     public const string InnerName = "Rebellia";
     public static readonly Color CharacterColor = new("74011f");
 
-    public static readonly Color Color = new(0.7f, 0.1f, 0.0f);
+    public static readonly Color MapDrawColor = new(0.7f, 0.1f, 0.0f);
 
     public override Color NameColor => CharacterColor;
-    public override Color MapDrawingColor => Color;
+    public override Color MapDrawingColor => MapDrawColor;
     public override CharacterGender Gender => CharacterGender.Feminine;
     public override int StartingHp => 70;
 
