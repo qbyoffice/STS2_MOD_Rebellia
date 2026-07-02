@@ -59,6 +59,9 @@ public class BloodSwordArtPower : RebelliaPowers, IHasSecondAmount
 
         _gainedThisTurn += amount;
 
+        if (DynamicVars.ContainsKey("BloodArtPoints"))
+            DynamicVars["BloodArtPoints"].BaseValue = data.BloodArtPoints;
+
         if (overflow > 0 && BloodArtOverflow != null)
             BloodArtOverflow.Invoke(Owner, overflow);
 
