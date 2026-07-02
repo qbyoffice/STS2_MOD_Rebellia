@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rooms;
 using Rebellia.RebelliaCode.Api.Powers;
 using Rebellia.RebelliaCode.Cards.Others;
 
@@ -61,5 +62,11 @@ public class DionysianBloodMirePower : RebelliaPowers
             );
             CardCmd.PreviewCardPileAdd(PreviewCards);
         }
+    }
+
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        BloodSwordArtPower.BloodArtOverflow -= OnBloodArtOverflow;
+        await PowerCmd.Remove(this);
     }
 }
