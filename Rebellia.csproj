@@ -34,12 +34,12 @@
         </SteamLibraryPath>
 
     <GodotPath Condition="'$(GodotPath)' == ''">
-            C:/megadot/MegaDot_v4.5.1-stable_mono_win64.exe
+        D:/sts2_project/Godot_v4.5.1-stable_mono_win64/Godot_v4.5.1-stable_mono_win64
         </GodotPath>
     <!-- If on Windows and Slay the Spire 2 is not installed in your default steam library, adjust the following.-->
-    <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''">
-            C:/Program Files (x86)/Steam/steamapps
-        </SteamLibraryPath>
+    <SteamLibraryPath Condition="'$(SteamLibraryPath)' == ''"
+      >F:/SteamLibrary/steamapps</SteamLibraryPath
+    >
 
     <!-- The below should not need to be changed. -->
     <Sts2Path Condition="'$(Sts2Path)' == ''">$(SteamLibraryPath)/common/Slay the Spire 2</Sts2Path>
