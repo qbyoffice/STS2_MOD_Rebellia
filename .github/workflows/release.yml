@@ -46,12 +46,12 @@ jobs:
           ModsPath: ${{ github.workspace }}/mods_output/
       - name: Package Release Artifacts
         run: |
-          cd mods_output/LittleWizard
-          zip -r ../../LittleWizard-v${{ steps.version.outputs.version }}.zip .
+          cd mods_output/Rebellia
+          zip -r ../../Rebellia-v${{ steps.version.outputs.version }}.zip .
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: LittleWizard-v${{ steps.version.outputs.version }}.zip
+          files: Rebellia-v${{ steps.version.outputs.version }}.zip
           generate_release_notes: true
           draft: false
           prerelease: false
