@@ -67,6 +67,7 @@ public class BloodForgeArtsPower : RebelliaPowers
             damage,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
             Owner,
+            null,
             null
         );
     }

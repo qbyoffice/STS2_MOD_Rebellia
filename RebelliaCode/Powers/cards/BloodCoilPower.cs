@@ -100,6 +100,7 @@ public class BloodCoilPower : RebelliaPowers
                             currentTempHp,
                             ValueProp.Unpowered | ValueProp.SkipHurtAnim,
                             Owner,
+                            null,
                             null
                         );
                     _storedTempHp = currentTempHp;

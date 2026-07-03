@@ -74,6 +74,7 @@ public class BloodShadow : RebelliaPowers
             totalDamage,
             ValueProp.Move,
             Owner,
+            null,
             null
         );
     }
@@ -101,6 +102,7 @@ public class BloodShadow : RebelliaPowers
             totalDamage,
             ValueProp.Move,
             Owner,
+            null,
             null
         );
     }

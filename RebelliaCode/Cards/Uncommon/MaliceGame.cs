@@ -28,7 +28,9 @@ public class MaliceGame() : RebelliaCard(2, CardType.Skill, CardRarity.Uncommon,
             Owner.Creature,
             hpLoss,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-            this
+            Owner.Creature,
+            this,
+            play
         );
 
         var cardsToPick = (int)DynamicVars.Cards.BaseValue;

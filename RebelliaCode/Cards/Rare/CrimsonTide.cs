@@ -40,7 +40,7 @@ public class CrimsonTide()
 
         await DamageCmd
             .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, play)
             .TargetingAllOpponents(combatState)
             .Execute(choiceContext);
 

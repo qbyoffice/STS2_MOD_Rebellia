@@ -48,7 +48,7 @@ public class BloodBackLash()
         else
             totalDamage = DynamicVars.CalculationBase.BaseValue;
 
-        var cmd = DamageCmd.Attack(totalDamage).FromCard(this).Targeting(target);
+        var cmd = DamageCmd.Attack(totalDamage).FromCard(this, play).Targeting(target);
         await cmd.Execute(choiceContext);
     }
 

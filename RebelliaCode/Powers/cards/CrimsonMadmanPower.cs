@@ -21,7 +21,8 @@ public class CrimsonMadmanPower : RebelliaPowers
         decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource
+        CardModel? cardSource,
+        CardPlay? cardPlay
     )
     {
         if (dealer != Owner)

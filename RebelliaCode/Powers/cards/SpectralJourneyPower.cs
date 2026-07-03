@@ -62,6 +62,7 @@ public class SpectralJourneyPower : RebelliaPowers
             HPLoss,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
             Owner,
+            null,
             null
         );
         await CardPileCmd.AddGeneratedCardToCombat(

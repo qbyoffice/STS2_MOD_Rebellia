@@ -61,7 +61,7 @@ public class BloodCrimsonMeteor()
         {
             var cmd = await DamageCmd
                 .Attack(damage)
-                .FromCard(this)
+                .FromCard(this, play)
                 .Targeting(target)
                 .Execute(choiceContext);
             await cmd.Execute(choiceContext);
