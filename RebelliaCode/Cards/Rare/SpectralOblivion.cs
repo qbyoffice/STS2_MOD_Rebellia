@@ -46,7 +46,7 @@ public class SpectralOblivion()
 
         var mainResult = await DamageCmd
             .Attack(damage!)
-            .FromCard(this)
+            .FromCard(this, play)
             .Targeting(play.Target!)
             .Execute(choiceContext);
 

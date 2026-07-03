@@ -123,6 +123,7 @@ public class RebelliaTmepHpPower : RebelliaPowers
                 actualDamage,
                 ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
                 Owner,
+                null,
                 null
             );
             _isSelfDamage = false;

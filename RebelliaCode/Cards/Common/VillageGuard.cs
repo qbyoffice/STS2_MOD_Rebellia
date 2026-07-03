@@ -55,7 +55,7 @@ public class VillageGuard()
         var damage = DynamicVars.Damage.BaseValue;
         for (var i = 0; i < extraHits; i++)
         {
-            var cmd = DamageCmd.Attack(damage).FromCard(this).Targeting(play.Target!);
+            var cmd = DamageCmd.Attack(damage).FromCard(this, play).Targeting(play.Target!);
             await cmd.Execute(choiceContext);
         }
     }

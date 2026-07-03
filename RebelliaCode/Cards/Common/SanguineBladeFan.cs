@@ -29,12 +29,14 @@ public class SanguineBladeFan()
             Owner.Creature,
             DynamicVars.HpLoss.BaseValue,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-            this
+            Owner.Creature,
+            this,
+            play
         );
 
         var damageCmd = DamageCmd
             .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, play)
             .TargetingAllOpponents(combatState);
         await damageCmd.Execute(choiceContext);
 

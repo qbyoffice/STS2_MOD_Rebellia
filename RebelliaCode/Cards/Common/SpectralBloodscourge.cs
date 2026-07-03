@@ -34,7 +34,7 @@ public class SpectralBloodScourge()
 
         var cmd = DamageCmd
             .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, play)
             .TargetingAllOpponents(combatState);
         await cmd.Execute(choiceContext);
 

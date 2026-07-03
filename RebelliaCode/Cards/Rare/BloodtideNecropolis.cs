@@ -41,7 +41,7 @@ public class BloodtideNecropolis()
 
         await DamageCmd
             .Attack(DynamicVars.CalculatedDamage)
-            .FromCard(this)
+            .FromCard(this, play)
             .TargetingAllOpponents(combatState)
             .Execute(choiceContext);
 

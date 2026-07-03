@@ -35,7 +35,7 @@ public class CrimsonSpiral()
         {
             await DamageCmd
                 .Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
+                .FromCard(this, play)
                 .TargetingAllOpponents(combatState)
                 .Execute(choiceContext);
         }
@@ -45,7 +45,7 @@ public class CrimsonSpiral()
                 return;
             var cmd = DamageCmd
                 .Attack(DynamicVars.Damage.BaseValue)
-                .FromCard(this)
+                .FromCard(this, play)
                 .Targeting(play.Target);
             await cmd.Execute(choiceContext);
         }

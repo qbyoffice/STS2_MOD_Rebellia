@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using Rebellia.RebelliaCode.Api.Powers;
 
@@ -47,7 +48,14 @@ public class BloodCrimsonTremorPower : RebelliaPowers
                 totalDamage,
                 ValueProp.Move,
                 Owner,
+                null,
                 null
             );
+    }
+
+    public override async Task AfterCombatEnd(CombatRoom room)
+    {
+        RebelliaTmepHpPower.TempHpGained += OnTempHpGained;
+        await PowerCmd.Remove(this);
     }
 }

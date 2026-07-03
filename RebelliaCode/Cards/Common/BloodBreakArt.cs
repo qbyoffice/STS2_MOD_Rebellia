@@ -36,7 +36,7 @@ public class BloodBreakArt()
 
         await DamageCmd
             .Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, play)
             .Targeting(play.Target)
             .Execute(choiceContext);
         await Utils.GivePower<VulnerablePower>(

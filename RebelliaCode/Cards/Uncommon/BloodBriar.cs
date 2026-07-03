@@ -36,7 +36,9 @@ public class BloodBriar()
             Owner.Creature,
             DynamicVars.HpLoss.BaseValue,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-            this
+            Owner.Creature,
+            this,
+            play
         );
 
         var hitCount = DynamicVars.Repeat.IntValue;

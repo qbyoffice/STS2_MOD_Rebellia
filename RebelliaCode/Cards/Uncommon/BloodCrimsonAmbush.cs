@@ -45,7 +45,11 @@ public class BloodCrimsonAmbush()
             hitCount = 1;
 
         var damage = DynamicVars.Damage.BaseValue;
-        var cmd = DamageCmd.Attack(damage).FromCard(this).Targeting(target).WithHitCount(hitCount);
+        var cmd = DamageCmd
+            .Attack(damage)
+            .FromCard(this, play)
+            .Targeting(target)
+            .WithHitCount(hitCount);
         await cmd.Execute(choiceContext);
     }
 

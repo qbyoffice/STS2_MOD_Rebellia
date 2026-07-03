@@ -22,7 +22,9 @@ public class BloodForgedBulwark()
             Owner.Creature,
             DynamicVars.HpLoss.BaseValue,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-            this
+            Owner.Creature,
+            this,
+            play
         );
 
         var baseBlock = (int)DynamicVars.Block.BaseValue;

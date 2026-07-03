@@ -44,7 +44,7 @@ public class RebelBloodThrust()
         {
             await DamageCmd
                 .Attack(unblockedDamage)
-                .FromCard(this)
+                .FromCard(this, play)
                 .TargetingAllOpponents(combatState)
                 .Execute(choiceContext);
         }
@@ -58,7 +58,7 @@ public class RebelBloodThrust()
                 if (randomEnemy != null)
                     await DamageCmd
                         .Attack(unblockedDamage)
-                        .FromCard(this)
+                        .FromCard(this, play)
                         .Targeting(randomEnemy)
                         .Execute(choiceContext);
             }

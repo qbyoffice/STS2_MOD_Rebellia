@@ -332,7 +332,7 @@ public static class Utils
 
         if (await TryConsumeBloodArtPoints(card.Owner.Creature, requiredBlood))
         {
-            var baseCmd = DamageCmd.Attack(damage).FromCard(card);
+            var baseCmd = DamageCmd.Attack(damage).FromCard(card, play);
             foreach (var enemy in combatState.HittableEnemies)
                 await baseCmd.Targeting(enemy).Execute(context);
             if (onConsumeSuccess != null)

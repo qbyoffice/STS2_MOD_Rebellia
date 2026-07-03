@@ -79,7 +79,7 @@ public class SanguineBurst()
             if (target == null)
                 break;
 
-            var damageCmd = DamageCmd.Attack(damage).FromCard(this).Targeting(target);
+            var damageCmd = DamageCmd.Attack(damage).FromCard(this, play).Targeting(target);
             await damageCmd.Execute(choiceContext);
 
             if (bloodConsumed)
